@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incrementi — Brand & Positioning Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0B0D;            /* near-black canvas */
+    --ink-2:#101317;          /* raised panels */
+    --ink-3:#161A1F;          /* cards */
+    --navy:#0E1622;           /* deep navy alt */
+    --line:rgba(244,242,238,.12);
+    --line-2:rgba(244,242,238,.06);
+    --paper:#F4F2EE;          /* warm off-white text */
+    --muted:#A7ABB2;          /* secondary text */
+    --muted-2:#71767E;        /* tertiary */
+    --copper:#C98A5E;         /* refined metallic copper accent */
+    --copper-2:#B87333;       /* deeper copper */
+    --steel:#8FA3B8;          /* cool steel accent */
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:"DM Sans",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    font-feature-settings:"ss01";
+  }
+  ::selection{background:var(--copper);color:var(--ink)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  .serif{font-family:"Fraunces",Georgia,serif;font-optical-sizing:auto}
+  h1,h2,h3,h4{font-family:"Fraunces",Georgia,serif;font-weight:400;line-height:1.1;letter-spacing:-.01em}
+  a{color:var(--copper);text-decoration:none}
+  strong{font-weight:600;color:var(--paper)}
+  em{color:var(--copper)}
+
+  /* ---------- Top bar ---------- */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(10,11,13,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-2)}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brandmark{font-family:"Fraunces",serif;font-size:21px;letter-spacing:.02em}
+  .brandmark .dot{color:var(--copper)}
+  .navlinks{display:flex;gap:26px;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+  .navlinks a{color:var(--muted);transition:color .2s}
+  .navlinks a:hover{color:var(--paper)}
+  @media(max-width:860px){.navlinks{display:none}}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;padding:130px 0 90px;border-bottom:1px solid var(--line-2);overflow:hidden}
+  .hero:before{content:"";position:absolute;inset:0;background:
+    radial-gradient(900px 500px at 78% -10%, rgba(201,138,94,.16), transparent 60%),
+    radial-gradient(700px 500px at 10% 110%, rgba(143,163,184,.10), transparent 60%);
+    pointer-events:none}
+  .eyebrow{font-size:12.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--copper);margin-bottom:26px}
+  .hero h1{font-size:clamp(40px,7vw,82px);font-weight:300;line-height:1.02;letter-spacing:-.02em}
+  .hero h1 em{font-style:italic;font-weight:400}
+  .hero .lede{max-width:680px;margin-top:30px;font-size:20px;color:var(--muted);line-height:1.6}
+  .hero .meta{margin-top:46px;display:flex;gap:40px;flex-wrap:wrap;font-size:13.5px;color:var(--muted-2);letter-spacing:.02em}
+  .hero .meta b{display:block;color:var(--paper);font-family:"Fraunces",serif;font-size:15px;margin-bottom:3px;letter-spacing:0}
+
+  /* ---------- Section scaffolding ---------- */
+  section{padding:84px 0;border-bottom:1px solid var(--line-2)}
+  .sec-no{font-size:12.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--copper);margin-bottom:18px;display:flex;align-items:center;gap:14px}
+  .sec-no:before{content:"";width:30px;height:1px;background:var(--copper);opacity:.6}
+  h2.title{font-size:clamp(30px,4.4vw,48px);font-weight:300;max-width:780px;margin-bottom:14px}
+  .sub{color:var(--muted);max-width:680px;font-size:18px;margin-bottom:30px}
+  p{margin-bottom:18px;color:#D7D4CE}
+  p.tight{margin-bottom:8px}
+
+  .grid{display:grid;gap:22px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:860px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+  .card{background:var(--ink-2);border:1px solid var(--line);border-radius:14px;padding:28px}
+  .card.alt{background:linear-gradient(160deg,var(--ink-3),var(--ink-2))}
+  .card h3{font-size:22px;margin-bottom:10px}
+  .card h4{font-size:18px;margin-bottom:8px}
+  .card .k{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--copper);margin-bottom:14px}
+  .card p{font-size:15.5px;color:var(--muted);margin-bottom:0}
+  .card p+p{margin-top:12px}
+
+  .pill{display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper);
+    border:1px solid var(--line);border-radius:999px;padding:6px 14px;margin:0 8px 8px 0}
+  .pill.copper{border-color:rgba(201,138,94,.5);color:var(--copper)}
+
+  .lead-statement{font-family:"Fraunces",serif;font-weight:300;font-size:clamp(24px,3.4vw,38px);line-height:1.3;
+    color:var(--paper);max-width:920px}
+  .lead-statement em{font-style:italic}
+
+  .stat{display:flex;flex-direction:column;gap:4px}
+  .stat .n{font-family:"Fraunces",serif;font-size:clamp(34px,5vw,52px);font-weight:300;color:var(--paper);line-height:1}
+  .stat .n span{color:var(--copper)}
+  .stat .l{font-size:13.5px;color:var(--muted);letter-spacing:.02em}
+
+  ul.clean{list-style:none;margin:0 0 4px}
+  ul.clean li{position:relative;padding-left:24px;margin-bottom:11px;color:var(--muted);font-size:15.5px}
+  ul.clean li:before{content:"";position:absolute;left:0;top:10px;width:7px;height:7px;border:1px solid var(--copper);border-radius:50%}
+  ul.clean li b{color:var(--paper)}
+
+  /* journey */
+  .journey{counter-reset:step;display:grid;gap:0}
+  .step{display:grid;grid-template-columns:90px 1fr;gap:26px;padding:30px 0;border-top:1px solid var(--line-2)}
+  .step:first-child{border-top:none}
+  .step .num{font-family:"Fraunces",serif;font-size:42px;font-weight:300;color:var(--copper);line-height:1}
+  .step h3{font-size:24px;margin-bottom:8px}
+  .step p{font-size:15.5px;color:var(--muted);margin-bottom:0;max-width:680px}
+  .step .tag{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2);margin-top:10px;display:block}
+  @media(max-width:640px){.step{grid-template-columns:1fr;gap:8px}.step .num{font-size:34px}}
+
+  /* color swatches */
+  .swatches{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px}
+  .sw{flex:1 1 130px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--ink-2)}
+  .sw .chip{height:84px}
+  .sw .info{padding:12px 14px;font-size:12.5px}
+  .sw .info b{display:block;font-family:"Fraunces",serif;font-size:14px;color:var(--paper);margin-bottom:2px}
+  .sw .info span{color:var(--muted-2);letter-spacing:.04em}
+
+  .type-demo{border:1px solid var(--line);border-radius:14px;padding:30px;background:var(--ink-2)}
+  .type-demo .big{font-family:"Fraunces",serif;font-weight:300;font-size:clamp(34px,5vw,58px);line-height:1.04;letter-spacing:-.02em}
+  .type-demo .body-ex{color:var(--muted);max-width:560px;margin-top:16px;font-size:16px}
+  .type-demo .label-ex{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--copper);margin-top:22px}
+
+  table.matrix{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:8px}
+  table.matrix th,table.matrix td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line-2);vertical-align:top}
+  table.matrix th{font-family:"DM Sans";font-weight:600;color:var(--paper);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+  table.matrix td{color:var(--muted)}
+  table.matrix td b{color:var(--paper)}
+  table.matrix tr:hover td{background:rgba(244,242,238,.02)}
+
+  /* sitemap tree */
+  .tree{font-size:15px}
+  .tree .node{padding:12px 0;border-bottom:1px solid var(--line-2)}
+  .tree .node .nm{font-family:"Fraunces",serif;font-size:18px;color:var(--paper)}
+  .tree .node .ds{color:var(--muted);font-size:14.5px}
+  .tree .children{margin-left:18px;padding-left:18px;border-left:1px solid var(--line-2);margin-top:8px}
+  .tree .children .leaf{font-size:14px;color:var(--muted);padding:5px 0}
+  .tree .children .leaf b{color:var(--paper)}
+
+  .callout{background:linear-gradient(160deg,rgba(201,138,94,.10),rgba(201,138,94,.02));
+    border:1px solid rgba(201,138,94,.28);border-radius:16px;padding:30px 32px}
+  .callout .k{color:var(--copper);font-size:12px;letter-spacing:.24em;text-transform:uppercase;margin-bottom:12px}
+
+  .quote{border-left:2px solid var(--copper);padding-left:24px;font-family:"Fraunces",serif;font-weight:300;
+    font-size:22px;line-height:1.45;color:var(--paper);max-width:780px}
+
+  .footer{padding:70px 0 90px;color:var(--muted-2);font-size:13.5px}
+  .footer .brandmark{font-size:26px;margin-bottom:16px;color:var(--paper)}
+  .footer a{color:var(--muted)}
+
+  .two-col{columns:2;column-gap:42px}
+  .two-col p{break-inside:avoid}
+  @media(max-width:760px){.two-col{columns:1}}
+
+  .badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+
+  hr.soft{border:none;border-top:1px solid var(--line-2);margin:34px 0}
+
+  .toc{display:grid;grid-template-columns:repeat(2,1fr);gap:2px 40px}
+  @media(max-width:760px){.toc{grid-template-columns:1fr}}
+  .toc a{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line-2);color:var(--paper);transition:padding .2s}
+  .toc a:hover{padding-left:8px}
+  .toc a span:first-child{color:var(--muted-2);font-size:13px;width:30px;flex:none}
+  .toc a span:nth-child(2){flex:1}
+  .toc a:hover span:nth-child(2){color:var(--copper)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brandmark">INCREMENTI<span class="dot">.</span></div>
+    <nav class="navlinks">
+      <a href="#positioning">Positioning</a>
+      <a href="#journey">The Journey</a>
+      <a href="#identity">Identity</a>
+      <a href="#website">Website</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Brand &amp; Positioning Strategy · Confidential · v1.0</div>
+    <h1>The operating system<br>for the <em>AI-native firm.</em></h1>
+    <p class="lede">The foundational strategy for the rebrand and repositioning of Incrementi — a bold, premium repositioning built to make it Norway's largest AI consulting firm.</p>
+    <div class="meta">
+      <div><b>Prepared for</b>Carl-Wilhelm Vedvik</div>
+      <div><b>Scope</b>Positioning · Identity · Website &amp; Content blueprint</div>
+      <div><b>Date</b>June 2026</div>
+      <div><b>Status</b>Source of truth — build everything from this</div>
+    </div>
+  </div>
+</header>
+
+<!-- CONTENTS -->
+<section id="contents" style="padding-top:64px;padding-bottom:64px">
+  <div class="wrap">
+    <div class="sec-no">Contents</div>
+    <div class="toc">
+      <a href="#summary"><span>01</span><span>Executive summary &amp; the big idea</span><span>↘</span></a>
+      <a href="#landscape"><span>02</span><span>Where we play &amp; why now</span><span>↘</span></a>
+      <a href="#positioning"><span>03</span><span>Positioning &amp; brand idea</span><span>↘</span></a>
+      <a href="#audience"><span>04</span><span>Who we serve</span><span>↘</span></a>
+      <a href="#messaging"><span>05</span><span>Messaging architecture</span><span>↘</span></a>
+      <a href="#journey"><span>06</span><span>The offering — the Incrementi Journey</span><span>↘</span></a>
+      <a href="#proof"><span>07</span><span>Proof &amp; credibility system</span><span>↘</span></a>
+      <a href="#identity"><span>08</span><span>Brand identity &amp; voice</span><span>↘</span></a>
+      <a href="#website"><span>09</span><span>Website architecture &amp; pages</span><span>↘</span></a>
+      <a href="#content"><span>10</span><span>Content pillars &amp; engine</span><span>↘</span></a>
+      <a href="#merge"><span>11</span><span>The web experience — a living intelligence</span><span>↘</span></a>
+      <a href="#roadmap"><span>12</span><span>Rollout roadmap</span><span>↘</span></a>
+      <a href="#inputs"><span>13</span><span>What I need from you</span><span>↘</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 01 EXEC SUMMARY -->
+<section id="summary">
+  <div class="wrap">
+    <div class="sec-no">01 — Executive summary</div>
+    <h2 class="title">One brand. One conviction. The whole journey.</h2>
+    <p class="sub">Incrementi stops being "an IT company that also does AI" and becomes the category-defining partner that builds the operating system beneath an operationally-intensive firm — and hands its people the ability to run it.</p>
+
+    <div class="grid g2" style="margin-top:14px">
+      <div>
+        <p><strong>Incrementi</strong> — part of 99X Group — already wins serious enterprise mandates for data platforms, digital products and AI (ABYS, NRC Group, Sebastian, Optimar, Maritech). But the brand today undersells the ambition: it reads as a capable IT partner, not the category leader it intends to become.</p>
+        <p>This strategy repositions Incrementi as a single, deliberately premium, <strong>AI-led</strong> brand: the partner that owns the entire transformation to AI-native — from data foundation to employees building their own agents — for industrial, maritime and financial firms across the Nordics.</p>
+      </div>
+      <div>
+        <div class="callout">
+          <div class="k">The big idea</div>
+          <p class="lead-statement" style="font-size:27px">We don't sell AI projects.<br>We build the <em>firm that compounds</em> — a data foundation, a governed context layer, and employees who build and operate their own agents.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="soft">
+    <div class="grid g4">
+      <div class="stat"><div class="n">650<span>+</span></div><div class="l">99X specialists behind every engagement</div></div>
+      <div class="stat"><div class="n">474<span>M</span></div><div class="l">NOK group revenue, 2025</div></div>
+      <div class="stat"><div class="n">20<span>yr</span></div><div class="l">building digital products at enterprise quality</div></div>
+      <div class="stat"><div class="n">#1</div><div class="l">the objective: Norway's largest AI consultancy</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 LANDSCAPE -->
+<section id="landscape">
+  <div class="wrap">
+    <div class="sec-no">02 — Where we play &amp; why now</div>
+    <h2 class="title">The whitespace between advisors and vendors.</h2>
+    <p class="sub">Operationally-intensive firms are caught between three inadequate options. Incrementi is built to be the fourth — and the only one that owns the whole journey.</p>
+
+    <div class="grid g4">
+      <div class="card">
+        <div class="k">Strategy houses</div>
+        <h4>Advise, then leave</h4>
+        <p>Big-name consultancies produce roadmaps and decks. The build — and the value — never arrives. The client is left to execute alone.</p>
+      </div>
+      <div class="card">
+        <div class="k">Software vendors</div>
+        <h4>Lock you in</h4>
+        <p>Off-the-shelf platforms own your data and your roadmap. Every new need becomes a feature request and a renewal negotiation.</p>
+      </div>
+      <div class="card">
+        <div class="k">Dev shops &amp; AI startups</div>
+        <h4>Ship features, not foundations</h4>
+        <p>Point solutions and chatbots bolted on top of messy data. Impressive demos, fragile architecture, mounting technical debt.</p>
+      </div>
+      <div class="card alt">
+        <div class="k" style="color:var(--copper)">Incrementi</div>
+        <h4>Build it, and hand it over</h4>
+        <p>Own the journey end-to-end: foundation, platform, AI context layer, and the capability for the firm to run and extend it themselves. You own the IP.</p>
+      </div>
+    </div>
+
+    <hr class="soft">
+    <div class="grid g2">
+      <div>
+        <h3 class="serif" style="font-size:26px;font-weight:300;margin-bottom:12px">Why now</h3>
+        <ul class="clean">
+          <li><b>AI has outrun most firms' foundations.</b> Everyone wants agents; almost no one has the governed data context to run them safely. That gap is the market.</li>
+          <li><b>Delivery economics have inverted.</b> AI-assisted development (AI-DLC) makes it possible to deliver enterprise software faster and cheaper than the incumbents — without lowering quality.</li>
+          <li><b>The Nordic mid-market is underserved.</b> Industrial, maritime and financial firms are too operationally specific for generic AI vendors and too pragmatic for big-five theatre.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="callout">
+          <div class="k">The name is the strategy</div>
+          <p class="lead-statement" style="font-size:24px"><em>Incrementi</em> — increments that compound. Every data source connected, every module shipped, every agent built makes the next one faster, cheaper and more powerful.</p>
+          <p style="margin-top:16px;color:var(--muted);font-size:15px">This isn't a slogan. It's documented in the work: at NRC Group, a new HR-system integration landed in under half the original estimate because the platform was already there. Advantage that compounds is the brand's central promise.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 POSITIONING -->
+<section id="positioning">
+  <div class="wrap">
+    <div class="sec-no">03 — Positioning &amp; brand idea</div>
+    <h2 class="title">What Incrementi stands for.</h2>
+
+    <div class="card alt" style="margin-bottom:26px">
+      <div class="k">Positioning statement</div>
+      <p class="lead-statement">For industrial, maritime and financial firms in the Nordics that <em>run on operations</em>, Incrementi is the AI-native transformation partner that builds the operating system beneath the business — a secure data foundation, a governed AI context layer, and the capability for every employee to build and operate their own agents. Unlike advisors who stop at strategy or vendors who lock you in, Incrementi owns the whole journey, builds on open technology you own, and is backed by 99X Group's 650+ specialists — so every increment compounds into decisive advantage.</p>
+    </div>
+
+    <div class="grid g3">
+      <div class="card">
+        <div class="k">Category we claim</div>
+        <h3>AI-native firm transformation</h3>
+        <p>Not "AI consulting." Not "data platforms." We build the AI-native firm — and own the path to get there.</p>
+      </div>
+      <div class="card">
+        <div class="k">Brand idea</div>
+        <h3>The compounding advantage</h3>
+        <p>The organising thought behind everything: name, narrative, delivery model and proof all point to advantage that compounds.</p>
+      </div>
+      <div class="card">
+        <div class="k">Promise</div>
+        <h3>You own the engine</h3>
+        <p>Open architecture, your IP, no lock-in, capability that stays in your organisation when we step back.</p>
+      </div>
+    </div>
+
+    <hr class="soft">
+    <h3 class="serif" style="font-size:24px;font-weight:300;margin-bottom:8px">Tagline territory</h3>
+    <p class="sub" style="margin-bottom:18px">Three directions, from most ownable to most descriptive. My recommendation leads.</p>
+    <div class="grid g3">
+      <div class="card alt">
+        <div class="k copper" style="display:inline-block;border:1px solid rgba(201,138,94,.5);border-radius:999px;padding:5px 12px">Recommended</div>
+        <h3 style="margin-top:14px">"The compounding advantage."</h3>
+        <p>Owns the name's meaning, premium, unique to Incrementi. Pairs with: <em>"From data foundation to autonomous agents — built to compound."</em></p>
+      </div>
+      <div class="card">
+        <div class="k">Alt — visionary</div>
+        <h3>"Build the firm that builds itself."</h3>
+        <p>Leans into employee-built agents. Bold and memorable; slightly more abstract for conservative buyers.</p>
+      </div>
+      <div class="card">
+        <div class="k">Alt — plain-spoken</div>
+        <h3>"The whole journey to AI-native."</h3>
+        <p>Maximally clear on the differentiator (end-to-end ownership). Safest, least distinctive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 AUDIENCE -->
+<section id="audience">
+  <div class="wrap">
+    <div class="sec-no">04 — Who we serve</div>
+    <h2 class="title">Three sectors. One profile.</h2>
+    <p class="sub">Firms that live or die by operations, hold deep domain complexity, and are under pressure to modernise without betting the company. Deliberately narrow — exclusivity is part of the premium.</p>
+
+    <div class="grid g3">
+      <div class="card">
+        <div class="k">Maritime &amp; ocean</div>
+        <h4>Vessel operators, subsea, aquaculture service, seafood tech</h4>
+        <p>OT/sensor data from vessels and equipment, fragmented systems, growth via acquisition. Proof: ABYS, Sebastian, 4Subsea, Optimar, Upkip, Maritech.</p>
+      </div>
+      <div class="card">
+        <div class="k">Industrial</div>
+        <h4>Infrastructure, energy, manufacturing, field-service</h4>
+        <p>Multi-site operations, spread data, heavy reporting burden, predictive-maintenance upside. Proof: NRC Group, Envo, BUS.</p>
+      </div>
+      <div class="card">
+        <div class="k">Financial &amp; professional</div>
+        <h4>Accounting groups, finance functions, advisory chains</h4>
+        <p>Compliance-bound, document-heavy workflows ripe for governed AI and agents. Proof: Accru Partners, Coneqt, Tripletex automation.</p>
+      </div>
+    </div>
+
+    <hr class="soft">
+    <h3 class="serif" style="font-size:24px;font-weight:300;margin-bottom:16px">Who buys, and what keeps them up at night</h3>
+    <table class="matrix">
+      <thead><tr><th>Buyer</th><th>What they want</th><th>What they fear</th><th>What we say</th></tr></thead>
+      <tbody>
+        <tr><td><b>CEO / Owner</b><br>(PE-backed, growth)</td><td>A durable competitive edge; a firm that scales and integrates acquisitions without IT becoming the bottleneck.</td><td>Betting big on the wrong architecture; vendor lock-in; a transformation that stalls.</td><td>"You own the engine. Every increment compounds. We've done this in your sector."</td></tr>
+        <tr><td><b>COO / Operations</b></td><td>One real-time picture of the operation; less manual reporting; decisions on reliable data.</td><td>Disruption to live operations; tools the crew won't actually use.</td><td>"First value in production in weeks, built around how your people actually work."</td></tr>
+        <tr><td><b>CFO</b></td><td>Predictable, variable cost; lower TCO; measurable ROI.</td><td>Runaway consulting bills; sunk cost with nothing in production.</td><td>"Variable cost that follows progress. Stop anytime and still own something that works."</td></tr>
+        <tr><td><b>CDO / Head of IT</b></td><td>Open, maintainable architecture; security and compliance; no single-person dependency.</td><td>A black box only the vendor understands; shadow AI; breaches.</td><td>"Open tech, your tenant, ISO-grade governance, a context layer that makes AI safe."</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 05 MESSAGING -->
+<section id="messaging">
+  <div class="wrap">
+    <div class="sec-no">05 — Messaging architecture</div>
+    <h2 class="title">Four pillars hold up everything we say.</h2>
+    <p class="sub">Every page, deck, post and proposal ladders to one of these. Each pillar pairs a claim with the proof that makes it credible.</p>
+
+    <div class="grid g2">
+      <div class="card alt">
+        <div class="k">Pillar 01</div>
+        <h3>The whole journey, owned</h3>
+        <p>From data foundation to employee-built agents — one partner, end-to-end. We don't hand you a roadmap and leave; we build it, ship it to production, and hand over the capability.</p>
+        <p style="margin-top:12px;color:var(--copper);font-size:13.5px;letter-spacing:.04em">PROOF · ABYS five-phase model · NRC platform in production · 20yr / 150+ products</p>
+      </div>
+      <div class="card alt">
+        <div class="k">Pillar 02</div>
+        <h3>AI grounded in your context</h3>
+        <p>A context &amp; control layer — MCP, RAG, knowledge graph — so AI and agents work on <em>your</em> data, in <em>your</em> reality, with sources, governance and audit trails. Not a generic bolt-on.</p>
+        <p style="margin-top:12px;color:var(--copper);font-size:13.5px;letter-spacing:.04em">PROOF · Accru pilot-to-scale model · ABYS context layer · agents employees build safely</p>
+      </div>
+      <div class="card alt">
+        <div class="k">Pillar 03</div>
+        <h3>Your firm, your IP, no lock-in</h3>
+        <p>Open, established technology — Microsoft Fabric, OpenBridge, .NET, React. You own the code, data and architecture. ISO 27001, 27701 and 9001. Any team can pick it up.</p>
+        <p style="margin-top:12px;color:var(--copper);font-size:13.5px;letter-spacing:.04em">PROOF · ISO certifications · open stack · "the engine is yours" guarantee</p>
+      </div>
+      <div class="card alt">
+        <div class="k">Pillar 04</div>
+        <h3>Speed that compounds</h3>
+        <p>AI-DLC delivery in "bolts," prototypes converted straight to production, 650+ 99X specialists for elastic capacity. First value in 2–4 weeks; each increment makes the next faster and cheaper.</p>
+        <p style="margin-top:12px;color:var(--copper);font-size:13.5px;letter-spacing:.04em">PROOF · NRC integration at &lt;½ estimate · 50+ admin hours saved in one project in 2 months</p>
+      </div>
+    </div>
+
+    <hr class="soft">
+    <div class="grid g2">
+      <div>
+        <h3 class="serif" style="font-size:22px;font-weight:300;margin-bottom:14px">Message house — top line</h3>
+        <div class="quote">"We build the operating system beneath your business — and hand your people the keys. Advantage that compounds, increment by increment."</div>
+      </div>
+      <div>
+        <h3 class="serif" style="font-size:22px;font-weight:300;margin-bottom:14px">Objections, pre-answered</h3>
+        <ul class="clean">
+          <li><b>"AI feels risky / hype."</b> → Governed context layer, audit trails, human-in-the-loop, pilot sandbox with gates.</li>
+          <li><b>"We'll be locked in."</b> → Open tech, your tenant, your IP; any vendor can continue.</li>
+          <li><b>"Consultants overpromise and overspend."</b> → Variable cost, value in production every bolt, stop anytime.</li>
+          <li><b>"You don't know our world."</b> → Deep maritime/industrial/finance references and named domain specialists.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 JOURNEY / OFFERING -->
+<section id="journey">
+  <div class="wrap">
+    <div class="sec-no">06 — The offering</div>
+    <h2 class="title">The Incrementi Journey.</h2>
+    <p class="sub">One premium, enterprise engagement model — phased, modular, client-paced. We commit to capabilities and outcomes; the client controls priority and tempo. Each phase stands on its own and compounds into the next.</p>
+
+    <div class="journey">
+      <div class="step">
+        <div class="num">00</div>
+        <div>
+          <h3>Direction</h3>
+          <p>One week to align on the target architecture, the phases that matter, and the sequence. A shared plan the whole engagement steers by.</p>
+          <span class="tag">Outcome · agreed phase plan · ~1 week</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">01</div>
+        <div>
+          <h3>Prototype &amp; scope</h3>
+          <p>Rapid, clickable prototypes built with AI tools alongside your people. We verify which data is really available and lock the work packages — before development resources are committed.</p>
+          <span class="tag">Outcome · validated prototype + locked scope · ~4 weeks</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <div>
+          <h3>Data foundation</h3>
+          <p>A modern data &amp; integration platform on Microsoft Fabric — the hub-and-spoke architecture where every system, sensor and source connects as a clean building block. "Data first," lowest TCO over time.</p>
+          <span class="tag">Outcome · the foundation everything compounds on</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <div>
+          <h3>The operating system</h3>
+          <p>Your operational backbone, built module by module straight into production via AI-DLC bolts — the apps your crew, operations, leadership and customers actually use (the AbyssGo pattern).</p>
+          <span class="tag">Outcome · production software, shipped in increments</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">04</div>
+        <div>
+          <h3>The AI context &amp; control layer</h3>
+          <p>The layer that makes enterprise AI safe and systematic: a knowledge graph of your real context, MCP/RAG access, roles and permissions for agents, lineage, audit and cost control.</p>
+          <span class="tag">Outcome · the firm becomes genuinely "AI-ready"</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">05</div>
+        <div>
+          <h3>Agent enablement</h3>
+          <p>We put the capability in your people's hands — training, an internal build model, and structured hypothesis-testing where what proves value is consolidated back into the control layer. Ongoing, growing with the organisation.</p>
+          <span class="tag">Outcome · employees build &amp; operate their own agents</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="soft">
+    <div class="grid g3">
+      <div class="card"><div class="k">Delivery model</div><h4>AI-DLC, in bolts</h4><p>Short, intense cycles; prototype-to-production; AI agents working beside our engineers on quality, security and tests. Velocity up, cost per bolt down.</p></div>
+      <div class="card"><div class="k">Commercials</div><h4>Variable, transparent</h4><p>Cost follows progress. Fixed-price per module, monthly status on spend and what's next. Stop anytime and still own working software.</p></div>
+      <div class="card"><div class="k">Governance</div><h4>99X Product Health Review</h4><p>Five-pillar internal audit; ISO 9001 / 27001 / 27701; SonarQube and security scanning throughout. Enterprise-grade by default.</p></div>
+    </div>
+
+    <div class="callout" style="margin-top:26px">
+      <div class="k">Positioning discipline</div>
+      <p style="color:var(--paper);font-size:16px;margin-bottom:0">Faster, smaller offerings — AI workshops, agent/skill setup, MCP integrations, advisory retainers — are <strong>not the public face</strong> of the brand. They remain available as quiet, partner-led entry points into the Journey, but the website and brand speak only at enterprise altitude. Exclusivity protects the premium.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 07 PROOF -->
+<section id="proof">
+  <div class="wrap">
+    <div class="sec-no">07 — Proof &amp; credibility system</div>
+    <h2 class="title">A premium brand earns its claims.</h2>
+    <p class="sub">Three tiers of proof, deployed deliberately. The numbers do the persuading; the brand stays understated.</p>
+
+    <div class="grid g3">
+      <div class="card alt">
+        <div class="k">Hard results</div>
+        <ul class="clean" style="margin-top:6px">
+          <li><b>NRC Group:</b> HR integration at under half the original estimate.</li>
+          <li><b>50+</b> admin hours saved on a single project within two months.</li>
+          <li><b>100%</b> of billable work captured and documented.</li>
+          <li><b>1–2 hrs</b> saved per change order via structured change handling.</li>
+        </ul>
+      </div>
+      <div class="card alt">
+        <div class="k">Flagship references</div>
+        <ul class="clean" style="margin-top:6px">
+          <li><b>NRC Group</b> — Fabric platform in production (industrial).</li>
+          <li><b>Sebastian AS</b> — maritime DP checklists, piloting in Brazil.</li>
+          <li><b>4Subsea · Optimar</b> — sensor-to-insight on Azure.</li>
+          <li><b>Maritech</b> — product ownership, customs systems.</li>
+        </ul>
+      </div>
+      <div class="card alt">
+        <div class="k">Institutional weight</div>
+        <ul class="clean" style="margin-top:6px">
+          <li><b>99X Group</b> — 650+ specialists across Norway, Sri Lanka, Portugal, Malaysia, Brazil.</li>
+          <li><b>150+</b> digital products in 20 years; 5-year average engagement.</li>
+          <li><b>ISO</b> 9001 · 27001 · 27701.</li>
+          <li><b>Upkip</b> partnership — deep maritime OT capability.</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:24px;color:var(--muted-2);font-size:14px">Note: every metric above is drawn from existing proposals and must be confirmed for public, attributed use (see §13). Where a client can be named, name them; where not, use the pattern ("a listed Nordic infrastructure group").</p>
+  </div>
+</section>
+
+<!-- 08 IDENTITY -->
+<section id="identity">
+  <div class="wrap">
+    <div class="sec-no">08 — Brand identity &amp; voice</div>
+    <h2 class="title">Dark, editorial, exclusive — and human.</h2>
+    <p class="sub">Premium enough for the boardroom of a listed company; warm and clear enough that it never reads as a cold, expensive agency. This very document is built in the proposed system.</p>
+
+    <h3 class="serif" style="font-size:22px;font-weight:300;margin-bottom:6px">Colour</h3>
+    <p style="color:var(--muted);font-size:15.5px;max-width:680px">A near-black canvas with warm off-white type and a single refined metallic copper accent. Cool steel as a secondary accent for data/technical contexts. Copper is used sparingly: it should feel like brass on dark wood, not a highlighter.</p>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#0A0B0D"></div><div class="info"><b>Ink</b><span>#0A0B0D · canvas</span></div></div>
+      <div class="sw"><div class="chip" style="background:#0E1622"></div><div class="info"><b>Deep Navy</b><span>#0E1622 · alt canvas</span></div></div>
+      <div class="sw"><div class="chip" style="background:#C98A5E"></div><div class="info"><b>Copper</b><span>#C98A5E · accent</span></div></div>
+      <div class="sw"><div class="chip" style="background:#8FA3B8"></div><div class="info"><b>Steel</b><span>#8FA3B8 · secondary</span></div></div>
+      <div class="sw"><div class="chip" style="background:#F4F2EE"></div><div class="info"><b>Paper</b><span>#F4F2EE · text</span></div></div>
+    </div>
+
+    <hr class="soft">
+    <h3 class="serif" style="font-size:22px;font-weight:300;margin-bottom:10px">Typography</h3>
+    <div class="type-demo">
+      <div class="big">A serif with a point of view,<br>set against a quiet grotesque.</div>
+      <div class="body-ex">Display in <strong>Fraunces</strong> (an editorial, high-contrast serif) signals craft, confidence and intelligence — the "premium magazine" register. Body and interface in <strong>DM Sans</strong> keep it modern, legible and approachable. Numbers and data lean on the same pairing.</div>
+      <div class="label-ex">Labels · uppercase · wide tracking · DM Sans</div>
+    </div>
+    <p style="color:var(--muted-2);font-size:14px;margin-top:12px">Both families are open-source (Google Fonts) — no licensing cost, web-safe, and load fast. Fraunces replaces the all-DM-Sans look and is the single biggest visual lift from the current brand.</p>
+
+    <hr class="soft">
+    <div class="grid g3">
+      <div class="card">
+        <div class="k">Imagery</div>
+        <h4>Cinematic &amp; real</h4>
+        <p>High-contrast, dark-graded photography of real industrial and maritime environments — vessels, decks, control rooms, machinery. Abstract architecture/data visuals as texture. Always lots of negative space. Never stock-photo "AI" clichés.</p>
+      </div>
+      <div class="card">
+        <div class="k">Layout &amp; motion</div>
+        <h4>Editorial restraint</h4>
+        <p>Generous margins, strong grid, large type, thin rules instead of heavy dividers. Motion is slow and deliberate — quiet reveals, no bounce. Confidence is shown by what we leave out.</p>
+      </div>
+      <div class="card">
+        <div class="k">Logo</div>
+        <h4>Kept, framed better</h4>
+        <p>The Incrementi wordmark stays as-is. We define clear-space, dark/light lockups, and a 99X-endorsement lockup. The new system makes the existing logo look more expensive without redrawing it.</p>
+      </div>
+    </div>
+
+    <hr class="soft">
+    <div class="grid g2">
+      <div>
+        <h3 class="serif" style="font-size:22px;font-weight:300;margin-bottom:12px">Voice — English, Scandinavian backbone</h3>
+        <ul class="clean">
+          <li><b>Confident, never loud.</b> We state outcomes plainly and let proof carry the weight.</li>
+          <li><b>Precise and concrete.</b> Specific numbers, real systems, named sectors — no vague "transformation" fog.</li>
+          <li><b>Human and direct.</b> Short sentences. Active voice. We explain, we don't posture.</li>
+          <li><b>Premium, not corporate.</b> Editorial warmth over consulting jargon. We sound like the smartest person in the room who has nothing to prove.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="serif" style="font-size:22px;font-weight:300;margin-bottom:12px">Say / don't say</h3>
+        <table class="matrix">
+          <tbody>
+            <tr><td><b style="color:var(--copper)">Say</b></td><td><b style="color:var(--muted-2)">Don't say</b></td></tr>
+            <tr><td>"You own the engine."</td><td>"Best-in-class synergies."</td></tr>
+            <tr><td>"First value in production in weeks."</td><td>"Digital transformation journey."</td></tr>
+            <tr><td>"Agents your people build themselves."</td><td>"Leverage cutting-edge AI."</td></tr>
+            <tr><td>"Every increment compounds."</td><td>"End-to-end holistic solutions."</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 WEBSITE -->
+<section id="website">
+  <div class="wrap">
+    <div class="sec-no">09 — Website architecture</div>
+    <h2 class="title">incrementi.no, page by page.</h2>
+    <p class="sub">A lean, premium site. Eight destinations, each with a single job. Built to convert enterprise buyers and to host the content engine. English-first.</p>
+
+    <div class="tree">
+      <div class="node">
+        <span class="nm">Home</span> — <span class="ds">the conviction, in 10 seconds.</span>
+        <div class="children">
+          <div class="leaf"><b>Hero:</b> "The operating system for the AI-native firm." + the compounding-advantage line + single CTA ("Start the conversation").</div>
+          <div class="leaf"><b>Blocks:</b> the whitespace (4-option frame) · the Journey (00–05) · proof numbers · sectors · flagship case · 99X endorsement · insights teaser.</div>
+        </div>
+      </div>
+      <div class="node">
+        <span class="nm">The Journey</span> — <span class="ds">how we take a firm to AI-native.</span>
+        <div class="children">
+          <div class="leaf">The full 00–05 model as the signature page. Delivery model (AI-DLC/bolts), commercials, governance. This is the page that closes believers.</div>
+        </div>
+      </div>
+      <div class="node">
+        <span class="nm">What we build</span> — <span class="ds">capabilities, in four.</span>
+        <div class="children">
+          <div class="leaf"><b>Data foundation</b> (Fabric) · <b>The operating system</b> (products/apps) · <b>AI context &amp; control layer</b> (MCP/RAG/knowledge graph) · <b>Agent enablement.</b> Each a sub-page or anchored section.</div>
+        </div>
+      </div>
+      <div class="node">
+        <span class="nm">Industries</span> — <span class="ds">we speak your operation.</span>
+        <div class="children">
+          <div class="leaf">Maritime &amp; ocean · Industrial · Financial &amp; professional. Each with sector pains, the Incrementi answer, and matching references. Strong SEO + sales surface.</div>
+        </div>
+      </div>
+      <div class="node">
+        <span class="nm">Work / Cases</span> — <span class="ds">proof, told well.</span>
+        <div class="children">
+          <div class="leaf">NRC Group, Sebastian, Optimar, 4Subsea, Maritech, Accru. Editorial case studies: situation → architecture → result, with the hard numbers.</div>
+        </div>
+      </div>
+      <div class="node">
+        <span class="nm">About</span> — <span class="ds">Incrementi &amp; 99X, and the people.</span>
+        <div class="children">
+          <div class="leaf">The brand story, 99X Group backbone, leadership &amp; key people (Carl-Wilhelm as founder/face; Espen Slyngstad et al.), ISO &amp; governance, locations.</div>
+        </div>
+      </div>
+      <div class="node">
+        <span class="nm">Insights</span> — <span class="ds">the content engine (see §10).</span>
+        <div class="children">
+          <div class="leaf">Articles, field notes, frameworks. The demand engine and the home for the founder-led thought leadership.</div>
+        </div>
+      </div>
+      <div class="node">
+        <span class="nm">Start / Contact</span> — <span class="ds">one clear next step.</span>
+        <div class="children">
+          <div class="leaf">Not a generic form — an invitation framed as "Phase 0: Direction." Qualifies and sets the premium tone from first contact.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:28px">
+      <div class="k">Build path</div>
+      <p style="color:var(--paper);margin-bottom:0">Recommended next deliverable after this document: a rendered <strong>homepage design + The Journey page</strong> in this exact visual system, then the full copy deck page-by-page, then build (the programmatic-SEO approach is on the table for the Industries layer once the core is live).</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 CONTENT -->
+<section id="content">
+  <div class="wrap">
+    <div class="sec-no">10 — Content pillars &amp; engine</div>
+    <h2 class="title">The demand engine, in six pillars.</h2>
+    <p class="sub">Founder-led thought leadership is Incrementi's demand engine — pitched at category-leadership altitude, from architecture credibility to the AI-native vision. Every piece ladders to a messaging pillar and a sector.</p>
+
+    <div class="grid g3">
+      <div class="card"><div class="k">Pillar A</div><h4>The AI-native firm</h4><p>Category creation. What it means to run on AI, why foundations beat features, the compounding thesis. Vision-level, founder-voiced.</p></div>
+      <div class="card"><div class="k">Pillar B</div><h4>Foundations &amp; architecture</h4><p>Data-first, TCO, open tech vs lock-in, hub-and-spoke. The technical-credibility pillar for CDOs and IT.</p></div>
+      <div class="card"><div class="k">Pillar C</div><h4>Governed enterprise AI</h4><p>Context layers, security, compliance, the pilot-sandbox-to-scale model. De-risks AI for cautious boards.</p></div>
+      <div class="card"><div class="k">Pillar D</div><h4>Agents in employees' hands</h4><p>Capability building, the internal build model, agent, skill &amp; MCP craft. Aspirational and practical.</p></div>
+      <div class="card"><div class="k">Pillar E</div><h4>Field notes &amp; proof</h4><p>Real results, real numbers, behind-the-scenes of delivery. The trust pillar — shows we ship.</p></div>
+      <div class="card"><div class="k">Pillar F</div><h4>Industry lenses</h4><p>Maritime / industrial / finance-specific takes. Drives SEO and sector relevance; feeds the Industries pages.</p></div>
+    </div>
+
+    <hr class="soft">
+    <div class="grid g2">
+      <div>
+        <h3 class="serif" style="font-size:22px;font-weight:300;margin-bottom:12px">Channels</h3>
+        <ul class="clean">
+          <li><b>LinkedIn (founder-led):</b> a human face for the brand; sharp hooks and comment-gated CTAs that convert attention into qualified pipeline.</li>
+          <li><b>Insights hub:</b> long-form authority pieces, frameworks, case studies — the SEO and credibility base.</li>
+          <li><b>Programmatic SEO:</b> Industries × use-cases × sectors page system to own long-tail enterprise search.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="serif" style="font-size:22px;font-weight:300;margin-bottom:12px">Craft as an asset</h3>
+        <p style="color:var(--muted);font-size:15.5px">Incrementi's advantage in content is proof, not volume: real delivery, real numbers, real architecture. The engine pairs a distinctive founder voice with rigorous frameworks and case evidence — premium, specific, and impossible for generalist competitors to fake.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 WEB EXPERIENCE -->
+<section id="merge">
+  <div class="wrap">
+    <div class="sec-no">11 — The web experience</div>
+    <h2 class="title">The website is a living intelligence.</h2>
+    <p class="sub">This is where the rebrand becomes unforgettable. incrementi.no is not a brochure you scroll — it's a mind you converse with. The medium <em>is</em> the message: we build the brain for a firm, so our site is a brain. (Positioning and messaging are unchanged — this changes only how they're delivered.)</p>
+
+    <div class="grid g2">
+      <div>
+        <p>At the centre sits a <strong>living neural organism</strong> — Incrementi's intelligence, breathing, pulsing, reacting. Instead of a wall of copy, the visitor is invited to <strong>ask</strong>. Suggested questions surround a single chat input ("How do you take a firm to AI-native?", "Do we own what you build?", "Show me the proof"). The intelligence reasons, then reveals <strong>only the content that visitor wants</strong> — the right messaging, on demand.</p>
+        <p>It embodies every pillar at once: an AI-native experience, grounded in context, that surfaces exactly what matters. Two states carry it: an immersive <strong>hero</strong> where the organism is centre-stage, and a <strong>conversation</strong> where it recedes to a living presence while answers stream in. Sub-pages (The Journey, What we build, Industries, Work, About) remain fully clickable — each simply asks the intelligence a question.</p>
+        <p style="color:var(--muted);font-size:15px">Reference point: Manta (manta.eu) proves the "built like a brain" register works at the premium end. We adapt it to Incrementi's industrial/maritime world and the compounding-advantage idea — warmer, copper-on-navy, and centred on conversation rather than a static graph.</p>
+      </div>
+      <div>
+        <div class="callout" style="margin-bottom:18px">
+          <div class="k">Why it wins</div>
+          <ul class="clean" style="margin-top:6px">
+            <li><b>Unforgettable &amp; ownable</b> — no Nordic competitor has anything close.</li>
+            <li><b>Self-qualifying</b> — the questions a visitor asks reveal their intent and segment.</li>
+            <li><b>Premium by feel</b> — restraint, motion and depth do the work; it never reads as a loud agency.</li>
+            <li><b>The proof is the product</b> — a firm that sells intelligence, demonstrated the moment you land.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="k">Build notes</div>
+          <p>Canvas/WebGL organism, pre-authored answer library at launch, with a clear path to wire it to a real, governed model later (a live demo of our own context layer). Full accessibility fallback: every answer is a real, crawlable page underneath, so SEO and screen-readers are never sacrificed for spectacle. A working concept prototype accompanies this document.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 ROADMAP -->
+<section id="roadmap">
+  <div class="wrap">
+    <div class="sec-no">12 — Rollout roadmap</div>
+    <h2 class="title">From this document to a live brand.</h2>
+    <p class="sub">A pragmatic sequence. Each stage is a usable deliverable; nothing waits for everything.</p>
+
+    <table class="matrix">
+      <thead><tr><th>Stage</th><th>Deliverable</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td><b>0 · Now</b></td><td>This strategy — approved &amp; locked</td><td>Shared source of truth; decisions confirmed</td></tr>
+        <tr><td><b>1</b></td><td>Verbal &amp; visual identity kit</td><td>Final tagline, logo lockups, colour/type tokens, imagery direction, voice guide (mini brand book)</td></tr>
+        <tr><td><b>2</b></td><td>Living-intelligence homepage, built out from the prototype</td><td>The signature conversational experience + The Journey — the "see it" moment</td></tr>
+        <tr><td><b>3</b></td><td>Full website copy deck</td><td>Page-by-page English copy for all 8 destinations</td></tr>
+        <tr><td><b>4</b></td><td>Case studies + proof assets</td><td>3–5 flagship cases written and cleared for use</td></tr>
+        <tr><td><b>5</b></td><td>Build &amp; launch incrementi.no</td><td>Live site; redirects from retired domains; analytics &amp; CRM wired</td></tr>
+        <tr><td><b>6</b></td><td>Content engine switched on</td><td>Editorial calendar, founder cadence, programmatic-SEO layer for Industries</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 13 INPUTS -->
+<section id="inputs">
+  <div class="wrap">
+    <div class="sec-no">13 — What I need from you</div>
+    <h2 class="title">To move to stage 1.</h2>
+    <p class="sub">Answers and assets that unblock the identity kit and the rendered homepage.</p>
+
+    <div class="grid g2">
+      <div class="card alt">
+        <div class="k">Decisions</div>
+        <ul class="clean" style="margin-top:6px">
+          <li><b>99X brand rules</b> — how independent can Incrementi's identity be? How is the endorsement expressed?</li>
+          <li><b>Tagline</b> — confirm "The compounding advantage" or pick an alternative.</li>
+          <li><b>Brand/holding structure</b> — the entity and ownership setup behind the Incrementi brand going forward.</li>
+          <li><b>Domain</b> — incrementi.no confirmed as primary; any others to fold in?</li>
+          <li><b>Case permissions</b> — which clients/metrics can be named publicly?</li>
+        </ul>
+      </div>
+      <div class="card alt">
+        <div class="k">Assets</div>
+        <ul class="clean" style="margin-top:6px">
+          <li><b>Incrementi logo</b> — vector files (and any 99X lockups).</li>
+          <li><b>Photography</b> — real project/site imagery, leadership headshots.</li>
+          <li><b>Team</b> — bios for key people to feature (founder + delivery leads).</li>
+          <li><b>Metrics</b> — any additional verified results we can quote.</li>
+          <li><b>Target accounts</b> — named enterprise prospects, to sharpen ICP &amp; SEO.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:38px;text-align:center">
+      <p class="lead-statement" style="margin:0 auto;text-align:center">Approve this, and I'll build the identity kit and a rendered homepage next.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="brandmark">INCREMENTI<span class="dot" style="color:var(--copper)">.</span></div>
+    <p style="max-width:520px;margin-bottom:16px;color:var(--muted-2)">Brand &amp; Positioning Strategy · v1.0 · June 2026 · Confidential. Prepared as the foundational source of truth for the rebrand and repositioning of incrementi.no.</p>
+    <p style="color:var(--muted-2)">The compounding advantage. · Part of 99X Group.</p>
+  </div>
+</footer>
+
+</body>
+</html>
