@@ -2,3 +2,8 @@
 node_modules/
 *.log
 Thumbs.db
+.next/
+out/
+.vercel
+*.tsbuildinfo
+next-env.d.ts
