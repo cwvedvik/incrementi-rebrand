@@ -1,9 +1,19 @@
 # Incrementi — Rebrand & Repositioning
 
 Rebrand and repositioning of **incrementi.no** — the AI transformation partner
-for industrial, maritime and financial firms in the Nordics. Part of 99X Group.
+for industrial, maritime and financial firms in the Nordics. A 99x company.
 
-> **The compounding advantage** — the operating system for the AI-native firm.
+> **The compounding advantage** — the whole journey to AI-native.
+
+## Live links
+
+| What | URL |
+|------|-----|
+| **Website (production)** | https://incrementi-rebrand.vercel.app |
+| **Brand & positioning strategy** | https://incrementi-rebrand.vercel.app/brand-strategy.html |
+| Vercel project dashboard | https://vercel.com/cwv1/incrementi-rebrand |
+
+Every push to `main` deploys automatically via the Vercel GitHub integration.
 
 ## The web experience (V3 — production)
 
