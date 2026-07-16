@@ -156,7 +156,7 @@ void main() {
   float vz = -mv.z;
   vDepth = clamp((8.0 - vz) * 0.35, 0.15, 1.0);
   vSeed = aSeed;
-  gl_PointSize = aSize * uPixelRatio * (7.0 / vz);
+  gl_PointSize = aSize * uPixelRatio * (8.0 / vz);
   gl_Position = projectionMatrix * mv;
 }
 `;
@@ -170,9 +170,9 @@ void main() {
   vec2 uv = gl_PointCoord - 0.5;
   float d = length(uv);
   if (d > 0.5) discard;
-  float glow = exp(-d * d * 12.0);
-  float twinkle = 0.6 + 0.4 * sin(uTime * (0.4 + vSeed * 0.8) + vSeed * 30.0);
-  vec3 col = mix(vec3(0.62, 0.68, 0.76), vec3(0.85, 0.66, 0.5), step(0.86, vSeed));
-  gl_FragColor = vec4(col * 0.5, glow * 0.11 * twinkle * vDepth * uDim);
+  float glow = exp(-d * d * 11.0);
+  float twinkle = 0.62 + 0.38 * sin(uTime * (0.4 + vSeed * 0.8) + vSeed * 30.0);
+  vec3 col = mix(vec3(0.68, 0.74, 0.82), vec3(0.88, 0.70, 0.52), step(0.84, vSeed));
+  gl_FragColor = vec4(col * 0.62, glow * 0.17 * twinkle * vDepth * uDim);
 }
 `;

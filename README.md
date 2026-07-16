@@ -10,10 +10,11 @@ for industrial, maritime and financial firms in the Nordics. A 99x company.
 | What | URL |
 |------|-----|
 | **Website (production)** | https://incrementi-rebrand.vercel.app |
+| **English** | https://incrementi-rebrand.vercel.app/en |
 | **Brand & positioning strategy** | https://incrementi-rebrand.vercel.app/brand-strategy.html |
 | Vercel project dashboard | https://vercel.com/cwv1/incrementi-rebrand |
 
-Every push to `main` deploys automatically via the Vercel GitHub integration.
+Default language is **Norwegian**. Switch to English with the `NO | EN` control top-right. Every push to `main` deploys automatically via the Vercel GitHub integration.
 
 ## The web experience (V3 — production)
 

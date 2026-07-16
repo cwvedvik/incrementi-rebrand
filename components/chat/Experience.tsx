@@ -3,11 +3,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
-import { TOPICS, INITIAL_CHIPS } from "@/lib/topics";
+import { TOPICS, INITIAL_CHIPS, topicQuestion } from "@/lib/topics";
 import { matchTopic } from "@/lib/matching";
 import { useBrain } from "@/lib/store";
-import TopBar from "@/components/sections/TopBar";
+import { useLocale } from "@/lib/i18n/locale";
+import { ui } from "@/lib/i18n/ui";
+import { t } from "@/lib/i18n/types";
+import SiteNav from "@/components/sections/SiteNav";
 import Hero from "@/components/sections/Hero";
+import HeroSea from "@/components/sections/HeroSea";
 import Dock from "./Dock";
 import { UserMessage, ThinkingMessage, AIMessage } from "./Message";
 
@@ -34,6 +38,7 @@ const ANSWER_MS = 1700;
 let nextId = 1;
 
 export default function Experience() {
+  const { locale, href } = useLocale();
   const [messages, setMessages] = useState<Msg[]>([]);
   const [visited, setVisited] = useState<Set<string>>(new Set());
   const busyRef = useRef(false);
@@ -44,17 +49,14 @@ export default function Experience() {
 
   const inConversation = messages.length > 0;
 
-  // reflect phase on <body> for ambient CSS (glow dimming)
   useEffect(() => {
     document.body.dataset.phase = phase;
   }, [phase]);
 
-  // keep the newest exchange in view: align the start of the latest
-  // AI answer (or the latest message) near the top of the stream
   useEffect(() => {
     const el = streamRef.current;
     if (!el) return;
-    const t = setTimeout(() => {
+    const timer = setTimeout(() => {
       const last = messages[messages.length - 1];
       if (last?.kind === "ai") {
         const bubbles = el.querySelectorAll<HTMLElement>(".msg-user");
@@ -69,15 +71,22 @@ export default function Experience() {
       }
       el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
     }, 90);
-    return () => clearTimeout(t);
+    return () => clearTimeout(timer);
   }, [messages]);
 
   const deliver = useCallback(
-    (userText: string, topicId: string, query?: string, followupsOverride?: string[]): boolean => {
+    (
+      userText: string,
+      topicId: string,
+      query?: string,
+      followupsOverride?: string[],
+    ): boolean => {
       if (busyRef.current) return false;
       busyRef.current = true;
 
-      const topic = TOPICS[topicId] ?? TOPICS.fallback;
+      const raw = TOPICS[topicId] ?? TOPICS.fallback;
+      const resolvedId = raw.id === "results" || topicId === "proof" ? "results" : raw.id;
+      const topic = TOPICS[resolvedId] ?? TOPICS.fallback;
       setPhase("thinking");
 
       const userId = nextId++;
@@ -89,9 +98,12 @@ export default function Experience() {
       ]);
 
       setTimeout(() => {
-        // journey awareness — after a few topics, nudge toward a human
         let nudge = false;
-        if (!nudgeShownRef.current && topic.id !== "start" && topic.id !== "fallback") {
+        if (
+          !nudgeShownRef.current &&
+          topic.id !== "start" &&
+          topic.id !== "fallback"
+        ) {
           const seen = new Set(visited);
           seen.add(topic.id);
           if (seen.size >= 4) {
@@ -111,8 +123,8 @@ export default function Experience() {
                   followups: followupsOverride ?? topic.follow,
                   nudge,
                 }
-              : msg
-          )
+              : msg,
+          ),
         );
         setVisited((v) => {
           const next = new Set(v);
@@ -120,7 +132,6 @@ export default function Experience() {
           return next;
         });
         setPhase("answering");
-        // accept the next question as soon as the answer starts revealing
         busyRef.current = false;
 
         setTimeout(() => {
@@ -129,18 +140,20 @@ export default function Experience() {
       }, THINK_MS);
       return true;
     },
-    [setPhase, visited]
+    [setPhase, visited],
   );
 
   const ask = useCallback(
     (id: string) => {
       const topic = TOPICS[id];
       if (!topic) return;
-      if (deliver(topic.q, id)) {
-        window.history.replaceState(null, "", `/?t=${id}`);
+      const q = topicQuestion(id, locale);
+      if (deliver(q, id)) {
+        const tid = topic.id;
+        window.history.replaceState(null, "", `${href("/")}?t=${tid}`.replace("/?", "?"));
       }
     },
-    [deliver]
+    [deliver, locale, href],
   );
 
   const submitFree = useCallback(
@@ -150,22 +163,26 @@ export default function Experience() {
       if (topic.id === "fallback") {
         const follow = [
           ...suggestions,
-          ...["journey", "proof"].filter((x) => !suggestions.includes(x)),
+          ...["journey", "results"].filter((x) => !suggestions.includes(x)),
         ].slice(0, 3);
         deliver(text, "fallback", text, follow);
       } else if (deliver(text, topic.id)) {
-        window.history.replaceState(null, "", `/?t=${topic.id}`);
+        window.history.replaceState(
+          null,
+          "",
+          `${href("/")}?t=${topic.id}`.replace("/?", "?"),
+        );
       }
     },
-    [deliver]
+    [deliver, href],
   );
 
   const reset = useCallback(() => {
     setMessages([]);
     setPhase("idle");
     busyRef.current = false;
-    window.history.replaceState(null, "", "/");
-  }, [setPhase]);
+    window.history.replaceState(null, "", href("/"));
+  }, [setPhase, href]);
 
   const onListening = useCallback(
     (listening: boolean) => {
@@ -173,14 +190,17 @@ export default function Experience() {
       if (listening && current === "idle") setPhase("listening");
       if (!listening && current === "listening") setPhase("idle");
     },
-    [setPhase]
+    [setPhase],
   );
 
-  // deep link: /?t=journey opens that topic on load
   useEffect(() => {
-    const t = new URLSearchParams(window.location.search).get("t");
-    if (t && TOPICS[t] && t !== "fallback") {
-      const timer = setTimeout(() => deliver(TOPICS[t].q, t), 650);
+    const param = new URLSearchParams(window.location.search).get("t");
+    const tid = param === "proof" ? "results" : param;
+    if (tid && TOPICS[tid] && tid !== "fallback") {
+      const timer = setTimeout(
+        () => deliver(topicQuestion(tid, locale), tid),
+        650,
+      );
       return () => clearTimeout(timer);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -189,10 +209,11 @@ export default function Experience() {
   return (
     <>
       <div className="glow" aria-hidden="true" />
+      <HeroSea />
       <BrainCanvas />
       <div className="grain" aria-hidden="true" />
 
-      <TopBar visited={visited} onAsk={ask} onReset={reset} />
+      <SiteNav experienceMode onLogoClick={reset} />
 
       <AnimatePresence>
         {inConversation && (
@@ -205,7 +226,7 @@ export default function Experience() {
             transition={{ duration: 0.4, delay: 0.6 }}
             type="button"
           >
-            ← Back to the beginning
+            {t(ui.chat.back, locale)}
           </motion.button>
         )}
       </AnimatePresence>

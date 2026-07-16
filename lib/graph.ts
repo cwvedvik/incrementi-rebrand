@@ -130,7 +130,7 @@ export function buildBrainGraph(
     dustPositions[i * 3 + 1] = Math.cos(phi) * r * 0.85;
     dustPositions[i * 3 + 2] = Math.sin(phi) * Math.sin(theta) * r;
     dustSeeds[i] = rnd();
-    dustSizes[i] = 0.6 + rnd() * 1.2;
+    dustSizes[i] = 0.7 + rnd() * 1.35;
   }
 
   return {

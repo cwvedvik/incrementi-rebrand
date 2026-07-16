@@ -1,7 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { TOPICS } from "@/lib/topics";
+import Link from "next/link";
+import { TOPICS, topicQuestion } from "@/lib/topics";
+import { useLocale } from "@/lib/i18n/locale";
+import { ui } from "@/lib/i18n/ui";
+import { t } from "@/lib/i18n/types";
 
 export function Chip({
   id,
@@ -12,6 +15,7 @@ export function Chip({
   visited: boolean;
   onAsk: (id: string) => void;
 }) {
+  const { locale } = useLocale();
   const topic = TOPICS[id];
   if (!topic) return null;
   return (
@@ -21,41 +25,30 @@ export function Chip({
       type="button"
     >
       <span className="q">?</span>
-      {topic.q}
+      {topicQuestion(id, locale)}
     </button>
   );
 }
 
 export function UserMessage({ text }: { text: string }) {
   return (
-    <motion.div
-      className="msg-user"
-      initial={{ opacity: 0, y: 12, scale: 0.98 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-    >
-      {text}
-    </motion.div>
+    <div className="msg-user reveal-in">{text}</div>
   );
 }
 
 export function ThinkingMessage() {
+  const { locale } = useLocale();
   return (
-    <motion.div
-      className="msg-ai"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.35 }}
-    >
+    <div className="msg-ai">
       <div className="thinking">
-        Reasoning
+        {t(ui.chat.thinking, locale)}
         <div className="dots">
           <i />
           <i />
           <i />
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -74,7 +67,16 @@ export function AIMessage({
   visited: Set<string>;
   onAsk: (id: string) => void;
 }) {
-  const topic = TOPICS[topicId] ?? TOPICS.fallback;
+  const { locale, href } = useLocale();
+  const resolved =
+    topicId === "proof" ? "results" : topicId;
+  const topic = TOPICS[resolved] ?? TOPICS.fallback;
+  const showBook =
+    resolved === "journey" ||
+    resolved === "results" ||
+    resolved === "start" ||
+    nudge;
+
   return (
     <div className="msg-ai">
       <div className="ai-tag">
@@ -93,22 +95,20 @@ export function AIMessage({
                 onAsk={onAsk}
               />
             ))}
+            {showBook ? (
+              <Link href={href("/start")} className="chip chip-cta">
+                <span className="q">→</span>
+                {t(ui.chat.bookSession, locale)}
+              </Link>
+            ) : null}
           </div>
         )}
         {nudge && (
           <div className="nudge">
-            <p>
-              You&apos;ve covered a good slice of Incrementi. The rest is
-              better as a conversation — start with an AI &amp; data strategy
-              session.
-            </p>
-            <button
-              className="btn-copper"
-              type="button"
-              onClick={() => onAsk("start")}
-            >
-              Book a strategy session
-            </button>
+            <p>{t(ui.chat.nudge, locale)}</p>
+            <Link href={href("/start")} className="btn-copper">
+              {t(ui.ctaBand.button, locale)}
+            </Link>
           </div>
         )}
       </div>

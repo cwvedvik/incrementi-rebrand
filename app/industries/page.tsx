@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
-import PageShell from "@/components/sections/PageShell";
-import { TOPICS } from "@/lib/topics";
+import IndustriesPageClient from "@/components/pages/IndustriesPageClient";
 
 export const metadata: Metadata = {
-  title: "Industries — Incrementi",
+  title: "Bransjer — Incrementi",
   description:
-    "Maritime & ocean, industrial, and financial & professional services — three sectors, one profile: firms that run on operations and can't afford to bet the company.",
+    "Maritim, industri og finans — tre sektorer, én profil: selskaper som lever av drift.",
 };
 
 export default function IndustriesPage() {
-  return (
-    <PageShell experienceTopic="industries">
-      <div className="eyebrow-sm">Industries</div>
-      <h1 className="page-title">Three sectors. One profile.</h1>
-      {TOPICS.industries.render()}
-    </PageShell>
-  );
+  return <IndustriesPageClient />;
 }

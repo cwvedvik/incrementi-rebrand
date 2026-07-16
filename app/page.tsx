@@ -1,39 +1,48 @@
 import Link from "next/link";
 import Experience from "@/components/chat/Experience";
 import { CASES } from "@/lib/cases";
-import { PAGE_NAV } from "@/components/sections/PageShell";
+import { PAGE_NAV } from "@/lib/nav";
+import { getRequestLocale } from "@/lib/i18n/server";
+import { localePath } from "@/lib/i18n/config";
+import { ui } from "@/lib/i18n/ui";
+import { t } from "@/lib/i18n/types";
 
-export default function Page() {
+export default async function Page() {
+  const locale = await getRequestLocale();
+
   return (
     <>
       <Experience />
 
-      {/*
-        Visually hidden, crawlable index of the real pages behind the
-        experience. The full content lives on those routes; this keeps the
-        homepage focused while search engines (and screen-reader users
-        skipping the experience) can reach everything.
-      */}
       <nav className="seo-content" aria-label="Site pages">
-        <h1>Incrementi — The AI transformation partner</h1>
+        <h1>
+          {locale === "no"
+            ? "Incrementi — AI-transformasjonspartner"
+            : "Incrementi — The AI transformation partner"}
+        </h1>
         <p>
-          The whole journey to AI-native. We build your engine — data
-          foundation, operating system, AI in your context — and you keep the
-          keys. One partner, increment by increment. A 99x company.
+          {locale === "no"
+            ? "Hele reisen til AI-native. Vi bygger motoren din — dataplattform, operativsystem, AI i din kontekst — og du beholder nøklene. Én partner, steg for steg. A 99x company."
+            : "The whole journey to AI-native. We build your engine — data foundation, operating system, AI in your context — and you keep the keys. One partner, increment by increment. A 99x company."}
         </p>
         <ul>
           {PAGE_NAV.map((item) => (
             <li key={item.href}>
-              <Link href={item.href}>{item.label}</Link>
+              <Link href={localePath(item.href, locale)}>
+                {t(ui.nav[item.key], locale)}
+              </Link>
             </li>
           ))}
           <li>
-            <Link href="/start">Book an AI &amp; data strategy session</Link>
+            <Link href={localePath("/start", locale)}>
+              {t(ui.nav.start, locale)}
+            </Link>
           </li>
           {CASES.map((c) => (
             <li key={c.slug}>
-              <Link href={`/work/${c.slug}`}>
-                Case study: {c.client} — {c.title}
+              <Link href={localePath(`/results/${c.slug}`, locale)}>
+                {locale === "no" ? "Case" : "Case study"}: {c.client} —{" "}
+                {c.title[locale]}
               </Link>
             </li>
           ))}

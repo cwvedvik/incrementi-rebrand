@@ -1,23 +1,12 @@
 import type { Metadata } from "next";
-import PageShell from "@/components/sections/PageShell";
-import BuildingBlocks from "@/components/sections/BuildingBlocks";
+import JourneyPageClient from "@/components/pages/JourneyPageClient";
 
 export const metadata: Metadata = {
-  title: "The Journey — Incrementi",
+  title: "Reisen — Incrementi",
   description:
-    "One journey, six building blocks: Direction, prototype & scope, data foundation, the operating system, AI context & control, agent enablement. Every block stands on its own and compounds into the next.",
+    "Én reise, seks byggeklosser: Retning, prototype, datagrunnlag, operativsystem, AI-kontekst og agent-kapabilitet.",
 };
 
 export default function JourneyPage() {
-  return (
-    <PageShell experienceTopic="journey">
-      <div className="eyebrow-sm">The Incrementi Journey</div>
-      <h1 className="page-title">How we take a firm to AI-native.</h1>
-      <p className="page-intro">
-        One journey, six building blocks. You control the priority and the
-        pace — every block stands on its own and compounds into the next.
-      </p>
-      <BuildingBlocks />
-    </PageShell>
-  );
+  return <JourneyPageClient />;
 }

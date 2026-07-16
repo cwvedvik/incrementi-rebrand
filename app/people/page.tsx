@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
-import PageShell from "@/components/sections/PageShell";
-import { TOPICS } from "@/lib/topics";
+import PeoplePageClient from "@/components/pages/PeoplePageClient";
 
 export const metadata: Metadata = {
-  title: "People — Incrementi",
+  title: "Folk — Incrementi",
   description:
-    "Senior partners lead every engagement, 99X's 650+ specialists scale it. Meet the partners, advisors and consultants who own your journey personally.",
+    "Senior partnere leder hvert engasjement. 99X’ 650+ spesialister skalerer det.",
 };
 
 export default function PeoplePage() {
-  return (
-    <PageShell experienceTopic="people">
-      <div className="eyebrow-sm">People</div>
-      <h1 className="page-title">Who you&apos;ll actually work with.</h1>
-      {TOPICS.people.render()}
-    </PageShell>
-  );
+  return <PeoplePageClient />;
 }

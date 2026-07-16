@@ -2,6 +2,9 @@
 
 import { useRef, useEffect } from "react";
 import { Chip } from "./Message";
+import { useLocale } from "@/lib/i18n/locale";
+import { ui } from "@/lib/i18n/ui";
+import { t } from "@/lib/i18n/types";
 
 export default function Dock({
   chips,
@@ -18,9 +21,9 @@ export default function Dock({
   onListening: (listening: boolean) => void;
   inConversation: boolean;
 }) {
+  const { locale } = useLocale();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // any printable key focuses the input — the whole page is the prompt
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (
@@ -65,23 +68,28 @@ export default function Dock({
           <input
             ref={inputRef}
             type="text"
-            placeholder="Ask Incrementi…"
+            placeholder={t(ui.dock.placeholder, locale)}
             autoComplete="off"
-            aria-label="Ask Incrementi a question"
+            aria-label={t(ui.dock.placeholder, locale)}
             onFocus={() => onListening(true)}
             onBlur={() => onListening(false)}
             onKeyDown={(e) => {
               if (e.key === "Enter") submit();
             }}
           />
-          <button className="send" onClick={submit} aria-label="Send" type="button">
+          <button
+            className="send"
+            onClick={submit}
+            aria-label={t(ui.dock.send, locale)}
+            type="button"
+          >
             ↑
           </button>
         </div>
         <div className="dock-hint">
           {inConversation
-            ? "Keep asking — or press “Back to the beginning” to reset."
-            : "Suggested questions above — or type your own. Ask what matters to you. Skip what doesn’t."}
+            ? t(ui.dock.hintAfter, locale)
+            : t(ui.dock.hint, locale)}
         </div>
       </div>
     </div>

@@ -19,6 +19,7 @@ const EXTRA_KEYWORDS: Record<string, string[]> = {
     "personvern", "styring", "regelverk", "eu ai act",
   ],
   proof: ["portfolio", "track record", "examples", "eksempler", "prosjekter"],
+  results: ["portfolio", "track record", "examples", "eksempler", "prosjekter", "proof"],
   build: ["fabric", "azure", "stack", "teknologi", "arkitektur", "architecture"],
   people: ["ceo", "founder", "employees", "ansatte", "grunnlegger", "ledelse"],
   start: ["email", "phone", "call", "demo", "epost", "telefon", "ringe"],
@@ -74,7 +75,7 @@ export function matchTopic(text: string): MatchResult {
   const tokens = new Set(query.split(" "));
 
   const ranked = Object.values(TOPICS)
-    .filter((t) => t.id !== "fallback")
+    .filter((t) => t.id !== "fallback" && t.kw.length > 0)
     .map((t) => ({ topic: t, ...scoreTopic(query, tokens, t) }))
     .sort((a, b) => b.score - a.score);
 
@@ -89,7 +90,7 @@ export function matchTopic(text: string): MatchResult {
     .filter((r) => r.score > 0)
     .slice(0, 2)
     .map((r) => r.topic.id);
-  const suggestions = near.length > 0 ? near : ["journey", "proof"];
+  const suggestions = near.length > 0 ? near : ["journey", "results"];
 
   return { topic: TOPICS.fallback, suggestions };
 }

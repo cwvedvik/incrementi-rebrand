@@ -3,21 +3,66 @@ import { CASES } from "@/lib/cases";
 
 const BASE = "https://incrementi.no";
 
+const ROUTES = [
+  "",
+  "/journey",
+  "/what-we-build",
+  "/industries",
+  "/results",
+  "/people",
+  "/about",
+  "/start",
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = [
-    "",
-    "/journey",
-    "/what-we-build",
-    "/industries",
-    "/work",
-    "/people",
-    "/about",
-    "/start",
-    ...CASES.map((c) => `/work/${c.slug}`),
-  ];
-  return pages.map((path) => ({
-    url: `${BASE}${path}`,
-    changeFrequency: "monthly",
-    priority: path === "" ? 1 : path.startsWith("/work/") ? 0.7 : 0.8,
-  }));
+  const pages = ROUTES.flatMap((route) => {
+    const path = route || "/";
+    return [
+      {
+        url: `${BASE}${path === "/" ? "" : path}`,
+        lastModified: new Date(),
+        alternates: {
+          languages: {
+            nb: `${BASE}${path === "/" ? "" : path}`,
+            en: `${BASE}/en${path === "/" ? "" : path}`,
+          },
+        },
+      },
+      {
+        url: `${BASE}/en${path === "/" ? "" : path}`,
+        lastModified: new Date(),
+        alternates: {
+          languages: {
+            nb: `${BASE}${path === "/" ? "" : path}`,
+            en: `${BASE}/en${path === "/" ? "" : path}`,
+          },
+        },
+      },
+    ];
+  });
+
+  const cases = CASES.flatMap((c) => [
+    {
+      url: `${BASE}/results/${c.slug}`,
+      lastModified: new Date(),
+      alternates: {
+        languages: {
+          nb: `${BASE}/results/${c.slug}`,
+          en: `${BASE}/en/results/${c.slug}`,
+        },
+      },
+    },
+    {
+      url: `${BASE}/en/results/${c.slug}`,
+      lastModified: new Date(),
+      alternates: {
+        languages: {
+          nb: `${BASE}/results/${c.slug}`,
+          en: `${BASE}/en/results/${c.slug}`,
+        },
+      },
+    },
+  ]);
+
+  return [...pages, ...cases];
 }

@@ -1,46 +1,47 @@
+"use client";
+
 import type { ReactNode } from "react";
 import PeopleGrid from "@/components/sections/PeopleGrid";
 import ContactForm from "@/components/chat/ContactForm";
 import BuildingBlocks from "@/components/sections/BuildingBlocks";
 import CaseCards from "@/components/sections/CaseCards";
 import LogoStrip from "@/components/sections/LogoStrip";
-
-/* ============================================================
-   CONTENT — the intelligence's answers.
-   Grounded in real offers, proposals and delivered client work.
-   Keywords carry both English and Norwegian variants.
-   ============================================================ */
+import { BUILD_LAYERS } from "@/lib/content/build";
+import { INDUSTRIES } from "@/lib/content/industries";
+import { ConceptIcon, type IconName } from "@/components/icons";
+import { useLocale } from "@/lib/i18n/locale";
+import type { LocalizedString } from "@/lib/i18n/types";
+import { t } from "@/lib/i18n/types";
+import type { Locale } from "@/lib/i18n/config";
 
 export interface TopicRenderContext {
-  /** The visitor's own typed question (fallback topic only). */
   query?: string;
 }
 
 export interface Topic {
   id: string;
-  /** The question as shown in chips / nav. */
-  q: string;
-  /** Keywords for free-text matching (English + Norwegian). */
+  q: LocalizedString;
   kw: string[];
   render: (ctx?: TopicRenderContext) => ReactNode;
   follow: string[];
 }
 
-/* ---------- small layout helpers ---------- */
-
 function Mini({
   k,
   h,
   p,
+  icon,
   wide = false,
 }: {
   k: string;
   h: string;
   p: string;
+  icon?: IconName;
   wide?: boolean;
 }) {
   return (
     <div className={`mini${wide ? " wide" : ""}`}>
+      {icon ? <ConceptIcon name={icon} className="concept-icon sm mini-icon" /> : null}
       <div className="k">{k}</div>
       <h4>{h}</h4>
       <p>{p}</p>
@@ -48,12 +49,443 @@ function Mini({
   );
 }
 
-/* ---------- the topics ---------- */
+function JourneyLead() {
+  const { locale } = useLocale();
+  return locale === "no" ? (
+    <div className="ai-lead">
+      Én reise, seks byggeklosser. Dere styrer prioritet og tempo —{" "}
+      <em>hver kloss står alene og forsterker den neste.</em>
+    </div>
+  ) : (
+    <div className="ai-lead">
+      One journey, six building blocks. You control the priority and the pace —{" "}
+      <em>every block stands on its own and compounds into the next.</em>
+    </div>
+  );
+}
+
+function BuildRender() {
+  const { locale } = useLocale();
+  return (
+    <>
+      <div className="ai-lead">
+        {locale === "no"
+          ? "Fire lag som blir til et selskap som kjører på egne data."
+          : "Four layers that stack into a firm that runs on its own data."}
+      </div>
+      <div className="cards2">
+        {BUILD_LAYERS.map((layer) => (
+          <Mini
+            key={layer.id}
+            wide={layer.wide}
+            icon={layer.icon}
+            k={t(layer.k, locale)}
+            h={t(layer.h, locale)}
+            p={t(layer.p, locale)}
+          />
+        ))}
+      </div>
+    </>
+  );
+}
+
+function ResultsRender() {
+  const { locale } = useLocale();
+  return (
+    <>
+      <div className="ai-lead">
+        {locale === "no" ? (
+          <>
+            Tallene overbeviser. Merkevaren holder seg lavmælt —{" "}
+            <em>hver case åpner til hele historien.</em>
+          </>
+        ) : (
+          <>
+            The numbers do the persuading. The brand stays understated —{" "}
+            <em>every case opens into the full story.</em>
+          </>
+        )}
+      </div>
+      <LogoStrip dense />
+      <CaseCards />
+    </>
+  );
+}
+
+function OwnershipRender() {
+  const { locale } = useLocale();
+  return (
+    <>
+      <div className="ai-lead">
+        {locale === "no" ? (
+          <>
+            Ja. <em>Dere eier motoren.</em> Det er hele poenget.
+          </>
+        ) : (
+          <>
+            Yes. <em>You own the engine.</em> That is the whole point.
+          </>
+        )}
+      </div>
+      <ul className="ai-points">
+        {locale === "no" ? (
+          <>
+            <li>
+              <b>Åpen, etablert teknologi</b> — Microsoft Fabric, OpenBridge,
+              .NET, React. Ingen proprietære svarte bokser.
+            </li>
+            <li>
+              <b>Deres kode, data og arkitektur</b> — i deres tenant. Ethvert
+              team kan ta over og fortsette.
+            </li>
+            <li>
+              <b>ISO 9001, 27001 &amp; 27701</b> — kvalitet, sikkerhet og
+              personvern innebygd fra start.
+            </li>
+            <li>
+              <b>Variabel kostnad</b> — verdi levert hver syklus; stopp når
+              dere vil og eier fortsatt noe som fungerer.
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <b>Open, established technology</b> — Microsoft Fabric,
+              OpenBridge, .NET, React. No proprietary black boxes.
+            </li>
+            <li>
+              <b>Your code, your data, your architecture</b> — in your tenant.
+              Any team can pick it up and continue.
+            </li>
+            <li>
+              <b>ISO 9001, 27001 &amp; 27701</b> — quality, security and privacy
+              governance built in from the start.
+            </li>
+            <li>
+              <b>Variable cost</b> — value shipped every cycle; stop whenever
+              you want and still own something that works.
+            </li>
+          </>
+        )}
+      </ul>
+    </>
+  );
+}
+
+function IndustriesRender() {
+  const { locale } = useLocale();
+  return (
+    <>
+      <div className="ai-lead">
+        {locale === "no" ? (
+          <>
+            Tre sektorer, én profil: selskaper som <em>lever av drift</em>{" "}
+            og ikke har råd til å satse selskapet.
+          </>
+        ) : (
+          <>
+            Three sectors, one profile: firms that <em>run on operations</em>{" "}
+            and can&apos;t afford to bet the company.
+          </>
+        )}
+      </div>
+      <div className="cards2">
+        {INDUSTRIES.map((ind) => (
+          <Mini
+            key={ind.id}
+            icon={ind.icon}
+            k={t(ind.k, locale)}
+            h={t(ind.h, locale)}
+            p={t(ind.p, locale)}
+          />
+        ))}
+      </div>
+    </>
+  );
+}
+
+function SpeedRender() {
+  const { locale } = useLocale();
+  return (
+    <>
+      <div className="ai-lead">
+        {locale === "no" ? (
+          <>
+            Første verdi i produksjon på <em>uker</em> — og det akselererer
+            derfra.
+          </>
+        ) : (
+          <>
+            First value in production in <em>weeks</em> — and it accelerates
+            from there.
+          </>
+        )}
+      </div>
+      <ul className="ai-points">
+        {locale === "no" ? (
+          <>
+            <li>
+              <b>2–4 uker</b> til validert, klikkbar prototype og låst scope.
+            </li>
+            <li>
+              <b>AI-DLC-leveranse i «bolts»</b> — prototyper rett til
+              produksjon; hastighet opp, kostnad per syklus ned.
+            </li>
+            <li>
+              <b>650+ 99X-spesialister</b> for elastisk kapasitet når en fase
+              krever det.
+            </li>
+            <li>
+              <b>Det forsterker seg</b> — hver tilkoblet datakilde gjør neste
+              løsning raskere og billigere.
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <b>2–4 weeks</b> to a validated, clickable prototype and a locked
+              scope.
+            </li>
+            <li>
+              <b>AI-DLC delivery in &quot;bolts&quot;</b> — prototypes converted
+              straight to production; velocity up, cost per cycle down.
+            </li>
+            <li>
+              <b>650+ 99X specialists</b> for elastic capacity when a phase
+              demands it.
+            </li>
+            <li>
+              <b>It compounds</b> — every data source connected makes the next
+              solution faster and cheaper.
+            </li>
+          </>
+        )}
+      </ul>
+    </>
+  );
+}
+
+function ContextRender() {
+  const { locale } = useLocale();
+  return (
+    <>
+      <div className="ai-lead">
+        {locale === "no" ? (
+          <>
+            Fordi AI-en jobber på <em>deres kontekst</em> — ikke en generisk
+            modell limt på.
+          </>
+        ) : (
+          <>
+            Because the AI works on <em>your context</em> — not a generic model
+            bolted on.
+          </>
+        )}
+      </div>
+      <p className="ai-body">
+        {locale === "no"
+          ? "Vi bygger et kontekst- og kontrollag over dataene deres: en kunnskapsgraf over den virkelige verden, styrt tilgang via MCP, retrieval som forankrer hvert svar i kildene deres. Agenter kjenner fartøy, anlegg, kunder og prosesser — og opererer innen roller, rettigheter, sporbarhet og revisjon."
+          : "We build a context & control layer over your data: a knowledge graph of your real world, governed access through MCP, retrieval that grounds every answer in your sources. Agents know your vessels, sites, customers and processes — and operate inside roles, permissions, lineage and audit."}
+      </p>
+      <ul className="ai-points">
+        {locale === "no" ? (
+          <>
+            <li>
+              <b>Forankrede svar</b> med sporbare kilder — mindre
+              hallusinering.
+            </li>
+            <li>
+              <b>Pilot-sandbox → port → styrt skala</b> — utforsk raskt, skaler
+              bare det som fortjener det.
+            </li>
+            <li>
+              <b>Menneske i loopen</b> og fulle revisjonsspor som standard.
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <b>Grounded answers</b> with traceable sources — reduced
+              hallucination.
+            </li>
+            <li>
+              <b>Pilot sandbox → gate → governed scale</b> — explore fast, scale
+              only what earns it.
+            </li>
+            <li>
+              <b>Human-in-the-loop</b> and full audit trails by default.
+            </li>
+          </>
+        )}
+      </ul>
+    </>
+  );
+}
+
+function WhyRender() {
+  const { locale } = useLocale();
+  return (
+    <>
+      <div className="ai-lead">
+        {locale === "no" ? (
+          <>
+            Alle andre stopper halvveis.{" "}
+            <em>Vi eier hele reisen — så overleverer vi den.</em>
+          </>
+        ) : (
+          <>
+            Everyone else stops halfway.{" "}
+            <em>We own the whole journey — then hand it over.</em>
+          </>
+        )}
+      </div>
+      <ul className="ai-points">
+        {locale === "no" ? (
+          <>
+            <li>
+              <b>Ikke et strategihus</b> som rådgir og drar. Vi bygger og
+              leverer til produksjon.
+            </li>
+            <li>
+              <b>Ikke en programvareleverandør</b> som låser dere inn. Åpen
+              teknologi, deres IP.
+            </li>
+            <li>
+              <b>Ikke et dev-shop</b> som leverer features på rotete data.
+              Fundament først.
+            </li>
+            <li>
+              <b>Støttet av 99X Group</b> — 650+ spesialister, 474 MNOK omsetning,
+              20 år, 150+ produkter.
+            </li>
+            <li>
+              <b>Utover reisen</b> — produktledelse og utviklingsrådgivning:
+              senior produktledere og ingeniører inne i teamene deres.
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <b>Not a strategy house</b> that advises and leaves. We build it
+              and ship it to production.
+            </li>
+            <li>
+              <b>Not a software vendor</b> that locks you in. Open tech, your
+              IP.
+            </li>
+            <li>
+              <b>Not a dev shop</b> shipping features on messy data. Foundations
+              first.
+            </li>
+            <li>
+              <b>Backed by 99X Group</b> — 650+ specialists, 474 MNOK revenue, 20
+              years, 150+ products.
+            </li>
+            <li>
+              <b>Beyond the journey</b> — product management and development
+              consulting: senior product owners and engineers embedded in your
+              teams.
+            </li>
+          </>
+        )}
+      </ul>
+      <p className="ai-body" style={{ marginTop: 16 }}>
+        {locale === "no"
+          ? "Resultatet er fordelen som forsterker seg: steg for steg blir selskapet raskere, skarpere og mer autonomt."
+          : "The result is the compounding advantage: increment by increment, your firm gets faster, sharper and more autonomous."}
+      </p>
+    </>
+  );
+}
+
+function PeopleRender() {
+  const { locale } = useLocale();
+  return (
+    <>
+      <div className="ai-lead">
+        {locale === "no" ? (
+          <>
+            Senior partnere leder hvert engasjement.{" "}
+            <em>99X’ 650+ spesialister skalerer det.</em> Ingen bait-and-switch
+            til juniorer.
+          </>
+        ) : (
+          <>
+            Senior partners lead every engagement.{" "}
+            <em>99X&apos;s 650+ specialists scale it.</em> No bait-and-switch to
+            juniors.
+          </>
+        )}
+      </div>
+      <p className="ai-body">
+        {locale === "no"
+          ? "Folkene under eier reisen deres personlig — fra første Retnings-uke til dagen ansatte kjører egne agenter. Bak dem står hele 99X Group når en fase krever elastisk kapasitet."
+          : "The people below own your journey personally — from the first Direction week to the day your employees run their own agents. Behind them stands the full weight of 99X Group when a phase demands elastic capacity."}
+      </p>
+      <PeopleGrid />
+    </>
+  );
+}
+
+function StartRender() {
+  const { locale } = useLocale();
+  return (
+    <>
+      <div className="ai-lead">
+        {locale === "no" ? (
+          <>
+            Med en <em>AI- og datastrategisesjon.</em> Én uke med Retning —
+            lav risiko, høy klarhet.
+          </>
+        ) : (
+          <>
+            With an <em>AI &amp; data strategy session.</em> One week of
+            Direction — low risk, high clarity.
+          </>
+        )}
+      </div>
+      <p className="ai-body">
+        {locale === "no"
+          ? "Sesjonen samler ledelsen deres og våre partnere rundt deres virkelighet: hvor verdien sitter, hvordan målarkitekturen ser ut, og hva som skal bygges først. Den blir den delte planen hele reisen styres etter. Ingen stor forpliktelse for å finne ut om vi passer — dere går ut med en retning, enten vi jobber sammen eller ikke."
+          : "The session brings your leadership and our partners around your reality: where the value sits, what the target architecture looks like, and what to build first. It becomes the shared plan the whole journey steers by. No big commitment to find out if we're right for each other — you leave with a direction, whether or not we work together."}
+      </p>
+      <ContactForm />
+    </>
+  );
+}
+
+function FallbackRender({ query }: TopicRenderContext = {}) {
+  const { locale } = useLocale();
+  return (
+    <>
+      <div className="ai-lead">
+        {locale === "no"
+          ? "Godt spørsmål — og akkurat den typen et menneske bør svare ordentlig på."
+          : "Good question — and exactly the kind a person should answer properly."}
+      </div>
+      <p className="ai-body">
+        {locale === "no"
+          ? "Det nærmeste jeg kan dekke står under. Eller send spørsmålet rett til teamet — de svarer direkte, vanligvis innen en dag."
+          : "The closest ground I can cover is below. Or send your question straight to the team — they answer these directly, usually within a day."}
+      </p>
+      <ContactForm
+        compact
+        initialMessage={query}
+        heading={
+          locale === "no" ? "Spør oss direkte" : "Ask us this directly"
+        }
+      />
+    </>
+  );
+}
 
 export const TOPICS: Record<string, Topic> = {
   journey: {
     id: "journey",
-    q: "How do you take a firm to AI-native?",
+    q: {
+      no: "Hvordan tar dere et selskap til AI-native?",
+      en: "How do you take a firm to AI-native?",
+    },
     kw: [
       "journey", "how", "process", "start with", "steps", "phases",
       "transform", "roadmap", "path", "reise", "prosess", "steg",
@@ -61,296 +493,168 @@ export const TOPICS: Record<string, Topic> = {
     ],
     render: () => (
       <>
-        <div className="ai-lead">
-          One journey, six building blocks. You control the priority and the
-          pace — <em>every block stands on its own and compounds into the next.</em>
-        </div>
+        <JourneyLead />
         <BuildingBlocks />
       </>
     ),
     follow: ["build", "speed", "context", "start"],
   },
-
   build: {
     id: "build",
-    q: "What exactly do you build?",
+    q: {
+      no: "Hva bygger dere egentlig?",
+      en: "What exactly do you build?",
+    },
     kw: [
       "build", "what do you", "capabilities", "product", "platform",
       "make", "deliver", "solution", "bygge", "lage", "leverer",
       "løsning", "plattform", "hva gjør",
     ],
-    render: () => (
-      <>
-        <div className="ai-lead">
-          Four layers that stack into a firm that runs on its own data.
-        </div>
-        <div className="cards2">
-          <Mini k="Foundation" h="Data & integration platform" p="A modern lakehouse platform — Microsoft Fabric, Azure or Databricks, matched to your estate. Data first, lowest TCO, connect anything as a building block." />
-          <Mini k="Products" h="The operating system" p="The apps your crew, operations, leadership and customers actually use — built in production increments on open technology like .NET, React and OpenBridge." />
-          <Mini k="Intelligence" h="AI context & control layer" p="MCP, RAG and a knowledge graph so AI works on your data, in your reality, with sources and audit." />
-          <Mini k="Capability" h="Agent enablement" p="Your employees build and operate their own agents — the capability stays in the organisation." />
-          <Mini
-            wide
-            k="Alongside the journey"
-            h="Product management & development consulting"
-            p="Senior product owners and engineers embedded in your teams — steering roadmaps, shipping products and raising delivery capability, with 99X's 650+ specialists behind them."
-          />
-        </div>
-      </>
-    ),
-    follow: ["context", "journey", "ownership", "proof"],
+    render: () => <BuildRender />,
+    follow: ["context", "journey", "ownership", "results"],
   },
-
-  proof: {
-    id: "proof",
-    q: "Show me the proof.",
+  results: {
+    id: "results",
+    q: {
+      no: "Vis meg resultatene.",
+      en: "Show me the results.",
+    },
     kw: [
       "proof", "results", "evidence", "case", "reference", "work",
       "clients", "roi", "numbers", "done", "bevis", "resultater",
       "kunder", "referanser", "tall", "erfaring",
     ],
-    render: () => (
-      <>
-        <div className="ai-lead">
-          The numbers do the persuading. The brand stays understated —{" "}
-          <em>every case opens into the full story.</em>
-        </div>
-        <LogoStrip dense />
-        <CaseCards />
-      </>
-    ),
+    render: () => <ResultsRender />,
     follow: ["industries", "ownership", "people", "start"],
   },
-
+  proof: {
+    id: "results",
+    q: {
+      no: "Vis meg resultatene.",
+      en: "Show me the results.",
+    },
+    kw: [],
+    render: () => <ResultsRender />,
+    follow: ["industries", "ownership", "people", "start"],
+  },
   ownership: {
     id: "ownership",
-    q: "Do we own what you build?",
+    q: {
+      no: "Eier vi det dere bygger?",
+      en: "Do we own what you build?",
+    },
     kw: [
       "own", "ownership", "ip", "lock", "lock-in", "vendor", "code",
       "rights", "keep", "proprietary", "eie", "eierskap", "kildekode",
       "rettigheter", "leverandør", "innlåsing",
     ],
-    render: () => (
-      <>
-        <div className="ai-lead">
-          Yes. <em>You own the engine.</em> That is the whole point.
-        </div>
-        <ul className="ai-points">
-          <li><b>Open, established technology</b> — Microsoft Fabric, OpenBridge, .NET, React. No proprietary black boxes.</li>
-          <li><b>Your code, your data, your architecture</b> — in your tenant. Any team can pick it up and continue.</li>
-          <li><b>ISO 9001, 27001 &amp; 27701</b> — quality, security and privacy governance built in from the start.</li>
-          <li><b>Variable cost</b> — value shipped every cycle; stop whenever you want and still own something that works.</li>
-        </ul>
-      </>
-    ),
-    follow: ["context", "proof", "journey"],
+    render: () => <OwnershipRender />,
+    follow: ["context", "results", "journey"],
   },
-
   industries: {
     id: "industries",
-    q: "Which industries do you serve?",
+    q: {
+      no: "Hvilke bransjer jobber dere med?",
+      en: "Which industries do you serve?",
+    },
     kw: [
       "industries", "sector", "maritime", "industrial", "finance",
       "financial", "who do you", "serve", "vertical", "bransje",
       "sektor", "industri", "finans", "hvem",
     ],
-    render: () => (
-      <>
-        <div className="ai-lead">
-          Three sectors, one profile: firms that <em>run on operations</em>{" "}
-          and can&apos;t afford to bet the company.
-        </div>
-        <div className="cards2">
-          <Mini k="Maritime & ocean" h="Vessels, subsea, aquaculture" p="OT/sensor data, fragmented systems, growth by acquisition. ABYS, Sebastian, 4Subsea, Optimar, Upkip." />
-          <Mini k="Industrial" h="Infrastructure, energy, field-service" p="Multi-site operations, spread data, predictive-maintenance upside. NRC Group, Envo, BUS." />
-          <Mini k="Financial & professional" h="Accounting, finance functions" p="Compliance-bound, document-heavy workflows built for governed AI and agents." />
-        </div>
-      </>
-    ),
-    follow: ["proof", "build", "start"],
+    render: () => <IndustriesRender />,
+    follow: ["results", "build", "start"],
   },
-
   speed: {
     id: "speed",
-    q: "How fast do we see value?",
+    q: {
+      no: "Hvor raskt ser vi verdi?",
+      en: "How fast do we see value?",
+    },
     kw: [
       "fast", "speed", "quick", "time", "when", "how long", "weeks",
       "value", "deliver", "rask", "hurtig", "tid", "uker", "verdi",
       "hvor lang",
     ],
-    render: () => (
-      <>
-        <div className="ai-lead">
-          First value in production in <em>weeks</em> — and it accelerates
-          from there.
-        </div>
-        <ul className="ai-points">
-          <li><b>2–4 weeks</b> to a validated, clickable prototype and a locked scope.</li>
-          <li><b>AI-DLC delivery in &quot;bolts&quot;</b> — prototypes converted straight to production; velocity up, cost per cycle down.</li>
-          <li><b>650+ 99X specialists</b> for elastic capacity when a phase demands it.</li>
-          <li><b>It compounds</b> — every data source connected makes the next solution faster and cheaper.</li>
-        </ul>
-      </>
-    ),
+    render: () => <SpeedRender />,
     follow: ["journey", "ownership", "start"],
   },
-
   context: {
     id: "context",
-    q: "How is your AI safe — and different?",
+    q: {
+      no: "Hvordan er AI-en deres trygg — og annerledes?",
+      en: "How is your AI safe — and different?",
+    },
     kw: [
       "safe", "secure", "security", "different", "risk", "govern",
       "hallucinat", "context", "trust", "gdpr", "compliance", "agent",
       "sikker", "sikkerhet", "trygg", "risiko", "kontekst", "tillit",
     ],
-    render: () => (
-      <>
-        <div className="ai-lead">
-          Because the AI works on <em>your context</em> — not a generic model
-          bolted on.
-        </div>
-        <p className="ai-body">
-          We build a context &amp; control layer over your data: a knowledge
-          graph of your real world, governed access through MCP, retrieval
-          that grounds every answer in your sources. Agents know your
-          vessels, sites, customers and processes — and operate inside roles,
-          permissions, lineage and audit.
-        </p>
-        <ul className="ai-points">
-          <li><b>Grounded answers</b> with traceable sources — reduced hallucination.</li>
-          <li><b>Pilot sandbox → gate → governed scale</b> — explore fast, scale only what earns it.</li>
-          <li><b>Human-in-the-loop</b> and full audit trails by default.</li>
-        </ul>
-      </>
-    ),
+    render: () => <ContextRender />,
     follow: ["build", "ownership", "journey"],
   },
-
   why: {
     id: "why",
-    q: "Why Incrementi?",
+    q: {
+      no: "Hvorfor Incrementi?",
+      en: "Why Incrementi?",
+    },
     kw: [
       "why", "about", "who are you", "different", "instead",
       "competitor", "choose", "trust", "company", "hvorfor", "om dere",
       "hvem er", "konkurrent", "velge", "selskap",
     ],
-    render: () => (
-      <>
-        <div className="ai-lead">
-          Everyone else stops halfway.{" "}
-          <em>We own the whole journey — then hand it over.</em>
-        </div>
-        <ul className="ai-points">
-          <li><b>Not a strategy house</b> that advises and leaves. We build it and ship it to production.</li>
-          <li><b>Not a software vendor</b> that locks you in. Open tech, your IP.</li>
-          <li><b>Not a dev shop</b> shipping features on messy data. Foundations first.</li>
-          <li><b>Backed by 99X Group</b> — 650+ specialists, 474 MNOK revenue, 20 years, 150+ products.</li>
-          <li><b>Beyond the journey</b> — product management and development consulting: senior product owners and engineers embedded in your teams.</li>
-        </ul>
-        <p className="ai-body" style={{ marginTop: 16 }}>
-          The result is the compounding advantage: increment by increment,
-          your firm gets faster, sharper and more autonomous.
-        </p>
-      </>
-    ),
-    follow: ["people", "journey", "proof", "start"],
+    render: () => <WhyRender />,
+    follow: ["people", "journey", "results", "start"],
   },
-
   people: {
     id: "people",
-    q: "Who will we actually work with?",
+    q: {
+      no: "Hvem jobber vi egentlig med?",
+      en: "Who will we actually work with?",
+    },
     kw: [
       "people", "team", "partner", "partners", "advisor", "advisors",
       "adviser", "consultant", "consultants", "who works", "faces",
       "folk", "team", "partnere", "rådgivere", "konsulenter", "hvem jobber",
     ],
-    render: () => (
-      <>
-        <div className="ai-lead">
-          Senior partners lead every engagement.{" "}
-          <em>99X&apos;s 650+ specialists scale it.</em> No bait-and-switch
-          to juniors.
-        </div>
-        <p className="ai-body">
-          The people below own your journey personally — from the first
-          Direction week to the day your employees run their own agents.
-          Behind them stands the full weight of 99X Group when a phase
-          demands elastic capacity.
-        </p>
-        <PeopleGrid />
-      </>
-    ),
-    follow: ["why", "proof", "start"],
+    render: () => <PeopleRender />,
+    follow: ["why", "results", "start"],
   },
-
   start: {
     id: "start",
-    q: "How do we start?",
+    q: {
+      no: "Hvordan kommer vi i gang?",
+      en: "How do we start?",
+    },
     kw: [
       "start", "begin", "contact", "talk", "book", "meeting",
       "get started", "next step", "reach", "starte", "begynne",
       "kontakt", "snakke", "møte", "komme i gang", "neste steg",
     ],
-    render: () => (
-      <>
-        <div className="ai-lead">
-          With an <em>AI &amp; data strategy session.</em> One week of
-          Direction — low risk, high clarity.
-        </div>
-        <p className="ai-body">
-          The session brings your leadership and our partners around your
-          reality: where the value sits, what the target architecture looks
-          like, and what to build first. It becomes the shared plan the whole
-          journey steers by. No big commitment to find out if we&apos;re
-          right for each other — you leave with a direction, whether or not
-          we work together.
-        </p>
-        <ContactForm />
-      </>
-    ),
+    render: () => <StartRender />,
     follow: ["journey", "why", "people"],
   },
-
   fallback: {
     id: "fallback",
-    q: "",
+    q: { no: "", en: "" },
     kw: [],
-    render: (ctx) => (
-      <>
-        <div className="ai-lead">
-          Good question — and exactly the kind a person should answer
-          properly.
-        </div>
-        <p className="ai-body">
-          The closest ground I can cover is below. Or send your question
-          straight to the team — they answer these directly, usually within
-          a day.
-        </p>
-        <ContactForm
-          compact
-          initialMessage={ctx?.query}
-          heading="Ask us this directly"
-        />
-      </>
-    ),
-    follow: ["journey", "proof", "start"],
+    render: (ctx) => <FallbackRender query={ctx?.query} />,
+    follow: ["journey", "results", "start"],
   },
 };
 
 export const INITIAL_CHIPS = [
   "journey",
   "build",
-  "proof",
+  "results",
   "ownership",
   "people",
   "start",
 ];
 
-export const NAV_ITEMS: Array<{ id: string; label: string }> = [
-  { id: "journey", label: "The Journey" },
-  { id: "build", label: "What we build" },
-  { id: "industries", label: "Industries" },
-  { id: "proof", label: "Work" },
-  { id: "people", label: "People" },
-  { id: "why", label: "About" },
-];
+export function topicQuestion(id: string, locale: Locale): string {
+  const topic = TOPICS[id];
+  if (!topic) return "";
+  return t(topic.q, locale);
+}

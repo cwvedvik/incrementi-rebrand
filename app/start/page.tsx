@@ -1,21 +1,12 @@
 import type { Metadata } from "next";
-import PageShell from "@/components/sections/PageShell";
-import { TOPICS } from "@/lib/topics";
+import StartPageClient from "@/components/pages/StartPageClient";
 
 export const metadata: Metadata = {
-  title: "Start — book an AI & data strategy session — Incrementi",
+  title: "Strategisesjon — Incrementi",
   description:
-    "Start with an AI & data strategy session: one week of Direction — low risk, high clarity. You leave with a plan the whole journey steers by, whether or not we work together.",
+    "Book en AI- og datastrategisesjon. Én uke med Retning — lav risiko, høy klarhet.",
 };
 
 export default function StartPage() {
-  return (
-    <PageShell experienceTopic="start">
-      <div className="eyebrow-sm">Start</div>
-      <h1 className="page-title">
-        Book an AI &amp; data strategy session.
-      </h1>
-      {TOPICS.start.render()}
-    </PageShell>
-  );
+  return <StartPageClient />;
 }
