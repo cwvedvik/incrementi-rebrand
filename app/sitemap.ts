@@ -5,11 +5,10 @@ const BASE = "https://incrementi.no";
 
 const ROUTES = [
   "",
-  "/journey",
+  "/platform",
   "/what-we-build",
   "/industries",
   "/results",
-  "/people",
   "/about",
   "/start",
 ];

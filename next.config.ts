@@ -15,6 +15,12 @@ const nextConfig: NextConfig = {
         destination: "/en/results/:slug",
         permanent: true,
       },
+      { source: "/diagram", destination: "/platform", permanent: true },
+      { source: "/en/diagram", destination: "/en/platform", permanent: true },
+      { source: "/people", destination: "/about", permanent: true },
+      { source: "/en/people", destination: "/en/about", permanent: true },
+      { source: "/journey", destination: "/about", permanent: true },
+      { source: "/en/journey", destination: "/en/about", permanent: true },
     ];
   },
 };

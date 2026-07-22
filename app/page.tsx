@@ -17,13 +17,13 @@ export default async function Page() {
       <nav className="seo-content" aria-label="Site pages">
         <h1>
           {locale === "no"
-            ? "Incrementi — AI-transformasjonspartner"
-            : "Incrementi — The AI transformation partner"}
+            ? "Incrementi — Fra data-kaos til målbar produktivitet"
+            : "Incrementi — From data chaos to measurable productivity"}
         </h1>
         <p>
           {locale === "no"
-            ? "Hele reisen til AI-native. Vi bygger motoren din — dataplattform, operativsystem, AI i din kontekst — og du beholder nøklene. Én partner, steg for steg. A 99x company."
-            : "The whole journey to AI-native. We build your engine — data foundation, operating system, AI in your context — and you keep the keys. One partner, increment by increment. A 99x company."}
+            ? "Vi samler fragmenterte systemer i en felles dataplattform og et styrt kontekstlag. Da blir AI trygg og nyttig — og gevinstene lander i produktivitet, inntjening per ansatt og EBITDA. Dere beholder nøklene. A 99x company."
+            : "We bring fragmented systems into a shared data platform and a governed context layer. Then AI becomes safe and useful — and the gains land in productivity, earnings per employee, and EBITDA. You keep the keys. A 99x company."}
         </p>
         <ul>
           {PAGE_NAV.map((item) => (

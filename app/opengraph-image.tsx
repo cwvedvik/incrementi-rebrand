@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Incrementi — The AI transformation partner";
+export const alt =
+  "Incrementi — From data chaos to measurable productivity";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -31,7 +32,7 @@ export default function OpengraphImage() {
             marginBottom: 36,
           }}
         >
-          The AI transformation partner
+          The data & AI partner
         </div>
         <div
           style={{
@@ -46,13 +47,15 @@ export default function OpengraphImage() {
         </div>
         <div
           style={{
-            fontSize: 30,
+            fontSize: 28,
             color: "#A7ABB2",
             marginTop: 30,
             fontStyle: "italic",
+            maxWidth: 900,
+            textAlign: "center",
           }}
         >
-          The whole journey to AI-native
+          From data chaos to measurable productivity
         </div>
         <div
           style={{

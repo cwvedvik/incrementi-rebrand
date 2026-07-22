@@ -26,10 +26,10 @@ function detectMode(): Mode {
     (isMobile && window.innerWidth < 480);
 
   const tier: BrainTier = lowPower
-    ? { neurons: 180, dust: 800, bloom: false, dpr: [1, 1.5] }
+    ? { neurons: 100, dust: 350, bloom: false, dpr: [1, 1.25] }
     : isMobile
-      ? { neurons: 250, dust: 1400, bloom: true, dpr: [1, 2] }
-      : { neurons: 420, dust: 2600, bloom: true, dpr: [1, 2] };
+      ? { neurons: 140, dust: 550, bloom: false, dpr: [1, 1.5] }
+      : { neurons: 220, dust: 900, bloom: true, dpr: [1, 1.75] };
 
   return { kind: "webgl", tier };
 }
@@ -61,9 +61,9 @@ export default function BrainCanvas() {
         {mode.tier.bloom && (
           <EffectComposer>
             <Bloom
-              luminanceThreshold={0.55}
-              intensity={0.85}
-              radius={0.72}
+              luminanceThreshold={0.72}
+              intensity={0.4}
+              radius={0.55}
               mipmapBlur
             />
           </EffectComposer>

@@ -26,17 +26,18 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL("https://incrementi.no"),
     title: isNo
-      ? "Incrementi — AI-transformasjonspartner"
-      : "Incrementi — The AI transformation partner",
+      ? "Incrementi — Fra data-kaos til målbar produktivitet"
+      : "Incrementi — From data chaos to measurable productivity",
     description: isNo
-      ? "Hele reisen til AI-native. Vi bygger motoren din — dataplattform, operativsystem, AI i din kontekst — og du beholder nøklene. Én partner, steg for steg. A 99x company."
-      : "The whole journey to AI-native. We build your engine — data foundation, operating system, AI in your context — and you keep the keys. One partner, increment by increment. A 99x company.",
+      ? "Vi samler fragmenterte systemer i en felles dataplattform og et styrt kontekstlag. Da blir AI trygg og nyttig — og gevinstene lander i produktivitet, inntjening per ansatt og EBITDA. Dere beholder nøklene. A 99x company."
+      : "We bring fragmented systems into a shared data platform and a governed context layer. Then AI becomes safe and useful — and the gains land in productivity, earnings per employee, and EBITDA. You keep the keys. A 99x company.",
     keywords: [
-      "AI transformation",
-      "AI-native",
       "dataplattform",
+      "virksomhetsarkitektur",
+      "kontekstlag",
+      "AI transformasjon",
       "Microsoft Fabric",
-      "AI rådgivning Norge",
+      "gevinstrealisering",
       "Incrementi",
     ],
     alternates: {
@@ -47,11 +48,11 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       title: isNo
-        ? "Incrementi — AI-transformasjonspartner"
-        : "Incrementi — The AI transformation partner",
+        ? "Incrementi — Fra data-kaos til målbar produktivitet"
+        : "Incrementi — From data chaos to measurable productivity",
       description: isNo
-        ? "Hele reisen til AI-native. Vi bygger motoren — og du beholder nøklene."
-        : "The whole journey to AI-native. We build your engine — and you keep the keys.",
+        ? "Felles dataplattform og styrt kontekstlag — slik at AI betaler seg i produktivitet og EBITDA."
+        : "Shared data platform and governed context layer — so AI pays off in productivity and EBITDA.",
       url: isNo ? "https://incrementi.no" : "https://incrementi.no/en",
       siteName: "Incrementi",
       locale: isNo ? "nb_NO" : "en_US",
@@ -60,11 +61,11 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: isNo
-        ? "Incrementi — AI-transformasjonspartner"
-        : "Incrementi — The AI transformation partner",
+        ? "Incrementi — Fra data-kaos til målbar produktivitet"
+        : "Incrementi — From data chaos to measurable productivity",
       description: isNo
-        ? "Hele reisen til AI-native. Vi bygger motoren — og du beholder nøklene."
-        : "The whole journey to AI-native. We build your engine — and you keep the keys.",
+        ? "Felles dataplattform og styrt kontekstlag — slik at AI betaler seg i produktivitet og EBITDA."
+        : "Shared data platform and governed context layer — so AI pays off in productivity and EBITDA.",
     },
   };
 }

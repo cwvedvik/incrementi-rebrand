@@ -19,8 +19,8 @@ export const BUILD_LAYERS: BuildLayer[] = [
       en: "Data & integration platform",
     },
     p: {
-      no: "En moderne lakehouse-plattform — Microsoft Fabric, Azure eller Databricks, tilpasset deres estate. Data først, lavest eierkostnad, koble hva som helst som byggekloss.",
-      en: "A modern lakehouse platform — Microsoft Fabric, Azure or Databricks, matched to your estate. Data first, lowest TCO, connect anything as a building block.",
+      no: "Vi rydder data-kaoset: fragmenterte systemer blir byggeklosser i en felles dataplattform — Fabric, Azure eller Databricks, tilpasset deres estate. Uten dette laget eskalerer AI bare støyen. Med det lander hvert senere steg raskere — og eierkostnaden blir lavest.",
+      en: "We clear data chaos: fragmented systems become building blocks in a shared data platform — Fabric, Azure or Databricks, matched to your estate. Without this layer, AI only escalates the noise. With it, every later step lands faster — at the lowest TCO.",
     },
   },
   {
@@ -29,8 +29,8 @@ export const BUILD_LAYERS: BuildLayer[] = [
     k: { no: "Produkter", en: "Products" },
     h: { no: "Operativsystemet", en: "The operating system" },
     p: {
-      no: "Appene mannskap, drift, ledelse og kunder faktisk bruker — bygget i produksjonsinkrementer på åpen teknologi som .NET, React og OpenBridge.",
-      en: "The apps your crew, operations, leadership and customers actually use — built in production increments on open technology like .NET, React and OpenBridge.",
+      no: "Appene mannskap, drift, ledelse og kunder faktisk bruker — bygget i produksjonsinkrementer på åpen teknologi som .NET, React og OpenBridge. Produktivitet i hverdagen, ikke bare i dashboards.",
+      en: "The apps your crew, operations, leadership and customers actually use — built in production increments on open technology like .NET, React and OpenBridge. Productivity in the day-to-day, not only in dashboards.",
     },
   },
   {
@@ -42,8 +42,8 @@ export const BUILD_LAYERS: BuildLayer[] = [
       en: "AI context & control layer",
     },
     p: {
-      no: "MCP, RAG og en kunnskapsgraf slik at AI jobber på deres data, i deres virkelighet, med kilder og revisjon.",
-      en: "MCP, RAG and a knowledge graph so AI works on your data, in your reality, with sources and audit.",
+      no: "Det felles kontekstlaget: MCP, RAG og kunnskapsgraf slik at AI jobber på deres data, i deres virkelighet, med kilder og revisjon. Dette er laget som gjør AI nyttig — ikke generisk støy limt på siloer.",
+      en: "The shared context layer: MCP, RAG and a knowledge graph so AI works on your data, in your reality, with sources and audit. This is the layer that makes AI useful — not generic noise bolted onto silos.",
     },
   },
   {
@@ -52,8 +52,8 @@ export const BUILD_LAYERS: BuildLayer[] = [
     k: { no: "Kapabilitet", en: "Capability" },
     h: { no: "Agent-kapabilitet", en: "Agent enablement" },
     p: {
-      no: "Ansatte bygger og drifter egne agenter — kapabiliteten blir i organisasjonen.",
-      en: "Your employees build and operate their own agents — the capability stays in the organisation.",
+      no: "Ansatte bygger og drifter egne agenter på det styrte fundamentet — kapabiliteten blir i organisasjonen og løfter inntjening per ansatt, i stedet for å spre enda mer kaos.",
+      en: "Your employees build and operate their own agents on the governed foundation — capability stays in the organisation and lifts earnings per employee, instead of spreading more chaos.",
     },
   },
   {

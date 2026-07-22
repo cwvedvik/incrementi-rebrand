@@ -10,7 +10,7 @@ export default function HeroSea() {
       <div className="hero-sea-depth" />
       <div className="hero-sea-horizon" />
       <svg className="hero-sea-ticks" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <g opacity="0.18" stroke="currentColor" strokeWidth="0.15" fill="none">
+        <g opacity="0.1" stroke="currentColor" strokeWidth="0.15" fill="none">
           <line x1="4" y1="18" x2="7" y2="18" />
           <line x1="4" y1="28" x2="6" y2="28" />
           <line x1="4" y1="38" x2="7" y2="38" />

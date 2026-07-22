@@ -19,11 +19,11 @@ const PHASE_TARGETS: Record<
   BrainPhase,
   { energy: number; scale: number; y: number; dim: number; rot: number }
 > = {
-  idle: { energy: 0.16, scale: 1.22, y: 0.3, dim: 1.0, rot: 0.05 },
-  listening: { energy: 0.42, scale: 1.16, y: 0.28, dim: 1.0, rot: 0.1 },
-  thinking: { energy: 1.0, scale: 0.46, y: 1.5, dim: 0.6, rot: 0.16 },
-  answering: { energy: 0.68, scale: 0.46, y: 1.5, dim: 0.5, rot: 0.09 },
-  docked: { energy: 0.18, scale: 0.44, y: 1.5, dim: 0.38, rot: 0.045 },
+  idle: { energy: 0.08, scale: 1.08, y: 0.28, dim: 0.52, rot: 0.03 },
+  listening: { energy: 0.28, scale: 1.04, y: 0.26, dim: 0.58, rot: 0.06 },
+  thinking: { energy: 0.72, scale: 0.42, y: 1.5, dim: 0.42, rot: 0.12 },
+  answering: { energy: 0.48, scale: 0.42, y: 1.5, dim: 0.36, rot: 0.07 },
+  docked: { energy: 0.1, scale: 0.4, y: 1.5, dim: 0.22, rot: 0.03 },
 };
 
 const WAVE_DURATION = 1.9; // seconds

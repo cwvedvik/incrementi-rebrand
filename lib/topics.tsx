@@ -53,12 +53,12 @@ function JourneyLead() {
   const { locale } = useLocale();
   return locale === "no" ? (
     <div className="ai-lead">
-      Én reise, seks byggeklosser. Dere styrer prioritet og tempo —{" "}
+      Først fundamentet, så AI som betaler seg. Én reise, seks byggeklosser —{" "}
       <em>hver kloss står alene og forsterker den neste.</em>
     </div>
   ) : (
     <div className="ai-lead">
-      One journey, six building blocks. You control the priority and the pace —{" "}
+      Foundation first, then AI that pays off. One journey, six building blocks —{" "}
       <em>every block stands on its own and compounds into the next.</em>
     </div>
   );
@@ -70,8 +70,8 @@ function BuildRender() {
     <>
       <div className="ai-lead">
         {locale === "no"
-          ? "Fire lag som blir til et selskap som kjører på egne data."
-          : "Four layers that stack into a firm that runs on its own data."}
+          ? "Fire lag: fra datagrunnlag til AI som jobber for driften."
+          : "Four layers: from data foundation to AI that works for the business."}
       </div>
       <div className="cards2">
         {BUILD_LAYERS.map((layer) => (
@@ -119,11 +119,11 @@ function OwnershipRender() {
       <div className="ai-lead">
         {locale === "no" ? (
           <>
-            Ja. <em>Dere eier motoren.</em> Det er hele poenget.
+            Ja. <em>Dere eier plattformen.</em> Det er hele poenget.
           </>
         ) : (
           <>
-            Yes. <em>You own the engine.</em> That is the whole point.
+            Yes. <em>You own the platform.</em> That is the whole point.
           </>
         )}
       </div>
@@ -273,19 +273,19 @@ function ContextRender() {
         {locale === "no" ? (
           <>
             Fordi AI-en jobber på <em>deres kontekst</em> — ikke en generisk
-            modell limt på.
+            modell limt på kaos.
           </>
         ) : (
           <>
             Because the AI works on <em>your context</em> — not a generic model
-            bolted on.
+            bolted onto chaos.
           </>
         )}
       </div>
       <p className="ai-body">
         {locale === "no"
-          ? "Vi bygger et kontekst- og kontrollag over dataene deres: en kunnskapsgraf over den virkelige verden, styrt tilgang via MCP, retrieval som forankrer hvert svar i kildene deres. Agenter kjenner fartøy, anlegg, kunder og prosesser — og opererer innen roller, rettigheter, sporbarhet og revisjon."
-          : "We build a context & control layer over your data: a knowledge graph of your real world, governed access through MCP, retrieval that grounds every answer in your sources. Agents know your vessels, sites, customers and processes — and operate inside roles, permissions, lineage and audit."}
+          ? "Uten felles datagrunnlag og kontekstlag eskalerer AI bare støy og manuelt arbeid. Vi bygger laget over dataene deres: kunnskapsgraf, styrt tilgang via MCP, retrieval som forankrer hvert svar. Agenter kjenner fartøy, anlegg, kunder og prosesser — innen roller, rettigheter, sporbarhet og revisjon."
+          : "Without a shared data foundation and context layer, AI only escalates noise and manual work. We build the layer over your data: knowledge graph, governed access through MCP, retrieval that grounds every answer. Agents know your vessels, sites, customers and processes — inside roles, permissions, lineage and audit."}
       </p>
       <ul className="ai-points">
         {locale === "no" ? (
@@ -301,6 +301,10 @@ function ContextRender() {
             <li>
               <b>Menneske i loopen</b> og fulle revisjonsspor som standard.
             </li>
+            <li>
+              <b>Effekt i driften</b> — produktivitet og inntjening per ansatt,
+              ikke bare demoer.
+            </li>
           </>
         ) : (
           <>
@@ -314,6 +318,10 @@ function ContextRender() {
             </li>
             <li>
               <b>Human-in-the-loop</b> and full audit trails by default.
+            </li>
+            <li>
+              <b>Effect in operations</b> — productivity and earnings per
+              employee, not just demos.
             </li>
           </>
         )}
@@ -329,13 +337,13 @@ function WhyRender() {
       <div className="ai-lead">
         {locale === "no" ? (
           <>
-            Alle andre stopper halvveis.{" "}
-            <em>Vi eier hele reisen — så overleverer vi den.</em>
+            De fleste kjøper AI oppå kaos.{" "}
+            <em>Vi bygger fundamentet som gjør at AI løser problemet.</em>
           </>
         ) : (
           <>
-            Everyone else stops halfway.{" "}
-            <em>We own the whole journey — then hand it over.</em>
+            Most buy AI on top of chaos.{" "}
+            <em>We build the foundation that makes AI solve the problem.</em>
           </>
         )}
       </div>
@@ -352,7 +360,7 @@ function WhyRender() {
             </li>
             <li>
               <b>Ikke et dev-shop</b> som leverer features på rotete data.
-              Fundament først.
+              Fundament først — ellers eskalerer AI kaoset.
             </li>
             <li>
               <b>Støttet av 99X Group</b> — 650+ spesialister, 474 MNOK omsetning,
@@ -374,8 +382,8 @@ function WhyRender() {
               IP.
             </li>
             <li>
-              <b>Not a dev shop</b> shipping features on messy data. Foundations
-              first.
+              <b>Not a dev shop</b> shipping features on messy data. Foundation
+              first — otherwise AI escalates the chaos.
             </li>
             <li>
               <b>Backed by 99X Group</b> — 650+ specialists, 474 MNOK revenue, 20
@@ -391,8 +399,8 @@ function WhyRender() {
       </ul>
       <p className="ai-body" style={{ marginTop: 16 }}>
         {locale === "no"
-          ? "Resultatet er fordelen som forsterker seg: steg for steg blir selskapet raskere, skarpere og mer autonomt."
-          : "The result is the compounding advantage: increment by increment, your firm gets faster, sharper and more autonomous."}
+          ? "Resultatet er fordelen som forsterker seg: høyere produktivitet, mer inntjening per ansatt, og bedre EBITDA — fordi AI jobber på et ryddig fundament."
+          : "The result is the compounding advantage: higher productivity, more earnings per employee, and better EBITDA — because AI works on a clean foundation."}
       </p>
     </>
   );
@@ -446,8 +454,8 @@ function StartRender() {
       </div>
       <p className="ai-body">
         {locale === "no"
-          ? "Sesjonen samler ledelsen deres og våre partnere rundt deres virkelighet: hvor verdien sitter, hvordan målarkitekturen ser ut, og hva som skal bygges først. Den blir den delte planen hele reisen styres etter. Ingen stor forpliktelse for å finne ut om vi passer — dere går ut med en retning, enten vi jobber sammen eller ikke."
-          : "The session brings your leadership and our partners around your reality: where the value sits, what the target architecture looks like, and what to build first. It becomes the shared plan the whole journey steers by. No big commitment to find out if we're right for each other — you leave with a direction, whether or not we work together."}
+          ? "Sesjonen samler ledelsen deres og våre partnere rundt deres virkelighet: hvor data-kaoset hemmer verdi, hvordan målarkitekturen for plattform og kontekstlag ser ut, og hva som skal bygges først. Den blir den delte planen hele reisen styres etter. Ingen stor forpliktelse for å finne ut om vi passer — dere går ut med en retning, enten vi jobber sammen eller ikke."
+          : "The session brings your leadership and our partners around your reality: where data chaos holds back value, what the target architecture for platform and context layer looks like, and what to build first. It becomes the shared plan the whole journey steers by. No big commitment to find out if we're right for each other — you leave with a direction, whether or not we work together."}
       </p>
       <ContactForm />
     </>
@@ -483,13 +491,14 @@ export const TOPICS: Record<string, Topic> = {
   journey: {
     id: "journey",
     q: {
-      no: "Hvordan tar dere et selskap til AI-native?",
-      en: "How do you take a firm to AI-native?",
+      no: "Hvordan går dere fra data-kaos til produktivitet?",
+      en: "How do you go from data chaos to productivity?",
     },
     kw: [
       "journey", "how", "process", "start with", "steps", "phases",
       "transform", "roadmap", "path", "reise", "prosess", "steg",
-      "faser", "transformasjon", "veikart", "hvordan",
+      "faser", "transformasjon", "veikart", "hvordan", "kaos", "fundament",
+      "produktivitet", "productivity", "chaos", "foundation", "ai-native",
     ],
     render: () => (
       <>
@@ -525,7 +534,7 @@ export const TOPICS: Record<string, Topic> = {
       "kunder", "referanser", "tall", "erfaring",
     ],
     render: () => <ResultsRender />,
-    follow: ["industries", "ownership", "people", "start"],
+    follow: ["industries", "ownership", "why", "start"],
   },
   proof: {
     id: "results",
@@ -535,7 +544,7 @@ export const TOPICS: Record<string, Topic> = {
     },
     kw: [],
     render: () => <ResultsRender />,
-    follow: ["industries", "ownership", "people", "start"],
+    follow: ["industries", "ownership", "why", "start"],
   },
   ownership: {
     id: "ownership",
@@ -605,7 +614,7 @@ export const TOPICS: Record<string, Topic> = {
       "hvem er", "konkurrent", "velge", "selskap",
     ],
     render: () => <WhyRender />,
-    follow: ["people", "journey", "results", "start"],
+    follow: ["journey", "results", "start"],
   },
   people: {
     id: "people",
@@ -633,7 +642,7 @@ export const TOPICS: Record<string, Topic> = {
       "kontakt", "snakke", "møte", "komme i gang", "neste steg",
     ],
     render: () => <StartRender />,
-    follow: ["journey", "why", "people"],
+    follow: ["journey", "why", "build"],
   },
   fallback: {
     id: "fallback",
@@ -649,7 +658,7 @@ export const INITIAL_CHIPS = [
   "build",
   "results",
   "ownership",
-  "people",
+  "why",
   "start",
 ];
 

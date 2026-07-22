@@ -13,8 +13,8 @@ export const PHASES: PhaseContent[] = [
     icon: "direction",
     h: { no: "Retning", en: "Direction" },
     p: {
-      no: "Én fokusert uke, forankret i en AI- og datastrategisesjon med ledelsen. Vi kartlegger hvor dere er, hvor verdien sitter, og blir enige om målarkitektur og byggesekvens. Dere går ut med en plan hele reisen styres etter — uansett om vi fortsetter sammen.",
-      en: "One focused week, anchored in an AI & data strategy session with your leadership. We map where you are, where the value sits, and agree the target architecture and the build sequence. You leave with a plan the whole journey steers by — whether or not we continue together.",
+      no: "Én fokusert uke, forankret i en AI- og datastrategisesjon med ledelsen. Vi kartlegger hvor data-kaoset hemmer verdi, hvor produktiviteten kan løftes, og blir enige om målarkitektur og byggesekvens. Dere går ut med en plan hele reisen styres etter — uansett om vi fortsetter sammen.",
+      en: "One focused week, anchored in an AI & data strategy session with your leadership. We map where data chaos holds back value, where productivity can lift, and agree the target architecture and build sequence. You leave with a plan the whole journey steers by — whether or not we continue together.",
     },
   },
   {
@@ -31,8 +31,8 @@ export const PHASES: PhaseContent[] = [
     icon: "data",
     h: { no: "Datagrunnlag", en: "Data foundation" },
     p: {
-      no: "En moderne data­plattform som gjør hvert system, hver sensor og hver kilde til en ren byggekloss. Vi bygger typisk på etablert lakehouse-teknologi — Microsoft Fabric, Azure, Databricks — tilpasset deres estate og preferanser, aldri låst til våre. Data først gir lavest eierkostnad, og hvert senere steg lander raskere.",
-      en: "A modern data platform that turns every system, sensor and source into a clean building block. We typically build on established lakehouse technology — Microsoft Fabric, Azure, Databricks — matched to your estate and your preferences, never locked to ours. Data first means the lowest total cost of ownership, and every later increment lands faster because of it.",
+      no: "Steget som stopper kaoset: en moderne dataplattform som gjør hvert system, hver sensor og hver kilde til en ren byggekloss. Vi bygger typisk på etablert lakehouse-teknologi — Microsoft Fabric, Azure, Databricks — tilpasset deres estate, aldri låst til våre. Data først gir lavest eierkostnad, og hvert senere steg — kontekst, AI, agenter — lander raskere.",
+      en: "The step that stops the chaos: a modern data platform that turns every system, sensor and source into a clean building block. We typically build on established lakehouse technology — Microsoft Fabric, Azure, Databricks — matched to your estate, never locked to ours. Data first means the lowest TCO, and every later step — context, AI, agents — lands faster.",
     },
   },
   {
@@ -49,8 +49,8 @@ export const PHASES: PhaseContent[] = [
     icon: "context",
     h: { no: "AI-kontekst og kontrollag", en: "AI context & control layer" },
     p: {
-      no: "Laget som gjør virksomhets-AI trygg og nyttig: en kunnskapsgraf over deres virkelige verden, styrt tilgang via MCP, og retrieval som forankrer hvert svar i deres kilder. Roller, rettigheter, sporbarhet og revisjon er innebygd fra start. Det er dette som gjør generiske modeller til AI som kjenner fartøyene, anleggene, kundene og prosessene deres.",
-      en: "The layer that makes enterprise AI safe and useful: a knowledge graph of your real world, governed access through MCP, and retrieval that grounds every answer in your sources. Roles, permissions, lineage and audit are built in from the start. This is what turns generic models into AI that knows your vessels, sites, customers and processes.",
+      no: "Det felles kontekstlaget som gjør virksomhets-AI trygg og nyttig: kunnskapsgraf over deres virkelige verden, styrt tilgang via MCP, og retrieval som forankrer hvert svar i deres kilder. Roller, rettigheter, sporbarhet og revisjon er innebygd. Uten dette laget er AI generisk støy på siloer — med det blir AI en kraftmultiplikator for produktivitet.",
+      en: "The shared context layer that makes enterprise AI safe and useful: a knowledge graph of your real world, governed access through MCP, and retrieval that grounds every answer in your sources. Roles, permissions, lineage and audit are built in. Without this layer, AI is generic noise on silos — with it, AI becomes a force multiplier for productivity.",
     },
   },
   {
@@ -58,8 +58,8 @@ export const PHASES: PhaseContent[] = [
     icon: "agents",
     h: { no: "Agent-kapabilitet", en: "Agent enablement" },
     p: {
-      no: "Vi legger kapabiliteten i hendene på folkene deres: ansatte designer, bygger og drifter egne agenter på det styrte fundamentet under. Kapabiliteten blir i organisasjonen — og fortsetter å forsterke seg etter at vi trekker oss tilbake.",
-      en: "We put the capability in your people's hands: your employees design, build and operate their own agents on the governed foundation beneath them. The capability stays in your organisation — and keeps compounding after we step back.",
+      no: "Vi legger kapabiliteten i hendene på folkene deres: ansatte designer, bygger og drifter egne agenter på det styrte fundamentet under. Kapabiliteten blir i organisasjonen — og fortsetter å forsterke inntjening per ansatt etter at vi trekker oss tilbake.",
+      en: "We put the capability in your people's hands: your employees design, build and operate their own agents on the governed foundation beneath them. The capability stays in your organisation — and keeps compounding earnings per employee after we step back.",
     },
   },
 ];

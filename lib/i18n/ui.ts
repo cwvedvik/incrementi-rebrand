@@ -2,11 +2,10 @@ import type { LocalizedString } from "./types";
 
 export const ui = {
   nav: {
-    journey: { no: "Reisen", en: "The Journey" },
+    platform: { no: "Plattformen", en: "The Platform" },
     build: { no: "Hva vi bygger", en: "What we build" },
     industries: { no: "Bransjer", en: "Industries" },
     results: { no: "Resultater", en: "Results" },
-    people: { no: "Folk", en: "People" },
     about: { no: "Om oss", en: "About" },
     start: { no: "Strategisesjon", en: "Strategy session" },
   },
@@ -64,7 +63,7 @@ export const ui = {
       en: "Book the strategy session",
     },
     nudge: {
-      no: "Klar for å snakke med et menneske?",
+      no: "Klar for å snakke med en spesialist?",
       en: "Ready to talk to a human?",
     },
     back: {
@@ -106,22 +105,30 @@ export const ui = {
   },
   hero: {
     eyebrow: {
-      no: "AI-transformasjonspartner",
-      en: "The AI transformation partner",
+      no: "Data- og AI-partner",
+      en: "The data & AI partner",
     },
-    titleLine1: { no: "Hele reisen", en: "The whole journey" },
-    titleLine2: { no: "til AI-native.", en: "to AI-native." },
+    titleLine1: { no: "Fra data-kaos", en: "From data chaos" },
+    titleLine2: {
+      no: "til målbar produktivitet.",
+      en: "to measurable productivity.",
+    },
+    titleEm: {
+      no: "målbar produktivitet.",
+      en: "measurable productivity.",
+    },
+    titleTo: { no: "til", en: "to" },
     subBefore: {
-      no: "Vi bygger motoren din — dataplattform, operativsystem, AI i din kontekst —",
-      en: "We build your engine — data foundation, operating system, AI in your context —",
+      no: "Vi samler fragmenterte systemer i en felles dataplattform og et robust kontekstlag. Da blir AI trygt og verdiskapende — og gevinstene realiserer seg i",
+      en: "We bring fragmented systems into a shared data platform and a robust context layer. Then AI becomes safe and value-creating — and the gains materialize in",
     },
     subBold: {
-      no: "og du beholder nøklene.",
-      en: "and you keep the keys.",
+      no: "økt produktivitet, inntjening per ansatt og EBITDA.",
+      en: "higher productivity, earnings per employee, and EBITDA.",
     },
     subAfter: {
-      no: "Én partner, steg for steg.",
-      en: "One partner, increment by increment.",
+      no: "Dere beholder nøklene.",
+      en: "You keep the keys.",
     },
     readCase: { no: "Les casen →", en: "Read the case →" },
     caseTeaser: {
@@ -132,17 +139,17 @@ export const ui = {
   pages: {
     journeyEyebrow: { no: "Incrementi-reisen", en: "The Incrementi Journey" },
     journeyTitle: {
-      no: "Slik tar vi et selskap til AI-native.",
-      en: "How we take a firm to AI-native.",
+      no: "Først fundamentet. Så AI som betaler seg.",
+      en: "Foundation first. Then AI that pays off.",
     },
     journeyIntro: {
-      no: "Én reise, seks byggeklosser. Dere styrer prioritet og tempo — hver kloss står alene og forsterker den neste.",
-      en: "One journey, six building blocks. You control the priority and the pace — every block stands on its own and compounds into the next.",
+      no: "Én reise, seks byggeklosser — fra ryddig datagrunnlag til styrt kontekstlag og agenter ansatte kan bruke. Dere styrer prioritet og tempo; hver kloss står alene og forsterker den neste.",
+      en: "One journey, six building blocks — from a clean data foundation to a governed context layer and agents your people can use. You control priority and pace; every block stands on its own and compounds into the next.",
     },
     buildEyebrow: { no: "Hva vi bygger", en: "What we build" },
     buildTitle: {
-      no: "Fire lag som blir til et selskap som kjører på egne data.",
-      en: "Four layers that stack into a firm that runs on its own data.",
+      no: "Fire lag: fra datagrunnlag til AI som jobber for driften.",
+      en: "Four layers: from data foundation to AI that works for the business.",
     },
     industriesEyebrow: { no: "Bransjer", en: "Industries" },
     industriesTitle: {
@@ -165,12 +172,12 @@ export const ui = {
     },
     aboutEyebrow: { no: "Om Incrementi", en: "About Incrementi" },
     aboutTitle: {
-      no: "AI-transformasjonspartner.",
-      en: "The AI transformation partner.",
+      no: "Vi bygger fundamentet AI trenger.",
+      en: "We build the foundation AI needs.",
     },
     aboutIntro: {
-      no: "Vi tar driftsintensive selskaper hele veien til AI-native — vi bygger motoren, og dere beholder nøklene. A 99x company.",
-      en: "We take operations-heavy firms the whole journey to AI-native — we build the engine, and you keep the keys. A 99x company.",
+      no: "Uten felles datagrunnlag eskalerer AI kaoset. Vi rydder data-kaoset, bygger plattform og kontekstlag — så produktivitet, inntjening per ansatt og EBITDA kan følge. Dere beholder nøklene. A 99x company.",
+      en: "Without a shared data foundation, AI escalates the chaos. We clear data chaos, build platform and context layer — so productivity, earnings per employee and EBITDA can follow. You keep the keys. A 99x company.",
     },
     startEyebrow: { no: "Kom i gang", en: "Get started" },
     startTitle: {
@@ -183,20 +190,20 @@ export const ui = {
     },
     startOutcomes: {
       no: [
-        "En delt forståelse av hvor verdien sitter i driften deres",
-        "En målarkitektur og rekkefølge for byggingen",
+        "En delt forståelse av hvor data-kaoset hemmer produktivitet og verdi",
+        "En målarkitektur for felles dataplattform, kontekstlag og byggesekvens",
         "En retning hele reisen kan styres etter — uten stor forpliktelse",
       ],
       en: [
-        "A shared view of where value sits in your operations",
-        "A target architecture and build sequence",
+        "A shared view of where data chaos holds back productivity and value",
+        "A target architecture for shared data platform, context layer and build sequence",
         "A direction the whole journey can steer by — without a big commitment",
       ],
     } as Record<"no" | "en", string[]>,
   },
   blocksNote: {
-    no: "Vi bygger på åpen, etablert teknologi — og tilpasser oss stacken dere allerede eier.",
-    en: "We build on open, established technology — and adapt to the stack you already own.",
+    no: "Vi bygger på åpen, etablert teknologi — og tilpasser oss stacken dere allerede eier. Fundament først, så AI som forsterker i stedet for å spre kaos.",
+    en: "We build on open, established technology — and adapt to the stack you already own. Foundation first, then AI that compounds instead of spreading chaos.",
   },
   consulting: {
     k: { no: "Ved siden av reisen", en: "Alongside the journey" },

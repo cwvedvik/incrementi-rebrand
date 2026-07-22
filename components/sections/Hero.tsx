@@ -37,15 +37,7 @@ export default function Hero() {
       <motion.h1 variants={rise} initial="hidden" animate="show" custom={1}>
         {t(ui.hero.titleLine1, locale)}
         <br />
-        {locale === "no" ? (
-          <>
-            til <em>AI-native.</em>
-          </>
-        ) : (
-          <>
-            to <em>AI-native.</em>
-          </>
-        )}
+        {t(ui.hero.titleTo, locale)} <em>{t(ui.hero.titleEm, locale)}</em>
       </motion.h1>
       <motion.p className="sub" variants={rise} initial="hidden" animate="show" custom={2}>
         {t(ui.hero.subBefore, locale)}{" "}

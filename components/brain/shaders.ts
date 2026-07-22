@@ -173,6 +173,6 @@ void main() {
   float glow = exp(-d * d * 11.0);
   float twinkle = 0.62 + 0.38 * sin(uTime * (0.4 + vSeed * 0.8) + vSeed * 30.0);
   vec3 col = mix(vec3(0.68, 0.74, 0.82), vec3(0.88, 0.70, 0.52), step(0.84, vSeed));
-  gl_FragColor = vec4(col * 0.62, glow * 0.17 * twinkle * vDepth * uDim);
+  gl_FragColor = vec4(col * 0.45, glow * 0.09 * twinkle * vDepth * uDim);
 }
 `;
