@@ -103,16 +103,16 @@ export const DIAGRAM_ZONES: DiagramZone[] = [
   {
     id: "governance",
     label: {
-      no: "Governance — skinnene",
-      en: "Governance — the rails",
+      no: "Governance — guardrails",
+      en: "Governance — guardrails",
     },
     tooltip: {
       no: "Tilgang, isolasjon og audit — håndhevet én gang for alt",
       en: "Access, isolation and audit — enforced once for everything",
     },
     title: {
-      no: "Skinnene som holder alt trygt",
-      en: "The rails that keep everything safe",
+      no: "Guardrails som holder alt trygt",
+      en: "Guardrails that keep everything safe",
     },
     body: {
       no: "Tilgangskontroll, isolasjon mellom enheter, sporbarhet og modellfleksibilitet bygges inn i plattformen — ikke limt på hvert prosjekt. Nye domener og selskaper kobler seg på samme rails.",
