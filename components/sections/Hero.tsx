@@ -41,7 +41,7 @@ export default function Hero() {
       </motion.h1>
       <motion.p className="sub" variants={rise} initial="hidden" animate="show" custom={2}>
         {t(ui.hero.subBefore, locale)}{" "}
-        <b>{t(ui.hero.subBold, locale)}</b> {t(ui.hero.subAfter, locale)}
+        <b>{t(ui.hero.subBold, locale)}</b>
       </motion.p>
       <motion.div variants={rise} initial="hidden" animate="show" custom={3}>
         <Link href={href("/results/nrc-group")} className="hero-stat case-teaser">

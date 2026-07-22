@@ -126,10 +126,6 @@ export const ui = {
       no: "økt produktivitet, inntjening per ansatt og EBITDA.",
       en: "higher productivity, earnings per employee, and EBITDA.",
     },
-    subAfter: {
-      no: "Dere beholder nøklene.",
-      en: "You keep the keys.",
-    },
     readCase: { no: "Les casen →", en: "Read the case →" },
     caseTeaser: {
       no: "NRC Groups HR-integrasjon vs. opprinnelig estimat — fordel som forsterker seg.",
