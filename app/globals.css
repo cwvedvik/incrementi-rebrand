@@ -1997,14 +1997,8 @@ body[data-phase="answering"] .glow {
   margin-right: calc(50% - 50vw);
   margin-top: 12px;
   margin-bottom: 24px;
-  padding: 8px clamp(16px, 3.5vw, 48px) 12vh;
+  padding: 8px clamp(16px, 3.5vw, 48px) 40px;
   overflow: visible;
-}
-
-.platform-diagram-stage {
-  transform: perspective(1600px) rotateX(6deg);
-  transform-origin: center top;
-  transform-style: flat;
 }
 
 .platform-diagram-wrap.is-open .platform-diagram-stage {
@@ -2488,10 +2482,6 @@ body[data-phase="answering"] .glow {
     padding-bottom: 32px;
   }
 
-  .platform-diagram-stage {
-    transform: none;
-  }
-
   .pd-main {
     grid-template-columns: 1fr;
   }
@@ -2549,10 +2539,6 @@ body[data-phase="answering"] .glow {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .platform-diagram-stage {
-    transform: none;
-  }
-
   .pd-zone {
     animation: none;
   }
