@@ -66,7 +66,9 @@ export default function ContactForm({
           ? locale === "no"
             ? "Direkte linje"
             : "Direct line"
-          : t(ui.ctaBand.eyebrow, locale)}
+          : locale === "no"
+            ? "Kontakt"
+            : "Contact"}
       </div>
       <h4>{title}</h4>
       <div className="contact-fields">

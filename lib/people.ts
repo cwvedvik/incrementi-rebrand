@@ -1,53 +1,54 @@
+import type { LocalizedString } from "@/lib/i18n/types";
+
 export interface Person {
   name: string;
-  role: string;
-  focus: string;
+  role: LocalizedString;
+  photo?: string;
+  email?: string;
+  phone?: string;
   linkedin?: string;
+  /** Placeholder initials when no photo */
+  initials?: string;
+  /** CSS object-position for non-studio crops */
+  photoPosition?: string;
 }
 
-// PLACEHOLDER PROFILES — replace with real partners, advisors and
-// consultants (names, roles, focus lines, LinkedIn URLs, photos).
 export const PEOPLE: Person[] = [
   {
-    name: "Partner Name",
-    role: "Managing Partner",
-    focus:
-      "Owns the client relationship end-to-end. 15+ years building enterprise platforms for operations-heavy firms.",
-    linkedin: "#",
+    name: "Espen Slyngstad",
+    role: { no: "Founding Partner", en: "Founding Partner" },
+    photo:
+      "/media/portraits/2026_Incrementi_EspenSlyngstad_fotoCRoka_114c2_kvadrat.jpg",
+    email: "espen.slyngstad@incrementi.no",
+    phone: "+47 934 00 825",
   },
   {
-    name: "Partner Name",
-    role: "Partner — Maritime & Ocean",
-    focus:
-      "Vessels, subsea and aquaculture. Led the Sebastian DP-checklist work now piloting internationally.",
-    linkedin: "#",
+    name: "Camilla Fledsberg Vatne",
+    role: { no: "Founding Partner", en: "Founding Partner" },
+    photo:
+      "/media/portraits/2026_Incrementi_CamillaFledsbergVatne_fotoCRoka_157c2_kvadrat.jpg",
   },
   {
-    name: "Advisor Name",
-    role: "Principal Advisor — Applied AI",
-    focus:
-      "Designs the context & control layer: knowledge graphs, MCP, governed retrieval. Makes enterprise AI safe.",
-    linkedin: "#",
+    name: "Dag Martin Romslo",
+    role: { no: "Partner", en: "Partner" },
+    photo:
+      "/media/portraits/2026_Incrementi_DagMartinRomslo_fotoCRoka_146c2_kvadrat.jpg",
   },
   {
-    name: "Advisor Name",
-    role: "Principal Advisor — Data Platforms",
-    focus:
-      "Microsoft Fabric architect behind the NRC Group platform. Data first, lowest TCO, everything a building block.",
-    linkedin: "#",
+    name: "Carl-Wilhelm Vedvik",
+    role: { no: "Partner", en: "Partner" },
+    photo:
+      "/media/portraits/2026_Incrementi_CarlWilhelmVedvik_fotoCRoka_173c2_kvadrat.jpg",
   },
   {
-    name: "Consultant Name",
-    role: "Senior Consultant — Financial & Professional",
-    focus:
-      "Compliance-bound, document-heavy workflows. Turns accounting and finance functions into governed-AI operations.",
-    linkedin: "#",
+    name: "Kristov Rishie Xavier",
+    role: { no: "Partner", en: "Partner" },
+    initials: "KX",
   },
   {
-    name: "Consultant Name",
-    role: "Senior Consultant — Agent Enablement",
-    focus:
-      "Puts the capability in your people's hands — trains your teams to build and operate their own agents.",
-    linkedin: "#",
+    name: "Enea Marie Jantsch",
+    role: { no: "Project Coordinator", en: "Project Coordinator" },
+    photo:
+      "/media/portraits/2026_Incrementi_EneaJantsch_fotoCRoka_134c2_kvadrat.jpg",
   },
 ];

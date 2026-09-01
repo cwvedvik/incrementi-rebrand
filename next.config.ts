@@ -17,10 +17,42 @@ const nextConfig: NextConfig = {
       },
       { source: "/diagram", destination: "/platform", permanent: true },
       { source: "/en/diagram", destination: "/en/platform", permanent: true },
-      { source: "/people", destination: "/about", permanent: true },
-      { source: "/en/people", destination: "/en/about", permanent: true },
-      { source: "/journey", destination: "/about", permanent: true },
-      { source: "/en/journey", destination: "/en/about", permanent: true },
+      { source: "/people", destination: "/?s=om-oss", permanent: false },
+      { source: "/en/people", destination: "/en?s=om-oss", permanent: false },
+      {
+        source: "/journey",
+        destination: "/?s=slik-jobber-vi",
+        permanent: false,
+      },
+      {
+        source: "/en/journey",
+        destination: "/en?s=slik-jobber-vi",
+        permanent: false,
+      },
+      {
+        source: "/what-we-build",
+        destination: "/?s=hva-vi-leverer",
+        permanent: false,
+      },
+      {
+        source: "/en/what-we-build",
+        destination: "/en?s=hva-vi-leverer",
+        permanent: false,
+      },
+      { source: "/about", destination: "/?s=om-oss", permanent: false },
+      { source: "/en/about", destination: "/en?s=om-oss", permanent: false },
+      {
+        source: "/industries",
+        destination: "/?s=bransjer",
+        permanent: false,
+      },
+      {
+        source: "/en/industries",
+        destination: "/en?s=bransjer",
+        permanent: false,
+      },
+      { source: "/start", destination: "/?s=kontakt", permanent: false },
+      { source: "/en/start", destination: "/en?s=kontakt", permanent: false },
     ];
   },
 };

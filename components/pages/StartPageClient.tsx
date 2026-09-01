@@ -12,7 +12,7 @@ export default function StartPageClient() {
   const outcomes = ui.pages.startOutcomes[locale];
 
   return (
-    <PageShell experienceTopic="start">
+    <PageShell>
       <div className="start-split">
         <div className="start-copy">
           <div className="eyebrow-sm">{t(ui.pages.startEyebrow, locale)}</div>

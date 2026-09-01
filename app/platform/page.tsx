@@ -2,9 +2,15 @@ import type { Metadata } from "next";
 import DiagramPageClient from "@/components/pages/DiagramPageClient";
 
 export const metadata: Metadata = {
-  title: "Plattformen — Incrementi",
+  title: "Kontrollag | Incrementi",
   description:
-    "Slik ser fundamentet ut: felles datagrunnlag, styrt kontekstlag og skinner for hele virksomheten — lag for lag.",
+    "Et kontekst- og kontrollag som gjør hele virksomheten klar for AI: roller, rettigheter, sporbarhet og kostnadskontroll.",
+  alternates: {
+    languages: {
+      no: "/platform",
+      en: "/en/platform",
+    },
+  },
 };
 
 export default function PlatformPage() {

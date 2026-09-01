@@ -2,9 +2,15 @@ import type { Metadata } from "next";
 import ResultsPageClient from "@/components/pages/ResultsPageClient";
 
 export const metadata: Metadata = {
-  title: "Resultater — Incrementi",
+  title: "Resultater | Incrementi",
   description:
-    "Resultatorienterte case-studier — tall først. Fordelen som forsterker seg, dokumentert.",
+    "Utvalgte referanser med målbare resultater. Hver case åpner hele historien.",
+  alternates: {
+    languages: {
+      no: "/results",
+      en: "/en/results",
+    },
+  },
 };
 
 export default function ResultsPage() {

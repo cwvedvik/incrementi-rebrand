@@ -3,15 +3,7 @@ import { CASES } from "@/lib/cases";
 
 const BASE = "https://incrementi.no";
 
-const ROUTES = [
-  "",
-  "/platform",
-  "/what-we-build",
-  "/industries",
-  "/results",
-  "/about",
-  "/start",
-];
+const ROUTES = ["", "/platform", "/results"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = ROUTES.flatMap((route) => {

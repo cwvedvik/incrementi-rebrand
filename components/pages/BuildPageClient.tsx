@@ -9,7 +9,7 @@ import { t } from "@/lib/i18n/types";
 export default function BuildPageClient() {
   const { locale } = useLocale();
   return (
-    <PageShell experienceTopic="build">
+    <PageShell>
       <div className="eyebrow-sm">{t(ui.pages.buildEyebrow, locale)}</div>
       <h1 className="page-title">{t(ui.pages.buildTitle, locale)}</h1>
       <BuildLayers />

@@ -2,14 +2,18 @@
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { motion, useReducedMotion } from "framer-motion";
 import PageShell from "@/components/sections/PageShell";
 import { getCase, localizeCase } from "@/lib/cases";
 import { useLocale } from "@/lib/i18n/locale";
 import { ui } from "@/lib/i18n/ui";
 import { t } from "@/lib/i18n/types";
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
 export default function CasePageClient({ slug }: { slug: string }) {
   const { locale, href } = useLocale();
+  const reduce = useReducedMotion();
   const raw = getCase(slug);
   if (!raw) {
     notFound();
@@ -17,12 +21,33 @@ export default function CasePageClient({ slug }: { slug: string }) {
   const cs = localizeCase(raw, locale);
 
   return (
-    <PageShell experienceTopic="results">
-      <div className="eyebrow-sm">
-        {cs.client} · {cs.sector}
-      </div>
-      <h1 className="page-title">{cs.title}</h1>
-      <p className="page-intro">{cs.summary}</p>
+    <PageShell>
+      <header className="mkt-sub-hero">
+        <motion.p
+          className="mkt-eyebrow"
+          initial={reduce ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease }}
+        >
+          {cs.client}
+        </motion.p>
+        <motion.h1
+          className="serif mkt-sub-title"
+          initial={reduce ? false : { opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.05, ease }}
+        >
+          {cs.title}
+        </motion.h1>
+        <motion.p
+          className="mkt-sub-lead"
+          initial={reduce ? false : { opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.1, ease }}
+        >
+          {cs.summary}
+        </motion.p>
+      </header>
 
       <div className="case-hero-metrics">
         {cs.metrics.map((m, i) => (

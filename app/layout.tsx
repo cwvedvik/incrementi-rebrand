@@ -26,19 +26,20 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL("https://incrementi.no"),
     title: isNo
-      ? "Incrementi — Fra data-kaos til målbar produktivitet"
-      : "Incrementi — From data chaos to measurable productivity",
+      ? "Incrementi — Enklere hverdag fra fragmenterte data"
+      : "Incrementi — A simpler workday from fragmented data",
     description: isNo
-      ? "Vi samler fragmenterte systemer i en felles dataplattform og et styrt kontekstlag. Da blir AI trygg og nyttig — og gevinstene lander i produktivitet, inntjening per ansatt og EBITDA. Dere beholder nøklene. A 99x company."
-      : "We bring fragmented systems into a shared data platform and a governed context layer. Then AI becomes safe and useful — and the gains land in productivity, earnings per employee, and EBITDA. You keep the keys. A 99x company.",
+      ? "Vi samler og strukturerer data fra systemene dere allerede har, og bygger et fundament for innsikt og automatisering som gjør at dere jobber raskere og mer lønnsomt. A 99x company."
+      : "We gather and structure data from the systems you already have, and build a foundation for insight and automation that helps you work faster and more profitably. A 99x company.",
     keywords: [
       "dataplattform",
-      "virksomhetsarkitektur",
-      "kontekstlag",
-      "AI transformasjon",
-      "Microsoft Fabric",
-      "gevinstrealisering",
+      "rådgivning",
+      "industri",
+      "maritim",
+      "bygg og anlegg",
+      "AI",
       "Incrementi",
+      "99X",
     ],
     alternates: {
       languages: {
@@ -48,11 +49,11 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       title: isNo
-        ? "Incrementi — Fra data-kaos til målbar produktivitet"
-        : "Incrementi — From data chaos to measurable productivity",
+        ? "Incrementi — Enklere hverdag fra fragmenterte data"
+        : "Incrementi — A simpler workday from fragmented data",
       description: isNo
-        ? "Felles dataplattform og styrt kontekstlag — slik at AI betaler seg i produktivitet og EBITDA."
-        : "Shared data platform and governed context layer — so AI pays off in productivity and EBITDA.",
+        ? "Fra fragmenterte data til målbar produktivitet — rådgivning, data, programvare og AI der det gir verdi."
+        : "From fragmented data to measurable productivity — advisory, data, software and AI where it adds value.",
       url: isNo ? "https://incrementi.no" : "https://incrementi.no/en",
       siteName: "Incrementi",
       locale: isNo ? "nb_NO" : "en_US",
@@ -61,11 +62,11 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: isNo
-        ? "Incrementi — Fra data-kaos til målbar produktivitet"
-        : "Incrementi — From data chaos to measurable productivity",
+        ? "Incrementi — Enklere hverdag fra fragmenterte data"
+        : "Incrementi — A simpler workday from fragmented data",
       description: isNo
-        ? "Felles dataplattform og styrt kontekstlag — slik at AI betaler seg i produktivitet og EBITDA."
-        : "Shared data platform and governed context layer — so AI pays off in productivity and EBITDA.",
+        ? "Fra fragmenterte data til målbar produktivitet — rådgivning, data, programvare og AI der det gir verdi."
+        : "From fragmented data to measurable productivity — advisory, data, software and AI where it adds value.",
     },
   };
 }

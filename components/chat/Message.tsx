@@ -96,7 +96,7 @@ export function AIMessage({
               />
             ))}
             {showBook ? (
-              <Link href={href("/start")} className="chip chip-cta">
+              <Link href={href("/#kontakt")} className="chip chip-cta">
                 <span className="q">→</span>
                 {t(ui.chat.bookSession, locale)}
               </Link>
@@ -106,7 +106,7 @@ export function AIMessage({
         {nudge && (
           <div className="nudge">
             <p>{t(ui.chat.nudge, locale)}</p>
-            <Link href={href("/start")} className="btn-copper">
+            <Link href={href("/#kontakt")} className="btn-copper">
               {t(ui.ctaBand.button, locale)}
             </Link>
           </div>

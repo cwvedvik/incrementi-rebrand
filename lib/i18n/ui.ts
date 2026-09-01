@@ -3,11 +3,11 @@ import type { LocalizedString } from "./types";
 export const ui = {
   nav: {
     platform: { no: "Plattformen", en: "The Platform" },
-    build: { no: "Hva vi bygger", en: "What we build" },
+    build: { no: "Hva vi leverer", en: "What we deliver" },
     industries: { no: "Bransjer", en: "Industries" },
     results: { no: "Resultater", en: "Results" },
-    about: { no: "Om oss", en: "About" },
-    start: { no: "Strategisesjon", en: "Strategy session" },
+    about: { no: "Om oss", en: "About us" },
+    start: { no: "Snakk med oss", en: "Talk to us" },
   },
   lang: {
     no: { no: "NO", en: "NO" },
@@ -26,14 +26,13 @@ export const ui = {
     en: "Prefer to ask first?",
   },
   ctaBand: {
-    eyebrow: { no: "Fase 0 — Retning", en: "Phase 0 — Direction" },
     line: {
-      no: "Én uke. Felles plan. Ingen innlåsing.",
-      en: "One week. Shared plan. No lock-in.",
+      no: "La oss gjøre hverdagen enklere.",
+      en: "Let's make your workday simpler.",
     },
     button: {
-      no: "Book en strategisesjon",
-      en: "Book a strategy session",
+      no: "Book en strategisamtale",
+      en: "Book a strategy call",
     },
   },
   sticky: {
@@ -73,8 +72,8 @@ export const ui = {
   },
   form: {
     heading: {
-      no: "Book en AI- og datastrategisesjon",
-      en: "Book an AI & data strategy session",
+      no: "Book en strategisamtale",
+      en: "Book a strategy call",
     },
     compactHeading: {
       no: "Spør oss direkte",
@@ -83,12 +82,15 @@ export const ui = {
     name: { no: "Navn", en: "Name" },
     email: { no: "E-post", en: "Email" },
     company: { no: "Selskap", en: "Company" },
-    message: { no: "Melding", en: "Message" },
-    submit: { no: "Send forespørsel", en: "Send request" },
+    message: {
+      no: "Hva ønsker dere å få til?",
+      en: "What would you like to achieve?",
+    },
+    submit: { no: "Send melding", en: "Send message" },
     sending: { no: "Sender…", en: "Sending…" },
     success: {
-      no: "Takk — en partner svarer innen én arbeidsdag.",
-      en: "Thank you — a partner will reply within one working day.",
+      no: "Takk — vi svarer innen én arbeidsdag.",
+      en: "Thank you — we will reply within one working day.",
     },
     error: {
       no: "Noe gikk galt. Prøv igjen, eller skriv til oss direkte.",
@@ -154,12 +156,12 @@ export const ui = {
     },
     resultsEyebrow: { no: "Resultater", en: "Results" },
     resultsTitle: {
-      no: "Tallene overbeviser.",
-      en: "The numbers do the persuading.",
+      no: "Resultater som kan måles.",
+      en: "Results you can measure.",
     },
     resultsIntro: {
-      no: "Hver case åpner til hele historien — resultater først.",
-      en: "Every case opens into the full story — results first.",
+      no: "Utvalgte referanser. Tall først, deretter hele historien.",
+      en: "Selected references. Numbers first, then the full story.",
     },
     peopleEyebrow: { no: "Folk", en: "People" },
     peopleTitle: {

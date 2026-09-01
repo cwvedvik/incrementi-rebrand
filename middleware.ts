@@ -16,14 +16,20 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const isEn = pathname === "/en" || pathname.startsWith("/en/");
-  const locale = isEn ? "en" : "no";
+  const isEnPath = pathname === "/en" || pathname.startsWith("/en/");
+  // Preserve locale across internal rewrite re-entry (/en → /).
+  const incoming = request.headers.get("x-locale");
+  const locale = isEnPath || incoming === "en" ? "en" : "no";
 
-  // Rewrite /en/... → /... so the same app routes serve both locales
-  if (isEn) {
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-locale", locale);
+
+  if (isEnPath) {
     const url = request.nextUrl.clone();
     url.pathname = pathname.slice(3) || "/";
-    const res = NextResponse.rewrite(url);
+    const res = NextResponse.rewrite(url, {
+      request: { headers: requestHeaders },
+    });
     res.cookies.set(LOCALE_COOKIE, "en", {
       path: "/",
       maxAge: 60 * 60 * 24 * 365,
@@ -33,16 +39,28 @@ export function middleware(request: NextRequest) {
     return res;
   }
 
-  const res = NextResponse.next();
-  const cookie = request.cookies.get(LOCALE_COOKIE)?.value;
-  // Visiting a Norwegian URL pins locale to no (as-needed default)
-  if (!isLocale(cookie) || cookie !== "no") {
-    res.cookies.set(LOCALE_COOKIE, "no", {
+  const res = NextResponse.next({
+    request: { headers: requestHeaders },
+  });
+
+  // Only pin Norwegian cookie on real Norwegian URL visits (not rewrite re-entry).
+  if (locale === "no") {
+    const cookie = request.cookies.get(LOCALE_COOKIE)?.value;
+    if (!isLocale(cookie) || cookie !== "no") {
+      res.cookies.set(LOCALE_COOKIE, "no", {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 365,
+        sameSite: "lax",
+      });
+    }
+  } else {
+    res.cookies.set(LOCALE_COOKIE, "en", {
       path: "/",
       maxAge: 60 * 60 * 24 * 365,
       sameSite: "lax",
     });
   }
+
   res.headers.set("x-locale", locale);
   return res;
 }

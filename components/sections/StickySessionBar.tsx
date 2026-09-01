@@ -40,7 +40,7 @@ export default function StickySessionBar() {
     <div className="sticky-session" role="region" aria-label={t(ui.sticky.line, locale)}>
       <span>{t(ui.sticky.line, locale)}</span>
       <div className="sticky-session-actions">
-        <Link href={href("/start")} className="btn-outline">
+        <Link href={href("/#kontakt")} className="btn-outline">
           {t(ui.sticky.button, locale)}
         </Link>
         <button

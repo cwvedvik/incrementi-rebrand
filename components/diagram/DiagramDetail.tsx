@@ -1,7 +1,8 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import type { DiagramZone } from "@/lib/content/diagram";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import type { DiagramZone } from "@/lib/content/platform";
+import { diagramChrome } from "@/lib/content/platform";
 import { useLocale } from "@/lib/i18n/locale";
 import { t } from "@/lib/i18n/types";
 
@@ -13,6 +14,7 @@ export default function DiagramDetail({
   onClose: () => void;
 }) {
   const { locale } = useLocale();
+  const reduce = useReducedMotion();
 
   return (
     <AnimatePresence>
@@ -23,7 +25,7 @@ export default function DiagramDetail({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
+          transition={{ duration: reduce ? 0 : 0.25 }}
         >
           <button
             type="button"
@@ -37,9 +39,9 @@ export default function DiagramDetail({
             role="dialog"
             aria-modal="true"
             aria-labelledby="diagram-detail-title"
-            initial={{ opacity: 0, y: 16, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.98 }}
+            initial={reduce ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduce ? undefined : { opacity: 0, y: 10 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="diagram-detail-top">
@@ -58,9 +60,7 @@ export default function DiagramDetail({
             </h2>
             <p className="diagram-detail-body">{t(zone.body, locale)}</p>
             <p className="diagram-detail-why">
-              <span>
-                {locale === "no" ? "Hvorfor det betyr noe" : "Why it matters"}
-              </span>
+              <span>{t(diagramChrome.whyLabel, locale)}</span>
               {t(zone.why, locale)}
             </p>
           </motion.aside>

@@ -12,7 +12,7 @@ export default function AboutPageClient() {
   const { locale } = useLocale();
 
   return (
-    <PageShell experienceTopic="why" wide>
+    <PageShell wide>
       <div className="eyebrow-sm">{t(ui.pages.aboutEyebrow, locale)}</div>
       <h1 className="page-title">{t(ui.pages.aboutTitle, locale)}</h1>
       <p className="page-intro about-intro">{t(ui.pages.aboutIntro, locale)}</p>
