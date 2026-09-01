@@ -7,16 +7,54 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      { source: "/work", destination: "/results", permanent: true },
-      { source: "/work/:slug", destination: "/results/:slug", permanent: true },
-      { source: "/en/work", destination: "/en/results", permanent: true },
+      { source: "/work", destination: "/?s=referanser", permanent: false },
+      { source: "/work/:slug", destination: "/?s=referanser", permanent: false },
+      { source: "/en/work", destination: "/en?s=referanser", permanent: false },
       {
         source: "/en/work/:slug",
-        destination: "/en/results/:slug",
-        permanent: true,
+        destination: "/en?s=referanser",
+        permanent: false,
       },
-      { source: "/diagram", destination: "/platform", permanent: true },
-      { source: "/en/diagram", destination: "/en/platform", permanent: true },
+      {
+        source: "/results",
+        destination: "/?s=referanser",
+        permanent: false,
+      },
+      {
+        source: "/en/results",
+        destination: "/en?s=referanser",
+        permanent: false,
+      },
+      {
+        source: "/results/:slug",
+        destination: "/?s=referanser",
+        permanent: false,
+      },
+      {
+        source: "/en/results/:slug",
+        destination: "/en?s=referanser",
+        permanent: false,
+      },
+      {
+        source: "/platform",
+        destination: "/?s=hva-vi-leverer",
+        permanent: false,
+      },
+      {
+        source: "/en/platform",
+        destination: "/en?s=hva-vi-leverer",
+        permanent: false,
+      },
+      {
+        source: "/diagram",
+        destination: "/?s=hva-vi-leverer",
+        permanent: false,
+      },
+      {
+        source: "/en/diagram",
+        destination: "/en?s=hva-vi-leverer",
+        permanent: false,
+      },
       { source: "/people", destination: "/?s=om-oss", permanent: false },
       { source: "/en/people", destination: "/en?s=om-oss", permanent: false },
       {

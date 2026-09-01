@@ -23,7 +23,7 @@ export const home = {
     body: {"no":"Incrementi hjelper bedrifter med å forenkle arbeidsprosesser, få systemer og data til å henge sammen og bygge løsninger ansatte tar i bruk. Vi rådgir først, validerer før dere investerer, og bygger videre steg for steg. Når AI er riktig verktøy, sørger vi for at det tas i bruk på en trygg og kontrollert måte.","en":"Incrementi helps companies simplify work processes, connect systems and data, and build solutions employees put to use. We advise first, validate before you invest, and build step by step. When AI is the right tool, we make sure it is adopted in a safe and controlled way."},
     cta: {"no":"Book en strategisamtale","en":"Book a strategy call"},
     secondary: {"no":"Se hvordan vi jobber","en":"See how we work"},
-    note: {"no":"ERP, CRM, Excel, maskindata og fagsystemer kan gjerne bli stående. Vi gjør informasjonen tilgjengelig på tvers og bruker den som et trygt grunnlag for AI.","en":"Your ERP, CRM, Excel, machine data and line-of-business systems can stay. We make the information available across them and use it as a safe foundation for AI."},
+    note: {"no":"ERP, CRM, Excel, maskindata/OT og fagsystemer kan gjerne bli stående. Vi gjør informasjonen tilgjengelig på tvers og bruker den som et trygt grunnlag for AI.","en":"Your ERP, CRM, Excel, machine data/OT and line-of-business systems can stay. We make the information available across them and use it as a safe foundation for AI."},
     stats: [
       { value: "650+", label: {"no":"spesialister gjennom 99X","en":"specialists through 99X"} },
       { value: {"no":"20 år","en":"20 years"}, label: {"no":"med digital produktutvikling i gruppen","en":"of digital product development in the group"} },
@@ -110,7 +110,6 @@ export const home = {
         tag: {"no":"Kontrollag","en":"Control layer"},
         title: {"no":"AI operations & control","en":"AI operations & control"},
         body: {"no":"Et kontekst- og kontrollag som gjør hele virksomheten klar for AI: modellene forstår hvordan selskapet henger sammen, og all bruk, fra assistenter og automatisering til egne agenter, skjer med roller, rettigheter, sporbarhet og kostnadskontroll.","en":"A context and control layer that makes your whole business ready for AI: the models understand how your company fits together, and all use, from assistants and automation to your own agents, happens with roles, permissions, traceability and cost control."},
-        href: "/platform",
       },
       {
         tag: {"no":"AI","en":"AI"},
@@ -141,7 +140,7 @@ export const home = {
       },
     ],
     valueEyebrow: {"no":"Verdien vi leverer","en":"The value we deliver"},
-    valueLead: {"no":"Alt vi bygger skal styrke konkurransekraften deres: strategisk, operasjonelt og finansielt.","en":"Everything we build should strengthen your competitiveness: strategically, operationally and financially."},
+    valueLead: {"no":"Alt vi bygger skal styrke konkurransekraften deres.","en":"Everything we build should strengthen your competitiveness."},
     values: [
       {
         metric: {"no":"Strategisk","en":"Strategic"},
@@ -149,12 +148,12 @@ export const home = {
         body: {"no":"En arkitektur som lar dere utnytte den raske teknologiutviklingen. Fleksibiliteten ligger i et data først-fundament.","en":"An architecture that lets you exploit the rapid pace of technology development. The flexibility comes from a data-first foundation."},
       },
       {
-        metric: {"no":"Operasjonell","en":"Operational"},
+        metric: {"no":"Operasjonelt","en":"Operational"},
         title: {"no":"Forenkling og kontroll i driften","en":"Simplification and control in operations"},
         body: {"no":"Automatisering, forenkling og kontroll i hele driften. Sanntidsinnsikt fra maskindata og IoT-sensorer.","en":"Automation, simplification and control across the operation. Live insight from machine data and IoT sensors."},
       },
       {
-        metric: {"no":"Finansiell","en":"Financial"},
+        metric: {"no":"Finansielt","en":"Financial"},
         title: {"no":"Rask leveranse, transparent kostnad","en":"Fast delivery, transparent cost"},
         body: {"no":"En rask leveransemodell med variabel og transparent kostnad. Ingen leverandørbinding. Dere eier IP-en.","en":"A fast delivery model with variable, transparent cost. No vendor lock-in. You own the IP."},
       },

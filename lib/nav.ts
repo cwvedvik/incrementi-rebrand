@@ -10,10 +10,12 @@ export const HOME_ANCHORS = [
   { href: "/#faq", key: "faq" as const, id: "faq" },
 ] as const;
 
-/** Secondary page links kept from prior IA. */
-export const PAGE_NAV = [
-  { href: "/platform", key: "platform" as const },
-  { href: "/results", key: "results" as const },
-] as const;
+type PageNavItem = {
+  href: string;
+  key: keyof typeof homeNav;
+};
+
+/** Secondary page links (platform + results temporarily hidden). */
+export const PAGE_NAV: readonly PageNavItem[] = [];
 
 export { homeNav };

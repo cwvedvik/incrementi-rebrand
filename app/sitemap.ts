@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next";
-import { CASES } from "@/lib/cases";
 
 const BASE = "https://incrementi.no";
 
-const ROUTES = ["", "/platform", "/results"];
+/** Only public routes while /platform and /results are soft-hidden. */
+const ROUTES = [""];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ROUTES.flatMap((route) => {
+  return ROUTES.flatMap((route) => {
     const path = route || "/";
     return [
       {
@@ -31,29 +31,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     ];
   });
-
-  const cases = CASES.flatMap((c) => [
-    {
-      url: `${BASE}/results/${c.slug}`,
-      lastModified: new Date(),
-      alternates: {
-        languages: {
-          nb: `${BASE}/results/${c.slug}`,
-          en: `${BASE}/en/results/${c.slug}`,
-        },
-      },
-    },
-    {
-      url: `${BASE}/en/results/${c.slug}`,
-      lastModified: new Date(),
-      alternates: {
-        languages: {
-          nb: `${BASE}/results/${c.slug}`,
-          en: `${BASE}/en/results/${c.slug}`,
-        },
-      },
-    },
-  ]);
-
-  return [...pages, ...cases];
 }

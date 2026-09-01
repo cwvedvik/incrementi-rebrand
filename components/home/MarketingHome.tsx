@@ -1,18 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import ContactForm from "@/components/chat/ContactForm";
 import SiteNav from "@/components/sections/SiteNav";
 import { home } from "@/lib/content/home";
-import { CLIENTS } from "@/lib/clients";
 import { PEOPLE } from "@/lib/people";
 import { useLocale } from "@/lib/i18n/locale";
 import { t, tList } from "@/lib/i18n/types";
-import { ui } from "@/lib/i18n/ui";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -20,7 +17,7 @@ const fadeUp = {
 };
 
 export default function MarketingHome() {
-  const { locale, href } = useLocale();
+  const { locale } = useLocale();
   const reduce = useReducedMotion();
   const searchParams = useSearchParams();
   const [journeyStep, setJourneyStep] = useState(0);
@@ -116,17 +113,21 @@ export default function MarketingHome() {
         </div>
       </header>
 
-      {/* ——— LOGOS ——— */}
-      <section className="mkt-logos" aria-label={t(home.logos.eyebrow, locale)}>
-        <div className="mkt-wrap">
-          <div className="mkt-logo-row">
-            {CLIENTS.map((c) => (
-              <span key={c.name} className="mkt-logo-mark">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={c.logoSrc} alt={c.name} />
-              </span>
+      {/* ——— POST-HERO (body + maskindata note + stats) ——— */}
+      <section className="mkt-post-hero" aria-label={t(home.hero.titleLead, locale)}>
+        <div className="mkt-wrap mkt-post-hero-inner">
+          <p className="mkt-post-hero-body">{t(home.hero.body, locale)}</p>
+          <p className="mkt-post-hero-note">{t(home.hero.note, locale)}</p>
+          <ul className="mkt-post-hero-stats">
+            {home.hero.stats.map((s) => (
+              <li key={typeof s.value === "string" ? s.value : s.value.no}>
+                <strong>
+                  {typeof s.value === "string" ? s.value : t(s.value, locale)}
+                </strong>
+                <span>{t(s.label, locale)}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
@@ -196,35 +197,13 @@ export default function MarketingHome() {
             <p className="mkt-lead">{t(home.deliver.lead, locale)}</p>
           </header>
           <div className="mkt-cap-grid">
-            {home.deliver.items.map((item) => {
-              const inner = (
-                <>
-                  <span className="mkt-cap-tag">{t(item.tag, locale)}</span>
-                  <h3>{t(item.title, locale)}</h3>
-                  <p>{t(item.body, locale)}</p>
-                  {"href" in item && item.href ? (
-                    <span className="mkt-cap-link">
-                      {locale === "no"
-                        ? "Utforsk plattformen →"
-                        : "Explore the platform →"}
-                    </span>
-                  ) : null}
-                </>
-              );
-              return "href" in item && item.href ? (
-                <Link
-                  key={item.tag.no}
-                  href={href(item.href)}
-                  className="mkt-cap mkt-cap-linkable"
-                >
-                  {inner}
-                </Link>
-              ) : (
-                <article key={item.tag.no} className="mkt-cap">
-                  {inner}
-                </article>
-              );
-            })}
+            {home.deliver.items.map((item) => (
+              <article key={item.tag.no} className="mkt-cap">
+                <span className="mkt-cap-tag">{t(item.tag, locale)}</span>
+                <h3>{t(item.title, locale)}</h3>
+                <p>{t(item.body, locale)}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -259,14 +238,37 @@ export default function MarketingHome() {
             <h3 className="serif mkt-why-value-title">
               {t(home.why.valueLead, locale)}
             </h3>
-            <div className="mkt-why-value-grid">
+            <div className="mkt-why-value-stack">
               {home.why.values.map((v) => (
                 <article key={v.metric.no}>
+                  <span className="mkt-value-pill">{t(v.metric, locale)}</span>
                   <h4 className="serif">{t(v.title, locale)}</h4>
                   <p>{t(v.body, locale)}</p>
                 </article>
               ))}
             </div>
+          </div>
+
+          <div className="mkt-why-delivery">
+            <h3 className="serif mkt-why-delivery-title">
+              {t(home.why.deliveryTitle, locale)}
+            </h3>
+            <p className="mkt-why-delivery-lead">
+              {t(home.why.deliveryLead, locale)}
+            </p>
+            <ol className="mkt-why-delivery-list">
+              {home.why.delivery.map((d, i) => (
+                <li key={d.title.no}>
+                  <span className="mkt-why-num serif" aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h4 className="serif">{t(d.title, locale)}</h4>
+                    <p>{t(d.body, locale)}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
 
           <div className="mkt-sovereignty">
@@ -323,11 +325,6 @@ export default function MarketingHome() {
               </article>
             ))}
           </div>
-          <p className="mkt-inline-cta">
-            <Link href={href("/results")}>
-              {t(home.references.ctaResults, locale)} →
-            </Link>
-          </p>
         </div>
       </section>
 
@@ -452,8 +449,6 @@ export default function MarketingHome() {
               </a>
             </div>
             <nav className="mkt-footer-nav" aria-label="Footer">
-              <Link href={href("/platform")}>{t(ui.nav.platform, locale)}</Link>
-              <Link href={href("/results")}>{t(ui.nav.results, locale)}</Link>
               <a href="#kontakt">{t(home.hero.cta, locale)}</a>
             </nav>
           </div>

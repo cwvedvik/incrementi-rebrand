@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import PageShell from "@/components/sections/PageShell";
-import LogoStrip from "@/components/sections/LogoStrip";
 import CaseCards from "@/components/sections/CaseCards";
 import { useLocale } from "@/lib/i18n/locale";
 import { ui } from "@/lib/i18n/ui";
@@ -34,7 +33,6 @@ export default function ResultsPageClient() {
           {t(ui.pages.resultsIntro, locale)}
         </motion.p>
       </header>
-      <LogoStrip />
       <CaseCards />
     </PageShell>
   );

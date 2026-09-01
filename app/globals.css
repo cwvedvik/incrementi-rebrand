@@ -2825,7 +2825,69 @@ body[data-mode="marketing"] {
   color: var(--copper-bright);
 }
 
-/* ——— Logos (paper band under hero — intentional contrast block) ——— */
+/* ——— Post-hero band (body + maskindata note + stats) ——— */
+.mkt-post-hero {
+  padding: 40px 0 48px;
+  background:
+    linear-gradient(180deg, #12161c 0%, #0b0d10 100%);
+  border-bottom: 1px solid rgba(143, 163, 184, 0.12);
+}
+
+.mkt-post-hero-inner {
+  max-width: 720px;
+}
+
+.mkt-post-hero-body {
+  font-size: clamp(15px, 1.5vw, 17px);
+  line-height: 1.65;
+  color: var(--body-text);
+  margin: 0 0 16px;
+  max-width: 62ch;
+}
+
+.mkt-post-hero-note {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0 0 28px;
+  max-width: 58ch;
+  padding-left: 14px;
+  border-left: 2px solid rgba(201, 138, 94, 0.55);
+}
+
+.mkt-post-hero-stats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px 28px;
+  border-top: 1px solid rgba(143, 163, 184, 0.14);
+  padding-top: 22px;
+}
+
+.mkt-post-hero-stats li {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mkt-post-hero-stats strong {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(22px, 2.4vw, 28px);
+  color: var(--copper-bright);
+  line-height: 1;
+}
+
+.mkt-post-hero-stats span {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted);
+  max-width: 18ch;
+}
+
+/* ——— Logos (kept for later; unused while client logos are hidden) ——— */
 .mkt-logos {
   padding: 36px 0 40px;
   background:
@@ -3119,31 +3181,105 @@ body[data-mode="marketing"] {
   font-size: clamp(24px, 3vw, 34px);
   line-height: 1.2;
   max-width: 22ch;
-  margin: 0 0 36px;
+  margin: 0 0 28px;
 }
 
-.mkt-why-value-grid {
+.mkt-why-value-stack {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(143, 163, 184, 0.14);
+}
+
+.mkt-why-value-stack article {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 36px 40px;
+  grid-template-columns: minmax(120px, 160px) minmax(0, 1fr);
+  column-gap: 36px;
+  row-gap: 10px;
+  align-items: start;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(143, 163, 184, 0.14);
 }
 
-.mkt-why-value-grid article {
-  border-top: 1px solid rgba(201, 138, 94, 0.4);
-  padding-top: 18px;
+.mkt-value-pill {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 6px 12px;
+  border: 1px solid rgba(201, 138, 94, 0.45);
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--copper-bright);
+  white-space: nowrap;
+  margin-top: 4px;
 }
 
-.mkt-why-value-grid h4 {
+.mkt-why-value-stack h4 {
   font-weight: 300;
   font-size: clamp(18px, 1.8vw, 22px);
   line-height: 1.25;
-  margin-bottom: 12px;
+  margin: 0;
 }
 
-.mkt-why-value-grid p {
+.mkt-why-value-stack p {
+  grid-column: 2;
   color: var(--muted);
   font-size: 15px;
   line-height: 1.6;
+  margin: 0;
+  max-width: 52ch;
+}
+
+.mkt-why-delivery {
+  margin-bottom: 64px;
+  padding-top: 8px;
+}
+
+.mkt-why-delivery-title {
+  font-weight: 300;
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.2;
+  max-width: 18ch;
+  margin: 0 0 14px;
+}
+
+.mkt-why-delivery-lead {
+  color: var(--body-text);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 58ch;
+  margin: 0 0 28px;
+}
+
+.mkt-why-delivery-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(143, 163, 184, 0.14);
+}
+
+.mkt-why-delivery-list li {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 18px;
+  padding: 26px 0;
+  border-bottom: 1px solid rgba(143, 163, 184, 0.14);
+}
+
+.mkt-why-delivery-list h4 {
+  font-weight: 300;
+  font-size: clamp(18px, 1.8vw, 22px);
+  margin: 0 0 8px;
+}
+
+.mkt-why-delivery-list p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 52ch;
 }
 
 .mkt-sovereignty {
@@ -3609,10 +3745,18 @@ body[data-mode="marketing"] {
   .mkt-ref-grid,
   .mkt-cta-grid,
   .mkt-team,
-  .mkt-why-value-grid,
   .mkt-footer-grid,
   .mkt-logo-row {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .mkt-why-value-stack article {
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+  }
+
+  .mkt-why-value-stack p {
+    grid-column: 1;
   }
 
   .mkt-journey-detail {
@@ -3653,6 +3797,16 @@ body[data-mode="marketing"] {
     max-width: none;
   }
 
+  .mkt-post-hero-stats {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .mkt-why-delivery-list li {
+    grid-template-columns: 44px 1fr;
+    gap: 12px;
+  }
+
   .mkt-journey-tabs,
   .mkt-cap-grid,
   .mkt-triple,
@@ -3662,7 +3816,6 @@ body[data-mode="marketing"] {
   .mkt-industry-grid,
   .mkt-cta-grid,
   .mkt-team,
-  .mkt-why-value-grid,
   .mkt-footer-grid {
     grid-template-columns: 1fr;
   }
