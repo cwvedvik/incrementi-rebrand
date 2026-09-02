@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import ContactForm from "@/components/chat/ContactForm";
+import HeroPlatformGhost from "@/components/home/HeroPlatformGhost";
 import SiteNav from "@/components/sections/SiteNav";
 import { home } from "@/lib/content/home";
 import { PEOPLE } from "@/lib/people";
@@ -49,14 +50,7 @@ export default function MarketingHome() {
       {/* ——— HERO ——— */}
       <header className="mkt-hero" id="top">
         <div className="mkt-hero-media" aria-hidden="true">
-          <Image
-            src="/media/environment/2026_Incrementi_fotoCRoka_023c_web.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="mkt-hero-img"
-          />
+          <HeroPlatformGhost />
           <div className="mkt-hero-shade" />
         </div>
 
@@ -317,14 +311,6 @@ export default function MarketingHome() {
             <h2 className="serif">{t(home.references.title, locale)}</h2>
             <p className="mkt-lead">{t(home.references.lead, locale)}</p>
           </header>
-          <div className="mkt-ref-grid">
-            {home.references.items.map((r) => (
-              <article key={r.client} className="mkt-ref">
-                <h3>{r.client}</h3>
-                <p>{t(r.label, locale)}</p>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
 
