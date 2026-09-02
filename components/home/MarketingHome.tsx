@@ -50,68 +50,71 @@ export default function MarketingHome() {
       {/* ——— HERO ——— */}
       <header className="mkt-hero" id="top">
         <div className="mkt-hero-media" aria-hidden="true">
-          <HeroPlatformGhost />
           <div className="mkt-hero-shade" />
         </div>
 
-        <div className="mkt-wrap mkt-hero-content">
-          <motion.p
-            className="mkt-eyebrow"
-            initial={reduce ? false : "hidden"}
-            animate="show"
-            variants={fadeUp}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {t(home.hero.eyebrow, locale)}
-          </motion.p>
+        <div className="mkt-wrap mkt-hero-grid">
+          <div className="mkt-hero-copy">
+            <motion.p
+              className="mkt-eyebrow mkt-hero-eyebrow"
+              initial={reduce ? false : "hidden"}
+              animate="show"
+              variants={fadeUp}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {t(home.hero.eyebrow, locale)}
+            </motion.p>
 
-          <motion.h1
-            className="mkt-hero-title serif"
-            initial={reduce ? false : "hidden"}
-            animate="show"
-            variants={fadeUp}
-            transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <span className="mkt-hero-title-lead">
-              {t(home.hero.titleLead, locale)}
-            </span>
-            <span className="mkt-hero-title-rest">
-              {t(home.hero.titleRest, locale)}
-            </span>
-          </motion.h1>
+            <motion.h1
+              className="mkt-hero-title serif"
+              initial={reduce ? false : "hidden"}
+              animate="show"
+              variants={fadeUp}
+              transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <span className="mkt-hero-title-lead">
+                {t(home.hero.titleLead, locale)}
+              </span>
+              <span className="mkt-hero-title-rest">
+                {t(home.hero.titleRest, locale)}
+              </span>
+            </motion.h1>
 
-          <motion.p
-            className="mkt-hero-lead"
-            initial={reduce ? false : "hidden"}
-            animate="show"
-            variants={fadeUp}
-            transition={{ duration: 0.75, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {t(home.hero.lead, locale)}
-          </motion.p>
+            <motion.p
+              className="mkt-hero-lead"
+              initial={reduce ? false : "hidden"}
+              animate="show"
+              variants={fadeUp}
+              transition={{ duration: 0.75, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {t(home.hero.lead, locale)}
+            </motion.p>
 
-          <motion.div
-            className="mkt-hero-actions"
-            initial={reduce ? false : "hidden"}
-            animate="show"
-            variants={fadeUp}
-            transition={{ duration: 0.7, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <a className="mkt-btn mkt-btn-primary" href="#kontakt">
-              {t(home.hero.cta, locale)}
-            </a>
-            <a className="mkt-btn mkt-btn-ghost" href="#slik-jobber-vi">
-              {t(home.hero.secondary, locale)}
-            </a>
-          </motion.div>
+            <motion.div
+              className="mkt-hero-actions"
+              initial={reduce ? false : "hidden"}
+              animate="show"
+              variants={fadeUp}
+              transition={{ duration: 0.7, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <a className="mkt-btn mkt-btn-primary" href="#kontakt">
+                {t(home.hero.cta, locale)}
+              </a>
+              <a className="mkt-btn mkt-btn-ghost" href="#slik-jobber-vi">
+                {t(home.hero.secondary, locale)}
+              </a>
+            </motion.div>
+          </div>
+
+          <div className="mkt-hero-visual" aria-hidden="true">
+            <HeroPlatformGhost />
+          </div>
         </div>
       </header>
 
-      {/* ——— POST-HERO (body + maskindata note + stats) ——— */}
+      {/* ——— POST-HERO (stats) ——— */}
       <section className="mkt-post-hero" aria-label={t(home.hero.titleLead, locale)}>
         <div className="mkt-wrap mkt-post-hero-inner">
-          <p className="mkt-post-hero-body">{t(home.hero.body, locale)}</p>
-          <p className="mkt-post-hero-note">{t(home.hero.note, locale)}</p>
           <ul className="mkt-post-hero-stats">
             {home.hero.stats.map((s) => (
               <li key={typeof s.value === "string" ? s.value : s.value.no}>
