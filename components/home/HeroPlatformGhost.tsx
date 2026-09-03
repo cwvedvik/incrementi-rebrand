@@ -17,32 +17,28 @@ const copy = {
   sources: [
     { no: "ERP", en: "ERP" },
     { no: "CRM", en: "CRM" },
-    { no: "Excel", en: "Excel" },
-    { no: "BI", en: "BI" },
     { no: "Maskindata / OT", en: "Machine data / OT" },
     { no: "Fagsystemer", en: "Line systems" },
   ] as const satisfies readonly LocalizedString[],
   sourcesCompact: [
     { no: "ERP", en: "ERP" },
     { no: "CRM", en: "CRM" },
-    { no: "Excel", en: "Excel" },
-    { no: "BI", en: "BI" },
     { no: "OT", en: "OT" },
     { no: "Fagsys.", en: "LOB" },
   ] as const satisfies readonly LocalizedString[],
   outputs: [
     { no: "Applikasjoner", en: "Applications" },
     { no: "AI-agenter", en: "AI agents" },
-    { no: "Assistenter", en: "Assistants" },
+    { no: "Business intelligence", en: "Business intelligence" },
   ] as const satisfies readonly LocalizedString[],
   outputsCompact: [
     { no: "Apper", en: "Apps" },
     { no: "Agenter", en: "Agents" },
-    { no: "Assist", en: "Assist" },
+    { no: "BI", en: "BI" },
   ] as const satisfies readonly LocalizedString[],
 };
 
-/** Side-panel hero diagram: sources → data/context foundation → apps & agents. */
+/** Side-panel hero diagram: apps, agents & BI ← data/context foundation ← sources. */
 export default function HeroPlatformGhost() {
   const { locale } = useLocale();
   const [compact, setCompact] = useState(false);
@@ -62,45 +58,42 @@ export default function HeroPlatformGhost() {
   const hubTop = t(copy.hubTop, locale);
   const hubBottom = t(copy.hubBottom, locale);
 
-  const chipW = compact ? 78 : 96;
-  const chipH = compact ? 28 : 30;
-  const chipX = -chipW / 2;
-  const chipY = -chipH / 2;
+  const sourceChipW = compact ? 78 : 108;
+  const sourceChipH = compact ? 28 : 30;
+  const outChipW = compact ? 100 : 148;
+  const outChipH = compact ? 30 : 32;
 
-  // 6 sources: wider spacing, irregular heights; inset so chips aren't clipped
-  const nodes = compact
-    ? [
-        { x: 78, y: 70, label: sources[0] },
-        { x: 172, y: 28, label: sources[1] },
-        { x: 268, y: 52, label: sources[2] },
-        { x: 364, y: 22, label: sources[3] },
-        { x: 456, y: 62, label: sources[4] },
-        { x: 548, y: 34, label: sources[5] },
-      ]
-    : [
-        { x: 60, y: 86, label: sources[0] },
-        { x: 172, y: 28, label: sources[1] },
-        { x: 292, y: 64, label: sources[2] },
-        { x: 412, y: 20, label: sources[3] },
-        { x: 532, y: 78, label: sources[4] },
-        { x: 640, y: 38, label: sources[5] },
-      ];
-
-  const hubCx = compact ? 316 : 350;
-  const hubCy = compact ? 222 : 248;
+  const hubCx = compact ? 313 : 350;
+  const hubCy = compact ? 228 : 250;
   const hubW = compact ? 248 : 268;
   const hubH = compact ? 82 : 90;
 
+  // Top: three equal-length chips on one baseline
   const outs = compact
     ? [
-        { x: 140, y: 388, label: outputs[0] },
-        { x: 316, y: 408, label: outputs[1] },
-        { x: 490, y: 388, label: outputs[2] },
+        { x: 118, y: 42, label: outputs[0] },
+        { x: 313, y: 42, label: outputs[1] },
+        { x: 508, y: 42, label: outputs[2] },
       ]
     : [
-        { x: 130, y: 438, label: outputs[0] },
-        { x: 350, y: 462, label: outputs[1] },
-        { x: 570, y: 438, label: outputs[2] },
+        { x: 120, y: 48, label: outputs[0] },
+        { x: 350, y: 48, label: outputs[1] },
+        { x: 580, y: 48, label: outputs[2] },
+      ];
+
+  // Bottom: four sources with irregular heights
+  const nodes = compact
+    ? [
+        { x: 90, y: 400, label: sources[0] },
+        { x: 230, y: 372, label: sources[1] },
+        { x: 370, y: 412, label: sources[2] },
+        { x: 510, y: 380, label: sources[3] },
+      ]
+    : [
+        { x: 90, y: 448, label: sources[0] },
+        { x: 250, y: 412, label: sources[1] },
+        { x: 420, y: 462, label: sources[2] },
+        { x: 580, y: 428, label: sources[3] },
       ];
 
   const viewW = compact ? 626 : 700;
@@ -117,7 +110,7 @@ export default function HeroPlatformGhost() {
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>
-          <radialGradient id="mkt-ghost-glow" cx="50%" cy="46%" r="58%">
+          <radialGradient id="mkt-ghost-glow" cx="46%" cy="48%" r="58%">
             <stop offset="0%" stopColor="rgba(201, 138, 94, 0.32)" />
             <stop offset="40%" stopColor="rgba(143, 163, 184, 0.16)" />
             <stop offset="100%" stopColor="rgba(8, 9, 11, 0)" />
@@ -150,9 +143,9 @@ export default function HeroPlatformGhost() {
         <rect width={viewW} height={viewH} fill="url(#mkt-ghost-glow)" />
         <rect
           x="28"
-          y="80"
+          y="70"
           width={viewW - 56}
-          height={compact ? 240 : 270}
+          height={compact ? 280 : 320}
           fill="url(#mkt-ghost-grid)"
           opacity="0.95"
         />
@@ -175,60 +168,62 @@ export default function HeroPlatformGhost() {
         />
 
         <g className="mkt-hero-ghost-paths">
-          {nodes.map((n, i) => (
-            <path
-              key={`in-${n.label}`}
-              className="mkt-hero-ghost-path"
-              style={{ animationDelay: `${i * 0.22}s` }}
-              d={`M ${n.x} ${n.y + chipH / 2} C ${n.x} ${n.y + 72}, ${hubCx} ${hubCy - 92}, ${hubCx} ${hubCy - hubH / 2}`}
-              stroke="rgba(168, 186, 204, 0.78)"
-              strokeWidth="1.45"
-              strokeDasharray="5 6"
-            />
-          ))}
           {outs.map((o, i) => (
             <path
               key={`out-${o.label}`}
               className="mkt-hero-ghost-path mkt-hero-ghost-path-out"
-              style={{ animationDelay: `${0.5 + i * 0.28}s` }}
-              d={`M ${hubCx} ${hubCy + hubH / 2} C ${hubCx} ${hubCy + 88}, ${o.x} ${o.y - 58}, ${o.x} ${o.y - 24}`}
+              style={{ animationDelay: `${0.35 + i * 0.22}s` }}
+              d={`M ${hubCx} ${hubCy - hubH / 2} C ${hubCx} ${hubCy - 88}, ${o.x} ${o.y + 58}, ${o.x} ${o.y + outChipH / 2}`}
               stroke="rgba(227, 165, 116, 0.85)"
               strokeWidth="1.5"
               strokeDasharray="4 5"
             />
           ))}
+          {nodes.map((n, i) => (
+            <path
+              key={`in-${n.label}`}
+              className="mkt-hero-ghost-path"
+              style={{ animationDelay: `${i * 0.22}s` }}
+              d={`M ${hubCx} ${hubCy + hubH / 2} C ${hubCx} ${hubCy + 92}, ${n.x} ${n.y - 72}, ${n.x} ${n.y - sourceChipH / 2}`}
+              stroke="rgba(168, 186, 204, 0.78)"
+              strokeWidth="1.45"
+              strokeDasharray="5 6"
+            />
+          ))}
         </g>
 
-        {nodes.map((n) => (
-          <g
-            key={n.label}
-            className="mkt-hero-ghost-node"
-            transform={`translate(${n.x}, ${n.y})`}
-          >
-            <rect
-              x={chipX}
-              y={chipY}
-              width={chipW}
-              height={chipH}
-              fill="rgba(28, 36, 48, 0.88)"
-              stroke="rgba(168, 186, 204, 0.72)"
-              strokeWidth="1.2"
-            />
-            <path
-              d={`M${chipX} ${chipY} H${chipX + 10} M${-chipX} ${chipY} H${-chipX - 10} M${chipX} ${-chipY} H${chipX + 10} M${-chipX} ${-chipY} H${-chipX - 10}`}
-              stroke="rgba(227, 165, 116, 0.7)"
-              strokeWidth="1.25"
-            />
-            <text
-              textAnchor="middle"
-              dominantBaseline="central"
-              y="1"
-              className="mkt-hero-ghost-label"
+        {outs.map((o, i) => {
+          const cx = -outChipW / 2;
+          const cy = -outChipH / 2;
+          return (
+            <g
+              key={o.label}
+              className="mkt-hero-ghost-out-chip"
+              transform={`translate(${o.x}, ${o.y})`}
             >
-              {n.label}
-            </text>
-          </g>
-        ))}
+              <rect
+                className={
+                  i === 1 ? "mkt-hero-ghost-pulse" : "mkt-hero-ghost-pulse-soft"
+                }
+                x={cx}
+                y={cy}
+                width={outChipW}
+                height={outChipH}
+                fill="rgba(201, 138, 94, 0.16)"
+                stroke="rgba(227, 165, 116, 0.88)"
+                strokeWidth="1.35"
+              />
+              <text
+                textAnchor="middle"
+                dominantBaseline="central"
+                y="1"
+                className="mkt-hero-ghost-tip-label"
+              >
+                {o.label}
+              </text>
+            </g>
+          );
+        })}
 
         <g
           className="mkt-hero-ghost-hub"
@@ -278,34 +273,40 @@ export default function HeroPlatformGhost() {
           </text>
         </g>
 
-        {outs.map((o, i) => (
-          <g
-            key={o.label}
-            className="mkt-hero-ghost-out"
-            transform={`translate(${o.x}, ${o.y})`}
-          >
-            <circle
-              className={
-                i === 1 ? "mkt-hero-ghost-pulse" : "mkt-hero-ghost-pulse-soft"
-              }
-              r={i === 1 ? (compact ? 28 : 32) : compact ? 24 : 27}
-              fill="rgba(201, 138, 94, 0.14)"
-              stroke="rgba(227, 165, 116, 0.82)"
-              strokeWidth="1.35"
-            />
-            <circle
-              r={i === 1 ? 6.5 : 5}
-              fill="rgba(227, 165, 116, 0.95)"
-            />
-            <text
-              textAnchor="middle"
-              y={i === 1 ? 46 : 40}
-              className="mkt-hero-ghost-tip-label"
+        {nodes.map((n) => {
+          const cx = -sourceChipW / 2;
+          const cy = -sourceChipH / 2;
+          return (
+            <g
+              key={n.label}
+              className="mkt-hero-ghost-node"
+              transform={`translate(${n.x}, ${n.y})`}
             >
-              {o.label}
-            </text>
-          </g>
-        ))}
+              <rect
+                x={cx}
+                y={cy}
+                width={sourceChipW}
+                height={sourceChipH}
+                fill="rgba(28, 36, 48, 0.88)"
+                stroke="rgba(168, 186, 204, 0.72)"
+                strokeWidth="1.2"
+              />
+              <path
+                d={`M${cx} ${cy} H${cx + 10} M${-cx} ${cy} H${-cx - 10} M${cx} ${-cy} H${cx + 10} M${-cx} ${-cy} H${-cx - 10}`}
+                stroke="rgba(227, 165, 116, 0.7)"
+                strokeWidth="1.25"
+              />
+              <text
+                textAnchor="middle"
+                dominantBaseline="central"
+                y="1"
+                className="mkt-hero-ghost-label"
+              >
+                {n.label}
+              </text>
+            </g>
+          );
+        })}
       </svg>
     </div>
   );
