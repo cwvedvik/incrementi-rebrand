@@ -940,9 +940,10 @@ body[data-phase="answering"] .glow {
   border-color: rgba(201, 138, 94, 0.55);
 }
 
+/* --muted-2 målte 4,17:1 mot feltbakgrunnen, under WCAG-kravet på 4,5:1. */
 .field input::placeholder,
 .field textarea::placeholder {
-  color: var(--muted-2);
+  color: #878d96;
 }
 
 .contact-submit {
@@ -2700,10 +2701,12 @@ body[data-mode="marketing"] {
   scroll-margin-top: 88px;
 }
 
+/* Kapittelflater: steel er tydelig hevet, quiet er et mellomtrinn, basen er ink.
+   Hårstrekene topp og bunn markerer hvor et nytt kapittel begynner. */
 .mkt-section-steel {
   background:
-    linear-gradient(180deg, rgba(26, 32, 42, 0.92), rgba(14, 17, 22, 0.98));
-  border-block: 1px solid rgba(143, 163, 184, 0.12);
+    linear-gradient(180deg, rgba(31, 38, 49, 0.96), rgba(24, 30, 39, 0.96));
+  border-block: 1px solid rgba(143, 163, 184, 0.18);
 }
 
 /* ——— Hero ——— */
@@ -2742,7 +2745,7 @@ body[data-mode="marketing"] {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 0.88fr) minmax(380px, 1.35fr);
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 1.25fr);
   gap: clamp(24px, 3.5vw, 48px);
   align-items: center;
 }
@@ -2753,7 +2756,7 @@ body[data-mode="marketing"] {
 
 .mkt-hero-copy {
   min-width: 0;
-  max-width: 480px;
+  max-width: 580px;
 }
 
 .mkt-hero-visual {
@@ -2866,20 +2869,13 @@ body[data-mode="marketing"] {
   }
 }
 
-.mkt-hero-eyebrow {
-  color: rgba(201, 138, 94, 0.72);
-  font-size: 10.5px;
-  letter-spacing: 0.22em;
-  margin-bottom: 16px;
-}
-
 .mkt-hero-title {
-  font-weight: 300;
-  font-size: clamp(34px, 5.2vw, 56px);
+  font-weight: 500;
+  font-size: clamp(38px, 6.4vw, 72px);
   line-height: 1.05;
   letter-spacing: -0.03em;
-  margin-bottom: 18px;
-  max-width: 14ch;
+  margin-bottom: 22px;
+  max-width: 16ch;
 }
 
 .mkt-hero-title-lead {
@@ -2890,9 +2886,10 @@ body[data-mode="marketing"] {
 .mkt-hero-title-rest {
   display: block;
   color: var(--copper-bright);
+  font-weight: 400;
   font-size: 0.72em;
   max-width: 20ch;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .mkt-hero-lead {
@@ -3160,11 +3157,59 @@ body[data-mode="marketing"] {
   gap: 18px;
 }
 
+/* Gruppert etikettliste: én strek per gruppe i stedet for én per celle. */
+.mkt-deliver-groups {
+  display: grid;
+  gap: clamp(32px, 3.5vw, 48px);
+}
+
+.mkt-deliver-group {
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+  padding-top: clamp(26px, 2.8vw, 38px);
+  border-top: 1px solid rgba(143, 163, 184, 0.16);
+}
+
+.mkt-deliver-label {
+  font-weight: 300;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--copper-bright);
+  margin: 0;
+}
+
+.mkt-deliver-items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 44px);
+}
+
+/* En gruppe med bare ett punkt får bredere spalte i stedet for en smal, høy celle. */
+.mkt-deliver-items > :only-child {
+  grid-column: span 2;
+}
+
+.mkt-deliver-items h4 {
+  font-weight: 400;
+  font-size: clamp(17px, 1.7vw, 20px);
+  line-height: 1.3;
+  margin: 0 0 10px;
+  color: var(--paper);
+}
+
+.mkt-deliver-items p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
 .mkt-cap,
 .mkt-panel,
-.mkt-industry,
-.mkt-ref,
-.mkt-pillar {
+.mkt-ref {
   border-top: 1px solid rgba(201, 138, 94, 0.45);
   background: transparent;
   padding: 22px 4px 10px;
@@ -3191,7 +3236,6 @@ body[data-mode="marketing"] {
 
 .mkt-cap h3,
 .mkt-panel h3,
-.mkt-industry h3,
 .mkt-ref h3 {
   font-size: 20px;
   font-weight: 500;
@@ -3201,9 +3245,7 @@ body[data-mode="marketing"] {
 
 .mkt-cap p,
 .mkt-panel p,
-.mkt-industry p,
-.mkt-ref p,
-.mkt-pillar span {
+.mkt-ref p {
   color: var(--muted);
   font-size: 14.5px;
   line-height: 1.55;
@@ -3224,182 +3266,122 @@ body[data-mode="marketing"] {
 }
 
 /* ——— Why / editorial ——— */
-.mkt-why {
-  max-width: 920px;
-}
-
 .mkt-why-head h2 {
-  max-width: 16ch;
+  max-width: 18ch;
 }
 
-.mkt-why-pull {
-  margin: 0 0 56px;
+/* Problemet til venstre, svarene til høyre: kontrasten er komposisjonen. */
+.mkt-why-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(40px, 6vw, 96px);
+  align-items: start;
+}
+
+.mkt-why-problem {
+  margin: 0;
   padding: 0 0 0 22px;
   border-left: 2px solid rgba(201, 138, 94, 0.55);
 }
 
-.mkt-why-pull p {
+.mkt-why-problem-label {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin: 0 0 18px;
+}
+
+.mkt-why-problem-body {
   font-family: var(--serif);
   font-weight: 300;
-  font-size: clamp(20px, 2.4vw, 26px);
-  line-height: 1.45;
-  color: var(--paper);
-  max-width: 38ch;
+  font-size: clamp(19px, 2.1vw, 24px);
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
 }
 
-.mkt-why-list {
-  list-style: none;
+.mkt-why-answers {
   display: grid;
-  gap: 0;
-  margin: 0 0 72px;
-  border-top: 1px solid rgba(244, 242, 238, 0.12);
+  gap: 48px;
 }
 
-.mkt-why-item {
-  display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 20px;
-  padding: 28px 0;
-  border-bottom: 1px solid rgba(244, 242, 238, 0.12);
-}
-
-.mkt-why-num {
-  font-weight: 300;
-  font-size: 28px;
-  color: var(--copper);
-  letter-spacing: 0.04em;
-  line-height: 1.1;
-  padding-top: 2px;
-}
-
-.mkt-why-item h3 {
-  font-weight: 300;
-  font-size: clamp(22px, 2.5vw, 28px);
+.mkt-why-answers h3 {
+  font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 28px);
   line-height: 1.2;
-  margin-bottom: 10px;
+  margin: 0 0 12px;
+  color: var(--paper);
 }
 
-.mkt-why-item p {
+.mkt-why-answers p {
+  margin: 0;
   color: var(--body-text);
   font-size: 16px;
   line-height: 1.65;
   max-width: 52ch;
 }
 
-.mkt-why-value {
-  padding-top: 8px;
-  margin-bottom: 64px;
+/* Verdifeltet: fullbredde kontrastflate, display-serif metrikk, trappeforskyvning. */
+.mkt-why-band {
+  margin-top: clamp(72px, 9vw, 120px);
+  padding: clamp(64px, 8vw, 104px) 0 clamp(80px, 10vw, 132px);
+  background:
+    linear-gradient(180deg, rgba(30, 38, 50, 0.9), rgba(18, 23, 31, 0.96));
+  border-block: 1px solid rgba(143, 163, 184, 0.14);
 }
 
-.mkt-why-value-title {
+.mkt-why-band-title {
   font-weight: 300;
-  font-size: clamp(24px, 3vw, 34px);
-  line-height: 1.2;
-  max-width: 22ch;
-  margin: 0 0 28px;
+  font-size: clamp(26px, 3.2vw, 38px);
+  line-height: 1.18;
+  max-width: 24ch;
+  margin: 0 0 clamp(48px, 5vw, 72px);
 }
 
-.mkt-why-value-stack {
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid rgba(143, 163, 184, 0.14);
-}
-
-.mkt-why-value-stack article {
+.mkt-why-band-grid {
   display: grid;
-  grid-template-columns: minmax(120px, 160px) minmax(0, 1fr);
-  column-gap: 36px;
-  row-gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 3.5vw, 56px);
   align-items: start;
-  padding: 28px 0;
-  border-bottom: 1px solid rgba(143, 163, 184, 0.14);
 }
 
-.mkt-value-pill {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  padding: 6px 12px;
-  border: 1px solid rgba(201, 138, 94, 0.45);
-  border-radius: 999px;
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+.mkt-why-band-grid > :nth-child(2) {
+  margin-top: 40px;
+}
+
+.mkt-why-band-grid > :nth-child(3) {
+  margin-top: 80px;
+}
+
+.mkt-why-metric {
+  font-weight: 300;
+  font-size: clamp(30px, 3.4vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: var(--copper-bright);
-  white-space: nowrap;
-  margin-top: 4px;
+  margin: 0 0 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(201, 138, 94, 0.32);
 }
 
-.mkt-why-value-stack h4 {
-  font-weight: 300;
-  font-size: clamp(18px, 1.8vw, 22px);
-  line-height: 1.25;
-  margin: 0;
+.mkt-why-value h4 {
+  font-weight: 400;
+  font-size: clamp(17px, 1.7vw, 20px);
+  line-height: 1.3;
+  margin: 0 0 10px;
+  color: var(--paper);
 }
 
-.mkt-why-value-stack p {
-  grid-column: 2;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.6;
-  margin: 0;
-  max-width: 52ch;
-}
-
-.mkt-why-delivery {
-  margin-bottom: 64px;
-  padding-top: 8px;
-}
-
-.mkt-why-delivery-title {
-  font-weight: 300;
-  font-size: clamp(24px, 3vw, 34px);
-  line-height: 1.2;
-  max-width: 18ch;
-  margin: 0 0 14px;
-}
-
-.mkt-why-delivery-lead {
-  color: var(--body-text);
-  font-size: 16px;
-  line-height: 1.6;
-  max-width: 58ch;
-  margin: 0 0 28px;
-}
-
-.mkt-why-delivery-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid rgba(143, 163, 184, 0.14);
-}
-
-.mkt-why-delivery-list li {
-  display: grid;
-  grid-template-columns: 56px 1fr;
-  gap: 18px;
-  padding: 26px 0;
-  border-bottom: 1px solid rgba(143, 163, 184, 0.14);
-}
-
-.mkt-why-delivery-list h4 {
-  font-weight: 300;
-  font-size: clamp(18px, 1.8vw, 22px);
-  margin: 0 0 8px;
-}
-
-.mkt-why-delivery-list p {
+.mkt-why-value-body {
   margin: 0;
   color: var(--muted);
   font-size: 15px;
-  line-height: 1.6;
-  max-width: 52ch;
+  line-height: 1.65;
 }
 
 .mkt-sovereignty {
-  padding-top: 40px;
-  border-top: 1px solid rgba(244, 242, 238, 0.1);
+  padding: clamp(72px, 9vw, 110px) 0 0;
 }
 
 .mkt-sovereignty h3 {
@@ -3425,7 +3407,9 @@ body[data-mode="marketing"] {
 }
 
 .mkt-section-quiet {
-  background: rgba(12, 15, 20, 0.55);
+  background:
+    linear-gradient(180deg, rgba(19, 24, 31, 0.97), rgba(13, 16, 21, 0.97));
+  border-block: 1px solid rgba(143, 163, 184, 0.11);
 }
 
 .mkt-triple {
@@ -3435,9 +3419,13 @@ body[data-mode="marketing"] {
 }
 
 /* ——— Industries photo band ——— */
+/* Innholdet ankres i topp og bunn, så fotoet får puste i midten. */
 .mkt-section-photo {
   isolation: isolate;
-  padding: 110px 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 880px;
+  padding: clamp(96px, 10vw, 132px) 0 clamp(72px, 8vw, 100px);
 }
 
 .mkt-section-photo-bg {
@@ -3446,28 +3434,72 @@ body[data-mode="marketing"] {
   z-index: 0;
 }
 
+/* Lyst nok i midten til at fotoet leses, mørkt der teksten står. */
 .mkt-section-photo-shade {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(8, 9, 11, 0.78), rgba(8, 9, 11, 0.88));
+    linear-gradient(
+      180deg,
+      rgba(8, 9, 11, 0.88) 0%,
+      rgba(8, 9, 11, 0.58) 26%,
+      rgba(8, 9, 11, 0.4) 58%,
+      rgba(8, 9, 11, 0.52) 100%
+    );
 }
 
 .mkt-section-photo-content {
   position: relative;
   z-index: 1;
-}
-
-.mkt-industry-grid {
+  flex: 1;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px 36px;
+  grid-template-rows: auto 1fr;
+  gap: clamp(64px, 8vw, 120px);
 }
 
-.mkt-industry {
-  background: rgba(8, 9, 11, 0.35);
-  padding: 22px 18px;
-  border-top-color: rgba(201, 138, 94, 0.7);
+.mkt-industry-head {
+  margin-bottom: 0;
+}
+
+.mkt-industry-row {
+  position: relative;
+  align-self: end;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 2.6vw, 44px);
+  align-items: start;
+}
+
+/* Lokalt slør bak raden, så teksten holder seg lesbar uansett motiv. */
+.mkt-industry-row::before {
+  content: "";
+  position: absolute;
+  inset: -110px -50vw -160px;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(8, 9, 11, 0) 0,
+      rgba(8, 9, 11, 0.58) 100px,
+      rgba(8, 9, 11, 0.86) 200px,
+      rgba(8, 9, 11, 0.92) 100%
+    );
+}
+
+.mkt-industry h3 {
+  font-weight: 400;
+  font-size: clamp(17px, 1.7vw, 21px);
+  line-height: 1.25;
+  margin: 0 0 10px;
+  color: var(--paper);
+}
+
+.mkt-industry p {
+  margin: 0;
+  color: var(--body-text);
+  font-size: 14.5px;
+  line-height: 1.6;
 }
 
 /* ——— References ——— */
@@ -3493,22 +3525,39 @@ body[data-mode="marketing"] {
 }
 
 /* ——— About / team ——— */
+/* Kompakt stripe med loddrette skiller, så portrettene blir tyngdepunktet. */
 .mkt-pillars {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-bottom: 56px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 20px;
+  margin: 0 0 clamp(56px, 6vw, 80px);
 }
 
 .mkt-pillar {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex: 1 1 240px;
+  padding: 0 clamp(18px, 2vw, 30px);
+  border-left: 1px solid rgba(143, 163, 184, 0.16);
+}
+
+.mkt-pillar:first-child {
+  padding-left: 0;
+  border-left: 0;
 }
 
 .mkt-pillar strong {
-  font-size: 15px;
+  display: block;
+  font-weight: 500;
+  font-size: 14px;
   line-height: 1.35;
+  color: var(--copper-bright);
+  margin-bottom: 5px;
+}
+
+.mkt-pillar span {
+  display: block;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.55;
 }
 
 .mkt-team {
@@ -3855,23 +3904,42 @@ body[data-mode="marketing"] {
   .mkt-journey-tabs,
   .mkt-cap-grid,
   .mkt-triple,
-  .mkt-pillars,
   .mkt-badges,
   .mkt-ref-grid,
   .mkt-cta-grid,
   .mkt-team,
   .mkt-footer-grid,
-  .mkt-logo-row {
+  .mkt-logo-row,
+  .mkt-industry-row {
     grid-template-columns: 1fr 1fr;
   }
 
-  .mkt-why-value-stack article {
-    grid-template-columns: 1fr;
-    row-gap: 12px;
+  .mkt-section-photo {
+    min-height: 0;
   }
 
-  .mkt-why-value-stack p {
-    grid-column: 1;
+  .mkt-deliver-group {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .mkt-deliver-items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mkt-why-split {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .mkt-why-band-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .mkt-why-band-grid > :nth-child(2),
+  .mkt-why-band-grid > :nth-child(3) {
+    margin-top: 0;
   }
 
   .mkt-journey-detail {
@@ -3899,7 +3967,7 @@ body[data-mode="marketing"] {
   }
 
   .mkt-hero-title {
-    font-size: clamp(30px, 4.5vw, 44px);
+    font-size: clamp(32px, 5.4vw, 54px);
   }
 }
 
@@ -4007,16 +4075,10 @@ body[data-mode="marketing"] {
       );
   }
 
-  .mkt-hero-eyebrow {
-    margin-bottom: 10px;
-    letter-spacing: 0.16em;
-    font-size: 10px;
-  }
-
   .mkt-hero-title {
     max-width: none;
-    font-size: clamp(28px, 7.6vw, 36px);
-    margin-bottom: 12px;
+    font-size: clamp(30px, 8.4vw, 42px);
+    margin-bottom: 14px;
     overflow-wrap: anywhere;
     word-break: break-word;
   }
@@ -4070,25 +4132,58 @@ body[data-mode="marketing"] {
 
   .mkt-cap-grid,
   .mkt-triple,
-  .mkt-pillars,
   .mkt-badges,
   .mkt-ref-grid,
-  .mkt-industry-grid,
   .mkt-cta-grid,
   .mkt-team,
-  .mkt-footer-grid,
-  .mkt-why-value-grid {
+  .mkt-footer-grid {
     grid-template-columns: 1fr;
   }
 
-  .mkt-why-item {
-    grid-template-columns: 40px 1fr;
-    gap: 12px;
+  .mkt-pillar {
+    flex-basis: 100%;
+    padding: 16px 0 0;
+    border-left: 0;
+    border-top: 1px solid rgba(143, 163, 184, 0.16);
   }
 
-  .mkt-why-delivery-list li {
-    grid-template-columns: 40px 1fr;
-    gap: 12px;
+  .mkt-pillar:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .mkt-industry-row {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* Kortere slør, ellers spiser det opp hele fotoet på liten skjerm. */
+  .mkt-industry-row::before {
+    inset: -40px -50vw -120px;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(8, 9, 11, 0) 0,
+        rgba(8, 9, 11, 0.62) 44px,
+        rgba(8, 9, 11, 0.88) 110px,
+        rgba(8, 9, 11, 0.92) 100%
+      );
+  }
+
+  .mkt-section-photo {
+    min-height: 620px;
+  }
+
+  .mkt-section-photo-content {
+    gap: 40px;
+  }
+
+  .mkt-why-answers {
+    gap: 36px;
+  }
+
+  .mkt-deliver-items {
+    grid-template-columns: 1fr;
   }
 
   .mkt-section-head h2 {

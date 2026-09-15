@@ -26,8 +26,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL("https://incrementi.no"),
     title: isNo
-      ? "Incrementi — Enklere hverdag fra fragmenterte data"
-      : "Incrementi — A simpler workday from fragmented data",
+      ? "Incrementi – Enklere hverdag fra fragmenterte data"
+      : "Incrementi – A simpler workday from fragmented data",
     description: isNo
       ? "Vi samler og strukturerer data fra systemene dere allerede har, og bygger et fundament for innsikt og automatisering som gjør at dere jobber raskere og mer lønnsomt. A 99x company."
       : "We gather and structure data from the systems you already have, and build a foundation for insight and automation that helps you work faster and more profitably. A 99x company.",
@@ -49,11 +49,11 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       title: isNo
-        ? "Incrementi — Enklere hverdag fra fragmenterte data"
-        : "Incrementi — A simpler workday from fragmented data",
+        ? "Incrementi – Enklere hverdag fra fragmenterte data"
+        : "Incrementi – A simpler workday from fragmented data",
       description: isNo
-        ? "Fra fragmenterte data til målbar produktivitet — rådgivning, data, programvare og AI der det gir verdi."
-        : "From fragmented data to measurable productivity — advisory, data, software and AI where it adds value.",
+        ? "Fra fragmenterte data til målbar produktivitet – rådgivning, data, programvare og AI der det gir verdi."
+        : "From fragmented data to measurable productivity – advisory, data, software and AI where it adds value.",
       url: isNo ? "https://incrementi.no" : "https://incrementi.no/en",
       siteName: "Incrementi",
       locale: isNo ? "nb_NO" : "en_US",
@@ -62,11 +62,11 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: isNo
-        ? "Incrementi — Enklere hverdag fra fragmenterte data"
-        : "Incrementi — A simpler workday from fragmented data",
+        ? "Incrementi – Enklere hverdag fra fragmenterte data"
+        : "Incrementi – A simpler workday from fragmented data",
       description: isNo
-        ? "Fra fragmenterte data til målbar produktivitet — rådgivning, data, programvare og AI der det gir verdi."
-        : "From fragmented data to measurable productivity — advisory, data, software and AI where it adds value.",
+        ? "Fra fragmenterte data til målbar produktivitet – rådgivning, data, programvare og AI der det gir verdi."
+        : "From fragmented data to measurable productivity – advisory, data, software and AI where it adds value.",
     },
   };
 }

@@ -5,6 +5,11 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  images: {
+    // Ingen kildebilder er bredere enn 2560px, og 3840-varianten henger i
+    // optimizeren. 2048 er rikelig for fullbredde-fotofeltet.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+  },
   async redirects() {
     return [
       { source: "/work", destination: "/?s=referanser", permanent: false },

@@ -55,22 +55,12 @@ export default function MarketingHome() {
 
         <div className="mkt-wrap mkt-hero-grid">
           <div className="mkt-hero-copy">
-            <motion.p
-              className="mkt-eyebrow mkt-hero-eyebrow"
-              initial={reduce ? false : "hidden"}
-              animate="show"
-              variants={fadeUp}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {t(home.hero.eyebrow, locale)}
-            </motion.p>
-
             <motion.h1
               className="mkt-hero-title serif"
               initial={reduce ? false : "hidden"}
               animate="show"
               variants={fadeUp}
-              transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               <span className="mkt-hero-title-lead">
                 {t(home.hero.titleLead, locale)}
@@ -85,7 +75,7 @@ export default function MarketingHome() {
               initial={reduce ? false : "hidden"}
               animate="show"
               variants={fadeUp}
-              transition={{ duration: 0.75, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.75, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             >
               {t(home.hero.lead, locale)}
             </motion.p>
@@ -95,7 +85,7 @@ export default function MarketingHome() {
               initial={reduce ? false : "hidden"}
               animate="show"
               variants={fadeUp}
-              transition={{ duration: 0.7, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
             >
               <a className="mkt-btn mkt-btn-primary" href="#kontakt">
                 {t(home.hero.cta, locale)}
@@ -193,13 +183,21 @@ export default function MarketingHome() {
             <h2 className="serif">{t(home.deliver.title, locale)}</h2>
             <p className="mkt-lead">{t(home.deliver.lead, locale)}</p>
           </header>
-          <div className="mkt-cap-grid">
-            {home.deliver.items.map((item) => (
-              <article key={item.tag.no} className="mkt-cap">
-                <span className="mkt-cap-tag">{t(item.tag, locale)}</span>
-                <h3>{t(item.title, locale)}</h3>
-                <p>{t(item.body, locale)}</p>
-              </article>
+          <div className="mkt-deliver-groups">
+            {home.deliver.groups.map((group) => (
+              <section key={group.label.no} className="mkt-deliver-group">
+                <h3 className="serif mkt-deliver-label">
+                  {t(group.label, locale)}
+                </h3>
+                <div className="mkt-deliver-items">
+                  {group.items.map((item) => (
+                    <article key={item.title.no}>
+                      <h4 className="serif">{t(item.title, locale)}</h4>
+                      <p>{t(item.body, locale)}</p>
+                    </article>
+                  ))}
+                </div>
+              </section>
             ))}
           </div>
         </div>
@@ -207,67 +205,51 @@ export default function MarketingHome() {
 
       {/* ——— WHY (editorial) ——— */}
       <section className="mkt-section" id="hvorfor-oss">
-        <div className="mkt-wrap mkt-why">
+        <div className="mkt-wrap">
           <header className="mkt-section-head mkt-why-head">
             <h2 className="serif">{t(home.why.title, locale)}</h2>
             <p className="mkt-lead">{t(home.why.lead, locale)}</p>
           </header>
 
-          <blockquote className="mkt-why-pull">
-            <p>{t(home.why.marketBody, locale)}</p>
-          </blockquote>
+          <div className="mkt-why-split">
+            <blockquote className="mkt-why-problem">
+              <p className="mkt-why-problem-label">
+                {t(home.why.marketEyebrow, locale)}
+              </p>
+              <p className="mkt-why-problem-body">
+                {t(home.why.marketBody, locale)}
+              </p>
+            </blockquote>
 
-          <ol className="mkt-why-list">
-            {home.why.answers.map((a, i) => (
-              <li key={a.title.no} className="mkt-why-item">
-                <span className="mkt-why-num serif" aria-hidden="true">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
+            <div className="mkt-why-answers">
+              {home.why.answers.map((a) => (
+                <article key={a.title.no}>
                   <h3 className="serif">{t(a.title, locale)}</h3>
                   <p>{t(a.body, locale)}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-
-          <div className="mkt-why-value">
-            <h3 className="serif mkt-why-value-title">
-              {t(home.why.valueLead, locale)}
-            </h3>
-            <div className="mkt-why-value-stack">
-              {home.why.values.map((v) => (
-                <article key={v.metric.no}>
-                  <span className="mkt-value-pill">{t(v.metric, locale)}</span>
-                  <h4 className="serif">{t(v.title, locale)}</h4>
-                  <p>{t(v.body, locale)}</p>
                 </article>
               ))}
             </div>
           </div>
+        </div>
 
-          <div className="mkt-why-delivery">
-            <h3 className="serif mkt-why-delivery-title">
-              {t(home.why.deliveryTitle, locale)}
+        <div className="mkt-why-band">
+          <div className="mkt-wrap">
+            <h3 className="serif mkt-why-band-title">
+              {t(home.why.valueLead, locale)}
             </h3>
-            <p className="mkt-why-delivery-lead">
-              {t(home.why.deliveryLead, locale)}
-            </p>
-            <ol className="mkt-why-delivery-list">
-              {home.why.delivery.map((d, i) => (
-                <li key={d.title.no}>
-                  <span className="mkt-why-num serif" aria-hidden="true">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <h4 className="serif">{t(d.title, locale)}</h4>
-                    <p>{t(d.body, locale)}</p>
-                  </div>
-                </li>
+            <div className="mkt-why-band-grid">
+              {home.why.values.map((v) => (
+                <article key={v.metric.no} className="mkt-why-value">
+                  <p className="mkt-why-metric serif">{t(v.metric, locale)}</p>
+                  <h4 className="serif">{t(v.title, locale)}</h4>
+                  <p className="mkt-why-value-body">{t(v.body, locale)}</p>
+                </article>
               ))}
-            </ol>
+            </div>
           </div>
+        </div>
 
+        <div className="mkt-wrap">
           <div className="mkt-sovereignty">
             <h3 className="serif">{t(home.why.sovereigntyTitle, locale)}</h3>
             <p>{t(home.why.sovereigntyBody, locale)}</p>
@@ -291,29 +273,18 @@ export default function MarketingHome() {
           <div className="mkt-section-photo-shade" />
         </div>
         <div className="mkt-wrap mkt-section-photo-content">
-          <header className="mkt-section-head">
+          <header className="mkt-section-head mkt-industry-head">
             <h2 className="serif">{t(home.industries.title, locale)}</h2>
             <p className="mkt-lead">{t(home.industries.lead, locale)}</p>
           </header>
-          <div className="mkt-industry-grid">
+          <div className="mkt-industry-row">
             {home.industries.items.map((ind) => (
               <article key={ind.n} className="mkt-industry">
-                <span className="mkt-journey-n">{ind.n}</span>
-                <h3>{t(ind.title, locale)}</h3>
+                <h3 className="serif">{t(ind.title, locale)}</h3>
                 <p>{t(ind.body, locale)}</p>
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ——— REFERENCES ——— */}
-      <section className="mkt-section mkt-section-quiet" id="referanser">
-        <div className="mkt-wrap">
-          <header className="mkt-section-head">
-            <h2 className="serif">{t(home.references.title, locale)}</h2>
-            <p className="mkt-lead">{t(home.references.lead, locale)}</p>
-          </header>
         </div>
       </section>
 
