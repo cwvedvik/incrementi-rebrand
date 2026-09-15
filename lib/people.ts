@@ -41,9 +41,9 @@ export const PEOPLE: Person[] = [
       "/media/portraits/2026_Incrementi_CarlWilhelmVedvik_fotoCRoka_173c2_kvadrat.jpg",
   },
   {
-    name: "Kristov Rishie Xavier",
+    name: "Kristov Rishi Xavier",
     role: { no: "Partner", en: "Partner" },
-    photo: "/media/portraits/Kristov-Rishie.jpg",
+    photo: "/media/portraits/Kristov-Rishi.jpg",
     initials: "KX",
   },
   {

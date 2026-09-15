@@ -93,7 +93,7 @@ export const home = {
         ],
       },
       {
-        label: {"no":"Bygging","en":"Building"},
+        label: {"no":"Utvikling","en":"Development"},
         items: [
           {
             title: {"no":"Et gjenbrukbart datagrunnlag","en":"A reusable data foundation"},
@@ -149,16 +149,19 @@ export const home = {
     valueLead: {"no":"Alt vi bygger skal styrke konkurransekraften deres.","en":"Everything we build should strengthen your competitiveness."},
     values: [
       {
+        glyph: "strategic",
         metric: {"no":"Strategisk","en":"Strategic"},
         title: {"no":"Fleksibilitet for det som kommer","en":"Flexibility for what comes next"},
         body: {"no":"En arkitektur som lar dere utnytte den raske teknologiutviklingen. Fleksibiliteten ligger i et data først-fundament.","en":"An architecture that lets you exploit the rapid pace of technology development. The flexibility comes from a data-first foundation."},
       },
       {
+        glyph: "operational",
         metric: {"no":"Operasjonelt","en":"Operational"},
         title: {"no":"Forenkling og kontroll i driften","en":"Simplification and control in operations"},
         body: {"no":"Automatisering, forenkling og kontroll i hele driften. Sanntidsinnsikt fra maskindata og IoT-sensorer.","en":"Automation, simplification and control across the operation. Live insight from machine data and IoT sensors."},
       },
       {
+        glyph: "financial",
         metric: {"no":"Finansielt","en":"Financial"},
         title: {"no":"Rask leveranse, transparent kostnad","en":"Fast delivery, transparent cost"},
         body: {"no":"En rask leveransemodell med variabel og transparent kostnad. Ingen leverandørbinding. Dere eier IP-en.","en":"A fast delivery model with variable, transparent cost. No vendor lock-in. You own the IP."},

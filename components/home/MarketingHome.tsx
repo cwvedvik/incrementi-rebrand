@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import ContactForm from "@/components/chat/ContactForm";
 import HeroPlatformGhost from "@/components/home/HeroPlatformGhost";
 import SiteNav from "@/components/sections/SiteNav";
+import ValueGlyph from "@/components/home/ValueGlyph";
 import { home } from "@/lib/content/home";
 import { PEOPLE } from "@/lib/people";
 import { useLocale } from "@/lib/i18n/locale";
@@ -240,7 +241,8 @@ export default function MarketingHome() {
             <div className="mkt-why-band-grid">
               {home.why.values.map((v) => (
                 <article key={v.metric.no} className="mkt-why-value">
-                  <p className="mkt-why-metric serif">{t(v.metric, locale)}</p>
+                  <ValueGlyph kind={v.glyph} />
+                  <p className="mkt-why-metric">{t(v.metric, locale)}</p>
                   <h4 className="serif">{t(v.title, locale)}</h4>
                   <p className="mkt-why-value-body">{t(v.body, locale)}</p>
                 </article>
