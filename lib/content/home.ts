@@ -16,14 +16,11 @@ export const homeNav = {
 
 export const home = {
   hero: {
-    eyebrow: {"no":"Rådgivning • teknologi • gjennomføring","en":"Advisory • technology • delivery"},
-    titleLead: {"no":"Enklere hverdag","en":"A simpler workday"},
+    titleLead: {"no":"Enklere hverdag –","en":"A simpler workday –"},
     titleRest: {"no":"fra fragmenterte data til målbar produktivitet","en":"from fragmented data to measurable productivity"},
-    lead: {"no":"Vi samler data fra systemene dere allerede har og bygger et fundament for innsikt og automatisering. Incrementi hjelper bedrifter med å forenkle arbeidsprosesser, få systemer og data til å henge sammen, og bygge løsninger ansatte tar i bruk. Vi rådgir først, validerer før dere investerer, og bygger steg for steg, med trygg og kontrollert bruk av AI når det er riktig verktøy.","en":"We gather data from the systems you already have and build a foundation for insight and automation. Incrementi helps companies simplify work processes, connect systems and data, and build solutions employees put to use. We advise first, validate before you invest, and build step by step, with safe and controlled use of AI when it is the right tool."},
-    body: {"no":"Incrementi hjelper bedrifter med å forenkle arbeidsprosesser, få systemer og data til å henge sammen og bygge løsninger ansatte tar i bruk. Vi rådgir først, validerer før dere investerer, og bygger videre steg for steg. Når AI er riktig verktøy, sørger vi for at det tas i bruk på en trygg og kontrollert måte.","en":"Incrementi helps companies simplify work processes, connect systems and data, and build solutions employees put to use. We advise first, validate before you invest, and build step by step. When AI is the right tool, we make sure it is adopted in a safe and controlled way."},
+    lead: {"no":"Vi kobler sammen systemene dere allerede har, og bygger et fundament for innsikt, automatisering og trygg bruk av AI.","en":"We connect the systems you already have, and build a foundation for insight, automation and the safe use of AI."},
     cta: {"no":"Book en strategisamtale","en":"Book a strategy call"},
     secondary: {"no":"Se hvordan vi jobber","en":"See how we work"},
-    note: {"no":"ERP, CRM, maskindata/OT og fagsystemer kan gjerne bli stående. Vi gjør informasjonen tilgjengelig på tvers og bygger et trygt grunnlag for AI, applikasjoner og BI.","en":"Your ERP, CRM, machine data/OT and line-of-business systems can stay. We make the information available across them and build a safe foundation for AI, applications and BI."},
     stats: [
       { value: "650+", label: {"no":"spesialister gjennom 99X","en":"specialists through 99X"} },
       { value: {"no":"20 år","en":"20 years"}, label: {"no":"med digital produktutvikling i gruppen","en":"of digital product development in the group"} },
@@ -85,43 +82,52 @@ export const home = {
     eyebrow: {"no":"Hva vi leverer","en":"What we deliver"},
     title: {"no":"Fra rådgivning til løsninger i drift.","en":"From advisory to solutions in operation."},
     lead: {"no":"Vi kombinerer senior forretningsforståelse med teknologisk gjennomføringskraft. AI er en viktig del av verktøykassen, og vi bruker den der den løser et reelt problem.","en":"We combine senior business understanding with strong technical delivery. AI is an important part of our toolbox, and we use it where it solves a real problem."},
-    items: [
+    groups: [
       {
-        tag: {"no":"Rådgivning","en":"Advisory"},
-        title: {"no":"Digital retning og produktledelse","en":"Digital direction and product management"},
-        body: {"no":"Prioritering, roadmap, arkitektur, business case og løpende produktledelse, tett på ledelse og drift.","en":"Priorities, roadmap, architecture, business case and ongoing product management, close to leadership and operations."},
+        label: {"no":"Rådgivning","en":"Advisory"},
+        items: [
+          {
+            title: {"no":"Digital retning og produktledelse","en":"Digital direction and product management"},
+            body: {"no":"Prioritering, roadmap, arkitektur, business case og løpende produktledelse, tett på ledelse og drift.","en":"Priorities, roadmap, architecture, business case and ongoing product management, close to leadership and operations."},
+          },
+        ],
       },
       {
-        tag: {"no":"Data & integrasjon","en":"Data & integration"},
-        title: {"no":"Et gjenbrukbart datagrunnlag","en":"A reusable data foundation"},
-        body: {"no":"Vi kobler sammen systemer, applikasjoner, maskindata og IoT slik at data kan brukes på tvers.","en":"We connect systems, applications, machine data and IoT so data can be used across your business."},
+        label: {"no":"Utvikling","en":"Development"},
+        items: [
+          {
+            title: {"no":"Et gjenbrukbart datagrunnlag","en":"A reusable data foundation"},
+            body: {"no":"Vi kobler sammen systemer, applikasjoner, maskindata og IoT slik at data kan brukes på tvers.","en":"We connect systems, applications, machine data and IoT so data can be used across your business."},
+          },
+          {
+            title: {"no":"Tilpassede applikasjoner","en":"Tailored applications"},
+            body: {"no":"Brukervennlige arbeidsflater som automatiserer prosesser, støtter felt og drift og gir folk informasjonen de trenger, der de trenger den.","en":"User-friendly applications that automate processes, support field and operations, and give people the information they need, where they need it."},
+          },
+          {
+            title: {"no":"Legacy som får nytt liv","en":"Legacy given new life"},
+            body: {"no":"Vi moderniserer eksisterende programvare og arkitektur når det er smartere enn å starte på nytt.","en":"We modernise existing software and architecture when that is smarter than starting over."},
+          },
+        ],
       },
       {
-        tag: {"no":"Programvare","en":"Software"},
-        title: {"no":"Tilpassede applikasjoner","en":"Tailored applications"},
-        body: {"no":"Brukervennlige arbeidsflater som automatiserer prosesser, støtter felt og drift og gir folk informasjonen de trenger, der de trenger den.","en":"User-friendly applications that automate processes, support field and operations, and give people the information they need, where they need it."},
-      },
-      {
-        tag: {"no":"Modernisering","en":"Modernisation"},
-        title: {"no":"Legacy som får nytt liv","en":"Legacy given new life"},
-        body: {"no":"Vi moderniserer eksisterende programvare og arkitektur når det er smartere enn å starte på nytt.","en":"We modernise existing software and architecture when that is smarter than starting over."},
-      },
-      {
-        tag: {"no":"Kontrollag","en":"Control layer"},
-        title: {"no":"AI operations & control","en":"AI operations & control"},
-        body: {"no":"Et kontekst- og kontrollag som gjør hele virksomheten klar for AI: modellene forstår hvordan selskapet henger sammen, og all bruk, fra assistenter og automatisering til egne agenter, skjer med roller, rettigheter, sporbarhet og kostnadskontroll.","en":"A context and control layer that makes your whole business ready for AI: the models understand how your company fits together, and all use, from assistants and automation to your own agents, happens with roles, permissions, traceability and cost control."},
-      },
-      {
-        tag: {"no":"AI","en":"AI"},
-        title: {"no":"Agenter der det gir verdi","en":"Agents where they add value"},
-        body: {"no":"Vi klargjør data, verktøy og arbeidsprosesser for agenter når det finnes et konkret behov og et tydelig kontrollregime er på plass.","en":"We prepare data, tools and work processes for agents when there is a concrete need and a clear control regime is in place."},
+        label: {"no":"AI","en":"AI"},
+        items: [
+          {
+            title: {"no":"AI operations & control","en":"AI operations & control"},
+            body: {"no":"Et kontekst- og kontrollag som gjør hele virksomheten klar for AI: modellene forstår hvordan selskapet henger sammen, og all bruk, fra assistenter og automatisering til egne agenter, skjer med roller, rettigheter, sporbarhet og kostnadskontroll.","en":"A context and control layer that makes your whole business ready for AI: the models understand how your company fits together, and all use, from assistants and automation to your own agents, happens with roles, permissions, traceability and cost control."},
+          },
+          {
+            title: {"no":"Agenter der det gir verdi","en":"Agents where they add value"},
+            body: {"no":"Vi klargjør data, verktøy og arbeidsprosesser for agenter når det finnes et konkret behov og et tydelig kontrollregime er på plass.","en":"We prepare data, tools and work processes for agents when there is a concrete need and a clear control regime is in place."},
+          },
+        ],
       },
     ],
   },
   why: {
     eyebrow: {"no":"Hvorfor Incrementi","en":"Why Incrementi"},
     title: {"no":"Et alternativ til den tradisjonelle konsulentmodellen.","en":"An alternative to the traditional consulting model."},
-    lead: {"no":"Vi er bygget annerledes enn de store konsulenthusene. Dere jobber direkte med et kompakt seniorteam som bruker AI i hele leveransen, og resultatet er løsninger i produksjon, ikke rapporter. Alt vi bygger eier dere fra første dag, og dere står fritt til å stoppe etter hvert steg. Modellen gir mellomstore virksomheter tilgang til teknologi og kompetanse på enterprise-nivå, samtidig som vi har kapasiteten, styringen og sikkerheten som kreves i større og mer komplekse virksomheter.","en":"We are built differently from the large consulting houses. You work directly with a compact senior team that uses AI throughout the delivery, and the result is solutions in production, not reports. You own everything we build from day one, and you are free to stop after any step. The model gives mid-sized companies access to enterprise-level technology and expertise, while we maintain the capacity, governance and security required in larger and more complex organisations."},
+    lead: {"no":"Dere jobber direkte med et kompakt seniorteam, ikke et lag av mellomledd. Modellen gir mellomstore virksomheter enterprise-teknologi, med kapasiteten, styringen og sikkerheten som kreves når kompleksiteten vokser.","en":"You work directly with a compact senior team, not layers of intermediaries. The model gives mid-sized companies enterprise technology, with the capacity, governance and security required as complexity grows."},
     marketEyebrow: {"no":"Der markedets svar kommer til kort","en":"Where the market's answers fall short"},
     marketBody: {"no":"Rådgivere leverer veikart og rapporter, men byggingen kommer aldri. Plattformleverandører tar eierskap til både dataene og veikartet deres. Og nye AI-verktøy viser imponerende demoer på toppen av rotete data, uten fundamentet som gjør dem pålitelige.","en":"Advisers deliver roadmaps and reports, but the build never comes. Platform vendors take ownership of both your data and your roadmap. And new AI tools show impressive demos on top of messy data, without the foundation that makes them reliable."},
     answerEyebrow: {"no":"Vårt svar","en":"Our answer"},
@@ -143,38 +149,22 @@ export const home = {
     valueLead: {"no":"Alt vi bygger skal styrke konkurransekraften deres.","en":"Everything we build should strengthen your competitiveness."},
     values: [
       {
+        glyph: "strategic",
         metric: {"no":"Strategisk","en":"Strategic"},
         title: {"no":"Fleksibilitet for det som kommer","en":"Flexibility for what comes next"},
         body: {"no":"En arkitektur som lar dere utnytte den raske teknologiutviklingen. Fleksibiliteten ligger i et data først-fundament.","en":"An architecture that lets you exploit the rapid pace of technology development. The flexibility comes from a data-first foundation."},
       },
       {
+        glyph: "operational",
         metric: {"no":"Operasjonelt","en":"Operational"},
         title: {"no":"Forenkling og kontroll i driften","en":"Simplification and control in operations"},
         body: {"no":"Automatisering, forenkling og kontroll i hele driften. Sanntidsinnsikt fra maskindata og IoT-sensorer.","en":"Automation, simplification and control across the operation. Live insight from machine data and IoT sensors."},
       },
       {
+        glyph: "financial",
         metric: {"no":"Finansielt","en":"Financial"},
         title: {"no":"Rask leveranse, transparent kostnad","en":"Fast delivery, transparent cost"},
         body: {"no":"En rask leveransemodell med variabel og transparent kostnad. Ingen leverandørbinding. Dere eier IP-en.","en":"A fast delivery model with variable, transparent cost. No vendor lock-in. You own the IP."},
-      },
-    ],
-    deliveryTitle: {"no":"Rask leveranse, med AI under kontroll","en":"Fast delivery, with AI under control"},
-    deliveryLead: {"no":"Vi leverer raskt fordi AI er en del av måten vi jobber på, i korte sykluser der hver leveranse demonstreres, settes i drift og skaper verdi før neste steg.","en":"We deliver fast because AI is part of how we work, in short cycles where every delivery is demonstrated, put into operation and creates value before the next step."},
-    delivery: [
-      {
-        metric: {"no":"Prototyping","en":"Prototyping"},
-        title: {"no":"Prototyper raskt, sammen med dere","en":"Rapid prototyping, together with you"},
-        body: {"no":"Klikkbare prototyper lages med AI-verktøy mens vi sitter sammen, og valideres mot reelle brukere før dere investerer.","en":"Clickable prototypes are built with AI tools while we sit together, and validated with real users before you invest."},
-      },
-      {
-        metric: {"no":"Produksjon","en":"Production"},
-        title: {"no":"Fra validert prototype til produksjon","en":"From validated prototype to production"},
-        body: {"no":"Validerte prototyper bygges om til produksjonsklar kode på plattformen vår, med arkitektur, testing og sikkerhet på plass. Innsikten fra prototypearbeidet følger med inn i den endelige løsningen.","en":"Validated prototypes are rebuilt as production-ready code on our platform, with architecture, testing and security in place. The insight from the prototype work carries into the final solution."},
-      },
-      {
-        metric: {"no":"Kvalitet","en":"Quality"},
-        title: {"no":"AI-agenter i utviklingen","en":"AI agents in development"},
-        body: {"no":"AI tar det rutinepregede, utviklerne våre står for design, arkitektur og kvalitetssikring, innenfor rammer med roller, rettigheter og sporbarhet.","en":"AI handles the routine work, while our developers own design, architecture and quality assurance, within a framework of roles, permissions and traceability."},
       },
     ],
     sovereigntyTitle: {"no":"Digital suverenitet på deres premisser","en":"Digital sovereignty on your terms"},
