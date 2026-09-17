@@ -179,6 +179,17 @@ export function IconStrategy(props: IconProps) {
   );
 }
 
+/** Knappepil. Tynnere strek enn resten av settet: den rendres på 14 px inne i
+    en 30 px sirkel, og 1.6 på et 24-viewBox gir da 0,93 px — en hårstrek. */
+export function IconArrowUpRight(props: IconProps) {
+  return (
+    <Svg strokeWidth={1.6} {...props}>
+      <path d="M7.5 16.5L16.5 7.5" />
+      <path d="M9.75 7.5H16.5V14.25" />
+    </Svg>
+  );
+}
+
 const MAP = {
   direction: IconDirection,
   prototype: IconPrototype,

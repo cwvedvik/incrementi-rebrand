@@ -45,7 +45,7 @@
   /* Merkevarens typeskala: 22 Paragraph, 26 Subheader, 32 H4, 37 H3,
      43 H2, 52 H1. Taket er merkevarens tall, gulvet er mobilvarianten.
      Hero-tittelen ligger bevisst over H1 og har sitt eget unntak. */
-  --t-h1: var(--t-h1);
+  --t-h1: clamp(32px, 5vw, 52px);
   --t-h2: clamp(28px, 4.2vw, 43px);
   --t-h3: clamp(26px, 3.2vw, 37px);
   --t-h4: clamp(23px, 2.6vw, 32px);
@@ -58,7 +58,19 @@
   --display: var(--font-dm), system-ui, sans-serif;
   --sans: var(--font-dm), system-ui, sans-serif;
 
+  /* Radiusskala. Plata og kjernen hører sammen: kjernen er plata minus
+     bezelens 10 px, og det er den differansen som gjør kurvene konsentriske.
+     Endrer du én av dem, må den andre følge etter. */
+  --r-pill: 999px;
+  --r-plate: 28px;
+  --r-plate-inner: 18px;
+  --r-card: 16px;
+  --r-chip: 10px;
+
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Tregere start og lang utrulling. Brukes der noe skal kjennes som at det
+     har masse: knappetrykk, ikonet som sparker, plata som faller på plass. */
+  --ease-haptic: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 * {
@@ -128,6 +140,13 @@ body[data-phase="answering"] .glow {
   opacity: 0.02;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grain-shift 9s steps(6) infinite;
+}
+
+/* Markedsføringssiden bruker kornet stille. Uten animasjonen trengs heller
+   ikke overdekningen på -50 %, som firedobler arealet nettleseren maler. */
+.grain-static {
+  inset: 0;
+  animation: none;
 }
 
 @keyframes grain-shift {
@@ -2774,26 +2793,63 @@ body[data-mode="marketing"] {
 }
 
 /* ——— Hero ——— */
-/* Bildet ligger i helflate, og teksten står i venstre kolonne over det.
-   Blokken er senket ut av toppen, men ikke helt til midten: lenger ned
-   ligger kvinnens hår og de mørke stolene, og der stiger sløret teksten
-   trenger raskt. Plasseringen er et kompromiss mellom komposisjon og
-   hvor mye av fotoet vi er villige til å bleke. */
+/* Teksten og fotoet har hvert sitt territorium. Det er ikke en smaksendring:
+   så lenge brødtekst ligger oppå et fotografi må kontrasten måles piksel for
+   piksel og dras over AA-grensen med slør, og da bleker vi bort halve bildet.
+   På ren Off White er --ink 9,41:1 og magenta 5,23:1 av seg selv, uten et
+   eneste gradientstopp — og fotoet står i full styrke. */
 .mkt-hero {
   position: relative;
   min-height: 100dvh;
   display: flex;
-  align-items: flex-start;
-  padding: clamp(168px, 22vh, 268px) 0 72px;
-  overflow: hidden;
+  align-items: center;
+  padding: 132px 0 80px;
   background: var(--surface);
 }
 
-.mkt-hero-media {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: var(--surface);
+.mkt-hero-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.mkt-hero-grid.mkt-wrap {
+  width: min(1360px, calc(100% - 64px));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(48px, 6vw, 104px);
+  align-items: center;
+}
+
+.mkt-hero-copy {
+  position: relative;
+  min-width: 0;
+  max-width: 560px;
+}
+
+/* Plata får størrelsen sin fra viewporthøyden, ikke fra bredden. Det er
+   nettopp derfor beskjæringen holder seg: aspect-ratio låser formatet,
+   høyden låser størrelsen, og ingenting flyter over på en lav skjerm.
+   Tekstkolonnen tar det som blir igjen. */
+.mkt-hero-plate-shell {
+  height: clamp(420px, 58dvh, 640px);
+  aspect-ratio: 1 / 1;
+  padding: 10px;
+  border-radius: var(--r-plate);
+  background: rgba(241, 238, 234, 0.7);
+  border: 1px solid var(--line);
+  /* Innerlyset er kanten på et maskinert objekt. Skyggene er grønntonet og
+     svært diffuse, i tråd med resten av fila — ikke hard svart. */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 40px 90px -30px rgba(28, 41, 30, 0.22),
+    0 2px 8px -2px rgba(28, 41, 30, 0.06);
+}
+
+.mkt-hero-plate-core {
+  position: relative;
+  height: 100%;
+  border-radius: var(--r-plate-inner);
+  overflow: hidden;
 }
 
 .mkt-hero-img,
@@ -2801,63 +2857,13 @@ body[data-mode="marketing"] {
   object-fit: cover;
 }
 
-/* Hele kontrasten bæres av dette ene laget. Tekstkolonnens høyre kant
-   ligger på rundt 46 % av bredden på alle desktopbredder, så rampen holder
-   full styrke dit og er borte før whiteboardet og de tre til høyre.
-   Stoppene ligger tett fordi en gradient over 1500 px får synlige trinn
-   hvis den bare har to punkter.
-
-   Ellipsen er den andre halvparten av regnestykket. Tekstblokken strekker
-   seg ned til 64 % av høyden, og der ligger kvinnens hår og de mørke
-   stolene: ingressbåndet krever 50 % slør og knappebåndet 73 %, mot 38 %
-   oppe ved tittelen. Forsterkningen må derfor være der nede — men bare til
-   venstre. Et bånd over hele bredden ville dugget ned de to ved bordet,
-   og det er nettopp dem bildet er valgt for. */
-.mkt-hero-shade {
-  position: absolute;
-  inset: 0;
-  background:
-    /* Nederste 8 %: uten denne møter fotoet statistikkbåndet med en synlig
-       kant nede til venstre, der gulvet og stolene er gråere enn Off White. */
-    linear-gradient(
-      to top,
-      rgba(232, 227, 222, 0.85) 0%,
-      rgba(232, 227, 222, 0.3) 3.5%,
-      rgba(232, 227, 222, 0) 8%
-    ),
-    radial-gradient(
-      ellipse 62% 52% at 6% 76%,
-      rgba(232, 227, 222, 0.4) 0%,
-      rgba(232, 227, 222, 0.24) 52%,
-      rgba(232, 227, 222, 0) 100%
-    ),
-    linear-gradient(
-      90deg,
-      rgba(232, 227, 222, 0.66) 0%,
-      rgba(232, 227, 222, 0.64) 30%,
-      rgba(232, 227, 222, 0.6) 44%,
-      rgba(232, 227, 222, 0.48) 54%,
-      rgba(232, 227, 222, 0.34) 63%,
-      rgba(232, 227, 222, 0.18) 72%,
-      rgba(232, 227, 222, 0.06) 80%,
-      rgba(232, 227, 222, 0) 86%
-    );
-}
-
-/* Høyre halvdel er bevisst tom: der står whiteboardet og de to til høyre. */
-.mkt-hero-grid {
-  position: relative;
-  z-index: 1;
-}
-
-.mkt-hero-grid.mkt-wrap {
-  width: min(1280px, calc(100% - 40px));
-}
-
-.mkt-hero-copy {
-  position: relative;
-  min-width: 0;
-  max-width: 560px;
+/* Kvadratet fra et 3:2-bilde er 67 % av bredden, og motivene av interesse —
+   han som står, det håndtegnede diagrammet, og de to ved bordet — spenner
+   24–91 %. Derfor treffer denne beskjæringen dem presist. Kvinnen til
+   venstre faller ut; alternativet var en vid og lav plate uten
+   vertikal tilstedeværelse. */
+.mkt-hero-img {
+  object-position: 57% 50%;
 }
 
 /* Én grad og én vekt gjennom hele tittelen. Setningen er lang, så graden
@@ -2891,30 +2897,61 @@ body[data-mode="marketing"] {
   gap: 12px;
 }
 
-/* Knappene ligger lavere enn resten av teksten, og der nede er fotoet mørkt:
-   kvinnens hår og buksene til han som står. Primærknappen har sin egen
-   magentaflate og klarer seg, men spøkelsesknappen er gjennomsiktig og må
-   bære flaten sin selv her. */
-.mkt-hero-actions .mkt-btn-ghost {
-  background: rgba(241, 238, 234, 0.82);
-  backdrop-filter: blur(3px);
-}
-
-.mkt-hero-actions .mkt-btn-ghost:hover {
-  background: rgba(241, 238, 234, 0.94);
-}
-
 .mkt-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 14px;
   min-height: 46px;
-  padding: 0 22px;
+  padding: 0 24px;
+  border-radius: var(--r-pill);
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   border: 1px solid transparent;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  transition: background 0.35s var(--ease-haptic), color 0.35s var(--ease-haptic),
+    border-color 0.35s var(--ease-haptic), transform 0.35s var(--ease-haptic);
+}
+
+/* Trykket skal kjennes i fingeren, ikke bare skifte farge. */
+.mkt-btn:active {
+  transform: scale(0.985);
+}
+
+/* Pilen står aldri naken ved siden av teksten. Den bor i sin egen sirkel,
+   flush med knappens høyre innerkant, og derfor strammes den siden inn.
+   Knapper uten pil beholder symmetrisk polstring. */
+.mkt-btn:has(.mkt-btn-icon) {
+  padding-right: 8px;
+}
+
+.mkt-btn-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r-pill);
+  background: rgba(241, 238, 234, 0.18);
+  transition: transform 0.5s var(--ease-haptic), background 0.35s var(--ease-haptic);
+}
+
+/* Spøkelsesknappen har mørk tekst på lys flate, så en lys sirkel ville
+   forsvunnet. Den får en grønntonet i stedet. */
+.mkt-btn-ghost .mkt-btn-icon {
+  background: rgba(80, 118, 86, 0.12);
+}
+
+.mkt-btn:hover .mkt-btn-icon {
+  transform: translate(2px, -2px) scale(1.06);
+}
+
+.mkt-btn-primary:hover .mkt-btn-icon {
+  background: rgba(241, 238, 234, 0.26);
+}
+
+.mkt-btn-ghost:hover .mkt-btn-icon {
+  background: rgba(118, 80, 112, 0.14);
 }
 
 .mkt-btn-primary {
@@ -3974,38 +4011,35 @@ body[data-mode="marketing"] {
   }
 }
 
-@media (max-width: 980px) and (min-width: 721px) {
-  .mkt-hero-grid {
-    width: min(1120px, calc(100% - 36px));
+/* Ett brekk for hero-en. Over 900 px står tekst og plate side om side, under
+   ligger plata øverst i full bredde og teksten under. Tidligere fantes tre
+   regimer her, hvert med egen beskjæring og eget slør. */
+@media (max-width: 900px) {
+  .mkt-hero {
+    min-height: 0;
+    padding: 108px 0 64px;
   }
 
-  /* Tekstkolonnen tar en større andel av bredden her, så rampen må holde
-     full styrke lenger før den slipper fotoet. */
-  .mkt-hero-shade {
-    background:
-      radial-gradient(
-        ellipse 70% 52% at 6% 76%,
-        rgba(232, 227, 222, 0.4) 0%,
-        rgba(232, 227, 222, 0.24) 52%,
-        rgba(232, 227, 222, 0) 100%
-      ),
-      linear-gradient(
-        90deg,
-        rgba(232, 227, 222, 0.68) 0%,
-        rgba(232, 227, 222, 0.66) 40%,
-        rgba(232, 227, 222, 0.6) 56%,
-        rgba(232, 227, 222, 0.42) 68%,
-        rgba(232, 227, 222, 0.2) 80%,
-        rgba(232, 227, 222, 0) 92%
-      );
+  .mkt-hero-grid.mkt-wrap {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+
+  .mkt-hero-plate-shell {
+    order: -1;
+    height: auto;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    padding: 7px;
+    border-radius: 20px;
+  }
+
+  .mkt-hero-plate-core {
+    border-radius: 13px;
   }
 
   .mkt-hero-copy {
-    max-width: 460px;
-  }
-
-  .mkt-hero-title {
-    font-size: clamp(32px, 4.8vw, 48px);
+    max-width: none;
   }
 }
 
@@ -4039,43 +4073,24 @@ body[data-mode="marketing"] {
     padding: 64px 0;
   }
 
-  /* Delingen går fra vertikal til horisontal: fotoet legger seg som et bånd
-     i toppen og teksten står under på ren flate. Hero-en slutter å være
-     100dvh her, ellers blir det bare luft på en liten skjerm. */
   .mkt-hero {
-    min-height: auto;
-    padding: calc(42svh + 36px) 0 44px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    overflow: hidden;
+    padding: 96px 0 52px;
   }
 
-  .mkt-hero-media {
-    inset: 0 0 auto 0;
-    height: 42svh;
-    mask-image: linear-gradient(180deg, #000 calc(100% - 64px), transparent);
-  }
-
-  .mkt-hero-img {
-    object-position: 68% 46%;
-  }
-
-  .mkt-hero-grid {
+  .mkt-hero-grid.mkt-wrap {
     width: calc(100% - 32px);
   }
 
-  .mkt-hero-copy {
-    max-width: none;
+  /* Plata blir liggende her. En 4:3 i full bredde på en telefon er høy nok
+     til at diagrammet og ansiktene fortsatt leses. */
+  .mkt-hero-plate-shell {
+    aspect-ratio: 4 / 3;
+    padding: 6px;
+    border-radius: 16px;
   }
 
-  .mkt-hero-shade {
-    background: linear-gradient(
-      to top,
-      rgba(232, 227, 222, 0.4) 0%,
-      rgba(232, 227, 222, 0) 26%
-    );
+  .mkt-hero-plate-core {
+    border-radius: 10px;
   }
 
   .mkt-hero-title {
@@ -4100,9 +4115,11 @@ body[data-mode="marketing"] {
     gap: 10px;
   }
 
+  /* I full bredde skal pilen stå ytterst, ikke midtstilt sammen med teksten. */
   .mkt-hero-actions .mkt-btn {
     width: 100%;
     min-height: 48px;
+    justify-content: space-between;
   }
 
   .mkt-post-hero {
@@ -4190,6 +4207,7 @@ body[data-mode="marketing"] {
 @media (prefers-reduced-motion: reduce) {
   .mkt-topbar,
   .mkt-btn,
+  .mkt-btn-icon,
   .mkt-journey-tab {
     transition: none;
   }
@@ -4200,6 +4218,11 @@ body[data-mode="marketing"] {
     transition: none;
   }
 
+  /* Knappefysikken er ren pynt, så den skrus helt av her. */
+  .mkt-btn:active,
+  .mkt-btn:hover .mkt-btn-icon {
+    transform: none;
+  }
 }
 
 /* ============================================================

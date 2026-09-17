@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import ContactForm from "@/components/chat/ContactForm";
 import SiteNav from "@/components/sections/SiteNav";
 import ValueGlyph from "@/components/home/ValueGlyph";
+import { IconArrowUpRight } from "@/components/icons";
 import { CLIENTS } from "@/lib/clients";
 import { home } from "@/lib/content/home";
 import { PEOPLE } from "@/lib/people";
@@ -46,22 +47,13 @@ export default function MarketingHome() {
 
   return (
     <div className="mkt">
+      {/* Papirfølelsen på Off White. Statisk variant: den animerte i chat-visningen
+          ligger på fire ganger viewportarealet og flytter seg i evig loop. */}
+      <div className="grain grain-static" aria-hidden="true" />
       <SiteNav marketing />
 
       {/* ——— HERO ——— */}
       <header className="mkt-hero" id="top">
-        <div className="mkt-hero-media" aria-hidden="true">
-          <Image
-            src="/media/environment/2026_Incrementi_fotoCRoka_110c.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="mkt-hero-img"
-          />
-          <div className="mkt-hero-shade" />
-        </div>
-
         <div className="mkt-wrap mkt-hero-grid">
           <div className="mkt-hero-copy">
             <motion.h1
@@ -96,12 +88,40 @@ export default function MarketingHome() {
             >
               <a className="mkt-btn mkt-btn-primary" href="#kontakt">
                 {t(home.hero.cta, locale)}
+                <span className="mkt-btn-icon" aria-hidden="true">
+                  <IconArrowUpRight width={14} height={14} />
+                </span>
               </a>
               <a className="mkt-btn mkt-btn-ghost" href="#slik-jobber-vi">
                 {t(home.hero.secondary, locale)}
+                <span className="mkt-btn-icon" aria-hidden="true">
+                  <IconArrowUpRight width={14} height={14} />
+                </span>
               </a>
             </motion.div>
           </div>
+
+          {/* Fotoet er et objekt på flaten, ikke flaten selv: ytre skall med
+              hårstrek og polstring, indre kjerne som beskjærer. Teksten står
+              på ren Off White, så det trengs ikke noe slør noe sted. */}
+          <motion.div
+            className="mkt-hero-plate-shell"
+            aria-hidden="true"
+            initial={reduce ? false : { opacity: 0, scale: 1.02, filter: "blur(8px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            transition={{ duration: 1.1, ease: [0.32, 0.72, 0, 1] }}
+          >
+            <div className="mkt-hero-plate-core">
+              <Image
+                src="/media/environment/2026_Incrementi_fotoCRoka_110c.jpg"
+                alt=""
+                fill
+                priority
+                sizes="(max-width: 900px) 100vw, 660px"
+                className="mkt-hero-img"
+              />
+            </div>
+          </motion.div>
         </div>
       </header>
 
