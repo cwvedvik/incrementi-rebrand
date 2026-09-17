@@ -1,17 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, DM_Sans } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { getRequestLocale } from "@/lib/i18n/server";
 import { htmlLang } from "@/lib/i18n/config";
 import { LocaleProvider } from "@/lib/i18n/locale";
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  axes: ["opsz"],
-  variable: "--font-fraunces",
-  display: "swap",
-});
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -72,7 +64,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#08090B",
+  themeColor: "#E8E3DE",
   width: "device-width",
   initialScale: 1,
 };
@@ -84,7 +76,7 @@ export default async function RootLayout({
 }) {
   const locale = await getRequestLocale();
   return (
-    <html lang={htmlLang(locale)} className={`${fraunces.variable} ${dmSans.variable}`}>
+    <html lang={htmlLang(locale)} className={dmSans.variable}>
       <body>
         <LocaleProvider locale={locale}>{children}</LocaleProvider>
       </body>

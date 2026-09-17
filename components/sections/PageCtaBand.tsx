@@ -10,7 +10,7 @@ export default function PageCtaBand() {
 
   return (
     <section className="mkt-sub-cta">
-      <h2 className="serif">{t(ui.ctaBand.line, locale)}</h2>
+      <h2 className="display">{t(ui.ctaBand.line, locale)}</h2>
       <Link href={href("/#kontakt")} className="mkt-btn mkt-btn-primary">
         {t(ui.ctaBand.button, locale)}
       </Link>

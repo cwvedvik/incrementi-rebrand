@@ -3,20 +3,59 @@
    Design tokens & global system
    ============================================================ */
 :root {
-  --ink: #08090b;
-  --navy: #0c1420;
-  --panel: rgba(20, 24, 30, 0.72);
-  --line: rgba(244, 242, 238, 0.12);
-  --line-2: rgba(244, 242, 238, 0.06);
-  --paper: #f4f2ee;
-  --body-text: #d7d4ce;
-  --muted: #a7abb2;
-  --muted-2: #6e737b;
-  --copper: #c98a5e;
-  --copper-bright: #e3a574;
-  --steel: #8fa3b8;
+  /* Merkevarepaletten slik den står i Incrementi Branding 2025 V2.
+     Disse fem er kanoniske og skal ikke justeres. */
+  --brand-off-white: #e8e3de;
+  --brand-light-green: #85a289;
+  --brand-dark-green: #507656;
+  --brand-light-magenta: #b296ae;
+  --brand-dark-magenta: #765070;
 
-  --serif: var(--font-fraunces), Georgia, serif;
+  /* Flater. Off White er bunnen, og kapittelrytmen går i tre trinn:
+     surface → surface-wash → surface-deep. */
+  --surface: var(--brand-off-white);
+  --surface-raised: #f1eeea;
+  --surface-wash: #dcdbd4; /* Light Green 12 % over Off White */
+  --surface-deep: #1c291e; /* Dark Green mørknet 65 % */
+
+  /* Tekst. Kontrasttallene er målt mot --surface.
+     Merk at Dark Green selv bare gir 4,05 og derfor ikke brukes som tekst. */
+  --ink: #283b2b; /* 9,41 — overskrifter */
+  --ink-body: #344d38; /* 7,27 — brødtekst */
+  --ink-muted: #405e45; /* 5,67 — dempet tekst */
+  /* Svakeste tillatte tekst. Tallet må holde mot den mørkeste flaten den
+     kan havne på, ikke bare mot --surface: på --surface-wash lå forrige
+     verdi på 4,39 og røk under AA. Denne gir 5,13 og 4,71. */
+  --ink-faint: #45654a;
+  --ink-invert: #f1eeea; /* 13,11 mot --surface-deep */
+
+  /* Aksenter. Dark Magenta er den eneste merkevarefargen som holder
+     som tekst på Off White, så den bærer etiketter og lenker. */
+  --accent: var(--brand-dark-magenta); /* 5,23 */
+  --accent-strong: #64445f; /* 6,50 — hover og trykk */
+  --accent-2: #446449; /* 5,21 — dempet grønn etikett */
+
+  /* Fyll og grafikk. Aldri tekst: 2,19 og 2,09 mot flaten. */
+  --fill-green: var(--brand-light-green);
+  --fill-magenta: var(--brand-light-magenta);
+
+  --line: rgba(80, 118, 86, 0.22);
+  --line-2: rgba(80, 118, 86, 0.12);
+
+  /* Merkevarens typeskala: 22 Paragraph, 26 Subheader, 32 H4, 37 H3,
+     43 H2, 52 H1. Taket er merkevarens tall, gulvet er mobilvarianten.
+     Hero-tittelen ligger bevisst over H1 og har sitt eget unntak. */
+  --t-h1: var(--t-h1);
+  --t-h2: clamp(28px, 4.2vw, 43px);
+  --t-h3: clamp(26px, 3.2vw, 37px);
+  --t-h4: clamp(23px, 2.6vw, 32px);
+  --t-sub: clamp(20px, 2vw, 26px);
+  --t-para: clamp(17px, 1.8vw, 22px); /* ingresser */
+  --t-body: 17px; /* løpende brødtekst */
+  --t-small: 15px;
+  --t-label: 11px;
+
+  --display: var(--font-dm), system-ui, sans-serif;
   --sans: var(--font-dm), system-ui, sans-serif;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -34,21 +73,22 @@ body {
 }
 
 body {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--surface);
+  color: var(--ink);
   font-family: var(--sans);
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-.serif {
-  font-family: var(--serif);
+.display {
+  font-family: var(--display);
+  letter-spacing: -0.015em;
 }
 
 ::selection {
-  background: var(--copper);
-  color: var(--ink);
+  background: var(--accent);
+  color: var(--ink-invert);
 }
 
 a {
@@ -67,9 +107,9 @@ button {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(60vw 60vw at 50% 42%, rgba(201, 138, 94, 0.06), transparent 60%),
-    radial-gradient(50vw 50vw at 78% 88%, rgba(143, 163, 184, 0.04), transparent 60%),
-    radial-gradient(44vw 44vw at 14% 12%, rgba(12, 20, 32, 0.9), transparent 70%);
+    radial-gradient(60vw 60vw at 50% 42%, rgba(118, 80, 112, 0.06), transparent 60%),
+    radial-gradient(50vw 50vw at 78% 88%, rgba(80, 118, 86, 0.04), transparent 60%),
+    radial-gradient(44vw 44vw at 14% 12%, rgba(133, 162, 137, 0.22), transparent 70%);
   transition: opacity 1.4s ease;
 }
 
@@ -115,11 +155,11 @@ body[data-phase="answering"] .glow {
   pointer-events: none;
   opacity: 0.45;
   background:
-    radial-gradient(2px 2px at 48% 38%, rgba(227, 165, 116, 0.55), transparent 100%),
-    radial-gradient(2px 2px at 55% 44%, rgba(227, 165, 116, 0.4), transparent 100%),
-    radial-gradient(1.6px 1.6px at 42% 46%, rgba(244, 242, 238, 0.28), transparent 100%),
-    radial-gradient(1.6px 1.6px at 60% 36%, rgba(244, 242, 238, 0.22), transparent 100%),
-    radial-gradient(26vw 22vw at 50% 40%, rgba(201, 138, 94, 0.08), transparent 70%);
+    radial-gradient(2px 2px at 48% 38%, rgba(100, 68, 95, 0.55), transparent 100%),
+    radial-gradient(2px 2px at 55% 44%, rgba(100, 68, 95, 0.4), transparent 100%),
+    radial-gradient(1.6px 1.6px at 42% 46%, rgba(80, 118, 86, 0.28), transparent 100%),
+    radial-gradient(1.6px 1.6px at 60% 36%, rgba(80, 118, 86, 0.22), transparent 100%),
+    radial-gradient(26vw 22vw at 50% 40%, rgba(118, 80, 112, 0.08), transparent 70%);
 }
 
 /* ---------- top bar ---------- */
@@ -133,7 +173,7 @@ body[data-phase="answering"] .glow {
   align-items: center;
   justify-content: space-between;
   padding: 22px 34px;
-  background: linear-gradient(180deg, var(--ink) 10%, rgba(8, 9, 11, 0.72) 60%, transparent);
+  background: linear-gradient(180deg, var(--surface) 10%, rgba(232, 227, 222, 0.72) 60%, transparent);
 }
 
 .logo {
@@ -141,7 +181,7 @@ body[data-phase="answering"] .glow {
   user-select: none;
   background: none;
   border: none;
-  color: var(--paper);
+  color: var(--ink);
   text-align: left;
   padding: 0;
 }
@@ -157,7 +197,7 @@ body[data-phase="answering"] .glow {
   font-family: var(--sans);
   font-size: 10px;
   letter-spacing: 0.23em;
-  color: var(--muted-2);
+  color: var(--ink-faint);
   margin-top: 6px;
   text-transform: uppercase;
 }
@@ -169,7 +209,7 @@ body[data-phase="answering"] .glow {
   font-size: 12.5px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ink-muted);
 }
 
 .nav button,
@@ -179,7 +219,7 @@ body[data-phase="answering"] .glow {
   font-size: inherit;
   letter-spacing: inherit;
   text-transform: inherit;
-  color: var(--muted);
+  color: var(--ink-muted);
   cursor: pointer;
   transition: color 0.2s;
   position: relative;
@@ -188,7 +228,7 @@ body[data-phase="answering"] .glow {
 
 .nav button:hover,
 .nav a:hover {
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .nav button.visited::after {
@@ -199,14 +239,14 @@ body[data-phase="answering"] .glow {
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: var(--copper);
+  background: var(--accent);
   transform: translateX(-50%);
 }
 
 .nav button.start,
 .nav a.start {
-  border: 1px solid rgba(201, 138, 94, 0.5);
-  color: var(--copper);
+  border: 1px solid rgba(118, 80, 112, 0.5);
+  color: var(--accent);
   border-radius: 999px;
   padding: 9px 18px;
   letter-spacing: 0.1em;
@@ -214,8 +254,8 @@ body[data-phase="answering"] .glow {
 
 .nav button.start:hover,
 .nav a.start:hover {
-  background: rgba(201, 138, 94, 0.12);
-  color: var(--copper-bright);
+  background: rgba(118, 80, 112, 0.12);
+  color: var(--accent-strong);
 }
 
 @media (max-width: 880px) {
@@ -256,20 +296,20 @@ body[data-phase="answering"] .glow {
   letter-spacing: 0.44em;
   text-indent: 0.44em;
   text-transform: uppercase;
-  color: var(--copper-bright);
+  color: var(--accent-strong);
   margin-bottom: 28px;
   padding: 10px 22px;
   border-radius: 999px;
-  background: rgba(232, 227, 222, 0.08);
-  border: 1px solid rgba(232, 227, 222, 0.14);
+  background: rgba(80, 118, 86, 0.08);
+  border: 1px solid var(--line);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  text-shadow: 0 0 24px rgba(201, 138, 94, 0.55);
+  text-shadow: 0 0 24px rgba(118, 80, 112, 0.55);
 }
 
 
 .hero h1 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 300;
   font-size: clamp(34px, 6.4vw, 74px);
   line-height: 1.03;
@@ -278,19 +318,19 @@ body[data-phase="answering"] .glow {
 
 .hero h1 em {
   font-style: italic;
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .hero .sub {
   margin-top: 24px;
   max-width: 620px;
-  color: var(--muted);
+  color: var(--ink-muted);
   font-size: clamp(15px, 2vw, 18px);
   line-height: 1.6;
 }
 
 .hero .sub b {
-  color: var(--paper);
+  color: var(--ink);
   font-weight: 500;
 }
 
@@ -300,15 +340,15 @@ body[data-phase="answering"] .glow {
   align-items: center;
   gap: 14px;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--ink-muted);
   letter-spacing: 0.02em;
 }
 
 .hero .hero-stat .n {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 26px;
   font-weight: 300;
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 .hero .hero-stat .sep {
@@ -319,9 +359,9 @@ body[data-phase="answering"] .glow {
 
 .hero .case-teaser {
   padding: 12px 20px;
-  border: 1px solid rgba(201, 138, 94, 0.35);
+  border: 1px solid rgba(118, 80, 112, 0.35);
   border-radius: 14px;
-  background: rgba(20, 24, 30, 0.45);
+  background: rgba(255, 255, 255, 0.66);
   text-align: left;
 }
 
@@ -329,7 +369,7 @@ body[data-phase="answering"] .glow {
   font-size: 11.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--copper-bright);
+  color: var(--accent-strong);
   white-space: nowrap;
   margin-left: 6px;
 }
@@ -346,18 +386,18 @@ body[data-phase="answering"] .glow {
 }
 
 .logo-strip .logo-mark {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 19px;
   font-weight: 400;
   letter-spacing: 0.07em;
-  color: var(--muted);
+  color: var(--ink-muted);
   opacity: 0.95;
   transition: color 0.25s, opacity 0.25s;
   white-space: nowrap;
 }
 
 .logo-strip .logo-mark:hover {
-  color: var(--paper);
+  color: var(--ink);
   opacity: 1;
 }
 
@@ -367,8 +407,8 @@ body[data-phase="answering"] .glow {
   max-width: 120px;
   object-fit: contain;
   opacity: 0.78;
-  /* Transparent dark marks → light silhouettes on ink surfaces */
-  filter: brightness(0) invert(1);
+  /* Merkene i /media/clients er allerede hvite silhuetter, så de trenger
+     ikke filtreres. De forutsetter en mørk flate, som .mkt-on-deep. */
   vertical-align: middle;
   transition: opacity 0.25s;
 }
@@ -410,7 +450,7 @@ body[data-phase="answering"] .glow {
   overflow-y: auto;
   padding: 120px 24px 220px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(244, 242, 238, 0.15) transparent;
+  scrollbar-color: rgba(80, 118, 86, 0.35) transparent;
 }
 
 .stream-inner {
@@ -424,12 +464,12 @@ body[data-phase="answering"] .glow {
 .msg-user {
   align-self: flex-end;
   max-width: 80%;
-  background: linear-gradient(160deg, rgba(201, 138, 94, 0.18), rgba(201, 138, 94, 0.06));
-  border: 1px solid rgba(201, 138, 94, 0.28);
+  background: linear-gradient(160deg, rgba(118, 80, 112, 0.18), rgba(118, 80, 112, 0.06));
+  border: 1px solid rgba(118, 80, 112, 0.28);
   border-radius: 16px 16px 4px 16px;
   padding: 13px 18px;
   font-size: 16px;
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .msg-ai {
@@ -444,7 +484,7 @@ body[data-phase="answering"] .glow {
   font-size: 11px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
   margin-bottom: 16px;
 }
 
@@ -452,27 +492,27 @@ body[data-phase="answering"] .glow {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--copper);
-  box-shadow: 0 0 10px var(--copper);
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
 }
 
 .ai-lead {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 300;
   font-size: clamp(21px, 3vw, 29px);
   line-height: 1.28;
   letter-spacing: -0.01em;
-  color: var(--paper);
+  color: var(--ink);
   margin-bottom: 18px;
 }
 
 .ai-lead em {
   font-style: italic;
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 .ai-body {
-  color: var(--body-text);
+  color: var(--ink-body);
   font-size: 16px;
   line-height: 1.66;
 }
@@ -490,7 +530,7 @@ body[data-phase="answering"] .glow {
   position: relative;
   padding-left: 22px;
   margin-bottom: 12px;
-  color: var(--muted);
+  color: var(--ink-muted);
   font-size: 15.5px;
   line-height: 1.55;
 }
@@ -502,12 +542,12 @@ body[data-phase="answering"] .glow {
   top: 9px;
   width: 6px;
   height: 6px;
-  border: 1px solid var(--copper);
+  border: 1px solid var(--accent);
   border-radius: 50%;
 }
 
 .ai-points li b {
-  color: var(--paper);
+  color: var(--ink);
   font-weight: 500;
 }
 
@@ -522,20 +562,20 @@ body[data-phase="answering"] .glow {
 }
 
 .ai-stats .s .n {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 32px;
   font-weight: 300;
   line-height: 1;
 }
 
 .ai-stats .s .n em {
-  color: var(--copper);
+  color: var(--accent);
   font-style: normal;
 }
 
 .ai-stats .s .l {
   font-size: 12.5px;
-  color: var(--muted);
+  color: var(--ink-muted);
   margin-top: 5px;
   max-width: 150px;
 }
@@ -557,15 +597,15 @@ body[data-phase="answering"] .glow {
 }
 
 .steps .st .n {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 24px;
   font-weight: 300;
-  color: var(--copper);
+  color: var(--accent);
   line-height: 1;
 }
 
 .steps .st h4 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 400;
   font-size: 18px;
   margin-bottom: 3px;
@@ -573,7 +613,7 @@ body[data-phase="answering"] .glow {
 
 .steps .st p {
   font-size: 14.5px;
-  color: var(--muted);
+  color: var(--ink-muted);
   margin: 0;
   line-height: 1.5;
 }
@@ -592,7 +632,7 @@ body[data-phase="answering"] .glow {
 }
 
 .mini {
-  background: rgba(20, 24, 30, 0.5);
+  background: rgba(255, 255, 255, 0.66);
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 18px;
@@ -600,24 +640,24 @@ body[data-phase="answering"] .glow {
 }
 
 .mini:hover {
-  border-color: rgba(201, 138, 94, 0.3);
+  border-color: rgba(118, 80, 112, 0.3);
 }
 
 .mini.wide {
   grid-column: 1 / -1;
-  border-top: 1px solid rgba(201, 138, 94, 0.3);
+  border-top: 1px solid rgba(118, 80, 112, 0.3);
 }
 
 .mini .k {
   font-size: 10.5px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
   margin-bottom: 8px;
 }
 
 .mini h4 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 400;
   font-size: 17px;
   margin-bottom: 6px;
@@ -625,7 +665,7 @@ body[data-phase="answering"] .glow {
 
 .mini p {
   font-size: 14px;
-  color: var(--muted);
+  color: var(--ink-muted);
   margin: 0;
   line-height: 1.5;
 }
@@ -643,16 +683,16 @@ body[data-phase="answering"] .glow {
   grid-template-columns: 40px 1fr;
   gap: 18px;
   align-items: start;
-  background: linear-gradient(180deg, rgba(30, 35, 43, 0.55), rgba(16, 19, 24, 0.5));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(241, 238, 234, 0.6));
   border: 1px solid var(--line);
-  border-top: 1px solid rgba(201, 138, 94, 0.28);
+  border-top: 1px solid rgba(118, 80, 112, 0.28);
   border-radius: 12px;
   padding: 18px 20px;
   transition: border-color 0.3s;
 }
 
 .block:hover {
-  border-color: rgba(201, 138, 94, 0.3);
+  border-color: rgba(118, 80, 112, 0.3);
 }
 
 .stack-glyph {
@@ -666,15 +706,15 @@ body[data-phase="answering"] .glow {
   display: block;
   height: 5px;
   border-radius: 2px;
-  border: 1px solid rgba(244, 242, 238, 0.14);
+  border: 1px solid var(--line);
   background: transparent;
   transition: background 0.3s;
 }
 
 .stack-glyph i.on {
-  border-color: rgba(201, 138, 94, 0.5);
-  background: linear-gradient(90deg, rgba(201, 138, 94, 0.7), rgba(227, 165, 116, 0.45));
-  box-shadow: 0 0 8px rgba(201, 138, 94, 0.35);
+  border-color: rgba(118, 80, 112, 0.5);
+  background: linear-gradient(90deg, rgba(118, 80, 112, 0.7), rgba(100, 68, 95, 0.45));
+  box-shadow: 0 0 8px rgba(118, 80, 112, 0.35);
 }
 
 .block-head {
@@ -685,29 +725,29 @@ body[data-phase="answering"] .glow {
 }
 
 .block-head .n {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 22px;
   font-weight: 300;
-  color: var(--copper);
+  color: var(--accent);
   line-height: 1;
 }
 
 .block-head h4 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 400;
   font-size: 18px;
 }
 
 .block-body p {
   font-size: 14.5px;
-  color: var(--muted);
+  color: var(--ink-muted);
   line-height: 1.58;
   margin: 0;
 }
 
 .blocks-note {
   font-size: 13px;
-  color: var(--muted-2);
+  color: var(--ink-faint);
   letter-spacing: 0.02em;
   margin: 8px 2px 0;
   font-style: italic;
@@ -738,7 +778,7 @@ body[data-phase="answering"] .glow {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: rgba(20, 24, 30, 0.5);
+  background: rgba(255, 255, 255, 0.66);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 20px 19px 17px;
@@ -746,23 +786,23 @@ body[data-phase="answering"] .glow {
 }
 
 .case-card:hover {
-  border-color: rgba(201, 138, 94, 0.4);
+  border-color: rgba(118, 80, 112, 0.4);
   transform: translateY(-2px);
 }
 
 .case-card .metric .n {
   display: block;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 36px;
   font-weight: 300;
   line-height: 1;
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 .case-card .metric .l {
   display: block;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--ink-muted);
   margin-top: 6px;
   line-height: 1.45;
 }
@@ -776,27 +816,27 @@ body[data-phase="answering"] .glow {
 }
 
 .case-card .who .client {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 16px;
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .case-card .who .sector {
   font-size: 10.5px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--muted-2);
+  color: var(--ink-faint);
 }
 
 .case-card .open {
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
 }
 
 .case-card:hover .open {
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 /* ---------- people grid ---------- */
@@ -814,7 +854,7 @@ body[data-phase="answering"] .glow {
 }
 
 .person {
-  background: rgba(20, 24, 30, 0.5);
+  background: rgba(255, 255, 255, 0.66);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 20px 18px 18px;
@@ -822,7 +862,7 @@ body[data-phase="answering"] .glow {
 }
 
 .person:hover {
-  border-color: rgba(201, 138, 94, 0.35);
+  border-color: rgba(118, 80, 112, 0.35);
   transform: translateY(-2px);
 }
 
@@ -834,16 +874,16 @@ body[data-phase="answering"] .glow {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 19px;
   font-weight: 300;
-  color: var(--ink);
-  background: radial-gradient(circle at 32% 28%, var(--copper-bright), var(--copper) 62%, #8a5a3a);
-  box-shadow: 0 0 24px rgba(201, 138, 94, 0.25);
+  color: var(--ink-invert);
+  background: radial-gradient(circle at 32% 28%, var(--accent-strong), var(--accent) 62%, #4e3549);
+  box-shadow: 0 0 24px rgba(118, 80, 112, 0.25);
 }
 
 .person h4 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 400;
   font-size: 17px;
   margin-bottom: 2px;
@@ -853,13 +893,13 @@ body[data-phase="answering"] .glow {
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
   margin-bottom: 8px;
 }
 
 .person p {
   font-size: 13.5px;
-  color: var(--muted);
+  color: var(--ink-muted);
   line-height: 1.5;
   margin: 0;
 }
@@ -870,19 +910,19 @@ body[data-phase="answering"] .glow {
   font-size: 11.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted-2);
+  color: var(--ink-faint);
   border-bottom: 1px solid transparent;
   transition: color 0.2s, border-color 0.2s;
 }
 
 .person .li:hover {
-  color: var(--steel);
-  border-color: var(--steel);
+  color: var(--accent-2);
+  border-color: var(--accent-2);
 }
 
 /* ---------- contact form ---------- */
 .contact-card {
-  background: rgba(16, 19, 24, 0.75);
+  background: rgba(255, 255, 255, 0.82);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 26px 24px;
@@ -893,12 +933,12 @@ body[data-phase="answering"] .glow {
   font-size: 10.5px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
   margin-bottom: 10px;
 }
 
 .contact-card h4 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 300;
   font-size: 22px;
   margin-bottom: 16px;
@@ -923,11 +963,11 @@ body[data-phase="answering"] .glow {
 .field input,
 .field textarea {
   width: 100%;
-  background: rgba(8, 9, 11, 0.6);
+  background: rgba(255, 255, 255, 0.72);
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 13px 15px;
-  color: var(--paper);
+  color: var(--ink);
   font-family: var(--sans);
   font-size: 15px;
   outline: none;
@@ -937,13 +977,13 @@ body[data-phase="answering"] .glow {
 
 .field input:focus,
 .field textarea:focus {
-  border-color: rgba(201, 138, 94, 0.55);
+  border-color: rgba(118, 80, 112, 0.55);
 }
 
 /* --muted-2 målte 4,17:1 mot feltbakgrunnen, under WCAG-kravet på 4,5:1. */
 .field input::placeholder,
 .field textarea::placeholder {
-  color: #878d96;
+  color: var(--ink-faint);
 }
 
 .contact-submit {
@@ -955,8 +995,8 @@ body[data-phase="answering"] .glow {
 }
 
 .btn-copper {
-  background: linear-gradient(160deg, var(--copper-bright), var(--copper));
-  color: var(--ink);
+  background: linear-gradient(160deg, var(--accent-strong), var(--accent));
+  color: var(--ink-invert);
   border: none;
   border-radius: 11px;
   padding: 13px 26px;
@@ -969,7 +1009,7 @@ body[data-phase="answering"] .glow {
 
 .btn-copper:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 30px rgba(201, 138, 94, 0.3);
+  box-shadow: 0 8px 30px rgba(118, 80, 112, 0.3);
 }
 
 .btn-copper:disabled {
@@ -981,12 +1021,12 @@ body[data-phase="answering"] .glow {
 
 .contact-note {
   font-size: 12.5px;
-  color: var(--muted-2);
+  color: var(--ink-faint);
 }
 
 .contact-error {
   font-size: 13px;
-  color: #d98a7a;
+  color: #9c3b33;
 }
 
 .contact-done {
@@ -1000,12 +1040,12 @@ body[data-phase="answering"] .glow {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--copper);
-  box-shadow: 0 0 14px var(--copper);
+  background: var(--accent);
+  box-shadow: 0 0 14px var(--accent);
 }
 
 .contact-done p {
-  color: var(--body-text);
+  color: var(--ink-body);
   font-size: 15px;
   margin: 0;
 }
@@ -1078,15 +1118,15 @@ body[data-phase="answering"] .glow {
   flex-wrap: wrap;
   margin-top: 24px;
   padding: 16px 18px;
-  border: 1px solid rgba(201, 138, 94, 0.25);
+  border: 1px solid rgba(118, 80, 112, 0.25);
   border-radius: 14px;
-  background: rgba(201, 138, 94, 0.05);
+  background: rgba(118, 80, 112, 0.05);
 }
 
 .nudge p {
   margin: 0;
   font-size: 14.5px;
-  color: var(--body-text);
+  color: var(--ink-body);
   flex: 1;
   min-width: 200px;
 }
@@ -1096,7 +1136,7 @@ body[data-phase="answering"] .glow {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: var(--muted);
+  color: var(--ink-muted);
   font-size: 13px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1111,7 +1151,7 @@ body[data-phase="answering"] .glow {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--copper);
+  background: var(--accent);
   opacity: 0.4;
   animation: blink 1.1s infinite;
 }
@@ -1153,8 +1193,8 @@ body[data-phase="answering"] .glow {
 
 .chip {
   font-size: 13.5px;
-  color: var(--paper);
-  background: rgba(20, 24, 30, 0.6);
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.66);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 9px 16px;
@@ -1165,22 +1205,22 @@ body[data-phase="answering"] .glow {
 }
 
 .chip:hover {
-  border-color: rgba(201, 138, 94, 0.6);
-  color: var(--copper-bright);
+  border-color: rgba(118, 80, 112, 0.6);
+  color: var(--accent-strong);
   transform: translateY(-1px);
 }
 
 .chip .q {
-  color: var(--copper);
+  color: var(--accent);
   margin-right: 7px;
 }
 
 .chip.visited {
-  color: var(--muted);
+  color: var(--ink-muted);
 }
 
 .chip.visited .q {
-  color: var(--muted-2);
+  color: var(--ink-faint);
 }
 
 /* ---------- dock ---------- */
@@ -1191,7 +1231,7 @@ body[data-phase="answering"] .glow {
   bottom: 0;
   z-index: 20;
   padding: 20px 24px 30px;
-  background: linear-gradient(0deg, var(--ink) 40%, rgba(8, 9, 11, 0.85) 75%, transparent);
+  background: linear-gradient(0deg, var(--surface) 40%, rgba(232, 227, 222, 0.85) 75%, transparent);
 }
 
 .dock-inner {
@@ -1203,22 +1243,22 @@ body[data-phase="answering"] .glow {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(16, 19, 24, 0.9);
+  background: rgba(255, 255, 255, 0.82);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 8px 8px 8px 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 60px rgba(28, 41, 30, 0.12);
   transition: border-color 0.25s, box-shadow 0.25s;
 }
 
 .inputbar:focus-within {
-  border-color: rgba(201, 138, 94, 0.55);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(201, 138, 94, 0.08);
+  border-color: rgba(118, 80, 112, 0.55);
+  box-shadow: 0 20px 60px rgba(28, 41, 30, 0.12), 0 0 40px rgba(118, 80, 112, 0.08);
 }
 
 .inputbar .pre {
-  color: var(--copper);
-  font-family: var(--serif);
+  color: var(--accent);
+  font-family: var(--display);
   font-size: 18px;
 }
 
@@ -1227,7 +1267,7 @@ body[data-phase="answering"] .glow {
   background: none;
   border: none;
   outline: none;
-  color: var(--paper);
+  color: var(--ink);
   font-family: var(--sans);
   font-size: 16px;
   padding: 10px 0;
@@ -1235,7 +1275,7 @@ body[data-phase="answering"] .glow {
 }
 
 .inputbar input::placeholder {
-  color: var(--muted-2);
+  color: var(--ink-faint);
 }
 
 .send {
@@ -1244,8 +1284,8 @@ body[data-phase="answering"] .glow {
   border: none;
   border-radius: 11px;
   cursor: pointer;
-  background: linear-gradient(160deg, var(--copper-bright), var(--copper));
-  color: var(--ink);
+  background: linear-gradient(160deg, var(--accent-strong), var(--accent));
+  color: var(--ink-invert);
   font-size: 18px;
   display: flex;
   align-items: center;
@@ -1261,7 +1301,7 @@ body[data-phase="answering"] .glow {
 .dock-hint {
   text-align: center;
   font-size: 11.5px;
-  color: var(--muted-2);
+  color: var(--ink-faint);
   margin-top: 12px;
   letter-spacing: 0.03em;
 }
@@ -1278,14 +1318,14 @@ body[data-phase="answering"] .glow {
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ink-muted);
   cursor: pointer;
   background: none;
   border: none;
 }
 
 .reset:hover {
-  color: var(--copper);
+  color: var(--accent);
 }
 
 @media (max-width: 880px) {
@@ -1301,7 +1341,7 @@ body[data-phase="answering"] .glow {
   inset: 0;
   z-index: 10;
   overflow-y: auto;
-  background: var(--ink);
+  background: var(--surface);
 }
 
 .page-shell .glow {
@@ -1333,21 +1373,21 @@ body[data-phase="answering"] .glow {
   font-size: 11.5px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
   margin-bottom: 14px;
 }
 
 .page-title {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 300;
-  font-size: clamp(32px, 5vw, 52px);
+  font-size: var(--t-h1);
   line-height: 1.08;
   letter-spacing: -0.02em;
   margin-bottom: 28px;
 }
 
 .page-intro {
-  color: var(--muted);
+  color: var(--ink-muted);
   font-size: 17px;
   line-height: 1.65;
   max-width: 640px;
@@ -1362,12 +1402,12 @@ body[data-phase="answering"] .glow {
   font-size: 12.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ink-muted);
   transition: color 0.2s;
 }
 
 .page-exp-link a:hover {
-  color: var(--copper);
+  color: var(--accent);
 }
 
 .case-hero-metrics {
@@ -1381,16 +1421,16 @@ body[data-phase="answering"] .glow {
 }
 
 .case-hero-metrics .m .n {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 44px;
   font-weight: 300;
   line-height: 1;
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 .case-hero-metrics .m .l {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--ink-muted);
   margin-top: 8px;
   max-width: 220px;
   line-height: 1.5;
@@ -1401,7 +1441,7 @@ body[data-phase="answering"] .glow {
 }
 
 .case-section h2 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 400;
   font-size: 22px;
   margin-bottom: 12px;
@@ -1409,7 +1449,7 @@ body[data-phase="answering"] .glow {
 
 .case-section p,
 .case-section li {
-  color: var(--body-text);
+  color: var(--ink-body);
   font-size: 16px;
   line-height: 1.66;
 }
@@ -1468,7 +1508,7 @@ body[data-phase="answering"] .glow {
 .lang-toggle button {
   background: none;
   border: none;
-  color: var(--muted-2);
+  color: var(--ink-faint);
   cursor: pointer;
   padding: 4px 2px;
   font-size: inherit;
@@ -1476,11 +1516,11 @@ body[data-phase="answering"] .glow {
 }
 
 .lang-toggle button.active {
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 .lang-sep {
-  color: var(--muted-2);
+  color: var(--ink-faint);
   opacity: 0.5;
 }
 
@@ -1493,7 +1533,7 @@ body[data-phase="answering"] .glow {
 .menu-toggle {
   background: none;
   border: 1px solid var(--line);
-  color: var(--muted);
+  color: var(--ink-muted);
   border-radius: 999px;
   padding: 8px 14px;
   font-size: 11px;
@@ -1507,7 +1547,7 @@ body[data-phase="answering"] .glow {
   inset: 0;
   top: 72px;
   z-index: 40;
-  background: rgba(8, 9, 11, 0.96);
+  background: rgba(232, 227, 222, 0.97);
   padding: 28px 24px;
   backdrop-filter: blur(12px);
 }
@@ -1522,12 +1562,12 @@ body[data-phase="answering"] .glow {
 }
 
 .mobile-drawer-nav a {
-  color: var(--muted);
+  color: var(--ink-muted);
 }
 
 .mobile-drawer-nav a.active,
 .mobile-drawer-nav a:hover {
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .mobile-drawer-nav .start {
@@ -1536,7 +1576,7 @@ body[data-phase="answering"] .glow {
 }
 
 .nav a.active {
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .nav a.active::after {
@@ -1547,7 +1587,7 @@ body[data-phase="answering"] .glow {
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: var(--copper);
+  background: var(--accent);
   transform: translateX(-50%);
 }
 
@@ -1569,7 +1609,7 @@ body[data-phase="answering"] .glow {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  color: #8fa3b8;
+  color: var(--accent-2);
   overflow: hidden;
 }
 
@@ -1591,7 +1631,7 @@ body[data-phase="answering"] .glow {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(143, 163, 184, 0.12),
+    rgba(80, 118, 86, 0.12),
     transparent
   );
   animation: horizon-drift 36s ease-in-out infinite alternate;
@@ -1612,7 +1652,7 @@ body[data-phase="answering"] .glow {
 
 /* ---------- concept icons ---------- */
 .concept-icon {
-  color: rgba(244, 242, 238, 0.62);
+  color: var(--ink-muted);
   flex-shrink: 0;
 }
 
@@ -1629,7 +1669,7 @@ body[data-phase="answering"] .glow {
 .concept-icon.xl {
   width: 88px;
   height: 88px;
-  color: rgba(244, 242, 238, 0.5);
+  color: var(--ink-faint);
 }
 
 .block-head {
@@ -1701,14 +1741,14 @@ body[data-phase="answering"] .glow {
 }
 
 .industry-body h2 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 300;
   font-size: clamp(26px, 3vw, 34px);
   margin: 8px 0 16px;
 }
 
 .industry-body p {
-  color: var(--muted);
+  color: var(--ink-muted);
   font-size: 16.5px;
   line-height: 1.7;
   max-width: 58ch;
@@ -1718,7 +1758,7 @@ body[data-phase="answering"] .glow {
   margin-top: 18px !important;
   font-size: 14px !important;
   letter-spacing: 0.04em;
-  color: var(--muted-2) !important;
+  color: var(--ink-faint) !important;
 }
 
 .industry-cases {
@@ -1729,7 +1769,7 @@ body[data-phase="answering"] .glow {
 }
 
 .industry-cases a {
-  color: var(--copper);
+  color: var(--accent);
   font-size: 13px;
   letter-spacing: 0.06em;
 }
@@ -1757,7 +1797,7 @@ body[data-phase="answering"] .glow {
 
 .build-layer h3,
 .build-rail h3 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 400;
   font-size: 22px;
   margin: 6px 0 12px;
@@ -1765,7 +1805,7 @@ body[data-phase="answering"] .glow {
 
 .build-layer p,
 .build-rail p {
-  color: var(--muted);
+  color: var(--ink-muted);
   font-size: 16px;
   line-height: 1.68;
   max-width: 58ch;
@@ -1777,7 +1817,7 @@ body[data-phase="answering"] .glow {
   gap: 24px;
   margin-top: 40px;
   padding: 32px 0 8px;
-  border-top: 1px solid rgba(201, 138, 94, 0.35);
+  border-top: 1px solid rgba(118, 80, 112, 0.35);
   align-items: start;
 }
 
@@ -1795,7 +1835,7 @@ body[data-phase="answering"] .glow {
 }
 
 .page-cta-line {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: clamp(22px, 3vw, 30px);
   font-weight: 300;
   margin: 8px 0 22px;
@@ -1813,9 +1853,9 @@ body[data-phase="answering"] .glow {
 .btn-primary {
   display: inline-flex;
   align-items: center;
-  border: 1px solid rgba(201, 138, 94, 0.65);
-  background: rgba(201, 138, 94, 0.14);
-  color: var(--copper-bright);
+  border: 1px solid rgba(118, 80, 112, 0.65);
+  background: rgba(118, 80, 112, 0.14);
+  color: var(--accent-strong);
   border-radius: 999px;
   padding: 12px 22px;
   font-size: 12.5px;
@@ -1825,24 +1865,24 @@ body[data-phase="answering"] .glow {
 }
 
 .btn-primary:hover {
-  background: rgba(201, 138, 94, 0.24);
-  border-color: var(--copper-bright);
+  background: rgba(118, 80, 112, 0.24);
+  border-color: var(--accent-strong);
 }
 
 .btn-quiet {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--ink-muted);
   letter-spacing: 0.02em;
 }
 
 .btn-quiet:hover {
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .btn-outline {
   display: inline-flex;
-  border: 1px solid rgba(201, 138, 94, 0.5);
-  color: var(--copper);
+  border: 1px solid rgba(118, 80, 112, 0.5);
+  color: var(--accent);
   border-radius: 999px;
   padding: 8px 16px;
   font-size: 11.5px;
@@ -1860,12 +1900,12 @@ body[data-phase="answering"] .glow {
   align-items: center;
   gap: 18px;
   padding: 12px 16px 12px 20px;
-  background: rgba(12, 14, 18, 0.92);
-  border: 1px solid rgba(201, 138, 94, 0.3);
+  background: rgba(232, 227, 222, 0.94);
+  border: 1px solid rgba(118, 80, 112, 0.3);
   border-radius: 999px;
   backdrop-filter: blur(10px);
   font-size: 13px;
-  color: var(--muted);
+  color: var(--ink-muted);
   max-width: calc(100vw - 24px);
 }
 
@@ -1878,7 +1918,7 @@ body[data-phase="answering"] .glow {
 .sticky-dismiss {
   background: none;
   border: none;
-  color: var(--muted-2);
+  color: var(--ink-faint);
   font-size: 11px;
   cursor: pointer;
   letter-spacing: 0.06em;
@@ -1894,7 +1934,7 @@ body[data-phase="answering"] .glow {
 }
 
 .start-outcomes-title {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 400;
   font-size: 20px;
   margin: 28px 0 14px;
@@ -1913,13 +1953,13 @@ body[data-phase="answering"] .glow {
 }
 
 .page-back a {
-  color: var(--muted);
+  color: var(--ink-muted);
   font-size: 13px;
 }
 
 .chip.chip-cta {
-  border-color: rgba(201, 138, 94, 0.45);
-  color: var(--copper-bright);
+  border-color: rgba(118, 80, 112, 0.45);
+  color: var(--accent-strong);
   text-decoration: none;
 }
 
@@ -1983,7 +2023,7 @@ body[data-phase="answering"] .glow {
 }
 
 .diagram-hero-sub {
-  color: var(--body-text);
+  color: var(--ink-body);
   font-size: clamp(16px, 2vw, 18px);
   line-height: 1.6;
   max-width: 720px;
@@ -1994,7 +2034,7 @@ body[data-phase="answering"] .glow {
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted-2);
+  color: var(--ink-faint);
   margin-bottom: 4px;
 }
 
@@ -2029,8 +2069,8 @@ body[data-phase="answering"] .glow {
   text-align: left;
   cursor: pointer;
   color: inherit;
-  background: rgba(26, 30, 38, 0.92);
-  border: 1px solid rgba(143, 163, 184, 0.16);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(80, 118, 86, 0.16);
   border-radius: 4px;
   padding: 22px 22px;
   position: relative;
@@ -2042,17 +2082,17 @@ body[data-phase="answering"] .glow {
 }
 
 .pd-zone:hover {
-  border-color: rgba(201, 138, 94, 0.35);
+  border-color: rgba(118, 80, 112, 0.35);
 }
 
 .pd-zone.is-active {
-  border-color: rgba(201, 138, 94, 0.55);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  background: rgba(32, 38, 48, 0.96);
+  border-color: rgba(118, 80, 112, 0.55);
+  box-shadow: inset 0 1px 0 rgba(28, 41, 30, 0.07);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .pd-zone:focus-visible {
-  outline: 2px solid var(--copper);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -2064,7 +2104,7 @@ body[data-phase="answering"] .glow {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
   margin-bottom: 10px;
 }
 
@@ -2077,12 +2117,12 @@ body[data-phase="answering"] .glow {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
 }
 
 .pd-layer-h {
   display: block;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 300;
   font-size: 18px;
   line-height: 1.25;
@@ -2099,7 +2139,7 @@ body[data-phase="answering"] .glow {
 
 .pd-layer-note {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--ink-muted);
   line-height: 1.4;
 }
 
@@ -2109,7 +2149,7 @@ body[data-phase="answering"] .glow {
   flex-wrap: wrap;
   align-items: center;
   gap: 6px 4px;
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: clamp(15px, 2vw, 18px);
   font-weight: 300;
 }
@@ -2121,23 +2161,23 @@ body[data-phase="answering"] .glow {
 }
 
 .pd-flow-arrow {
-  color: var(--muted-2);
+  color: var(--ink-faint);
   font-family: var(--sans);
   font-size: 13px;
 }
 
 .pd-gate {
-  color: var(--copper-bright);
+  color: var(--accent-strong);
   padding: 2px 10px;
-  border: 1px solid rgba(201, 138, 94, 0.5);
+  border: 1px solid rgba(118, 80, 112, 0.5);
   border-radius: 8px;
-  background: rgba(201, 138, 94, 0.18);
+  background: rgba(118, 80, 112, 0.18);
 }
 
 .pd-flow-note {
   margin-top: 10px;
   font-size: 12.5px;
-  color: var(--muted);
+  color: var(--ink-muted);
   line-height: 1.45;
 }
 
@@ -2155,8 +2195,8 @@ body[data-phase="answering"] .glow {
   gap: 10px;
   padding: 16px 14px;
   background:
-    linear-gradient(180deg, rgba(201, 138, 94, 0.14), transparent 45%),
-    rgba(48, 54, 66, 0.9);
+    linear-gradient(180deg, rgba(118, 80, 112, 0.14), transparent 45%),
+    rgba(255, 255, 255, 0.78);
 }
 
 .pd-rails-title em {
@@ -2166,7 +2206,7 @@ body[data-phase="answering"] .glow {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 600;
-  color: var(--copper);
+  color: var(--accent);
 }
 
 .pd-rails ul {
@@ -2179,15 +2219,15 @@ body[data-phase="answering"] .glow {
 
 .pd-rails li {
   font-size: 12.5px;
-  color: var(--body-text);
+  color: var(--ink-body);
   padding-left: 10px;
-  border-left: 2px solid rgba(201, 138, 94, 0.35);
+  border-left: 2px solid rgba(118, 80, 112, 0.35);
   line-height: 1.35;
 }
 
 .pd-rails-foot {
   font-size: 11px;
-  color: var(--muted);
+  color: var(--ink-muted);
   font-style: italic;
   line-height: 1.4;
   margin-top: auto;
@@ -2202,7 +2242,7 @@ body[data-phase="answering"] .glow {
 
 .pd-group {
   background:
-    linear-gradient(90deg, rgba(143, 163, 184, 0.2), rgba(48, 54, 66, 0.85));
+    linear-gradient(90deg, rgba(133, 162, 137, 0.34), rgba(255, 255, 255, 0.72));
 }
 
 .pd-boundary {
@@ -2248,7 +2288,7 @@ body[data-phase="answering"] .glow {
   font-size: 10.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--body-text);
+  color: var(--ink-body);
   text-align: center;
   padding-bottom: 2px;
 }
@@ -2259,7 +2299,7 @@ body[data-phase="answering"] .glow {
 
 .pd-agents-rowhead {
   font-size: 11px;
-  color: var(--muted);
+  color: var(--ink-muted);
   display: flex;
   align-items: center;
 }
@@ -2271,8 +2311,8 @@ body[data-phase="answering"] .glow {
   min-height: 44px;
   padding: 10px 6px;
   border-radius: 2px;
-  background: rgba(244, 242, 238, 0.03);
-  border: 1px solid rgba(143, 163, 184, 0.12);
+  background: rgba(80, 118, 86, 0.05);
+  border: 1px solid rgba(80, 118, 86, 0.12);
 }
 
 .pd-agents-dot {
@@ -2280,20 +2320,20 @@ body[data-phase="answering"] .glow {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(201, 138, 94, 0.55);
+  background: rgba(118, 80, 112, 0.55);
 }
 
 .pd-agents-mobile-legend {
   display: none;
   margin: 12px 0 0;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--ink-muted);
 }
 
 /* Context */
 .pd-context {
   background:
-    linear-gradient(180deg, rgba(143, 163, 184, 0.18), rgba(48, 54, 66, 0.85));
+    linear-gradient(180deg, rgba(133, 162, 137, 0.3), rgba(255, 255, 255, 0.72));
 }
 
 .pd-context-parts {
@@ -2308,27 +2348,27 @@ body[data-phase="answering"] .glow {
   gap: 4px;
   padding: 16px 12px;
   border-radius: 10px;
-  background: rgba(244, 242, 238, 0.07);
-  border: 1px solid rgba(244, 242, 238, 0.14);
+  background: rgba(80, 118, 86, 0.07);
+  border: 1px solid var(--line);
 }
 
 .pd-context-part strong {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 400;
   font-size: 16px;
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 .pd-context-part span {
   font-size: 12px;
-  color: var(--body-text);
+  color: var(--ink-body);
   line-height: 1.35;
 }
 
 /* Foundation */
 .pd-foundation {
   background:
-    linear-gradient(180deg, rgba(48, 54, 66, 0.75), rgba(36, 44, 58, 0.9));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(220, 219, 212, 0.92));
 }
 
 .pd-sources {
@@ -2339,11 +2379,11 @@ body[data-phase="answering"] .glow {
 
 .pd-source {
   font-size: 12px;
-  color: var(--body-text);
+  color: var(--ink-body);
   padding: 12px 14px;
   border-radius: 8px;
-  border: 1px solid rgba(244, 242, 238, 0.16);
-  background: rgba(244, 242, 238, 0.07);
+  border: 1px solid var(--line);
+  background: rgba(80, 118, 86, 0.07);
 }
 
 /* Tooltip removed — zones open detail on click */
@@ -2367,7 +2407,7 @@ body[data-phase="answering"] .glow {
   padding: 0;
   cursor: pointer;
   pointer-events: auto;
-  background: rgba(8, 9, 11, 0.62);
+  background: rgba(28, 41, 30, 0.55);
   border-radius: 16px;
 }
 
@@ -2381,11 +2421,11 @@ body[data-phase="answering"] .glow {
   margin: 0;
   padding: 22px 22px 20px;
   border-radius: 16px;
-  border: 1px solid rgba(201, 138, 94, 0.35);
+  border: 1px solid rgba(118, 80, 112, 0.35);
   background:
-    linear-gradient(145deg, rgba(201, 138, 94, 0.1), transparent 50%),
-    rgba(16, 20, 28, 0.96);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+    linear-gradient(145deg, rgba(118, 80, 112, 0.1), transparent 50%),
+    rgba(241, 238, 234, 0.98);
+  box-shadow: 0 24px 64px rgba(28, 41, 30, 0.12);
 }
 
 .diagram-detail-top {
@@ -2400,7 +2440,7 @@ body[data-phase="answering"] .glow {
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
 }
 
 .diagram-detail-close {
@@ -2409,7 +2449,7 @@ body[data-phase="answering"] .glow {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: transparent;
-  color: var(--muted);
+  color: var(--ink-muted);
   font-size: 20px;
   line-height: 1;
   cursor: pointer;
@@ -2417,12 +2457,12 @@ body[data-phase="answering"] .glow {
 }
 
 .diagram-detail-close:hover {
-  color: var(--paper);
-  border-color: rgba(201, 138, 94, 0.4);
+  color: var(--ink);
+  border-color: rgba(118, 80, 112, 0.4);
 }
 
 .diagram-detail-title {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 300;
   font-size: clamp(22px, 3vw, 28px);
   line-height: 1.15;
@@ -2431,7 +2471,7 @@ body[data-phase="answering"] .glow {
 }
 
 .diagram-detail-body {
-  color: var(--body-text);
+  color: var(--ink-body);
   font-size: 15.5px;
   line-height: 1.65;
   max-width: 640px;
@@ -2441,7 +2481,7 @@ body[data-phase="answering"] .glow {
 .diagram-detail-why {
   font-size: 14px;
   line-height: 1.55;
-  color: var(--paper);
+  color: var(--ink);
   max-width: 640px;
   padding-top: 14px;
   border-top: 1px solid var(--line-2);
@@ -2452,7 +2492,7 @@ body[data-phase="answering"] .glow {
   font-size: 10.5px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
   margin-bottom: 6px;
 }
 
@@ -2543,7 +2583,7 @@ body[data-phase="answering"] .glow {
 }
 
 .about-section-title {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 300;
   font-size: clamp(26px, 3.5vw, 36px);
   line-height: 1.12;
@@ -2552,7 +2592,7 @@ body[data-phase="answering"] .glow {
 }
 
 .about-people-lead {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 300;
   font-size: clamp(20px, 2.5vw, 26px);
   line-height: 1.35;
@@ -2562,7 +2602,7 @@ body[data-phase="answering"] .glow {
 
 .about-people-lead em {
   font-style: italic;
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 .about-people-body {
@@ -2584,15 +2624,16 @@ body[data-phase="answering"] .glow {
 body[data-mode="marketing"] {
   overflow: auto;
   overflow-x: hidden;
-  background: #0b0d10;
+  background: var(--surface);
 }
 
+/* Flat bunn. På mørk base bar en loddrett gradient tyngden gjennom siden;
+   på lys base tar kapittelbåndene over den jobben. */
 .mkt {
   position: relative;
   min-height: 100vh;
-  background:
-    linear-gradient(180deg, #0b0d10 0%, #12161c 40%, #0b0d10 100%);
-  color: var(--paper);
+  background: var(--surface);
+  color: var(--ink-body);
 }
 
 .mkt-loading {
@@ -2616,63 +2657,81 @@ body[data-mode="marketing"] {
 }
 
 .mkt-topbar-scrolled {
-  background: rgba(11, 13, 16, 0.88);
-  border-bottom-color: rgba(244, 242, 238, 0.08);
+  background: rgba(232, 227, 222, 0.9);
+  border-bottom-color: var(--line);
   backdrop-filter: blur(14px);
 }
 
+/* Menyen ligger over hero-fotoet. Der er sløret lyst, så navigasjonen
+   går fra hvit til mørk grønn og holder kontrast både mot fotoet og
+   mot den lyse flaten den skroller ned på. */
 .mkt-topbar .desktop-nav a,
 .mkt-topbar .mobile-drawer-nav a {
   font-size: 12px;
   letter-spacing: 0.06em;
-  color: #fff;
+  color: var(--ink);
 }
 
 .mkt-topbar .desktop-nav a:hover,
 .mkt-topbar .mobile-drawer-nav a:hover {
-  color: #fff;
-  opacity: 0.85;
+  color: var(--accent);
+  opacity: 1;
 }
 
 .mkt-topbar .desktop-nav a.start,
 .mkt-topbar .mobile-drawer-nav a.start,
 .mkt-topbar .mobile-start {
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.45);
+  color: var(--accent);
+  border-color: rgba(118, 80, 112, 0.5);
 }
 
 .mkt-topbar .desktop-nav a.start:hover,
 .mkt-topbar .mobile-drawer-nav a.start:hover,
 .mkt-topbar .mobile-start:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.7);
+  color: var(--ink-invert);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 .mkt-topbar .lang-toggle button {
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--ink-muted);
 }
 
 .mkt-topbar .lang-toggle button.active {
-  color: #fff;
+  color: var(--ink);
 }
 
 .mkt-topbar .menu-toggle {
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.35);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+/* Skiftet mellom full meny og hamburger lå på to ulike bredder: den mobile
+   kontrollraden kom inn på 880 px, men desktopmenyen forsvant først på
+   720 px. I mellomrommet sto begge samtidig, og lenkene la seg oppå
+   ordmerket. Marketing-menyen bytter derfor på ett punkt, og punktet er
+   satt der lenkene faktisk slutter å få plass. */
+@media (max-width: 1000px) {
+  .mkt-topbar .desktop-nav {
+    display: none;
+  }
+
+  .mkt-topbar .mobile-nav-controls {
+    display: flex !important;
+  }
 }
 
 .mkt-eyebrow {
   font-size: 11px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
   margin-bottom: 14px;
 }
 
 .mkt-lead {
-  color: var(--body-text);
-  font-size: clamp(16px, 1.6vw, 18px);
+  color: var(--ink-body);
+  font-size: var(--t-para);
   line-height: 1.65;
   max-width: 62ch;
 }
@@ -2681,12 +2740,17 @@ body[data-mode="marketing"] {
   margin-bottom: 48px;
 }
 
+/* Kontaktseksjonen har ingen .mkt-section-head rundt tittelen, så den falt
+   tilbake på den generiske h2-regelen og rendret på 24 px i vekt 700 mens
+   alle andre seksjonstitler står på 43 px i vekt 500. */
 .mkt-section-head h2,
-.mkt-subhead h2 {
-  font-weight: 300;
-  font-size: clamp(28px, 4.4vw, 44px);
+.mkt-subhead h2,
+.mkt-cta h2 {
+  font-weight: 500;
+  font-size: var(--t-h2);
   line-height: 1.12;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  color: var(--ink);
   margin-bottom: 16px;
   max-width: 18ch;
 }
@@ -2701,31 +2765,35 @@ body[data-mode="marketing"] {
   scroll-margin-top: 88px;
 }
 
-/* Kapittelflater: steel er tydelig hevet, quiet er et mellomtrinn, basen er ink.
-   Hårstrekene topp og bunn markerer hvor et nytt kapittel begynner. */
+/* Kapittelflatene går nå oppover i lys i stedet for nedover i mørke.
+   Fire trinn: raised er lysest, surface er basen, wash er Light Green-vasken,
+   og deep er det dypgrønne båndet. Hårstrekene markerer hvor kapitlet skifter. */
 .mkt-section-steel {
-  background:
-    linear-gradient(180deg, rgba(31, 38, 49, 0.96), rgba(24, 30, 39, 0.96));
-  border-block: 1px solid rgba(143, 163, 184, 0.18);
+  background: var(--surface-wash);
+  border-block: 1px solid var(--line);
 }
 
 /* ——— Hero ——— */
+/* Bildet ligger i helflate, og teksten står i venstre kolonne over det.
+   Blokken er senket ut av toppen, men ikke helt til midten: lenger ned
+   ligger kvinnens hår og de mørke stolene, og der stiger sløret teksten
+   trenger raskt. Plasseringen er et kompromiss mellom komposisjon og
+   hvor mye av fotoet vi er villige til å bleke. */
 .mkt-hero {
   position: relative;
   min-height: 100dvh;
   display: flex;
-  align-items: center;
-  padding: 108px 0 72px;
+  align-items: flex-start;
+  padding: clamp(168px, 22vh, 268px) 0 72px;
   overflow: hidden;
+  background: var(--surface);
 }
 
 .mkt-hero-media {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background:
-    radial-gradient(ellipse 55% 50% at 78% 42%, rgba(42, 56, 72, 0.55) 0%, transparent 70%),
-    linear-gradient(155deg, #10151c 0%, #0a0d12 48%, #0c1118 100%);
+  background: var(--surface);
 }
 
 .mkt-hero-img,
@@ -2733,21 +2801,53 @@ body[data-mode="marketing"] {
   object-fit: cover;
 }
 
+/* Hele kontrasten bæres av dette ene laget. Tekstkolonnens høyre kant
+   ligger på rundt 46 % av bredden på alle desktopbredder, så rampen holder
+   full styrke dit og er borte før whiteboardet og de tre til høyre.
+   Stoppene ligger tett fordi en gradient over 1500 px får synlige trinn
+   hvis den bare har to punkter.
+
+   Ellipsen er den andre halvparten av regnestykket. Tekstblokken strekker
+   seg ned til 64 % av høyden, og der ligger kvinnens hår og de mørke
+   stolene: ingressbåndet krever 50 % slør og knappebåndet 73 %, mot 38 %
+   oppe ved tittelen. Forsterkningen må derfor være der nede — men bare til
+   venstre. Et bånd over hele bredden ville dugget ned de to ved bordet,
+   og det er nettopp dem bildet er valgt for. */
 .mkt-hero-shade {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(8, 9, 11, 0.35) 0%, rgba(8, 9, 11, 0.08) 55%, rgba(8, 9, 11, 0.12) 100%),
-    linear-gradient(0deg, rgba(8, 9, 11, 0.45) 0%, rgba(8, 9, 11, 0.05) 55%, rgba(8, 9, 11, 0.18) 100%);
+    /* Nederste 8 %: uten denne møter fotoet statistikkbåndet med en synlig
+       kant nede til venstre, der gulvet og stolene er gråere enn Off White. */
+    linear-gradient(
+      to top,
+      rgba(232, 227, 222, 0.85) 0%,
+      rgba(232, 227, 222, 0.3) 3.5%,
+      rgba(232, 227, 222, 0) 8%
+    ),
+    radial-gradient(
+      ellipse 62% 52% at 6% 76%,
+      rgba(232, 227, 222, 0.4) 0%,
+      rgba(232, 227, 222, 0.24) 52%,
+      rgba(232, 227, 222, 0) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(232, 227, 222, 0.66) 0%,
+      rgba(232, 227, 222, 0.64) 30%,
+      rgba(232, 227, 222, 0.6) 44%,
+      rgba(232, 227, 222, 0.48) 54%,
+      rgba(232, 227, 222, 0.34) 63%,
+      rgba(232, 227, 222, 0.18) 72%,
+      rgba(232, 227, 222, 0.06) 80%,
+      rgba(232, 227, 222, 0) 86%
+    );
 }
 
+/* Høyre halvdel er bevisst tom: der står whiteboardet og de to til høyre. */
 .mkt-hero-grid {
   position: relative;
   z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 1.25fr);
-  gap: clamp(24px, 3.5vw, 48px);
-  align-items: center;
 }
 
 .mkt-hero-grid.mkt-wrap {
@@ -2755,147 +2855,32 @@ body[data-mode="marketing"] {
 }
 
 .mkt-hero-copy {
-  min-width: 0;
-  max-width: 580px;
-}
-
-.mkt-hero-visual {
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: visible;
-  justify-self: stretch;
-}
-
-.mkt-hero-ghost {
   position: relative;
-  inset: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: none;
-  padding: 0;
-  opacity: 0.96;
-  pointer-events: none;
-  overflow: visible;
+  min-width: 0;
+  max-width: 560px;
 }
 
-.mkt-hero-ghost-svg {
-  width: 100%;
-  height: auto;
-  max-height: min(88vh, 720px);
-  margin-right: 0;
-  overflow: visible;
-  filter: drop-shadow(0 12px 36px rgba(8, 9, 11, 0.35));
-}
-
-.mkt-hero-ghost-label,
-.mkt-hero-ghost-hub-label,
-.mkt-hero-ghost-hub-sub,
-.mkt-hero-ghost-tip-label {
-  fill: rgba(244, 242, 238, 0.94);
-  font-family: var(--sans, system-ui, sans-serif);
-  font-size: 10.5px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.mkt-hero-ghost-hub-label {
-  fill: rgba(250, 248, 244, 0.98);
-  font-size: 13.5px;
-  letter-spacing: 0.12em;
-  font-weight: 600;
-}
-
-.mkt-hero-ghost-hub-sub {
-  fill: rgba(227, 165, 116, 0.96);
-  font-size: 11.5px;
-  letter-spacing: 0.14em;
-  font-weight: 500;
-}
-
-.mkt-hero-ghost-tip-label {
-  fill: rgba(227, 165, 116, 0.96);
-  font-size: 10px;
-  letter-spacing: 0.11em;
-}
-
-.mkt-hero-ghost-path {
-  stroke-dashoffset: 0;
-  animation: mkt-ghost-dash 12s cubic-bezier(0.32, 0.72, 0, 1) infinite;
-}
-
-.mkt-hero-ghost-path-out {
-  animation-duration: 9s;
-  animation-direction: reverse;
-}
-
-.mkt-hero-ghost-path-core {
-  animation-duration: 10s;
-}
-
-.mkt-hero-ghost-pulse,
-.mkt-hero-ghost-pulse-soft {
-  transform-origin: center;
-  transform-box: fill-box;
-  animation: mkt-ghost-pulse 5.2s cubic-bezier(0.32, 0.72, 0, 1) infinite;
-}
-
-.mkt-hero-ghost-pulse-soft {
-  animation-duration: 6.4s;
-  animation-delay: 0.8s;
-}
-
-@keyframes mkt-ghost-dash {
-  0% {
-    stroke-dashoffset: 0;
-  }
-  100% {
-    stroke-dashoffset: -96;
-  }
-}
-
-@keyframes mkt-ghost-pulse {
-  0%,
-  100% {
-    opacity: 0.65;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.08);
-  }
-}
-
+/* Én grad og én vekt gjennom hele tittelen. Setningen er lang, så graden
+   ligger under det tidligere toppnivået på 72 px: ellers blir det fem
+   linjer som skyver ingressen ned i den mørke delen av fotoet. */
 .mkt-hero-title {
   font-weight: 500;
-  font-size: clamp(38px, 6.4vw, 72px);
-  line-height: 1.05;
+  font-size: clamp(34px, 4.6vw, 58px);
+  line-height: 1.08;
   letter-spacing: -0.03em;
   margin-bottom: 22px;
-  max-width: 16ch;
+  color: var(--ink);
+  max-width: 17ch;
 }
 
-.mkt-hero-title-lead {
-  display: block;
-  color: var(--paper);
-}
-
-.mkt-hero-title-rest {
-  display: block;
-  color: var(--copper-bright);
-  font-weight: 400;
-  font-size: 0.72em;
-  max-width: 20ch;
-  margin-top: 10px;
+.mkt-hero-title-accent {
+  color: var(--accent);
 }
 
 .mkt-hero-lead {
-  font-size: clamp(14.5px, 1.35vw, 16.5px);
+  font-size: var(--t-body);
   line-height: 1.62;
-  color: var(--body-text);
+  color: var(--ink-body);
   max-width: 46ch;
   margin-bottom: 28px;
 }
@@ -2904,6 +2889,19 @@ body[data-mode="marketing"] {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+/* Knappene ligger lavere enn resten av teksten, og der nede er fotoet mørkt:
+   kvinnens hår og buksene til han som står. Primærknappen har sin egen
+   magentaflate og klarer seg, men spøkelsesknappen er gjennomsiktig og må
+   bære flaten sin selv her. */
+.mkt-hero-actions .mkt-btn-ghost {
+  background: rgba(241, 238, 234, 0.82);
+  backdrop-filter: blur(3px);
+}
+
+.mkt-hero-actions .mkt-btn-ghost:hover {
+  background: rgba(241, 238, 234, 0.94);
 }
 
 .mkt-btn {
@@ -2920,31 +2918,30 @@ body[data-mode="marketing"] {
 }
 
 .mkt-btn-primary {
-  background: var(--copper);
-  color: var(--ink);
+  background: var(--accent);
+  color: var(--ink-invert);
 }
 
 .mkt-btn-primary:hover {
-  background: var(--copper-bright);
+  background: var(--accent-strong);
 }
 
 .mkt-btn-ghost {
-  border-color: rgba(244, 242, 238, 0.28);
-  color: var(--paper);
+  border-color: rgba(80, 118, 86, 0.45);
+  color: var(--ink);
   background: transparent;
 }
 
 .mkt-btn-ghost:hover {
-  border-color: var(--copper);
-  color: var(--copper-bright);
+  border-color: var(--accent);
+  color: var(--accent-strong);
 }
 
 /* ——— Post-hero band (body + maskindata note + stats) ——— */
 .mkt-post-hero {
   padding: 40px 0 48px;
-  background:
-    linear-gradient(180deg, #12161c 0%, #0b0d10 100%);
-  border-bottom: 1px solid rgba(143, 163, 184, 0.12);
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--line);
 }
 
 .mkt-post-hero-inner {
@@ -2952,21 +2949,21 @@ body[data-mode="marketing"] {
 }
 
 .mkt-post-hero-body {
-  font-size: clamp(15px, 1.5vw, 17px);
+  font-size: var(--t-body);
   line-height: 1.65;
-  color: var(--body-text);
+  color: var(--ink-body);
   margin: 0 0 16px;
   max-width: 62ch;
 }
 
 .mkt-post-hero-note {
-  font-size: 14px;
+  font-size: var(--t-small);
   line-height: 1.55;
-  color: var(--muted);
+  color: var(--ink-muted);
   margin: 0 0 28px;
   max-width: 58ch;
   padding-left: 14px;
-  border-left: 2px solid rgba(201, 138, 94, 0.55);
+  border-left: 2px solid rgba(118, 80, 112, 0.55);
 }
 
 .mkt-post-hero-stats {
@@ -2985,53 +2982,67 @@ body[data-mode="marketing"] {
 }
 
 .mkt-post-hero-stats strong {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(22px, 2.4vw, 28px);
-  color: var(--copper-bright);
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: var(--t-sub);
+  color: var(--accent-strong);
   line-height: 1;
 }
 
 .mkt-post-hero-stats span {
   font-size: 12px;
   line-height: 1.4;
-  color: var(--muted);
+  color: var(--ink-muted);
   max-width: 18ch;
 }
 
-/* ——— Logos (kept for later; unused while client logos are hidden) ——— */
+/* ——— Logostripe ——— */
+/* Stripen er det første mørke båndet på siden og fungerer dermed også som
+   kapittelskille. Merkene er ferdig hvite silhuetter fra
+   scripts/prepare-client-logos.mjs, så her trengs ingen filtre. */
 .mkt-logos {
-  padding: 36px 0 40px;
-  background:
-    linear-gradient(180deg, #ebe6dc 0%, var(--paper) 40%, #ebe6dc 100%);
-  border-bottom: 1px solid rgba(8, 9, 11, 0.08);
+  padding: 48px 0 54px;
+}
+
+/* Stripen får en bredere ramme enn resten av siden. Sju merker på én rad
+   inne i 1280 px gir 172 px per logo, og da blir merkene stående som
+   fotnoter. Med 1440 puster raden. */
+.mkt-logos .mkt-wrap {
+  width: min(1440px, calc(100% - 40px));
+}
+
+.mkt-logos-eyebrow {
+  font-size: var(--t-label);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  margin: 0 0 28px;
 }
 
 .mkt-logo-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px 28px;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 20px 12px;
   align-items: center;
   justify-items: center;
 }
 
+/* Fast boks per logo. Den optiske balanseringen er alt gjort i lerretene,
+   så alle merkene kan vises med identiske regler. */
 .mkt-logo-mark {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 56px;
-  padding: 10px 8px;
-  background: transparent;
+  min-height: 60px;
 }
 
 .mkt-logo-mark img {
   display: block;
-  width: auto;
-  max-width: 148px;
-  height: 40px;
+  width: 100%;
+  max-width: 184px;
+  height: auto;
   object-fit: contain;
-  object-position: center;
   opacity: 0.88;
   transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -3040,20 +3051,39 @@ body[data-mode="marketing"] {
   opacity: 1;
 }
 
+@media (max-width: 980px) {
+  .mkt-logo-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .mkt-logo-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Sju merker i to kolonner gir en foreldreløs på siste rad. Den legges
+     over hele bredden og sentreres, ellers henger den skjevt til venstre. */
+  .mkt-logo-row > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
 /* ——— Journey ——— */
 .mkt-journey-tabs {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
-  background: rgba(244, 242, 238, 0.08);
-  border: 1px solid rgba(244, 242, 238, 0.08);
+  background: var(--line);
+  border: 1px solid var(--line);
   margin-bottom: 28px;
 }
 
 .mkt-journey-tab {
   text-align: left;
-  background: #12161c;
-  color: var(--paper);
+  background: var(--surface-raised);
+  color: var(--ink);
   border: 0;
   padding: 22px 18px;
   cursor: pointer;
@@ -3066,29 +3096,29 @@ body[data-mode="marketing"] {
 
 .mkt-journey-tab:hover,
 .mkt-journey-tab.active {
-  background: #1a2330;
+  background: var(--surface-wash);
 }
 
 .mkt-journey-tab.active {
-  box-shadow: inset 0 -2px 0 var(--copper);
+  box-shadow: inset 0 -2px 0 var(--accent);
 }
 
 .mkt-journey-n {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 13px;
-  color: var(--copper);
+  color: var(--accent);
   letter-spacing: 0.16em;
 }
 
 .mkt-journey-tab strong {
-  font-size: 15px;
+  font-size: var(--t-small);
   font-weight: 550;
 }
 
 .mkt-journey-short {
-  font-size: 12.5px;
+  font-size: 13px;
   line-height: 1.45;
-  color: var(--muted);
+  color: var(--ink-muted);
 }
 
 .mkt-journey-detail {
@@ -3103,7 +3133,7 @@ body[data-mode="marketing"] {
   position: relative;
   min-height: 360px;
   overflow: hidden;
-  background: #1a2330;
+  background: var(--surface-wash);
 }
 
 .mkt-journey-copy {
@@ -3114,14 +3144,14 @@ body[data-mode="marketing"] {
 }
 
 .mkt-journey-copy h3 {
-  font-weight: 300;
-  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 500;
+  font-size: var(--t-h3);
   line-height: 1.15;
   margin-bottom: 14px;
 }
 
 .mkt-journey-copy > p {
-  color: var(--body-text);
+  color: var(--ink-body);
   line-height: 1.65;
   margin-bottom: 22px;
 }
@@ -3135,8 +3165,8 @@ body[data-mode="marketing"] {
 .mkt-checks li {
   position: relative;
   padding-left: 22px;
-  color: var(--paper);
-  font-size: 14.5px;
+  color: var(--ink);
+  font-size: var(--t-small);
   line-height: 1.45;
 }
 
@@ -3147,7 +3177,7 @@ body[data-mode="marketing"] {
   top: 0.55em;
   width: 10px;
   height: 1px;
-  background: var(--copper);
+  background: var(--accent);
 }
 
 /* ——— Capabilities ——— */
@@ -3169,15 +3199,15 @@ body[data-mode="marketing"] {
   gap: clamp(24px, 4vw, 64px);
   align-items: start;
   padding-top: clamp(26px, 2.8vw, 38px);
-  border-top: 1px solid rgba(143, 163, 184, 0.16);
+  border-top: 1px solid rgba(80, 118, 86, 0.16);
 }
 
 .mkt-deliver-label {
-  font-weight: 300;
-  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 500;
+  font-size: var(--t-h4);
   line-height: 1.15;
   letter-spacing: -0.01em;
-  color: var(--copper-bright);
+  color: var(--accent-strong);
   margin: 0;
 }
 
@@ -3189,23 +3219,23 @@ body[data-mode="marketing"] {
 
 .mkt-deliver-items h4 {
   font-weight: 400;
-  font-size: clamp(17px, 1.7vw, 20px);
+  font-size: var(--t-para);
   line-height: 1.3;
   margin: 0 0 10px;
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .mkt-deliver-items p {
   margin: 0;
-  color: var(--muted);
-  font-size: 15px;
+  color: var(--ink-muted);
+  font-size: var(--t-small);
   line-height: 1.65;
 }
 
 .mkt-cap,
 .mkt-panel,
 .mkt-ref {
-  border-top: 1px solid rgba(201, 138, 94, 0.45);
+  border-top: 1px solid rgba(118, 80, 112, 0.45);
   background: transparent;
   padding: 22px 4px 10px;
 }
@@ -3216,23 +3246,23 @@ body[data-mode="marketing"] {
 }
 
 .mkt-cap-linkable:hover .mkt-cap-link {
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 .mkt-cap-tag,
 .mkt-metric {
   display: inline-block;
-  font-size: 11px;
+  font-size: var(--t-label);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--steel);
+  color: var(--accent-2);
   margin-bottom: 12px;
 }
 
 .mkt-cap h3,
 .mkt-panel h3,
 .mkt-ref h3 {
-  font-size: 20px;
+  font-size: var(--t-para);
   font-weight: 500;
   margin-bottom: 10px;
   line-height: 1.25;
@@ -3241,8 +3271,8 @@ body[data-mode="marketing"] {
 .mkt-cap p,
 .mkt-panel p,
 .mkt-ref p {
-  color: var(--muted);
-  font-size: 14.5px;
+  color: var(--ink-muted);
+  font-size: var(--t-small);
   line-height: 1.55;
 }
 
@@ -3252,12 +3282,12 @@ body[data-mode="marketing"] {
   font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
 }
 
-.mkt-panel .serif {
-  font-weight: 300;
-  font-size: 24px;
+.mkt-panel .display {
+  font-weight: 500;
+  font-size: var(--t-sub);
 }
 
 /* ——— Why / editorial ——— */
@@ -3276,23 +3306,23 @@ body[data-mode="marketing"] {
 .mkt-why-problem {
   margin: 0;
   padding: 0 0 0 22px;
-  border-left: 2px solid rgba(201, 138, 94, 0.55);
+  border-left: 2px solid rgba(118, 80, 112, 0.55);
 }
 
 .mkt-why-problem-label {
-  font-size: 11px;
+  font-size: var(--t-label);
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
   margin: 0 0 18px;
 }
 
 .mkt-why-problem-body {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(19px, 2.1vw, 24px);
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: var(--t-sub);
   line-height: 1.5;
-  color: var(--muted);
+  color: var(--ink-muted);
   margin: 0;
 }
 
@@ -3303,34 +3333,33 @@ body[data-mode="marketing"] {
 
 .mkt-why-answers h3 {
   font-weight: 400;
-  font-size: clamp(22px, 2.4vw, 28px);
+  font-size: var(--t-h4);
   line-height: 1.2;
   margin: 0 0 12px;
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .mkt-why-answers p {
   margin: 0;
-  color: var(--body-text);
-  font-size: 16px;
+  color: var(--ink-body);
+  font-size: var(--t-body);
   line-height: 1.65;
   max-width: 52ch;
 }
 
-/* Verdifeltet: fullbredde kontrastflate, display-serif metrikk, trappeforskyvning. */
+/* Verdifeltet: fullbredde kontrastflate i Light Green-vasken. */
 .mkt-why-band {
   margin-top: clamp(72px, 9vw, 120px);
   padding: clamp(64px, 8vw, 104px) 0 clamp(80px, 10vw, 132px);
-  background:
-    linear-gradient(180deg, rgba(30, 38, 50, 0.9), rgba(18, 23, 31, 0.96));
-  border-block: 1px solid rgba(143, 163, 184, 0.14);
+  background: var(--surface-wash);
+  border-block: 1px solid var(--line);
 }
 
 /* Samme nivå som svarene til venstre, så seksjonen holder seg til to
    overskriftsnivåer i stedet for fire. */
 .mkt-why-band-title {
   font-weight: 400;
-  font-size: clamp(22px, 2.4vw, 28px);
+  font-size: var(--t-h4);
   line-height: 1.2;
   max-width: 24ch;
   margin: 0 0 clamp(48px, 5vw, 72px);
@@ -3352,28 +3381,28 @@ body[data-mode="marketing"] {
 }
 
 .mkt-why-metric {
-  font-weight: 300;
-  font-size: clamp(30px, 3.4vw, 40px);
+  font-weight: 500;
+  font-size: var(--t-h3);
   line-height: 1.1;
   letter-spacing: -0.02em;
-  color: var(--copper-bright);
+  color: var(--accent-strong);
   margin: 0 0 16px;
   padding-bottom: 16px;
-  border-bottom: 1px solid rgba(201, 138, 94, 0.32);
+  border-bottom: 1px solid rgba(118, 80, 112, 0.32);
 }
 
 .mkt-why-value h4 {
   font-weight: 400;
-  font-size: clamp(17px, 1.7vw, 20px);
+  font-size: var(--t-para);
   line-height: 1.3;
   margin: 0 0 10px;
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .mkt-why-value-body {
   margin: 0;
-  color: var(--muted);
-  font-size: 16px;
+  color: var(--ink-muted);
+  font-size: var(--t-body);
   line-height: 1.65;
 }
 
@@ -3383,7 +3412,7 @@ body[data-mode="marketing"] {
 
 .mkt-sovereignty h3 {
   font-weight: 400;
-  font-size: clamp(22px, 2.4vw, 28px);
+  font-size: var(--t-h4);
   line-height: 1.2;
   margin-bottom: 14px;
   max-width: 20ch;
@@ -3391,23 +3420,22 @@ body[data-mode="marketing"] {
 
 .mkt-sovereignty > p {
   max-width: 62ch;
-  color: var(--body-text);
+  color: var(--ink-body);
   line-height: 1.65;
   margin-bottom: 20px;
-  font-size: 15.5px;
+  font-size: var(--t-body);
 }
 
 .mkt-partner-line {
-  color: var(--steel);
-  font-size: 11px;
+  color: var(--accent-2);
+  font-size: var(--t-label);
   letter-spacing: 0.24em;
   text-transform: uppercase;
 }
 
 .mkt-section-quiet {
-  background:
-    linear-gradient(180deg, rgba(19, 24, 31, 0.97), rgba(13, 16, 21, 0.97));
-  border-block: 1px solid rgba(143, 163, 184, 0.11);
+  background: var(--surface-raised);
+  border-block: 1px solid var(--line-2);
 }
 
 .mkt-triple {
@@ -3417,42 +3445,51 @@ body[data-mode="marketing"] {
 }
 
 /* ——— Industries photo band ——— */
-/* Innholdet ankres i topp og bunn, så fotoet får puste i midten. */
+/* Fotoet lå tidligere bak teksten med et slør over. Det fungerte på mørk
+   bunn, men her måtte sløret opp i 75 % Off White før brødteksten holdt AA
+   mot de mørkeste pikslene, og da var bildet bleket til grøt samtidig som
+   beskjæringen kuttet ansiktene. Bildet er derfor løftet ut i sitt eget
+   bånd i fullt trykk, og teksten står under på ren flate. */
 .mkt-section-photo {
   isolation: isolate;
   display: flex;
   flex-direction: column;
-  min-height: 880px;
-  padding: clamp(96px, 10vw, 132px) 0 clamp(72px, 8vw, 100px);
+  padding: 0 0 clamp(72px, 8vw, 100px);
+  background: var(--surface-wash);
+  border-bottom: 1px solid var(--line);
 }
 
 .mkt-section-photo-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+  position: relative;
+  height: min(56vh, 520px);
+  overflow: hidden;
 }
 
-/* Lyst nok i midten til at fotoet leses, mørkt der teksten står. */
+/* Beskjæringen holder ansiktene inne. Bildet er 3:2 og båndet er nær 4:1,
+   så uten dette kuttes hodene av på brede skjermer. */
+.mkt-section-photo-bg .mkt-cover {
+  object-position: 50% 6%;
+}
+
+/* Bare en overgang i bunnen, slik at fotoet legger seg ned i flaten
+   under i stedet for å slutte med en strek. */
 .mkt-section-photo-shade {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(8, 9, 11, 0.88) 0%,
-      rgba(8, 9, 11, 0.58) 26%,
-      rgba(8, 9, 11, 0.4) 58%,
-      rgba(8, 9, 11, 0.52) 100%
-    );
+  background: linear-gradient(
+    to top,
+    var(--surface-wash) 0%,
+    rgba(220, 219, 212, 0.55) 6%,
+    rgba(220, 219, 212, 0) 18%
+  );
 }
 
 .mkt-section-photo-content {
   position: relative;
   z-index: 1;
-  flex: 1;
   display: grid;
-  grid-template-rows: auto 1fr;
-  gap: clamp(64px, 8vw, 120px);
+  gap: clamp(48px, 5vw, 76px);
+  padding-top: clamp(56px, 6vw, 84px);
 }
 
 .mkt-industry-head {
@@ -3461,42 +3498,24 @@ body[data-mode="marketing"] {
 
 .mkt-industry-row {
   position: relative;
-  align-self: end;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(20px, 2.6vw, 44px);
   align-items: start;
 }
 
-/* Lokalt slør bak raden, så teksten holder seg lesbar uansett motiv. */
-.mkt-industry-row::before {
-  content: "";
-  position: absolute;
-  inset: -110px -50vw -160px;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(8, 9, 11, 0) 0,
-      rgba(8, 9, 11, 0.58) 100px,
-      rgba(8, 9, 11, 0.86) 200px,
-      rgba(8, 9, 11, 0.92) 100%
-    );
-}
-
 .mkt-industry h3 {
   font-weight: 400;
-  font-size: clamp(17px, 1.7vw, 21px);
+  font-size: var(--t-para);
   line-height: 1.25;
   margin: 0 0 10px;
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .mkt-industry p {
   margin: 0;
-  color: var(--body-text);
-  font-size: 14.5px;
+  color: var(--ink-body);
+  font-size: var(--t-small);
   line-height: 1.6;
 }
 
@@ -3515,11 +3534,11 @@ body[data-mode="marketing"] {
   font-size: 13px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
 }
 
 .mkt-inline-cta a:hover {
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 /* ——— About / team ——— */
@@ -3534,7 +3553,7 @@ body[data-mode="marketing"] {
 .mkt-pillar {
   flex: 1 1 240px;
   padding: 0 clamp(18px, 2vw, 30px);
-  border-left: 1px solid rgba(143, 163, 184, 0.16);
+  border-left: 1px solid rgba(80, 118, 86, 0.16);
 }
 
 .mkt-pillar:first-child {
@@ -3545,16 +3564,16 @@ body[data-mode="marketing"] {
 .mkt-pillar strong {
   display: block;
   font-weight: 500;
-  font-size: 14px;
+  font-size: var(--t-small);
   line-height: 1.35;
-  color: var(--copper-bright);
+  color: var(--accent-strong);
   margin-bottom: 5px;
 }
 
 .mkt-pillar span {
   display: block;
-  color: var(--muted);
-  font-size: 13.5px;
+  color: var(--ink-muted);
+  font-size: 13px;
   line-height: 1.55;
 }
 
@@ -3575,7 +3594,7 @@ body[data-mode="marketing"] {
   position: relative;
   aspect-ratio: 1;
   overflow: hidden;
-  background: #1a2330;
+  background: var(--surface-wash);
   display: grid;
   place-items: center;
 }
@@ -3586,38 +3605,38 @@ body[data-mode="marketing"] {
 }
 
 .mkt-initials {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 42px;
-  color: var(--steel);
+  color: var(--accent-2);
   letter-spacing: 0.08em;
 }
 
 .mkt-person-info h3 {
-  font-size: 17px;
+  font-size: var(--t-body);
   font-weight: 550;
   margin-bottom: 4px;
 }
 
 .mkt-person-info p {
-  color: var(--muted);
-  font-size: 13.5px;
+  color: var(--ink-muted);
+  font-size: 13px;
 }
 
 .mkt-group {
-  border-top: 1px solid rgba(244, 242, 238, 0.1);
+  border-top: 1px solid var(--line);
   padding-top: 40px;
 }
 
 .mkt-group h3 {
-  font-weight: 300;
-  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 500;
+  font-size: var(--t-h3);
   margin-bottom: 14px;
   max-width: 20ch;
 }
 
 .mkt-group > p {
   max-width: 68ch;
-  color: var(--body-text);
+  color: var(--ink-body);
   line-height: 1.65;
   margin-bottom: 28px;
 }
@@ -3632,20 +3651,20 @@ body[data-mode="marketing"] {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  border-top: 1px solid rgba(143, 163, 184, 0.35);
+  border-top: 1px solid rgba(80, 118, 86, 0.35);
   padding-top: 14px;
 }
 
 .mkt-badge strong {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: 28px;
-  color: var(--copper-bright);
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: var(--t-sub);
+  color: var(--accent-strong);
 }
 
 .mkt-badge span {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--ink-muted);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -3658,18 +3677,18 @@ body[data-mode="marketing"] {
 .mkt-faq-list {
   display: grid;
   gap: 0;
-  border-top: 1px solid rgba(244, 242, 238, 0.12);
+  border-top: 1px solid var(--line);
 }
 
 .mkt-faq-item {
-  border-bottom: 1px solid rgba(244, 242, 238, 0.12);
+  border-bottom: 1px solid var(--line);
   padding: 18px 0;
 }
 
 .mkt-faq-item summary {
   cursor: pointer;
   list-style: none;
-  font-size: 17px;
+  font-size: var(--t-para);
   font-weight: 500;
   padding-right: 28px;
   position: relative;
@@ -3684,7 +3703,7 @@ body[data-mode="marketing"] {
   position: absolute;
   right: 0;
   top: 0;
-  color: var(--copper);
+  color: var(--accent);
   font-size: 20px;
   line-height: 1;
 }
@@ -3695,7 +3714,7 @@ body[data-mode="marketing"] {
 
 .mkt-faq-item p {
   margin-top: 12px;
-  color: var(--body-text);
+  color: var(--ink-body);
   line-height: 1.65;
   max-width: 62ch;
 }
@@ -3703,9 +3722,9 @@ body[data-mode="marketing"] {
 /* ——— Contact ——— */
 .mkt-cta {
   background:
-    radial-gradient(70% 80% at 15% 20%, rgba(201, 138, 94, 0.12), transparent 60%),
-    linear-gradient(180deg, #141920, #0b0d10);
-  border-top: 1px solid rgba(201, 138, 94, 0.22);
+    radial-gradient(70% 80% at 15% 20%, rgba(118, 80, 112, 0.12), transparent 60%),
+    var(--surface-raised);
+  border-top: 1px solid rgba(118, 80, 112, 0.22);
 }
 
 .mkt-cta-grid {
@@ -3723,29 +3742,45 @@ body[data-mode="marketing"] {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font-size: 14.5px;
+  font-size: var(--t-small);
 }
 
 .mkt-contact-person span,
 .mkt-contact-person a {
-  color: var(--muted);
+  color: var(--ink-muted);
 }
 
 .mkt-contact-person a:hover {
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 .mkt-cta .contact-card {
-  background: rgba(20, 24, 30, 0.72);
-  border: 1px solid rgba(244, 242, 238, 0.1);
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid var(--line);
   backdrop-filter: blur(8px);
+}
+
+/* Det dypgrønne båndet snur tekstrollene. I stedet for å overstyre hver
+   enkelt regel setter flaten tokenene på nytt, så alt som ligger inni
+   følger etter av seg selv. Her er det merkevarens lyse halvdel som
+   endelig holder som tekst: Light Magenta gir 5,68 og Light Green 5,43. */
+.mkt-on-deep {
+  background: var(--surface-deep);
+  --ink: #f1eeea; /* 13,11 */
+  --ink-body: #dcd8d2; /* 10,68 */
+  --ink-muted: #b9c3b8; /* 8,35 */
+  --ink-faint: #9dab9d; /* 6,31 */
+  --ink-invert: var(--surface-deep);
+  --accent: var(--brand-light-magenta);
+  --accent-strong: #c9b3c5; /* 7,75 */
+  --accent-2: var(--brand-light-green);
+  --line: rgba(232, 227, 222, 0.17);
+  --line-2: rgba(232, 227, 222, 0.09);
 }
 
 /* ——— Footer ——— */
 .mkt-footer {
-  border-top: 1px solid rgba(244, 242, 238, 0.08);
   padding: 56px 0 64px;
-  background: #08090b;
 }
 
 .mkt-footer-grid {
@@ -3766,7 +3801,7 @@ body[data-mode="marketing"] {
 }
 
 .mkt-footer-line {
-  color: var(--muted);
+  color: var(--ink-muted);
   font-size: 13px;
   max-width: 42ch;
 }
@@ -3774,23 +3809,23 @@ body[data-mode="marketing"] {
 .mkt-footer-legal {
   display: grid;
   gap: 6px;
-  font-size: 14px;
+  font-size: var(--t-small);
   line-height: 1.45;
-  color: var(--body-text);
+  color: var(--ink-body);
 }
 
 .mkt-footer-legal strong {
-  color: var(--paper);
+  color: var(--ink);
   font-weight: 550;
 }
 
 .mkt-footer-legal a {
-  color: var(--muted);
+  color: var(--ink-muted);
   transition: color 0.2s ease;
 }
 
 .mkt-footer-legal a:hover {
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 .mkt-footer-nav {
@@ -3804,11 +3839,11 @@ body[data-mode="marketing"] {
   font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--steel);
+  color: var(--accent-2);
 }
 
 .mkt-footer-nav a:hover {
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 .mkt-place {
@@ -3817,7 +3852,7 @@ body[data-mode="marketing"] {
   gap: 16px;
   align-items: start;
   padding: 22px 0 8px;
-  border-top: 1px solid rgba(244, 242, 238, 0.1);
+  border-top: 1px solid var(--line);
   color: inherit;
 }
 
@@ -3826,8 +3861,8 @@ body[data-mode="marketing"] {
   height: 10px;
   margin-top: 6px;
   border-radius: 50%;
-  background: var(--copper);
-  box-shadow: 0 0 0 4px rgba(201, 138, 94, 0.18);
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(118, 80, 112, 0.18);
 }
 
 .mkt-place-copy {
@@ -3836,19 +3871,19 @@ body[data-mode="marketing"] {
 }
 
 .mkt-place-copy strong {
-  font-size: 11px;
+  font-size: var(--t-label);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
   font-weight: 500;
 }
 
 .mkt-place-copy > span:nth-child(2) {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: 20px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: var(--t-para);
   line-height: 1.35;
-  color: var(--paper);
+  color: var(--ink);
   max-width: 18ch;
 }
 
@@ -3856,12 +3891,12 @@ body[data-mode="marketing"] {
   font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--steel);
+  color: var(--accent-2);
   margin-top: 4px;
 }
 
 .mkt-place:hover .mkt-place-cta {
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 .mkt-99x-badge {
@@ -3871,7 +3906,7 @@ body[data-mode="marketing"] {
   gap: 14px;
   margin-top: 28px;
   padding-top: 28px;
-  border-top: 1px solid rgba(244, 242, 238, 0.1);
+  border-top: 1px solid var(--line);
   opacity: 0.9;
   transition: opacity 0.2s ease;
 }
@@ -3887,10 +3922,10 @@ body[data-mode="marketing"] {
 }
 
 .mkt-99x-badge span {
-  font-size: 11px;
+  font-size: var(--t-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ink-muted);
 }
 
 .mkt-footer-in,
@@ -3907,13 +3942,8 @@ body[data-mode="marketing"] {
   .mkt-cta-grid,
   .mkt-team,
   .mkt-footer-grid,
-  .mkt-logo-row,
   .mkt-industry-row {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .mkt-section-photo {
-    min-height: 0;
   }
 
   .mkt-deliver-group {
@@ -3946,21 +3976,36 @@ body[data-mode="marketing"] {
 
 @media (max-width: 980px) and (min-width: 721px) {
   .mkt-hero-grid {
-    grid-template-columns: minmax(0, 0.9fr) minmax(300px, 1.2fr);
-    gap: 24px;
     width: min(1120px, calc(100% - 36px));
   }
 
-  .mkt-hero-copy {
-    max-width: 420px;
+  /* Tekstkolonnen tar en større andel av bredden her, så rampen må holde
+     full styrke lenger før den slipper fotoet. */
+  .mkt-hero-shade {
+    background:
+      radial-gradient(
+        ellipse 70% 52% at 6% 76%,
+        rgba(232, 227, 222, 0.4) 0%,
+        rgba(232, 227, 222, 0.24) 52%,
+        rgba(232, 227, 222, 0) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(232, 227, 222, 0.68) 0%,
+        rgba(232, 227, 222, 0.66) 40%,
+        rgba(232, 227, 222, 0.6) 56%,
+        rgba(232, 227, 222, 0.42) 68%,
+        rgba(232, 227, 222, 0.2) 80%,
+        rgba(232, 227, 222, 0) 92%
+      );
   }
 
-  .mkt-hero-ghost-svg {
-    max-height: min(72vh, 580px);
+  .mkt-hero-copy {
+    max-width: 460px;
   }
 
   .mkt-hero-title {
-    font-size: clamp(32px, 5.4vw, 54px);
+    font-size: clamp(32px, 4.8vw, 48px);
   }
 }
 
@@ -3994,78 +4039,43 @@ body[data-mode="marketing"] {
     padding: 64px 0;
   }
 
+  /* Delingen går fra vertikal til horisontal: fotoet legger seg som et bånd
+     i toppen og teksten står under på ren flate. Hero-en slutter å være
+     100dvh her, ellers blir det bare luft på en liten skjerm. */
   .mkt-hero {
-    min-height: 100dvh;
-    min-height: 100svh;
-    padding: 84px 0 28px;
+    min-height: auto;
+    padding: calc(42svh + 36px) 0 44px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
-    overflow-x: clip;
-    overflow-y: visible;
-  }
-
-  .mkt-hero-media {
     overflow: hidden;
   }
 
+  .mkt-hero-media {
+    inset: 0 0 auto 0;
+    height: 42svh;
+    mask-image: linear-gradient(180deg, #000 calc(100% - 64px), transparent);
+  }
+
+  .mkt-hero-img {
+    object-position: 68% 46%;
+  }
+
   .mkt-hero-grid {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 18px;
     width: calc(100% - 32px);
-    align-items: stretch;
   }
 
   .mkt-hero-copy {
     max-width: none;
   }
 
-  .mkt-hero-visual {
-    max-height: min(48dvh, 400px);
-  }
-
-  .mkt-hero-ghost {
-    max-width: none;
-    opacity: 0.92;
-    height: 100%;
-  }
-
-  .mkt-hero-ghost-svg {
-    width: 100%;
-    max-width: none;
-    max-height: min(48dvh, 400px);
-    margin: 0 auto;
-    filter: none;
-  }
-
-  .mkt-hero-ghost.is-compact .mkt-hero-ghost-label {
-    font-size: 11px;
-  }
-
-  .mkt-hero-ghost.is-compact .mkt-hero-ghost-hub-label {
-    font-size: 12.5px;
-    letter-spacing: 0.1em;
-  }
-
-  .mkt-hero-ghost.is-compact .mkt-hero-ghost-hub-sub {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-  }
-
-  .mkt-hero-ghost.is-compact .mkt-hero-ghost-tip-label {
-    font-size: 10px;
-  }
-
   .mkt-hero-shade {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(8, 9, 11, 0.15) 0%,
-        rgba(8, 9, 11, 0.25) 30%,
-        rgba(8, 9, 11, 0.55) 100%
-      );
+    background: linear-gradient(
+      to top,
+      rgba(232, 227, 222, 0.4) 0%,
+      rgba(232, 227, 222, 0) 26%
+    );
   }
 
   .mkt-hero-title {
@@ -4076,13 +4086,8 @@ body[data-mode="marketing"] {
     word-break: break-word;
   }
 
-  .mkt-hero-title-rest {
-    max-width: none;
-    font-size: 0.76em;
-  }
-
   .mkt-hero-lead {
-    font-size: 14.5px;
+    font-size: 16px;
     line-height: 1.55;
     max-width: none;
     margin-bottom: 20px;
@@ -4115,7 +4120,7 @@ body[data-mode="marketing"] {
   }
 
   .mkt-journey-tab h3 {
-    font-size: 14px;
+    font-size: var(--t-small);
     line-height: 1.25;
   }
 
@@ -4137,7 +4142,7 @@ body[data-mode="marketing"] {
     flex-basis: 100%;
     padding: 16px 0 0;
     border-left: 0;
-    border-top: 1px solid rgba(143, 163, 184, 0.16);
+    border-top: 1px solid rgba(80, 118, 86, 0.16);
   }
 
   .mkt-pillar:first-child {
@@ -4150,25 +4155,14 @@ body[data-mode="marketing"] {
     gap: 24px;
   }
 
-  /* Kortere slør, ellers spiser det opp hele fotoet på liten skjerm. */
-  .mkt-industry-row::before {
-    inset: -40px -50vw -120px;
-    background:
-      linear-gradient(
-        180deg,
-        rgba(8, 9, 11, 0) 0,
-        rgba(8, 9, 11, 0.62) 44px,
-        rgba(8, 9, 11, 0.88) 110px,
-        rgba(8, 9, 11, 0.92) 100%
-      );
-  }
-
-  .mkt-section-photo {
-    min-height: 620px;
+  /* Båndet må ned i høyde her, ellers spiser fotoet hele skjermen før
+     teksten kommer i syne. */
+  .mkt-section-photo-bg {
+    height: 34svh;
   }
 
   .mkt-section-photo-content {
-    gap: 40px;
+    gap: 32px;
   }
 
   .mkt-why-answers {
@@ -4186,10 +4180,6 @@ body[data-mode="marketing"] {
   .mkt-footer-nav {
     flex-wrap: wrap;
     gap: 12px;
-  }
-
-  .mkt-topbar .desktop-nav {
-    display: none;
   }
 
   .mkt-99x-badge img {
@@ -4210,13 +4200,6 @@ body[data-mode="marketing"] {
     transition: none;
   }
 
-  .mkt-hero-ghost-path,
-  .mkt-hero-ghost-path-core,
-  .mkt-hero-ghost-path-out,
-  .mkt-hero-ghost-pulse,
-  .mkt-hero-ghost-pulse-soft {
-    animation: none;
-  }
 }
 
 /* ============================================================
@@ -4224,8 +4207,8 @@ body[data-mode="marketing"] {
    ============================================================ */
 .mkt-subpage {
   min-height: 100dvh;
-  background: #0b0d10;
-  color: var(--paper);
+  background: var(--surface);
+  color: var(--ink);
 }
 
 .mkt-sub-main {
@@ -4247,16 +4230,16 @@ body[data-mode="marketing"] {
 }
 
 .mkt-sub-title {
-  font-weight: 300;
-  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 500;
+  font-size: var(--t-h1);
   line-height: 1.1;
   letter-spacing: -0.02em;
   margin: 0 0 18px;
 }
 
 .mkt-sub-h2 {
-  font-weight: 300;
-  font-size: clamp(26px, 3.6vw, 36px);
+  font-weight: 500;
+  font-size: var(--t-h2);
   line-height: 1.15;
   letter-spacing: -0.02em;
   margin: 0 0 14px;
@@ -4264,9 +4247,9 @@ body[data-mode="marketing"] {
 }
 
 .mkt-sub-lead {
-  font-size: clamp(16px, 1.7vw, 18px);
+  font-size: var(--t-para);
   line-height: 1.6;
-  color: var(--body-text);
+  color: var(--ink-body);
   max-width: 48ch;
   margin: 0 0 28px;
 }
@@ -4287,17 +4270,17 @@ body[data-mode="marketing"] {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
   gap: 0;
-  border-top: 1px solid rgba(143, 163, 184, 0.14);
+  border-top: 1px solid rgba(80, 118, 86, 0.14);
 }
 
 .mkt-pillars-grid li {
   padding: 28px 28px 28px 0;
-  border-bottom: 1px solid rgba(143, 163, 184, 0.14);
+  border-bottom: 1px solid rgba(80, 118, 86, 0.14);
 }
 
 .mkt-pillars-grid li:nth-child(even) {
   padding-left: 28px;
-  border-left: 1px solid rgba(143, 163, 184, 0.14);
+  border-left: 1px solid rgba(80, 118, 86, 0.14);
 }
 
 .mkt-pillars-grid h2 {
@@ -4306,16 +4289,16 @@ body[data-mode="marketing"] {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--copper);
+  color: var(--accent);
   margin: 0 0 10px;
 }
 
 .mkt-pillars-grid p {
   margin: 0;
   max-width: 36ch;
-  color: var(--body-text);
+  color: var(--ink-body);
   line-height: 1.55;
-  font-size: 15px;
+  font-size: var(--t-small);
 }
 
 .mkt-layer-list {
@@ -4325,7 +4308,7 @@ body[data-mode="marketing"] {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border-top: 1px solid rgba(143, 163, 184, 0.14);
+  border-top: 1px solid rgba(80, 118, 86, 0.14);
 }
 
 .mkt-layer-list li {
@@ -4333,28 +4316,28 @@ body[data-mode="marketing"] {
   grid-template-columns: 56px 1fr;
   gap: 20px;
   padding: 28px 0;
-  border-bottom: 1px solid rgba(143, 163, 184, 0.14);
+  border-bottom: 1px solid rgba(80, 118, 86, 0.14);
 }
 
 .mkt-layer-n {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: 28px;
-  color: var(--copper-bright);
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: var(--t-sub);
+  color: var(--accent-strong);
   line-height: 1;
   padding-top: 4px;
 }
 
 .mkt-layer-list h3 {
-  font-weight: 300;
-  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 500;
+  font-size: var(--t-sub);
   margin: 0 0 8px;
 }
 
 .mkt-layer-list p {
   margin: 0;
   max-width: 52ch;
-  color: var(--body-text);
+  color: var(--ink-body);
   line-height: 1.55;
 }
 
@@ -4369,7 +4352,7 @@ body[data-mode="marketing"] {
 .mkt-sub-cta {
   margin-top: 24px;
   padding: 56px 0 16px;
-  border-top: 1px solid rgba(143, 163, 184, 0.14);
+  border-top: 1px solid rgba(80, 118, 86, 0.14);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -4377,8 +4360,8 @@ body[data-mode="marketing"] {
 }
 
 .mkt-sub-cta h2 {
-  font-weight: 300;
-  font-size: clamp(24px, 3.2vw, 34px);
+  font-weight: 500;
+  font-size: var(--t-h3);
   line-height: 1.2;
   max-width: 16ch;
   margin: 0;
@@ -4398,7 +4381,7 @@ body[data-mode="marketing"] {
 .mkt-subpage .case-card {
   background: transparent;
   border: 0;
-  border-top: 1px solid rgba(143, 163, 184, 0.16);
+  border-top: 1px solid rgba(80, 118, 86, 0.16);
   border-radius: 0;
   padding: 28px 0 20px;
   box-shadow: none;
@@ -4406,7 +4389,7 @@ body[data-mode="marketing"] {
 }
 
 .mkt-subpage .case-card:hover {
-  border-top-color: rgba(201, 138, 94, 0.55);
+  border-top-color: rgba(118, 80, 112, 0.55);
   background: transparent;
   transform: none;
 }
@@ -4415,7 +4398,7 @@ body[data-mode="marketing"] {
   gap: 36px;
   margin: 32px 0 48px;
   padding: 28px 0;
-  border-color: rgba(143, 163, 184, 0.14);
+  border-color: rgba(80, 118, 86, 0.14);
 }
 
 .mkt-subpage .case-section {
@@ -4424,27 +4407,27 @@ body[data-mode="marketing"] {
 }
 
 .mkt-subpage .case-section h2 {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(22px, 2.8vw, 28px);
-  color: var(--paper);
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: var(--t-h4);
+  color: var(--ink);
   margin-bottom: 12px;
 }
 
 .mkt-subpage .page-back a {
-  color: var(--copper);
-  font-size: 14px;
+  color: var(--accent);
+  font-size: var(--t-small);
   letter-spacing: 0.02em;
   text-transform: none;
 }
 
 .mkt-subpage .page-back a:hover {
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 .mkt-subpage .topbar .nav a.active,
 .mkt-subpage .topbar .desktop-nav a.active {
-  color: var(--copper-bright);
+  color: var(--accent-strong);
 }
 
 @media (max-width: 720px) {

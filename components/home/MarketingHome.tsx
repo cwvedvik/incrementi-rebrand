@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import ContactForm from "@/components/chat/ContactForm";
-import HeroPlatformGhost from "@/components/home/HeroPlatformGhost";
 import SiteNav from "@/components/sections/SiteNav";
 import ValueGlyph from "@/components/home/ValueGlyph";
+import { CLIENTS } from "@/lib/clients";
 import { home } from "@/lib/content/home";
 import { PEOPLE } from "@/lib/people";
 import { useLocale } from "@/lib/i18n/locale";
@@ -51,23 +51,29 @@ export default function MarketingHome() {
       {/* ——— HERO ——— */}
       <header className="mkt-hero" id="top">
         <div className="mkt-hero-media" aria-hidden="true">
+          <Image
+            src="/media/environment/2026_Incrementi_fotoCRoka_110c.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="mkt-hero-img"
+          />
           <div className="mkt-hero-shade" />
         </div>
 
         <div className="mkt-wrap mkt-hero-grid">
           <div className="mkt-hero-copy">
             <motion.h1
-              className="mkt-hero-title serif"
+              className="mkt-hero-title display"
               initial={reduce ? false : "hidden"}
               animate="show"
               variants={fadeUp}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="mkt-hero-title-lead">
-                {t(home.hero.titleLead, locale)}
-              </span>
-              <span className="mkt-hero-title-rest">
-                {t(home.hero.titleRest, locale)}
+              {t(home.hero.titleMain, locale)}{" "}
+              <span className="mkt-hero-title-accent">
+                {t(home.hero.titleAccent, locale)}
               </span>
             </motion.h1>
 
@@ -96,15 +102,11 @@ export default function MarketingHome() {
               </a>
             </motion.div>
           </div>
-
-          <div className="mkt-hero-visual" aria-hidden="true">
-            <HeroPlatformGhost />
-          </div>
         </div>
       </header>
 
       {/* ——— POST-HERO (stats) ——— */}
-      <section className="mkt-post-hero" aria-label={t(home.hero.titleLead, locale)}>
+      <section className="mkt-post-hero" aria-label={t(home.hero.titleMain, locale)}>
         <div className="mkt-wrap mkt-post-hero-inner">
           <ul className="mkt-post-hero-stats">
             {home.hero.stats.map((s) => (
@@ -119,11 +121,26 @@ export default function MarketingHome() {
         </div>
       </section>
 
+      {/* ——— KUNDELOGOER ——— */}
+      <section className="mkt-logos mkt-on-deep" aria-label={t(home.logos.eyebrow, locale)}>
+        <div className="mkt-wrap">
+          <p className="mkt-logos-eyebrow">{t(home.logos.eyebrow, locale)}</p>
+          <div className="mkt-logo-row">
+            {CLIENTS.map((c) => (
+              <span className="mkt-logo-mark" key={c.name}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={c.logoSrc} alt={c.name} />
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ——— JOURNEY ——— */}
       <section className="mkt-section" id="slik-jobber-vi">
         <div className="mkt-wrap">
           <header className="mkt-section-head">
-            <h2 className="serif">{t(home.journey.title, locale)}</h2>
+            <h2 className="display">{t(home.journey.title, locale)}</h2>
             <p className="mkt-lead">{t(home.journey.lead, locale)}</p>
           </header>
 
@@ -165,7 +182,7 @@ export default function MarketingHome() {
               />
             </div>
             <div className="mkt-journey-copy">
-              <h3 className="serif">{t(step.detailTitle, locale)}</h3>
+              <h3 className="display">{t(step.detailTitle, locale)}</h3>
               <p>{t(step.detailBody, locale)}</p>
               <ul className="mkt-checks">
                 {tList(step.checks, locale).map((c) => (
@@ -181,19 +198,19 @@ export default function MarketingHome() {
       <section className="mkt-section mkt-section-steel" id="hva-vi-leverer">
         <div className="mkt-wrap">
           <header className="mkt-section-head">
-            <h2 className="serif">{t(home.deliver.title, locale)}</h2>
+            <h2 className="display">{t(home.deliver.title, locale)}</h2>
             <p className="mkt-lead">{t(home.deliver.lead, locale)}</p>
           </header>
           <div className="mkt-deliver-groups">
             {home.deliver.groups.map((group) => (
               <section key={group.label.no} className="mkt-deliver-group">
-                <h3 className="serif mkt-deliver-label">
+                <h3 className="display mkt-deliver-label">
                   {t(group.label, locale)}
                 </h3>
                 <div className="mkt-deliver-items">
                   {group.items.map((item) => (
                     <article key={item.title.no}>
-                      <h4 className="serif">{t(item.title, locale)}</h4>
+                      <h4 className="display">{t(item.title, locale)}</h4>
                       <p>{t(item.body, locale)}</p>
                     </article>
                   ))}
@@ -208,7 +225,7 @@ export default function MarketingHome() {
       <section className="mkt-section" id="hvorfor-oss">
         <div className="mkt-wrap">
           <header className="mkt-section-head mkt-why-head">
-            <h2 className="serif">{t(home.why.title, locale)}</h2>
+            <h2 className="display">{t(home.why.title, locale)}</h2>
             <p className="mkt-lead">{t(home.why.lead, locale)}</p>
           </header>
 
@@ -225,7 +242,7 @@ export default function MarketingHome() {
             <div className="mkt-why-answers">
               {home.why.answers.map((a) => (
                 <article key={a.title.no}>
-                  <h3 className="serif">{t(a.title, locale)}</h3>
+                  <h3 className="display">{t(a.title, locale)}</h3>
                   <p>{t(a.body, locale)}</p>
                 </article>
               ))}
@@ -235,15 +252,15 @@ export default function MarketingHome() {
 
         <div className="mkt-why-band">
           <div className="mkt-wrap">
-            <h3 className="serif mkt-why-band-title">
+            <h3 className="display mkt-why-band-title">
               {t(home.why.valueLead, locale)}
             </h3>
             <div className="mkt-why-band-grid">
               {home.why.values.map((v) => (
                 <article key={v.metric.no} className="mkt-why-value">
                   <ValueGlyph kind={v.glyph} />
-                  <p className="mkt-why-metric serif">{t(v.metric, locale)}</p>
-                  <h4 className="serif">{t(v.title, locale)}</h4>
+                  <p className="mkt-why-metric display">{t(v.metric, locale)}</p>
+                  <h4 className="display">{t(v.title, locale)}</h4>
                   <p className="mkt-why-value-body">{t(v.body, locale)}</p>
                 </article>
               ))}
@@ -253,7 +270,7 @@ export default function MarketingHome() {
 
         <div className="mkt-wrap">
           <div className="mkt-sovereignty">
-            <h3 className="serif">{t(home.why.sovereigntyTitle, locale)}</h3>
+            <h3 className="display">{t(home.why.sovereigntyTitle, locale)}</h3>
             <p>{t(home.why.sovereigntyBody, locale)}</p>
             <p className="mkt-partner-line">
               {home.why.partners.map((p) => p.name).join(" · ")}
@@ -276,13 +293,13 @@ export default function MarketingHome() {
         </div>
         <div className="mkt-wrap mkt-section-photo-content">
           <header className="mkt-section-head mkt-industry-head">
-            <h2 className="serif">{t(home.industries.title, locale)}</h2>
+            <h2 className="display">{t(home.industries.title, locale)}</h2>
             <p className="mkt-lead">{t(home.industries.lead, locale)}</p>
           </header>
           <div className="mkt-industry-row">
             {home.industries.items.map((ind) => (
               <article key={ind.n} className="mkt-industry">
-                <h3 className="serif">{t(ind.title, locale)}</h3>
+                <h3 className="display">{t(ind.title, locale)}</h3>
                 <p>{t(ind.body, locale)}</p>
               </article>
             ))}
@@ -294,7 +311,7 @@ export default function MarketingHome() {
       <section className="mkt-section mkt-section-steel" id="om-oss">
         <div className="mkt-wrap">
           <header className="mkt-section-head">
-            <h2 className="serif">{t(home.about.title, locale)}</h2>
+            <h2 className="display">{t(home.about.title, locale)}</h2>
             <p className="mkt-lead">{t(home.about.lead, locale)}</p>
           </header>
 
@@ -339,7 +356,7 @@ export default function MarketingHome() {
           </div>
 
           <div className="mkt-group">
-            <h3 className="serif">{t(home.about.groupTitle, locale)}</h3>
+            <h3 className="display">{t(home.about.groupTitle, locale)}</h3>
             <p>{t(home.about.groupBody, locale)}</p>
             <div className="mkt-badges">
               {home.about.badges.map((b) => (
@@ -357,7 +374,7 @@ export default function MarketingHome() {
       <section className="mkt-section mkt-section-quiet" id="faq">
         <div className="mkt-wrap mkt-faq">
           <header className="mkt-section-head">
-            <h2 className="serif">{t(home.faq.title, locale)}</h2>
+            <h2 className="display">{t(home.faq.title, locale)}</h2>
           </header>
           <div className="mkt-faq-list">
             {home.faq.items.map((item) => (
@@ -375,7 +392,7 @@ export default function MarketingHome() {
         <div className="mkt-wrap mkt-cta-grid">
           <div>
             <p className="mkt-eyebrow">{t(home.contact.eyebrow, locale)}</p>
-            <h2 className="serif">{t(home.contact.title, locale)}</h2>
+            <h2 className="display">{t(home.contact.title, locale)}</h2>
             <p className="mkt-lead">{t(home.contact.lead, locale)}</p>
             <div className="mkt-contact-person">
               <strong>{home.contact.person.name}</strong>
@@ -392,7 +409,7 @@ export default function MarketingHome() {
         </div>
       </section>
 
-      <footer className="mkt-footer">
+      <footer className="mkt-footer mkt-on-deep">
         <div className="mkt-wrap mkt-footer-grid">
           <div className="mkt-footer-col">
             {/* eslint-disable-next-line @next/next/no-img-element */}

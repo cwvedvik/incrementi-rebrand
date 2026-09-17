@@ -17,10 +17,10 @@ export default function OpengraphImage() {
           alignItems: "center",
           justifyContent: "center",
           background:
-            "radial-gradient(700px 700px at 50% 45%, rgba(201,138,94,0.18), #08090B 65%)",
-          backgroundColor: "#08090B",
-          color: "#F4F2EE",
-          fontFamily: "Georgia, serif",
+            "radial-gradient(700px 700px at 50% 45%, rgba(133,162,137,0.22), #E8E3DE 65%)",
+          backgroundColor: "#E8E3DE",
+          color: "#283B2B",
+          fontFamily: "DM Sans, Helvetica, Arial, sans-serif",
         }}
       >
         <div
@@ -28,7 +28,7 @@ export default function OpengraphImage() {
             fontSize: 22,
             letterSpacing: 12,
             textTransform: "uppercase",
-            color: "#C98A5E",
+            color: "#765070",
             marginBottom: 36,
           }}
         >
@@ -37,21 +37,20 @@ export default function OpengraphImage() {
         <div
           style={{
             fontSize: 86,
-            fontWeight: 300,
+            fontWeight: 600,
             letterSpacing: -2,
             display: "flex",
           }}
         >
           INCREMENTI
-          <span style={{ color: "#C98A5E" }}>.</span>
+          <span style={{ color: "#765070" }}>.</span>
         </div>
         <div
           style={{
             fontSize: 28,
-            color: "#A7ABB2",
+            color: "#405E45",
             marginTop: 30,
-            fontStyle: "italic",
-            maxWidth: 900,
+                        maxWidth: 900,
             textAlign: "center",
           }}
         >
@@ -64,7 +63,7 @@ export default function OpengraphImage() {
             fontSize: 17,
             letterSpacing: 6,
             textTransform: "uppercase",
-            color: "#6E737B",
+            color: "#486A4D",
           }}
         >
           A 99x Company

@@ -25,7 +25,7 @@ export default function DiagramPageClient() {
           {t(platform.hero.eyebrow, locale)}
         </motion.p>
         <motion.h1
-          className="serif mkt-sub-title"
+          className="display mkt-sub-title"
           initial={reduce ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.06, ease }}
@@ -69,7 +69,7 @@ export default function DiagramPageClient() {
       </section>
 
       <section className="mkt-sub-section">
-        <h2 className="serif mkt-sub-h2">{t(platform.layers.title, locale)}</h2>
+        <h2 className="display mkt-sub-h2">{t(platform.layers.title, locale)}</h2>
         <p className="mkt-sub-lead tight">{t(platform.layers.lead, locale)}</p>
         <ol className="mkt-layer-list">
           {platform.layers.items.map((item, i) => (
@@ -84,7 +84,7 @@ export default function DiagramPageClient() {
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div>
-                <h3 className="serif">{t(item.title, locale)}</h3>
+                <h3 className="display">{t(item.title, locale)}</h3>
                 <p>{t(item.body, locale)}</p>
               </div>
             </motion.li>
@@ -93,7 +93,7 @@ export default function DiagramPageClient() {
       </section>
 
       <section className="mkt-sub-section mkt-diagram-section" id="arkitektur">
-        <h2 className="serif mkt-sub-h2">{t(platform.diagram.title, locale)}</h2>
+        <h2 className="display mkt-sub-h2">{t(platform.diagram.title, locale)}</h2>
         <p className="mkt-sub-lead tight">{t(platform.diagram.lead, locale)}</p>
         <PlatformDiagram />
       </section>

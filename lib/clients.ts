@@ -1,6 +1,11 @@
 /**
- * Client logo strip — transparent marks in /public/media/clients/*-mark.png
- * (black mats knocked out; dark marks lifted for paper-band contrast).
+ * Kundelogoer for logostripen.
+ *
+ * Merkene i /public/media/clients/ er hvite monokrome silhuetter på
+ * gjennomsiktig bunn, laget for det dypgrønne båndet. De er generert av
+ * scripts/prepare-client-logos.mjs, som også gjør den optiske skaleringen,
+ * så alle filene har samme lerret og kan vises i samme boks uten at noen
+ * logo dominerer raden. Ikke rediger PNG-ene for hånd, kjør skriptet.
  */
 export interface Client {
   name: string;
@@ -8,12 +13,11 @@ export interface Client {
 }
 
 export const CLIENTS: Client[] = [
-  { name: "Sebastian", logoSrc: "/media/clients/sebastian-mark.png" },
-  { name: "NRC Group", logoSrc: "/media/clients/nrc-group-mark.png" },
-  { name: "Maritech", logoSrc: "/media/clients/maritech-mark.png" },
-  { name: "Optimar", logoSrc: "/media/clients/optimar-mark.png" },
-  { name: "Envo", logoSrc: "/media/clients/envo-mark.png" },
-  { name: "Arktika Capital", logoSrc: "/media/clients/arktika-capital-mark.png" },
-  { name: "Accru Partners", logoSrc: "/media/clients/accru-partners-mark.png" },
-  { name: "4Subsea", logoSrc: "/media/clients/4subsea-mark.png" },
+  { name: "Optimar", logoSrc: "/media/clients/optimar.png" },
+  { name: "Europris", logoSrc: "/media/clients/europris.png" },
+  { name: "Thon Hotels", logoSrc: "/media/clients/thon-hotels.png" },
+  { name: "HRP", logoSrc: "/media/clients/hrp.png" },
+  { name: "Accru Partners", logoSrc: "/media/clients/accru-partners.png" },
+  { name: "Seagems", logoSrc: "/media/clients/seagems.png" },
+  { name: "Takringen", logoSrc: "/media/clients/takringen.png" },
 ];

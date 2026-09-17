@@ -17,7 +17,7 @@ export default function ResultsPageClient() {
     <PageShell wide>
       <header className="mkt-sub-hero">
         <motion.h1
-          className="serif mkt-sub-title"
+          className="display mkt-sub-title"
           initial={reduce ? false : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease }}
