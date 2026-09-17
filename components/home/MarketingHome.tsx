@@ -101,27 +101,30 @@ export default function MarketingHome() {
             </motion.div>
           </div>
 
-          {/* Fotoet er et objekt på flaten, ikke flaten selv: ytre skall med
-              hårstrek og polstring, indre kjerne som beskjærer. Teksten står
-              på ren Off White, så det trengs ikke noe slør noe sted. */}
-          <motion.div
-            className="mkt-hero-plate-shell"
-            aria-hidden="true"
-            initial={reduce ? false : { opacity: 0, scale: 1.02, filter: "blur(8px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1.1, ease: [0.32, 0.72, 0, 1] }}
-          >
-            <div className="mkt-hero-plate-core">
+          {/* Fotoet blør ut til høyre viewportkant og møter teksten med en skrå
+              kant. Teksten står på ren Off White, så det trengs ikke slør noe
+              sted. Skråkanten ligger i CSS, ikke i bildefila, slik at den
+              følger formatet på hver bredde. */}
+          <div className="mkt-hero-photo" aria-hidden="true">
+            {/* Inngangen ligger på bildet, ikke på den klippede flaten. Skalerte
+                vi flaten ville de tre prosentene skjøvet den forbi høyre
+                viewportkant og inn under teksten mens den satte seg. */}
+            <motion.div
+              className="mkt-hero-photo-inner"
+              initial={reduce ? false : { opacity: 0, scale: 1.06, filter: "blur(10px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              transition={{ duration: 1.1, ease: [0.32, 0.72, 0, 1] }}
+            >
               <Image
                 src="/media/environment/2026_Incrementi_fotoCRoka_110c.jpg"
                 alt=""
                 fill
                 priority
-                sizes="(max-width: 900px) 100vw, 660px"
+                sizes="(max-width: 900px) 100vw, (max-width: 1424px) 60vw, (max-width: 2000px) 1020px, 1360px"
                 className="mkt-hero-img"
               />
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </header>
 
