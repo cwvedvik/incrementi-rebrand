@@ -18,7 +18,7 @@ export const home = {
   hero: {
     titleLead: {"no":"Enklere hverdag –","en":"A simpler workday –"},
     titleRest: {"no":"fra fragmenterte data til målbar produktivitet","en":"from fragmented data to measurable productivity"},
-    lead: {"no":"Vi kobler sammen systemene dere allerede har, og bygger et fundament for innsikt, automatisering og trygg bruk av AI.","en":"We connect the systems you already have, and build a foundation for insight, automation and the safe use of AI."},
+    lead: {"no":"Incrementi samler data fra systemene dere allerede har og bygger et fundament for innsikt og automatisering. Dette hjelper bedrifter med å forenkle arbeidsprosesser, få systemer og data til å henge sammen, og bygge løsninger ansatte tar i bruk. Vi rådgir først, validerer før dere investerer, og bygger steg for steg, med trygg og kontrollert bruk av AI når det er riktig verktøy.","en":"Incrementi gathers data from the systems you already have and builds a foundation for insight and automation. This helps companies simplify work processes, connect systems and data, and build solutions employees put to use. We advise first, validate before you invest, and build step by step, with safe and controlled use of AI when it is the right tool."},
     cta: {"no":"Book en strategisamtale","en":"Book a strategy call"},
     secondary: {"no":"Se hvordan vi jobber","en":"See how we work"},
     stats: [
