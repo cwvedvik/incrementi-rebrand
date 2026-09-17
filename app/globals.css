@@ -2633,6 +2633,13 @@ body[data-phase="answering"] .glow {
 /* ============================================================
    MARKETING HOMEPAGE — industrial photographic surface
    ============================================================ */
+/* Rullingen låses opp av at markupen inneholder en markedsføringsrot, ikke av
+   at JavaScript har rukket å kjøre. body arver overflow: hidden og height:
+   100 % fra app-skallet, og data-mode settes i en useEffect — så mellom første
+   maling og hydrering kunne ikke siden rulles i det hele tatt. Med en hero på
+   100dvh betyr det at ingenting under den var nåbar. :has() gjelder fra første
+   maling. data-mode beholdes som reserve for eldre nettlesere. */
+body:has(.mkt),
 body[data-mode="marketing"] {
   overflow: auto;
   overflow-x: hidden;
