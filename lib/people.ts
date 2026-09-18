@@ -43,7 +43,7 @@ export const PEOPLE: Person[] = [
   {
     name: "Kristov Rishi Xavier",
     role: { no: "Partner", en: "Partner" },
-    photo: "/media/portraits/Kristov-Rishi.jpg",
+    photo: "/media/portraits/2026_Incrementi_KristovRishiXavier_kvadrat.jpg",
     initials: "KX",
   },
   {
