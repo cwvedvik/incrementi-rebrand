@@ -2673,6 +2673,12 @@ body[data-mode="marketing"] {
   background: transparent;
   border-bottom: 1px solid transparent;
   transition: background 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease;
+  /* Logoen skal stå på samme venstrekant som hero-tittelen, som den ses
+     sammen med. Hero-wrappen er min(1360px, 100% − 64px), så gutteren er
+     32 px under 1424 px bredde og (100% − 1360px)/2 over. Med fast 34 px sto
+     logoen 42 px til venstre for tittelen på en 1512 px skjerm og 246 px til
+     venstre på 1920 px — avviket vokste med bredden. */
+  padding-inline: max(32px, (100% - 1360px) / 2);
 }
 
 .mkt-topbar-scrolled {
