@@ -2735,8 +2735,13 @@ body[data-mode="marketing"] {
    kontrollraden kom inn på 880 px, men desktopmenyen forsvant først på
    720 px. I mellomrommet sto begge samtidig, og lenkene la seg oppå
    ordmerket. Marketing-menyen bytter derfor på ett punkt, og punktet er
-   satt der lenkene faktisk slutter å få plass. */
-@media (max-width: 1000px) {
+   satt der lenkene faktisk slutter å få plass.
+
+   Punktet flyttet fra 1000 til 1080 px da logoen ble byttet: den nye fila har
+   forholdet 7,01 mot 6,30, altså 238 px bred mot 214 px ved samme høyde. Målt
+   luft mellom ordmerket og første lenke var 0 px på 1020 og 5 px på 1040, og
+   vokser 1:1 med bredden. 1080 px gir 45 px klaring i det menyen dukker opp. */
+@media (max-width: 1080px) {
   .mkt-topbar .desktop-nav {
     display: none;
   }
@@ -4092,6 +4097,24 @@ body[data-mode="marketing"] {
 
   .mkt-topbar .logo img {
     height: 28px;
+  }
+
+  /* Den nye logofila er 7,01 bred mot 6,30, altså 20 px bredere ved 28 px
+     høyde, og topplinja er mettet på de smaleste skjermene: menykontrollene
+     ligger fast 148 px fra høyre kant, så logoen får bare bredden minus 164 px.
+     28 px rørte kontrollene på 360 px. To trinn dekker spennet med minst 16 px
+     klaring, ned til 320 px som WCAG-omflyt krever. Den gamle logoen overlappet
+     for øvrig med 8 px på 320 px. */
+  @media (max-width: 380px) {
+    .mkt-topbar .logo img {
+      height: 22px;
+    }
+  }
+
+  @media (max-width: 340px) {
+    .mkt-topbar .logo img {
+      height: 20px;
+    }
   }
 
   .mobile-nav-controls {
