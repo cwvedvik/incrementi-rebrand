@@ -7,7 +7,6 @@ import {
   useMemo,
   type ReactNode,
 } from "react";
-import { usePathname, useRouter } from "next/navigation";
 import {
   DEFAULT_LOCALE,
   LOCALE_COOKIE,
@@ -39,17 +38,15 @@ export function LocaleProvider({
   locale: Locale;
   children: ReactNode;
 }) {
-  const router = useRouter();
-  const pathname = usePathname() || "/";
-
-  const setLocale = useCallback(
-    (next: Locale) => {
-      writeCookie(next);
-      const { path } = parsePathname(pathname);
-      router.push(localePath(path, next));
-    },
-    [pathname, router],
-  );
+  const setLocale = useCallback((next: Locale) => {
+    writeCookie(next);
+    // Full navigation. Middleware rewrites /en onto /, so a client
+    // router.push stays on the current render and the language never changes.
+    const { path } = parsePathname(window.location.pathname);
+    const target = localePath(path, next);
+    if (target === window.location.pathname) return;
+    window.location.assign(target);
+  }, []);
 
   const href = useCallback(
     (path: string) => localePath(path, locale),

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { PEOPLE } from "@/lib/people";
 import { useLocale } from "@/lib/i18n/locale";
 import { t } from "@/lib/i18n/types";
+import PersonLinkedIn from "@/components/sections/PersonLinkedIn";
 
 export default function PeopleGrid() {
   const { locale } = useLocale();
@@ -26,6 +27,7 @@ export default function PeopleGrid() {
           </div>
           <h4>{p.name}</h4>
           <div className="role">{t(p.role, locale)}</div>
+          <PersonLinkedIn name={p.name} href={p.linkedin} className="li" />
         </div>
       ))}
     </div>

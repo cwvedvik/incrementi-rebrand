@@ -932,6 +932,12 @@ body[data-phase="answering"] .glow {
   border-color: var(--accent-2);
 }
 
+.person .li svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+
 /* ---------- contact form ---------- */
 .contact-card {
   background: rgba(255, 255, 255, 0.82);
@@ -3694,6 +3700,22 @@ body[data-mode="marketing"] {
 .mkt-person-info p {
   color: var(--ink-muted);
   font-size: 13px;
+}
+
+.mkt-person-linkedin {
+  display: inline-flex;
+  margin-top: 10px;
+  color: var(--ink-faint);
+}
+
+.mkt-person-linkedin:hover {
+  color: var(--accent-strong);
+}
+
+.mkt-person-linkedin svg {
+  display: block;
+  width: 15px;
+  height: 15px;
 }
 
 .mkt-group {

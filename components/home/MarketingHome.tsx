@@ -11,6 +11,7 @@ import { IconArrowUpRight } from "@/components/icons";
 import { CLIENTS } from "@/lib/clients";
 import { home } from "@/lib/content/home";
 import { PEOPLE } from "@/lib/people";
+import PersonLinkedIn from "@/components/sections/PersonLinkedIn";
 import { useLocale } from "@/lib/i18n/locale";
 import { t, tList } from "@/lib/i18n/types";
 
@@ -373,6 +374,11 @@ export default function MarketingHome() {
                 <div className="mkt-person-info">
                   <h3>{person.name}</h3>
                   <p>{t(person.role, locale)}</p>
+                  <PersonLinkedIn
+                    name={person.name}
+                    href={person.linkedin}
+                    className="mkt-person-linkedin"
+                  />
                 </div>
               </article>
             ))}
