@@ -1,13 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { PEOPLE } from "@/lib/people";
+import Link from "next/link";
+import { PEOPLE, personPath } from "@/lib/people";
 import { useLocale } from "@/lib/i18n/locale";
 import { t } from "@/lib/i18n/types";
 import PersonLinkedIn from "@/components/sections/PersonLinkedIn";
 
 export default function PeopleGrid() {
-  const { locale } = useLocale();
+  const { locale, href } = useLocale();
 
   return (
     <div className="people-grid">
@@ -25,7 +26,11 @@ export default function PeopleGrid() {
                 .join("")
             )}
           </div>
-          <h4>{p.name}</h4>
+          <h4>
+            <Link href={href(personPath(p.slug))} className="person-link">
+              {p.name}
+            </Link>
+          </h4>
           <div className="role">{t(p.role, locale)}</div>
           <PersonLinkedIn name={p.name} href={p.linkedin} className="li" />
         </div>

@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
+import { PEOPLE, personPath } from "@/lib/people";
 
 const BASE = "https://incrementi.no";
 
 /** Only public routes while /platform and /results are soft-hidden. */
-const ROUTES = [""];
+const ROUTES = ["", ...PEOPLE.map((p) => personPath(p.slug))];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return ROUTES.flatMap((route) => {

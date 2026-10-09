@@ -866,6 +866,7 @@ body[data-phase="answering"] .glow {
 }
 
 .person {
+  position: relative;
   background: rgba(255, 255, 255, 0.66);
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -916,7 +917,30 @@ body[data-phase="answering"] .glow {
   margin: 0;
 }
 
+.person .person-link {
+  color: inherit;
+}
+
+.person .person-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.person .person-link:focus-visible {
+  outline: none;
+}
+
+.person .person-link:focus-visible::after {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .person .li {
+  position: relative;
+  z-index: 2;
   display: inline-block;
   margin-top: 10px;
   font-size: 11.5px;
@@ -3702,7 +3726,51 @@ body[data-mode="marketing"] {
   font-size: 13px;
 }
 
+/* Navnet er kortets eneste lenke til profilen. ::after strekker treffflaten
+   over hele kortet, så LinkedIn-lenken kan ligge oppå uten nestede <a>. */
+.mkt-person {
+  position: relative;
+}
+
+.mkt-person-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.25s;
+}
+
+.mkt-person-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.mkt-person-link:focus-visible {
+  outline: none;
+}
+
+.mkt-person-link:focus-visible::after {
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
+}
+
+.mkt-person:hover .mkt-person-link {
+  text-decoration-color: currentColor;
+}
+
+.mkt-portrait .mkt-cover {
+  transition: transform 0.6s var(--ease-out);
+}
+
+.mkt-person:hover .mkt-cover {
+  transform: scale(1.03);
+}
+
 .mkt-person-linkedin {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   margin-top: 10px;
   color: var(--ink-faint);
@@ -4532,6 +4600,126 @@ body[data-mode="marketing"] {
 .mkt-subpage .topbar .nav a.active,
 .mkt-subpage .topbar .desktop-nav a.active {
   color: var(--accent-strong);
+}
+
+/* ——— Profile page (/team/[slug]) ——— */
+.person-back {
+  margin: 0 0 28px;
+}
+
+.person-profile {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+  margin-bottom: 72px;
+}
+
+.person-profile-photo {
+  position: sticky;
+  top: 104px;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: var(--surface-wash);
+  display: grid;
+  place-items: center;
+}
+
+.person-profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+
+.person-profile-body {
+  padding-top: clamp(0px, 4vw, 48px);
+}
+
+.person-profile-body .mkt-sub-title {
+  margin-bottom: 24px;
+}
+
+.person-profile-bio {
+  font-size: var(--t-para);
+  line-height: 1.6;
+  color: var(--ink-body);
+  max-width: 56ch;
+  margin: 0 0 40px;
+}
+
+.person-profile-contact {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid var(--line);
+  max-width: 56ch;
+}
+
+.person-profile-contact > div {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.person-profile-contact dt {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.person-profile-contact dd {
+  margin: 0;
+  font-size: var(--t-small);
+  overflow-wrap: anywhere;
+}
+
+.person-profile-contact a {
+  color: var(--ink);
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.person-profile-contact a:hover {
+  color: var(--accent-strong);
+  border-color: currentColor;
+}
+
+.person-profile-linkedin {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.person-profile-linkedin svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+@media (max-width: 860px) {
+  .person-profile {
+    grid-template-columns: 1fr;
+  }
+
+  .person-profile-photo {
+    position: relative;
+    top: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .person-profile-body {
+    padding-top: 0;
+  }
+
+  .person-profile-contact > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
 }
 
 @media (max-width: 720px) {

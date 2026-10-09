@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
@@ -10,7 +11,7 @@ import ValueGlyph from "@/components/home/ValueGlyph";
 import { IconArrowUpRight } from "@/components/icons";
 import { CLIENTS } from "@/lib/clients";
 import { home } from "@/lib/content/home";
-import { PEOPLE } from "@/lib/people";
+import { PEOPLE, personPath } from "@/lib/people";
 import PersonLinkedIn from "@/components/sections/PersonLinkedIn";
 import { useLocale } from "@/lib/i18n/locale";
 import { t, tList } from "@/lib/i18n/types";
@@ -21,7 +22,7 @@ const fadeUp = {
 };
 
 export default function MarketingHome() {
-  const { locale } = useLocale();
+  const { locale, href } = useLocale();
   const reduce = useReducedMotion();
   const searchParams = useSearchParams();
   const [journeyStep, setJourneyStep] = useState(0);
@@ -372,7 +373,14 @@ export default function MarketingHome() {
                   )}
                 </div>
                 <div className="mkt-person-info">
-                  <h3>{person.name}</h3>
+                  <h3>
+                    <Link
+                      href={href(personPath(person.slug))}
+                      className="mkt-person-link"
+                    >
+                      {person.name}
+                    </Link>
+                  </h3>
                   <p>{t(person.role, locale)}</p>
                   <PersonLinkedIn
                     name={person.name}
