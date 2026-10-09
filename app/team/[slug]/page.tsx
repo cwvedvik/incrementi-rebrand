@@ -47,6 +47,12 @@ export async function generateMetadata({
       type: "profile",
       images: person.fullPhoto ? [{ url: person.fullPhoto }] : undefined,
     },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: person.fullPhoto ? [person.fullPhoto] : undefined,
+    },
   };
 }
 

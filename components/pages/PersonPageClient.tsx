@@ -35,7 +35,7 @@ export default function PersonPageClient({ slug }: { slug: string }) {
   return (
     <PageShell wide>
       <p className="page-back person-back">
-        <Link href={href("/#om-oss")}>← {t(copy.back, locale)}</Link>
+        <Link href={`${href("/")}?s=om-oss`}>← {t(copy.back, locale)}</Link>
       </p>
 
       <article className="person-profile">
