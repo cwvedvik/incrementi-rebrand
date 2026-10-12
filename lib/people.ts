@@ -84,7 +84,7 @@ export const PEOPLE: Person[] = [
       en: "Rishi has a background in building automation and control systems (BACS) and IP network infrastructure. In 2006 he moved into the offshore and maritime industry. Since then he has been responsible for more than 100 projects, teams of over 25 engineers and subcontractors, and contract values above NOK 400 million. Most recently he was Head of Projects at Aukra Maritime. He co-founded Seaquent Labs, which develops autonomous control systems for lifting and handling operations, and which exited in 2023. During the pandemic he also built and sold another business.",
     },
     photo: "/media/portraits/2026_Incrementi_KristovRishiXavier_kvadrat.jpg",
-    fullPhoto: "/media/portraits/full/kristov-rishi-xavier.jpg",
+    fullPhoto: "/media/portraits/full/kristov-rishi-xavier-v2.jpg",
     initials: "KX",
     email: "krx@incrementi.no",
     linkedin: "https://www.linkedin.com/in/krxavier/",
