@@ -63,9 +63,13 @@ export default function PersonPageClient({ slug }: { slug: string }) {
           <motion.h1 className="display mkt-sub-title" {...fade(0.08)}>
             {person.name}
           </motion.h1>
-          <motion.p className="person-profile-bio" {...fade(0.12)}>
-            {t(person.bio, locale)}
-          </motion.p>
+          <motion.div className="person-profile-bio" {...fade(0.12)}>
+            {t(person.bio, locale)
+              .split("\n\n")
+              .map((paragraph) => (
+                <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+              ))}
+          </motion.div>
 
           <motion.dl className="person-profile-contact" {...fade(0.16)}>
             {person.email ? (

@@ -4648,6 +4648,14 @@ body[data-mode="marketing"] {
   margin: 0 0 40px;
 }
 
+.person-profile-bio p {
+  margin: 0;
+}
+
+.person-profile-bio p + p {
+  margin-top: 1em;
+}
+
 .person-profile-contact {
   display: grid;
   gap: 0;
