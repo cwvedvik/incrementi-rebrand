@@ -5176,15 +5176,7 @@ body[data-mode="marketing"] {
 }
 
 .lp-logos {
-  padding: 28px 20px;
-  border-block: 1px solid var(--line);
-  text-align: center;
-}
-
-.lp-logos p {
-  margin-bottom: 16px;
-  font-size: 13px;
-  color: var(--ink-muted);
+  padding: 8px 20px 16px;
 }
 
 /* Logofilene er hvite silhuetter laget for mørk bunn. På lys bunn gjøres de
@@ -5203,7 +5195,7 @@ body[data-mode="marketing"] {
   height: 44px;
   width: auto;
   filter: brightness(0);
-  opacity: 0.55;
+  opacity: 0.4;
 }
 
 .lp-letter {

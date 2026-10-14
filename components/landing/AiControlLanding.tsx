@@ -64,7 +64,6 @@ export default function AiControlLanding() {
         </section>
 
         <section className="lp-logos" aria-label={aiControl.logosLabel}>
-          <p>{aiControl.logosLabel}</p>
           <div className="lp-logo-row">
             {CLIENTS.map((c) => (
               // eslint-disable-next-line @next/next/no-img-element
