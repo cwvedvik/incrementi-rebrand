@@ -24,7 +24,7 @@ function Cta() {
 }
 
 export default function AiControlLanding() {
-  const { hero, sections, photo, solution, close, faq, contact } = aiControl;
+  const { hero, sections, photo, solution, contact } = aiControl;
 
   useEffect(() => {
     document.body.dataset.mode = "marketing";
@@ -106,24 +106,6 @@ export default function AiControlLanding() {
               ))}
             </ul>
             <Cta />
-          </section>
-
-          <section>
-            <h2>{close.title}</h2>
-            {close.paragraphs.map((p) => (
-              <p key={p}>{p}</p>
-            ))}
-            <Cta />
-          </section>
-
-          <section>
-            <h2>{faq.title}</h2>
-            {faq.items.map((item) => (
-              <div key={item.q} className="lp-faq">
-                <h3>{item.q}</h3>
-                <p>{item.a}</p>
-              </div>
-            ))}
           </section>
         </article>
 

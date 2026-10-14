@@ -66,30 +66,6 @@ export const aiControl = {
       ["Gjenbruk.", "Samme lag fungerer på tvers av AI-modeller, assistenter og agenter, så nye løsninger bygger på integrasjonene, konteksten og kontrollene dere allerede har."],
     ],
   },
-  close: {
-    title: "Hvor trygg er deres bruk av AI?",
-    paragraphs: [
-      "Book en samtale med oss om hvordan dere kan ta AI fra enkeltstående verktøy til kontrollerte løsninger som skaper verdi i virksomhetens arbeidsprosesser.",
-      "På 30 minutter går vi gjennom hvordan dere bruker AI i dag, hvor risikoen og kostnadene ligger, og hva som er et fornuftig første steg.",
-    ],
-  },
-  faq: {
-    title: "Vanlige spørsmål",
-    items: [
-      {
-        q: "Må vi bytte AI-verktøy eller systemer?",
-        a: "Nei. Laget kobler AI til systemene og kunnskapskildene dere allerede har, og fungerer på tvers av AI-modeller, assistenter og agenter.",
-      },
-      {
-        q: "Hvordan ivaretas informasjonssikkerheten?",
-        a: "Dere styrer hvilke kilder AI har tilgang til og hvilke handlinger den kan utføre, og bruken kan spores. Incrementi er en del av 99X Group, som er sertifisert etter ISO/IEC 27001 og ISO/IEC 27701.",
-      },
-      {
-        q: "Eier vi det dere bygger?",
-        a: "Ja. Dere eier kode, data og IP fra dag én, med minst mulig leverandørbinding.",
-      },
-    ],
-  },
   contact: {
     title: "Klar for å få kontroll på AI?",
     lead: "Kontakt oss for en 30 min strategiprat.",

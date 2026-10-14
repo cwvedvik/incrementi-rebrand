@@ -5217,20 +5217,6 @@ body[data-mode="marketing"] {
   color: var(--ink);
 }
 
-.lp-faq + .lp-faq {
-  margin-top: 24px;
-}
-
-.lp-faq h3 {
-  font-size: var(--lp-text);
-  font-weight: 600;
-  color: var(--ink);
-}
-
-.lp-faq p {
-  margin-top: 4px;
-}
-
 .lp-contact {
   scroll-margin-top: 60px;
   padding: 72px 0 80px;
