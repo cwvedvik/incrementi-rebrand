@@ -3095,6 +3095,15 @@ body[data-mode="marketing"] {
   margin-top: 8px;
 }
 
+.mkt-post-hero-stats .trust-seal-mark {
+  width: 62px;
+  height: 62px;
+}
+
+.mkt-post-hero-stats .trust-seals ul {
+  gap: 12px;
+}
+
 .mkt-post-hero-stats strong {
   font-family: var(--display);
   font-weight: 400;
