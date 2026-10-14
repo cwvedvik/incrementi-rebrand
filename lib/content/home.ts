@@ -23,11 +23,10 @@ export const home = {
     lead: {"no":"Incrementi samler data fra systemene dere allerede har og bygger et fundament for innsikt og automatisering. Dette hjelper bedrifter med å forenkle arbeidsprosesser, få systemer og data til å henge sammen, og bygge løsninger ansatte tar i bruk. Vi rådgir først, validerer før dere investerer, og bygger steg for steg, med trygg og kontrollert bruk av AI når det er riktig verktøy.","en":"Incrementi gathers data from the systems you already have and builds a foundation for insight and automation. This helps companies simplify work processes, connect systems and data, and build solutions employees put to use. We advise first, validate before you invest, and build step by step, with safe and controlled use of AI when it is the right tool."},
     cta: {"no":"Book en strategisamtale","en":"Book a strategy call"},
     secondary: {"no":"Se hvordan vi jobber","en":"See how we work"},
-    stats: [
-      { value: "650+", label: {"no":"spesialister gjennom 99X","en":"specialists through 99X"} },
-      { value: {"no":"20 år","en":"20 years"}, label: {"no":"med digital produktutvikling i gruppen","en":"of digital product development in the group"} },
-      { value: "ISO", label: { no: "9001 · 27001 · 27701", en: "9001 · 27001 · 27701" } },
-    ],
+    groupYears: {
+      value: {"no":"20 år","en":"20 years"},
+      label: {"no":"med digital produktutvikling i gruppen","en":"of digital product development in the group"},
+    },
   },
   logos: {
     eyebrow: {"no":"Utvalgte kunder","en":"Selected clients"},
@@ -241,12 +240,22 @@ export const home = {
     groupEyebrow: {"no":"Part of 99X Group","en":"Part of 99X Group"},
     groupTitle: {"no":"Et lokalt team med et internasjonalt fagmiljø bak seg.","en":"A local team backed by an international engineering community."},
     groupBody: {"no":"Incrementi er en del av 99X Group. Vi kombinerer forretningsnær rådgivning og domeneinnsikt med gruppens brede fagmiljø, og leveransene våre er dekket av 99X’ sertifiserte styringssystemer for kvalitet, informasjonssikkerhet og personvern.","en":"Incrementi is part of 99X Group. We combine business-focused advisory and domain insight with the group's broad expertise, and our deliveries are covered by 99X's certified management systems for quality, information security and privacy."},
-    badges: [
-      { value: "650+", label: {"no":"teknologispesialister","en":"technology specialists"} },
-      { value: "ISO 9001", label: {"no":"kvalitetsstyring","en":"quality management"} },
-      { value: "ISO 27001", label: {"no":"informasjonssikkerhet","en":"information security"} },
-      { value: "ISO 27701", label: {"no":"personvern","en":"privacy"} },
+  },
+  trust: {
+    // ISO forbyr logoen sin brukt i forbindelse med sertifisering, så seglene
+    // oppgir bare standard og versjon. Versjonene er de 99X selv publiserer.
+    certifications: [
+      { prefix: "ISO", standard: "9001", year: "2015", label: {"no":"Kvalitetsstyring","en":"Quality management"} },
+      { prefix: "ISO/IEC", standard: "27001", year: "2022", label: {"no":"Informasjonssikkerhet","en":"Information security"} },
+      { prefix: "ISO/IEC", standard: "27701", year: "2019", label: {"no":"Personvern","en":"Privacy"} },
     ],
+    certifiedThrough: {"no":"Sertifisert gjennom 99X Group","en":"Certified through 99X Group"},
+    specialists: {
+      value: "650+",
+      short: {"no":"spesialister gjennom 99X","en":"specialists through 99X"},
+      long: {"no":"teknologispesialister i 99X Group","en":"technology specialists in 99X Group"},
+    },
+    ninetyNineXHref: "https://99x.io",
   },
   faq: {
     eyebrow: {"no":"Spørsmål vi ofte får","en":"Questions we often get"},

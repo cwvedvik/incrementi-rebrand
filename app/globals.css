@@ -3049,7 +3049,7 @@ body[data-mode="marketing"] {
 }
 
 .mkt-post-hero-inner {
-  max-width: 720px;
+  max-width: 920px;
 }
 
 .mkt-post-hero-body {
@@ -3083,6 +3083,14 @@ body[data-mode="marketing"] {
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+.mkt-post-hero-stats .mkt-post-hero-trust {
+  justify-content: center;
+}
+
+.mkt-post-hero-stats .trust-seals-caption {
+  margin-top: 8px;
 }
 
 .mkt-post-hero-stats strong {
@@ -3805,32 +3813,172 @@ body[data-mode="marketing"] {
   margin-bottom: 28px;
 }
 
-.mkt-badges {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
+.mkt-trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 28px 56px;
+  border-top: 1px solid rgba(80, 118, 86, 0.35);
+  padding-top: 28px;
 }
 
-.mkt-badge {
+/* ——— Tillitsmerker: ISO-segl og 99X ——— */
+/* Fargene kommer fra tokenene, så de samme merkene fungerer på lys flate og
+   i den mørke footeren, der .mkt-on-deep setter tokenene på nytt. */
+.trust-99x {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 18px 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: inherit;
+  transition: border-color 0.25s, background-color 0.25s;
+}
+
+.trust-99x:hover {
+  border-color: var(--accent);
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.trust-99x img {
+  display: block;
+  width: auto;
+  height: 28px;
+}
+
+.trust-99x-md img {
+  height: 38px;
+}
+
+.trust-99x-rule {
+  width: 1px;
+  align-self: stretch;
+  background: var(--line);
+}
+
+.trust-99x-copy {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  border-top: 1px solid rgba(80, 118, 86, 0.35);
-  padding-top: 14px;
+  gap: 4px;
 }
 
-.mkt-badge strong {
+.trust-99x-copy strong {
   font-family: var(--display);
   font-weight: 500;
-  font-size: var(--t-sub);
+  font-size: 20px;
+  line-height: 1;
   color: var(--accent-strong);
 }
 
-.mkt-badge span {
+.trust-99x-md .trust-99x-copy strong {
+  font-size: var(--t-sub);
+}
+
+.trust-99x-copy span {
   font-size: 12px;
+  line-height: 1.35;
   color: var(--ink-muted);
-  letter-spacing: 0.08em;
+  max-width: 22ch;
+}
+
+.trust-seals ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.trust-seals-md ul {
+  gap: 18px 32px;
+}
+
+.trust-seal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.trust-seal-mark {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  overflow: visible;
+}
+
+.trust-seal-md .trust-seal-mark {
+  width: 64px;
+  height: 64px;
+}
+
+.trust-seal-ring {
+  fill: none;
+  stroke: var(--accent-2);
+  stroke-width: 1.3;
+}
+
+.trust-seal-inner {
+  fill: none;
+  stroke: var(--accent-2);
+  stroke-opacity: 0.45;
+  stroke-width: 0.8;
+  stroke-dasharray: 1.4 2.2;
+}
+
+.trust-seal-dot {
+  fill: var(--accent);
+}
+
+.trust-seal-prefix,
+.trust-seal-year {
+  font-family: var(--sans);
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.trust-seal-prefix {
+  fill: var(--ink-muted);
+}
+
+.trust-seal-year {
+  fill: var(--accent);
+}
+
+.trust-seal-number {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  fill: var(--ink);
+}
+
+.trust-seal-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.trust-seal-text strong {
+  font-weight: 500;
+  font-size: var(--t-small);
+  color: var(--ink);
+}
+
+.trust-seal-text span {
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+}
+
+.trust-seals-caption {
+  margin: 12px 0 0;
+  font-size: var(--t-label);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: var(--ink-muted);
 }
 
 /* ——— FAQ ——— */
@@ -4092,6 +4240,10 @@ body[data-mode="marketing"] {
   color: var(--ink-muted);
 }
 
+.mkt-footer-seals {
+  margin-top: 22px;
+}
+
 .mkt-footer-in,
 .mkt-footer-brand {
   display: none;
@@ -4101,7 +4253,6 @@ body[data-mode="marketing"] {
   .mkt-journey-tabs,
   .mkt-cap-grid,
   .mkt-triple,
-  .mkt-badges,
   .mkt-ref-grid,
   .mkt-cta-grid,
   .mkt-team,
@@ -4296,7 +4447,6 @@ body[data-mode="marketing"] {
 
   .mkt-cap-grid,
   .mkt-triple,
-  .mkt-badges,
   .mkt-ref-grid,
   .mkt-cta-grid,
   .mkt-team,
@@ -4350,6 +4500,17 @@ body[data-mode="marketing"] {
 
   .mkt-99x-badge img {
     height: 40px;
+  }
+
+  .mkt-trust {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .trust-seals-md ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 16px;
   }
 }
 

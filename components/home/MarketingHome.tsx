@@ -13,6 +13,7 @@ import { CLIENTS } from "@/lib/clients";
 import { home } from "@/lib/content/home";
 import { PEOPLE, personPath } from "@/lib/people";
 import PersonLinkedIn from "@/components/sections/PersonLinkedIn";
+import { CertSeals, NinetyNineXBadge } from "@/components/trust/TrustBadges";
 import { useLocale } from "@/lib/i18n/locale";
 import { t, tList } from "@/lib/i18n/types";
 
@@ -134,14 +135,16 @@ export default function MarketingHome() {
       <section className="mkt-post-hero" aria-label={t(home.hero.titleMain, locale)}>
         <div className="mkt-wrap mkt-post-hero-inner">
           <ul className="mkt-post-hero-stats">
-            {home.hero.stats.map((s) => (
-              <li key={typeof s.value === "string" ? s.value : s.value.no}>
-                <strong>
-                  {typeof s.value === "string" ? s.value : t(s.value, locale)}
-                </strong>
-                <span>{t(s.label, locale)}</span>
-              </li>
-            ))}
+            <li className="mkt-post-hero-trust">
+              <NinetyNineXBadge size="sm" />
+            </li>
+            <li>
+              <strong>{t(home.hero.groupYears.value, locale)}</strong>
+              <span>{t(home.hero.groupYears.label, locale)}</span>
+            </li>
+            <li className="mkt-post-hero-trust">
+              <CertSeals size="sm" />
+            </li>
           </ul>
         </div>
       </section>
@@ -395,13 +398,9 @@ export default function MarketingHome() {
           <div className="mkt-group">
             <h3 className="display">{t(home.about.groupTitle, locale)}</h3>
             <p>{t(home.about.groupBody, locale)}</p>
-            <div className="mkt-badges">
-              {home.about.badges.map((b) => (
-                <div key={b.value} className="mkt-badge">
-                  <strong>{b.value}</strong>
-                  <span>{t(b.label, locale)}</span>
-                </div>
-              ))}
+            <div className="mkt-trust">
+              <NinetyNineXBadge size="md" />
+              <CertSeals size="md" />
             </div>
           </div>
         </div>
@@ -496,6 +495,7 @@ export default function MarketingHome() {
               <img src="/media/brand/99xlogo-color.svg" alt="99X" />
               <span>{t(home.footer.groupBadge, locale)}</span>
             </a>
+            <CertSeals size="sm" className="mkt-footer-seals" />
           </div>
         </div>
       </footer>
