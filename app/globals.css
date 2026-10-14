@@ -4083,6 +4083,11 @@ body[data-mode="marketing"] {
   backdrop-filter: blur(8px);
 }
 
+/* Holder plass mens HubSpot-skjemaet lastes, så siden ikke hopper. */
+.mkt-hubspot-card .hs-form-frame {
+  min-height: 320px;
+}
+
 /* Det dypgrønne båndet snur tekstrollene. I stedet for å overstyre hver
    enkelt regel setter flaten tokenene på nytt, så alt som ligger inni
    følger etter av seg selv. Her er det merkevarens lyse halvdel som

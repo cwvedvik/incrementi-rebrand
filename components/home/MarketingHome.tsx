@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
-import ContactForm from "@/components/chat/ContactForm";
+import HubSpotForm from "@/components/sections/HubSpotForm";
 import SiteNav from "@/components/sections/SiteNav";
 import ValueGlyph from "@/components/home/ValueGlyph";
 import { IconArrowUpRight } from "@/components/icons";
@@ -441,7 +441,11 @@ export default function MarketingHome() {
               </a>
             </div>
           </div>
-          <ContactForm heading={t(home.contact.formHeading, locale)} />
+          <div className="contact-card mkt-hubspot-card">
+            <div className="k">{locale === "no" ? "Kontakt" : "Contact"}</div>
+            <h4>{t(home.contact.formHeading, locale)}</h4>
+            <HubSpotForm />
+          </div>
         </div>
       </section>
 
