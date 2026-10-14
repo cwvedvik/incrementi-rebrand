@@ -2,6 +2,9 @@ import { GTM_ID, hubspotScriptSrc } from "@/lib/analytics";
 
 // Must run before GTM loads. HubSpot's cookie banner is the consent source:
 // its listener fires on every page load with the stored choice and on change.
+// The HubSpot loader is injected from here rather than rendered as a <script
+// src>, because React hoists async scripts above inline ones and HubSpot must
+// not initialise before the consent listener is queued.
 const consentBootstrap = `
 window.dataLayer=window.dataLayer||[];
 function gtag(){window.dataLayer.push(arguments);}
@@ -28,7 +31,13 @@ consent_analytics:!!c.analytics,
 consent_advertisement:!!c.advertisement,
 consent_functionality:!!c.functionality});
 }]);
-`;
+${
+  hubspotScriptSrc
+    ? `(function(d){var s=d.createElement('script');s.id='hs-script-loader';
+s.async=true;s.defer=true;s.src=${JSON.stringify(hubspotScriptSrc)};
+d.head.appendChild(s);})(document);`
+    : ""
+}`;
 
 const gtmSnippet = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -46,15 +55,6 @@ export function TrackingHead() {
       {/* Google Tag Manager */}
       <script id="gtm" dangerouslySetInnerHTML={{ __html: gtmSnippet }} />
       {/* End Google Tag Manager */}
-      {hubspotScriptSrc && (
-        <script
-          id="hs-script-loader"
-          type="text/javascript"
-          async
-          defer
-          src={hubspotScriptSrc}
-        />
-      )}
     </>
   );
 }
