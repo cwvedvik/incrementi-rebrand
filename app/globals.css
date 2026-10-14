@@ -3096,8 +3096,8 @@ body[data-mode="marketing"] {
 }
 
 .mkt-post-hero-stats .trust-seal-mark {
-  width: 62px;
-  height: 62px;
+  width: 78px;
+  height: 78px;
 }
 
 .mkt-post-hero-stats .trust-seals ul {
@@ -4081,6 +4081,11 @@ body[data-mode="marketing"] {
   background: rgba(255, 255, 255, 0.66);
   border: 1px solid var(--line);
   backdrop-filter: blur(8px);
+}
+
+/* Holder plass mens HubSpot-skjemaet lastes, så siden ikke hopper. */
+.mkt-hubspot-card .hs-form-frame {
+  min-height: 320px;
 }
 
 /* Det dypgrønne båndet snur tekstrollene. I stedet for å overstyre hver
