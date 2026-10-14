@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import ContactForm from "@/components/chat/ContactForm";
+import CookieSettingsButton from "@/components/analytics/CookieSettingsButton";
 import SiteNav from "@/components/sections/SiteNav";
 import ValueGlyph from "@/components/home/ValueGlyph";
 import { IconArrowUpRight } from "@/components/icons";
@@ -16,6 +17,7 @@ import PersonLinkedIn from "@/components/sections/PersonLinkedIn";
 import { CertSeals, NinetyNineXBadge } from "@/components/trust/TrustBadges";
 import { useLocale } from "@/lib/i18n/locale";
 import { t, tList } from "@/lib/i18n/types";
+import { pushEvent } from "@/lib/analytics";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -433,10 +435,16 @@ export default function MarketingHome() {
             <div className="mkt-contact-person">
               <strong>{home.contact.person.name}</strong>
               <span>{home.contact.person.role}</span>
-              <a href={`mailto:${home.contact.person.email}`}>
+              <a
+                href={`mailto:${home.contact.person.email}`}
+                onClick={() => pushEvent("contact_click", { method: "email" })}
+              >
                 {home.contact.person.email}
               </a>
-              <a href={`tel:${home.contact.person.phone.replace(/\s/g, "")}`}>
+              <a
+                href={`tel:${home.contact.person.phone.replace(/\s/g, "")}`}
+                onClick={() => pushEvent("contact_click", { method: "phone" })}
+              >
                 {home.contact.person.phone}
               </a>
             </div>
@@ -458,13 +466,17 @@ export default function MarketingHome() {
             <div className="mkt-footer-legal">
               <strong>{t(home.footer.legalName, locale)}</strong>
               <span>{t(home.footer.orgNr, locale)}</span>
-              <a href={home.footer.telHref}>
+              <a
+                href={home.footer.telHref}
+                onClick={() => pushEvent("contact_click", { method: "phone" })}
+              >
                 {t(home.footer.telLabel, locale)}:{" "}
                 {t(home.footer.telDisplay, locale)}
               </a>
             </div>
             <nav className="mkt-footer-nav" aria-label="Footer">
               <a href="#kontakt">{t(home.hero.cta, locale)}</a>
+              <CookieSettingsButton />
             </nav>
           </div>
 

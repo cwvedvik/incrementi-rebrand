@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import SiteNav from "./SiteNav";
 import PageCtaBand from "./PageCtaBand";
+import CookieSettingsButton from "@/components/analytics/CookieSettingsButton";
 
 /**
  * Shared shell for marketing subpages (/platform, /results, cases).
@@ -28,6 +29,9 @@ export default function PageShell({
       <main className={`mkt-sub-main${wide ? " mkt-sub-main-wide" : ""}`}>
         {children}
         <PageCtaBand />
+        <div className="mkt-sub-legal">
+          <CookieSettingsButton />
+        </div>
       </main>
     </div>
   );

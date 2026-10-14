@@ -16,6 +16,7 @@ export const ui = {
   },
   menu: { no: "Meny", en: "Menu" },
   close: { no: "Lukk", en: "Close" },
+  cookieSettings: { no: "Informasjonskapsler", en: "Cookie settings" },
   companyLine: { no: "A 99x Company", en: "A 99x Company" },
   openExperience: {
     no: "Åpne den levende opplevelsen",

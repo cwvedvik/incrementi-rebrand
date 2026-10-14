@@ -4,6 +4,10 @@ import "./globals.css";
 import { getRequestLocale } from "@/lib/i18n/server";
 import { htmlLang } from "@/lib/i18n/config";
 import { LocaleProvider } from "@/lib/i18n/locale";
+import {
+  GtmNoScript,
+  TrackingHead,
+} from "@/components/analytics/TrackingScripts";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -77,7 +81,11 @@ export default async function RootLayout({
   const locale = await getRequestLocale();
   return (
     <html lang={htmlLang(locale)} className={dmSans.variable}>
+      <head>
+        <TrackingHead />
+      </head>
       <body>
+        <GtmNoScript />
         <LocaleProvider locale={locale}>{children}</LocaleProvider>
       </body>
     </html>
