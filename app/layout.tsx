@@ -4,6 +4,12 @@ import "./globals.css";
 import { getRequestLocale } from "@/lib/i18n/server";
 import { htmlLang } from "@/lib/i18n/config";
 import { LocaleProvider } from "@/lib/i18n/locale";
+import {
+  GtmNoScript,
+  TrackingHead,
+} from "@/components/analytics/TrackingScripts";
+import HubSpotPageViews from "@/components/analytics/HubSpotPageViews";
+import { hubspotScriptSrc } from "@/lib/analytics";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -77,7 +83,12 @@ export default async function RootLayout({
   const locale = await getRequestLocale();
   return (
     <html lang={htmlLang(locale)} className={dmSans.variable}>
+      <head>
+        <TrackingHead />
+      </head>
       <body>
+        <GtmNoScript />
+        {hubspotScriptSrc && <HubSpotPageViews />}
         <LocaleProvider locale={locale}>{children}</LocaleProvider>
       </body>
     </html>

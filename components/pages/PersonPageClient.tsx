@@ -9,6 +9,7 @@ import { IconLinkedIn } from "@/components/icons";
 import { getPerson } from "@/lib/people";
 import { useLocale } from "@/lib/i18n/locale";
 import { t } from "@/lib/i18n/types";
+import { pushEvent } from "@/lib/analytics";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -76,7 +77,14 @@ export default function PersonPageClient({ slug }: { slug: string }) {
               <div>
                 <dt>{t(copy.email, locale)}</dt>
                 <dd>
-                  <a href={`mailto:${person.email}`}>{person.email}</a>
+                  <a
+                    href={`mailto:${person.email}`}
+                    onClick={() =>
+                      pushEvent("contact_click", { method: "email" })
+                    }
+                  >
+                    {person.email}
+                  </a>
                 </dd>
               </div>
             ) : null}
@@ -84,7 +92,12 @@ export default function PersonPageClient({ slug }: { slug: string }) {
               <div>
                 <dt>{t(copy.phone, locale)}</dt>
                 <dd>
-                  <a href={`tel:${person.phone.replace(/\s+/g, "")}`}>
+                  <a
+                    href={`tel:${person.phone.replace(/\s+/g, "")}`}
+                    onClick={() =>
+                      pushEvent("contact_click", { method: "phone" })
+                    }
+                  >
                     {person.phone}
                   </a>
                 </dd>

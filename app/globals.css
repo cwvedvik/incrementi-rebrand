@@ -4174,6 +4174,27 @@ body[data-mode="marketing"] {
   color: var(--accent-strong);
 }
 
+.cookie-settings-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  transition: color 0.2s ease;
+}
+
+.cookie-settings-link:hover,
+.cookie-settings-link:focus-visible {
+  color: var(--accent-strong);
+}
+
+.mkt-sub-legal {
+  padding: 8px 0 32px;
+}
+
 .mkt-place {
   display: grid;
   grid-template-columns: 18px 1fr;

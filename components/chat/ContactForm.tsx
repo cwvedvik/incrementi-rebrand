@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useLocale } from "@/lib/i18n/locale";
 import { ui } from "@/lib/i18n/ui";
 import { t } from "@/lib/i18n/types";
+import { pushEvent } from "@/lib/analytics";
 
 interface ContactFormProps {
   compact?: boolean;
@@ -39,10 +40,21 @@ export default function ContactForm({
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, company, email, message }),
+        body: JSON.stringify({
+          name,
+          company,
+          email,
+          message,
+          pageUri: window.location.href,
+          pageName: document.title,
+        }),
       });
       if (!res.ok) throw new Error("request failed");
       setStatus("done");
+      pushEvent("generate_lead", {
+        form_location: compact ? "chat" : "page",
+        locale,
+      });
     } catch {
       setStatus("error");
     }
