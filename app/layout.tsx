@@ -8,6 +8,8 @@ import {
   GtmNoScript,
   TrackingHead,
 } from "@/components/analytics/TrackingScripts";
+import HubSpotPageViews from "@/components/analytics/HubSpotPageViews";
+import { hubspotScriptSrc } from "@/lib/analytics";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -86,6 +88,7 @@ export default async function RootLayout({
       </head>
       <body>
         <GtmNoScript />
+        {hubspotScriptSrc && <HubSpotPageViews />}
         <LocaleProvider locale={locale}>{children}</LocaleProvider>
       </body>
     </html>

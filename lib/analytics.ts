@@ -15,6 +15,7 @@ declare global {
   interface Window {
     dataLayer?: unknown[];
     _hsp?: unknown[];
+    _hsq?: unknown[];
   }
 }
 
