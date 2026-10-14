@@ -313,7 +313,7 @@ export const home = {
     telDisplay: { no: "934 00 825", en: "934 00 825" },
     telHref: "tel:+4793400825",
     mapsHref:
-      "https://www.openstreetmap.org/?mlat=59.9086&mlon=10.7578#map=17/59.9086/10.7578",
+      "https://www.google.com/maps/search/?api=1&query=Dronning+Eufemias+gate+26%2C+0191+Oslo",
     mapEmbed:
       "https://www.openstreetmap.org/export/embed.html?bbox=10.748%2C59.905%2C10.768%2C59.912&layer=mapnik&marker=59.9086%2C10.7578",
     groupBadge: {
