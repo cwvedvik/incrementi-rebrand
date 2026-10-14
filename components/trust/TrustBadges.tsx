@@ -106,3 +106,17 @@ export function NinetyNineXBadge({ size = "md" }: { size?: Size }) {
     </a>
   );
 }
+
+/**
+ * Fast tillitsstripe: 99X-merket og ISO-seglene i liten utgave, slik de står
+ * under hero-en på forsiden. Brukes der et skjema eller en CTA trenger bevis
+ * rett ved siden av seg.
+ */
+export function TrustBar({ className }: { className?: string }) {
+  return (
+    <div className={`trust-bar${className ? ` ${className}` : ""}`}>
+      <NinetyNineXBadge size="sm" />
+      <CertSeals size="sm" />
+    </div>
+  );
+}

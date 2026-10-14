@@ -70,7 +70,5 @@ export const aiControl = {
     title: "Klar for å få kontroll på AI?",
     lead: "Kontakt oss for en 30 min strategiprat.",
     personIntro: "Du snakker med",
-    trust:
-      "Incrementi er en del av 99X Group, sertifisert etter ISO 9001, ISO/IEC 27001 og ISO/IEC 27701.",
   },
 } as const;

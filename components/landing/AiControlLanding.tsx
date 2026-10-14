@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import HubSpotForm from "@/components/sections/HubSpotForm";
 import HeroVideo from "@/components/landing/HeroVideo";
+import { TrustBar } from "@/components/trust/TrustBadges";
 import { aiControl } from "@/lib/content/aiControl";
 import { CLIENTS } from "@/lib/clients";
 import { home } from "@/lib/content/home";
@@ -142,7 +143,7 @@ export default function AiControlLanding() {
                 </p>
               </div>
             ) : null}
-            <p className="lp-trust">{contact.trust}</p>
+            <TrustBar className="lp-trust" />
           </div>
         </section>
       </main>
