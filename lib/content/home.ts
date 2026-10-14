@@ -301,6 +301,11 @@ export const home = {
     },
   },
   footer: {
+    // Kampanjesiden finnes bare på norsk, så lenken peker alltid dit.
+    aiControl: {
+      href: "/ai-kontroll",
+      label: { no: "AI Operations & Control Layer", en: "AI Operations & Control Layer" },
+    },
     line: {"no":"Rådgivning · Data · Programvare · Modernisering · AI der det gir verdi","en":"Advisory · Data · Software · Modernisation · AI where it adds value"},
     legalName: { no: "Incrementi AS", en: "Incrementi AS" },
     orgNr: { no: "Org. nr. 930 168 408", en: "Org. no. 930 168 408" },

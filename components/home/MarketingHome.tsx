@@ -480,6 +480,9 @@ export default function MarketingHome() {
             </div>
             <nav className="mkt-footer-nav" aria-label="Footer">
               <a href="#kontakt">{t(home.hero.cta, locale)}</a>
+              <Link href={home.footer.aiControl.href}>
+                {t(home.footer.aiControl.label, locale)}
+              </Link>
               <CookieSettingsButton />
             </nav>
           </div>
