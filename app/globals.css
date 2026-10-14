@@ -4968,3 +4968,949 @@ body[data-mode="marketing"] {
     padding: 22px 0;
   }
 }
+
+/* ============================================================
+   LANDINGSSIDE: AI OPERATIONS & CONTROL LAYER (/ai-kontroll)
+   ============================================================ */
+/* Kampanjesiden har ett mål: at besøkende booker en strategiprat. Menyen er
+   derfor fjernet, og hver seksjon ender i samme handling. */
+.lp-wrap {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.lp-topbar {
+  justify-content: space-between;
+}
+
+.lp-topbar-cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 18px;
+  border: 1px solid rgba(118, 80, 112, 0.5);
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  transition: background 0.3s var(--ease-haptic), color 0.3s var(--ease-haptic),
+    border-color 0.3s var(--ease-haptic);
+}
+
+.lp-topbar-cta:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--ink-invert);
+}
+
+.lp-topbar-cta-short {
+  display: none;
+}
+
+.lp a:focus-visible,
+.lp button:focus-visible,
+.lp summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ——— Hero ——— */
+/* Samme 1360-ramme som forsidens hero, slik at logoen i topplinja står i
+   tittelens venstrekant. Filmen er 16:9 og vises uten beskjæring: den har
+   voiceover og kan ha tekst i bildet, så forsidens skrå utblødning ville
+   kappet innhold. */
+.lp-hero {
+  position: relative;
+  min-height: min(100dvh, 980px);
+  display: flex;
+  align-items: center;
+  padding: 128px 0 80px;
+  background:
+    radial-gradient(60% 70% at 85% 40%, rgba(133, 162, 137, 0.2), transparent 70%),
+    var(--surface);
+}
+
+.lp-hero-grid {
+  width: min(1360px, calc(100% - 64px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(40px, 4vw, 72px);
+  align-items: center;
+}
+
+.lp-hero-copy {
+  min-width: 0;
+  max-width: 560px;
+}
+
+/* Spørsmålet får egen linje, så det leses som et motsvar til påstanden. */
+.lp-hero-copy .mkt-hero-title-accent {
+  display: block;
+}
+
+.lp .mkt-hero-title,
+.lp .mkt-section-head h2,
+.lp-question-text,
+.lp-conclusion,
+.lp-video-end > p {
+  text-wrap: balance;
+}
+
+.lp-reassure {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 22px;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+
+.lp-reassure li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lp-reassure li::before {
+  content: "";
+  width: 9px;
+  height: 5px;
+  border-left: 1.5px solid var(--accent-2);
+  border-bottom: 1.5px solid var(--accent-2);
+  transform: translateY(-2px) rotate(-45deg);
+}
+
+.lp-hero-media {
+  min-width: 0;
+}
+
+.lp-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--surface-deep);
+  box-shadow: 0 40px 80px -40px rgba(28, 41, 30, 0.55);
+}
+
+.lp-video-el {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lp-video-sound .lp-video-el {
+  object-fit: contain;
+}
+
+.lp-video-preview::after {
+  content: "";
+  position: absolute;
+  inset: 55% 0 0;
+  background: linear-gradient(180deg, transparent, rgba(28, 41, 30, 0.55));
+  pointer-events: none;
+}
+
+.lp-video-play {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 20px 7px 7px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: rgba(241, 238, 234, 0.94);
+  color: var(--ink);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s var(--ease-haptic);
+}
+
+.lp-video-play:hover {
+  background: #fff;
+}
+
+.lp-video-play-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--ink-invert);
+  transition: transform 0.4s var(--ease-haptic);
+}
+
+.lp-video-play:hover .lp-video-play-icon {
+  transform: scale(1.08);
+}
+
+.lp-video-end {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 22px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(28, 41, 30, 0.88);
+  color: #f1eeea;
+}
+
+.lp-video-end > p {
+  font-size: var(--t-h4);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.lp-video-end-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 20px;
+}
+
+.lp-video-end .mkt-btn-primary {
+  background: var(--brand-light-magenta);
+  color: var(--surface-deep);
+}
+
+.lp-video-replay {
+  background: none;
+  border: 0;
+  color: inherit;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+/* ——— Ledermøtet ——— */
+.lp-roles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+}
+
+.lp-role {
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.lp-role-body {
+  font-size: clamp(18px, 1.6vw, 21px);
+  line-height: 1.5;
+  color: var(--ink-body);
+}
+
+.lp-role-body strong {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.lp-bridge {
+  margin-top: 56px;
+  max-width: 58ch;
+  padding-left: 18px;
+  border-left: 2px solid var(--accent);
+  font-size: var(--t-para);
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.lp-question {
+  padding: clamp(80px, 10vw, 140px) 0;
+}
+
+.lp-question-text {
+  max-width: 24ch;
+  font-size: clamp(30px, 4.2vw, 52px);
+  font-weight: 400;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.lp-question-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 36px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid currentColor;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  transition: color 0.2s ease;
+}
+
+.lp-question-link:hover {
+  color: var(--accent-strong);
+}
+
+/* ——— Skiftet ——— */
+.lp-shift-head h2 {
+  max-width: 22ch;
+}
+
+.lp-points {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+}
+
+.lp-point {
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.lp-point h3 {
+  margin-bottom: 12px;
+  font-size: var(--t-sub);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.lp-point p {
+  font-size: var(--t-body);
+  line-height: 1.6;
+  color: var(--ink-body);
+}
+
+.lp-conclusion {
+  margin-top: 80px;
+  max-width: 28ch;
+  font-size: var(--t-h3);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--accent-strong);
+}
+
+/* ——— Kontrollaget ——— */
+.lp-layer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 88px);
+  align-items: start;
+}
+
+.lp-layer-copy .mkt-section-head {
+  margin-bottom: 36px;
+}
+
+.lp-layer-visual {
+  position: sticky;
+  top: 108px;
+}
+
+.lp-benefits {
+  list-style: none;
+  display: grid;
+  gap: 22px;
+  margin-bottom: 40px;
+}
+
+.lp-benefits li {
+  position: relative;
+  padding-left: 30px;
+}
+
+.lp-benefits li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 6px;
+  width: 11px;
+  height: 6px;
+  border-left: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(-45deg);
+}
+
+.lp-benefits h3 {
+  margin-bottom: 4px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.lp-benefits p {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-body);
+}
+
+/* Lagdiagrammet er sidens signatur. Forespørsler går ned fra AI, kontekst går
+   opp fra kildene, og begge møtes i kontrollaget. Prikkene på trådene viser
+   den retningen. */
+.lp-stack {
+  display: grid;
+}
+
+.lp-stack-row {
+  padding: 18px 20px 20px;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+}
+
+.lp-stack-label {
+  margin-bottom: 12px;
+  font-size: var(--t-label);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+
+.lp-stack-row ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lp-stack-row li {
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.lp-stack-wires {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 56px;
+}
+
+.lp-stack-wires span {
+  position: relative;
+}
+
+.lp-stack-wires span::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(118, 80, 112, 0.35);
+}
+
+.lp-stack-wires span::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 3px);
+  top: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: lp-wire-down 2.6s var(--ease-out) infinite;
+}
+
+.lp-stack-wires-up span::after {
+  background: var(--brand-dark-green);
+  animation-name: lp-wire-up;
+}
+
+.lp-stack-wires span:nth-child(2)::after {
+  animation-delay: 0.65s;
+}
+
+.lp-stack-wires span:nth-child(3)::after {
+  animation-delay: 1.3s;
+}
+
+.lp-stack-wires span:nth-child(4)::after {
+  animation-delay: 1.95s;
+}
+
+@keyframes lp-wire-down {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(49px);
+    opacity: 0;
+  }
+}
+
+@keyframes lp-wire-up {
+  0% {
+    transform: translateY(49px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+
+.lp-stack-core {
+  padding: 24px 22px 22px;
+  border: 1px solid rgba(178, 150, 174, 0.45);
+  box-shadow: 0 30px 60px -36px rgba(28, 41, 30, 0.7);
+}
+
+.lp-stack-core-name {
+  margin-bottom: 18px;
+  font-family: var(--display);
+  font-size: clamp(20px, 1.9vw, 24px);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.lp-stack-core ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.lp-stack-core li {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  background: var(--surface-deep);
+}
+
+.lp-stack-core strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.lp-stack-core li span {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink-body);
+}
+
+/* ——— Selvsjekk ——— */
+.lp-check-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(40px, 6vw, 88px);
+  align-items: start;
+}
+
+.lp-check-list {
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.lp-check-list li {
+  border-bottom: 1px solid var(--line);
+}
+
+.lp-check-list label {
+  position: relative;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 18px 4px;
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.lp-check-list input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.lp-check-box {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border: 1.5px solid var(--ink-muted);
+  border-radius: 5px;
+  background: var(--surface-raised);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.lp-check-list label:hover .lp-check-box {
+  border-color: var(--accent);
+}
+
+.lp-check-list input:focus-visible + .lp-check-box {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.lp-check-list label.is-checked .lp-check-box {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.lp-check-list label.is-checked .lp-check-box::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid var(--ink-invert);
+  border-bottom: 2px solid var(--ink-invert);
+  transform: rotate(-45deg);
+}
+
+.lp-check-result {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  margin-top: 28px;
+  padding: 24px;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+}
+
+.lp-check-meter {
+  display: flex;
+  gap: 6px;
+}
+
+.lp-check-meter span {
+  width: 36px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line);
+  transition: background 0.3s ease;
+}
+
+.lp-check-meter span.on {
+  background: var(--brand-dark-green);
+}
+
+.lp-check-result p {
+  max-width: 52ch;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* ——— Kontakt ——— */
+/* Skjemaet står i høyre kolonne over begge radene på desktop. Stablet kommer
+   det rett etter overskriften, før kontaktperson og sertifiseringer, så
+   ingen må skrolle forbi tillitsmerkene for å finne det. */
+.lp-contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    "intro form"
+    "aside form";
+  grid-template-rows: auto 1fr;
+  gap: 0 48px;
+  align-items: start;
+}
+
+.lp-contact-intro {
+  grid-area: intro;
+}
+
+.mkt-cta .lp-contact-form {
+  grid-area: form;
+  margin-top: 0;
+}
+
+.lp-contact-aside {
+  grid-area: aside;
+}
+
+.mkt-cta .lp-contact-lead {
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.lp-contact-body {
+  max-width: 48ch;
+  margin-bottom: 32px;
+  font-size: var(--t-body);
+  line-height: 1.6;
+  color: var(--ink-body);
+}
+
+.lp-contact-person {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.lp-contact-photo {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.lp-contact-person .mkt-contact-person strong {
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.lp-contact-trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px 32px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.lp-contact-trust .trust-seal-mark {
+  width: 64px;
+  height: 64px;
+}
+
+.lp-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.lp-footer .mkt-footer-nav {
+  margin-top: 0;
+}
+
+/* ——— Mobil handlingslinje ——— */
+.lp-sticky {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .lp-hero {
+    min-height: 0;
+  }
+
+  .lp-hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .lp-hero-copy {
+    max-width: 640px;
+  }
+
+  .lp-roles,
+  .lp-points {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .lp-layer-grid,
+  .lp-check-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lp-check-grid {
+    gap: 0;
+  }
+
+  .lp-contact-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "intro"
+      "form"
+      "aside";
+    grid-template-rows: auto;
+  }
+
+  .lp-contact-aside {
+    margin-top: 40px;
+  }
+
+  .lp-layer-visual {
+    position: static;
+  }
+}
+
+@media (max-width: 720px) {
+  .lp-wrap,
+  .lp-hero-grid {
+    width: calc(100% - 32px);
+  }
+
+  .lp-hero {
+    padding: 100px 0 56px;
+  }
+
+  .lp-topbar-cta-long {
+    display: none;
+  }
+
+  .lp-topbar-cta-short {
+    display: inline;
+  }
+
+  .lp-topbar-cta {
+    min-height: 36px;
+    padding: 0 14px;
+    font-size: 11px;
+  }
+
+  /* Ordmerket er 7:1, så knappen og logoen deler 390 px med for lite klaring
+     ved forsidens 28 px. */
+  .lp-topbar .logo img {
+    height: 24px;
+  }
+
+  @media (max-width: 380px) {
+    .lp-topbar .logo img {
+      height: 20px;
+    }
+
+    .lp-topbar-cta {
+      padding: 0 11px;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+    }
+  }
+
+  .lp-video-play {
+    left: 12px;
+    bottom: 12px;
+    padding-right: 16px;
+    font-size: 12px;
+  }
+
+  .lp-video-play-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .lp-video-end {
+    gap: 14px;
+  }
+
+  .lp-video-end > p {
+    font-size: 20px;
+  }
+
+  .lp-bridge {
+    margin-top: 40px;
+  }
+
+  .lp-conclusion {
+    margin-top: 56px;
+    font-size: clamp(24px, 6.4vw, 30px);
+  }
+
+  .lp-question-text {
+    font-size: clamp(26px, 7.4vw, 34px);
+  }
+
+  .lp-stack-row,
+  .lp-stack-core {
+    padding-inline: 16px;
+  }
+
+  .lp-stack-core ul {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lp-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Plass til handlingslinja, så den ikke dekker footerens siste linje. */
+  .lp .mkt-footer {
+    padding-bottom: 104px;
+  }
+
+  .lp-sticky {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 8px 8px 18px;
+    border-radius: var(--r-pill);
+    background: rgba(28, 41, 30, 0.95);
+    color: #f1eeea;
+    box-shadow: 0 18px 40px -16px rgba(28, 41, 30, 0.6);
+    backdrop-filter: blur(10px);
+    transform: translateY(calc(100% + 32px));
+    transition: transform 0.45s var(--ease-haptic);
+  }
+
+  .lp-sticky.is-visible {
+    transform: translateY(0);
+  }
+
+  .lp-sticky span {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+
+  .lp-sticky .mkt-btn {
+    flex: none;
+    min-height: 40px;
+    padding: 0 16px;
+    font-size: 11px;
+    background: var(--brand-light-magenta);
+    color: var(--surface-deep);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-stack-wires span::after {
+    animation: none;
+    opacity: 0;
+  }
+
+  .lp-sticky,
+  .lp-topbar-cta,
+  .lp-video-play,
+  .lp-video-play-icon {
+    transition: none;
+  }
+}
