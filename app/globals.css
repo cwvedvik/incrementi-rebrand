@@ -5339,3 +5339,765 @@ body[data-mode="marketing"] {
     padding: 12px;
   }
 }
+
+/* Plakatbildet står i filmens ramme til filmen finnes. */
+.lp-video-still img {
+  object-fit: cover;
+}
+
+/* ============================================================
+   LANDINGSSIDE: RÅDGIVNING (/radgivning), FIGURER
+   ============================================================ */
+/* Figurene bryter ut av tekstkolonnen til 960 px, men holder seg i salgsbrevets
+   rytme: én figur per poeng, plassert rett etter avsnittet den forklarer.
+   Formregel: skall 16 px, kjerne 10 px (konsentrisk med 6 px luft), knapp og
+   skjema 8 px som ellers på landingssidene, brikker og veksler helt runde. */
+.lp-fig {
+  --fig-w: min(960px, calc(100vw - 40px));
+  width: var(--fig-w);
+  margin: 44px 0 44px calc((100% - var(--fig-w)) / 2);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.lp-fig-shell {
+  padding: 6px;
+  border-radius: 16px;
+  background: rgba(80, 118, 86, 0.06);
+  box-shadow:
+    0 0 0 1px rgba(80, 118, 86, 0.12),
+    0 40px 80px -56px rgba(28, 41, 30, 0.45);
+}
+
+.lp-fig-core {
+  padding: clamp(20px, 4.4vw, 48px);
+  border-radius: 10px;
+  background: var(--surface-raised);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.lp-fig figcaption {
+  margin-top: 12px;
+  padding-inline: 6px;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+.lp-fig button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.lp-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border: 1px solid rgba(80, 118, 86, 0.35);
+  border-radius: var(--r-pill);
+  background: rgba(80, 118, 86, 0.09);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ink-body);
+  white-space: nowrap;
+  transition:
+    color 0.5s var(--ease-haptic),
+    background-color 0.5s var(--ease-haptic),
+    border-color 0.5s var(--ease-haptic);
+}
+
+.lp-chip.is-hot {
+  border-color: rgba(118, 80, 112, 0.55);
+  background: rgba(118, 80, 112, 0.12);
+  color: var(--accent);
+}
+
+.lp-chip-ghost {
+  border-style: dashed;
+  border-color: rgba(80, 118, 86, 0.28);
+  background: transparent;
+  color: rgba(64, 94, 69, 0.4);
+}
+
+/* ---------- Figur 1: ledermøtet ---------- */
+.lp-meet {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr minmax(180px, 0.8fr) 1fr;
+  grid-template-areas:
+    "ceo center cio"
+    "cfo center staff";
+  align-items: center;
+  gap: 72px 48px;
+}
+
+.lp-meet-wires {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.lp-meet-role {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 18px 36px -32px rgba(28, 41, 30, 0.4);
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.5s var(--ease-haptic),
+    box-shadow 0.5s var(--ease-haptic);
+}
+
+.lp-meet-ceo { grid-area: ceo; }
+.lp-meet-cio { grid-area: cio; }
+.lp-meet-cfo { grid-area: cfo; }
+.lp-meet-staff { grid-area: staff; }
+
+/* Høyre kolonne speiler venstre, så alle kortene vender mot bordet. */
+.lp-meet-cio,
+.lp-meet-staff {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.lp-meet-role-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  transition: color 0.5s var(--ease-haptic);
+}
+
+.lp-meet-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lp-meet-cio .lp-meet-chips,
+.lp-meet-staff .lp-meet-chips {
+  justify-content: flex-end;
+}
+
+.lp-meet-role.is-active {
+  border-color: rgba(118, 80, 112, 0.55);
+  box-shadow: 0 22px 44px -30px rgba(118, 80, 112, 0.7);
+}
+
+.lp-meet-role.is-active .lp-chip {
+  border-color: rgba(118, 80, 112, 0.55);
+  background: rgba(118, 80, 112, 0.12);
+  color: var(--accent);
+}
+
+.lp-meet[data-active] .lp-meet-role:not(.is-active) {
+  border-color: var(--line-2);
+}
+
+.lp-meet[data-active] .lp-meet-role:not(.is-active) .lp-meet-role-name {
+  color: var(--ink-faint);
+}
+
+.lp-meet-center {
+  position: relative;
+  grid-area: center;
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  width: clamp(140px, 17vw, 184px);
+  aspect-ratio: 1;
+}
+
+/* Møtebordet sett ovenfra, med rollene rundt. */
+.lp-meet-center::before {
+  content: "";
+  position: absolute;
+  inset: -34% -14%;
+  border: 1px solid rgba(80, 118, 86, 0.2);
+  border-radius: var(--r-pill);
+  background: rgba(80, 118, 86, 0.035);
+}
+
+.lp-meet-ring {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border: 1.5px solid rgba(118, 80, 112, 0.92);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(118, 80, 112, 0.14), rgba(118, 80, 112, 0.03) 72%);
+  box-shadow:
+    inset 0 0 0 10px rgba(241, 238, 234, 0.7),
+    inset 0 0 0 11px rgba(118, 80, 112, 0.25);
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.lp-meet-pulse {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid rgba(118, 80, 112, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.lp-meet-caption {
+  min-height: 3em;
+  max-width: 58ch;
+  margin: 36px auto 0;
+  text-align: center;
+  color: var(--ink-body);
+}
+
+.lp-meet-caption strong {
+  color: var(--ink);
+}
+
+/* ---------- Figur 2: fra spesialutvikling til standard ---------- */
+.lp-seg {
+  display: inline-flex;
+  margin-bottom: 28px;
+  padding: 4px;
+  border-radius: var(--r-pill);
+  background: rgba(80, 118, 86, 0.08);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.lp-seg button {
+  position: relative;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: color 0.4s var(--ease-haptic);
+}
+
+.lp-seg button.is-on {
+  color: var(--ink-invert);
+}
+
+.lp-seg button:active {
+  transform: scale(0.98);
+}
+
+.lp-seg-thumb {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-pill);
+  background: var(--ink);
+}
+
+.lp-seg-label {
+  position: relative;
+}
+
+.lp-shift-rows {
+  display: grid;
+  gap: 14px;
+}
+
+.lp-shift-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  align-items: center;
+  gap: 24px;
+}
+
+.lp-shift-name {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.lp-shift-track {
+  position: relative;
+  height: 50px;
+  border-radius: 8px;
+  background: rgba(80, 118, 86, 0.04);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+}
+
+.lp-shift-bar {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: rgba(118, 80, 112, 0.16);
+  box-shadow: inset 3px 0 0 rgba(118, 80, 112, 0.9);
+  transform-origin: left center;
+  transition:
+    background-color 0.9s var(--ease-haptic),
+    box-shadow 0.9s var(--ease-haptic);
+}
+
+.lp-shift-bar.is-standard {
+  background: rgba(80, 118, 86, 0.22);
+  box-shadow: inset 3px 0 0 rgba(80, 118, 86, 0.9);
+}
+
+.lp-shift-tag {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 16px;
+  display: grid;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.lp-shift-tag > span {
+  grid-area: 1 / 1;
+}
+
+.lp-shift-tag > span:first-child {
+  color: var(--accent);
+}
+
+.lp-shift-tag > span:last-child {
+  color: var(--ink);
+}
+
+.lp-shift-free {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  bottom: 6px;
+  border: 1px dashed rgba(80, 118, 86, 0.5);
+  border-radius: 6px;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(80, 118, 86, 0.07) 0 1px,
+    transparent 1px 9px
+  );
+}
+
+.lp-shift-track-bare {
+  height: auto;
+  background: none;
+  box-shadow: none;
+}
+
+.lp-shift-bracket {
+  position: relative;
+  display: block;
+  padding-top: 12px;
+  border-top: 1.5px solid rgba(80, 118, 86, 0.75);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--accent-2);
+}
+
+.lp-shift-bracket::before,
+.lp-shift-bracket::after {
+  content: "";
+  position: absolute;
+  top: -9px;
+  width: 1.5px;
+  height: 9px;
+  background: rgba(80, 118, 86, 0.75);
+}
+
+.lp-shift-bracket::before {
+  left: 0;
+}
+
+.lp-shift-bracket::after {
+  right: 0;
+}
+
+/* ---------- Figur 3: kort sikt og lang retning ---------- */
+.lp-horizon-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lp-svg-text {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--ink-body);
+}
+
+.lp-svg-muted {
+  fill: var(--ink-faint);
+}
+
+.lp-svg-accent {
+  fill: var(--accent);
+}
+
+.lp-legend {
+  display: none;
+  list-style: none;
+}
+
+.lp-legend li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--ink-body);
+}
+
+.lp-key {
+  flex: none;
+  width: 26px;
+}
+
+.lp-key-direction {
+  border-top: 2.5px solid rgba(118, 80, 112, 0.92);
+}
+
+.lp-key-block {
+  width: 14px;
+  height: 14px;
+  margin-inline: 6px;
+  border: 1.4px solid rgba(80, 118, 86, 0.78);
+  background: rgba(80, 118, 86, 0.1);
+}
+
+.lp-key-fork {
+  border-top: 1.5px dashed rgba(80, 118, 86, 0.6);
+}
+
+.lp-key-misstep {
+  border-top: 2px dotted rgba(64, 94, 69, 0.55);
+}
+
+.lp-key-base {
+  border-top: 2px solid rgba(80, 118, 86, 0.78);
+}
+
+/* ---------- Figur 4: prioritering ---------- */
+.lp-prio-lenses {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.lp-prio-lenses > span:first-child {
+  text-align: right;
+}
+
+.lp-prio-lens {
+  display: block;
+  width: 200px;
+  height: auto;
+  overflow: visible;
+}
+
+.lp-prio-drop {
+  position: relative;
+  display: block;
+  width: 1.5px;
+  height: 34px;
+  margin: 6px auto 0;
+  background: rgba(118, 80, 112, 0.92);
+  transform-origin: top;
+}
+
+.lp-prio-drop::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid rgba(118, 80, 112, 0.92);
+  border-bottom: 1.5px solid rgba(118, 80, 112, 0.92);
+  transform: translate(-50%, 0) rotate(45deg);
+}
+
+.lp-prio-intake {
+  margin-top: 10px;
+  padding: 16px;
+  border: 1px dashed rgba(80, 118, 86, 0.32);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.lp-prio-intake-label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.lp-prio-intake-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.lp-prio-matrix {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+}
+
+.lp-prio-axis {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.lp-prio-axis-x {
+  align-self: flex-end;
+}
+
+.lp-prio-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(132px, auto) minmax(132px, auto);
+  margin: 10px 0;
+  border-bottom: 1.5px solid var(--ink-faint);
+  border-left: 1.5px solid var(--ink-faint);
+}
+
+/* Pilspisser på aksene. */
+.lp-prio-grid::before,
+.lp-prio-grid::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-top: 1.5px solid var(--ink-faint);
+  border-left: 1.5px solid var(--ink-faint);
+}
+
+.lp-prio-grid::before {
+  top: -1px;
+  left: -5px;
+  transform: rotate(45deg);
+}
+
+.lp-prio-grid::after {
+  right: -1px;
+  bottom: -5px;
+  transform: rotate(135deg);
+}
+
+.lp-prio-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  transition: background-color 0.9s var(--ease-haptic);
+}
+
+.lp-prio-direction,
+.lp-prio-reassess {
+  border-right: 1px dashed var(--line);
+}
+
+.lp-prio-direction,
+.lp-prio-prioritize {
+  border-bottom: 1px dashed var(--line);
+}
+
+.lp-prio-cell-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  transition: color 0.9s var(--ease-haptic);
+}
+
+.lp-prio-cell-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 34px;
+}
+
+.lp-prio-prioritize.is-lit {
+  background: rgba(118, 80, 112, 0.08);
+}
+
+.lp-prio-prioritize.is-lit .lp-prio-cell-name {
+  color: var(--accent);
+}
+
+.lp-prio-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 36px;
+  list-style: none;
+}
+
+.lp-prio-steps li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 20px 0 0;
+  border-top: 2px solid rgba(118, 80, 112, 0.45);
+}
+
+.lp-prio-steps li:last-child {
+  border-top-color: rgba(118, 80, 112, 0.92);
+}
+
+.lp-prio-steps li::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(118, 80, 112, 0.92);
+}
+
+.lp-prio-steps strong {
+  color: var(--ink);
+}
+
+.lp-prio-steps span {
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+@media (max-width: 760px) {
+  .lp-fig {
+    margin-block: 32px;
+  }
+
+  .lp-chip {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+
+  .lp-meet {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "ceo cio"
+      "center center"
+      "cfo staff";
+    gap: 40px 10px;
+  }
+
+  .lp-meet-role {
+    min-width: 0;
+    padding: 14px 12px;
+  }
+
+  .lp-meet .lp-chip {
+    white-space: normal;
+  }
+
+  .lp-meet-role-name {
+    font-size: 15px;
+  }
+
+  .lp-meet-center {
+    width: 124px;
+  }
+
+  .lp-meet-center::before {
+    inset: -8% -48%;
+  }
+
+  .lp-meet-ring {
+    font-size: 17px;
+  }
+
+  .lp-meet-caption {
+    margin-top: 28px;
+    font-size: 15px;
+  }
+
+  .lp-shift-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .lp-shift-bracket-row .lp-shift-name {
+    display: none;
+  }
+
+  .lp-svg-text {
+    display: none;
+  }
+
+  .lp-legend {
+    display: grid;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .lp-prio-lenses {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .lp-prio-lenses > span:first-child {
+    text-align: center;
+  }
+
+  .lp-prio-lens {
+    width: 150px;
+  }
+
+  .lp-prio-grid {
+    grid-template-rows: minmax(116px, auto) minmax(116px, auto);
+  }
+
+  .lp-prio-cell {
+    padding: 12px 10px;
+  }
+
+  .lp-prio-steps {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-left: 6px;
+  }
+
+  .lp-prio-steps li {
+    padding: 0 0 0 22px;
+    border-top: 0;
+    border-left: 2px solid rgba(118, 80, 112, 0.45);
+  }
+
+  .lp-prio-steps li:last-child {
+    border-left-color: rgba(118, 80, 112, 0.92);
+  }
+
+  .lp-prio-steps li::before {
+    top: 4px;
+    left: -6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-fig *,
+  .lp-fig *::before,
+  .lp-fig *::after {
+    transition: none !important;
+  }
+}
