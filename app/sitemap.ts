@@ -7,7 +7,7 @@ const BASE = "https://incrementi.no";
 const ROUTES = ["", ...PEOPLE.map((p) => personPath(p.slug))];
 
 /** Campaign pages that exist in Norwegian only. */
-const NO_ONLY_ROUTES = ["/ai-kontroll"];
+const NO_ONLY_ROUTES = ["/ai-kontroll", "/radgivning"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const noOnly: MetadataRoute.Sitemap = NO_ONLY_ROUTES.map((route) => ({

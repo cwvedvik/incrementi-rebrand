@@ -483,6 +483,9 @@ export default function MarketingHome() {
               <Link href={home.footer.aiControl.href}>
                 {t(home.footer.aiControl.label, locale)}
               </Link>
+              <Link href={home.footer.advisory.href}>
+                {t(home.footer.advisory.label, locale)}
+              </Link>
               <CookieSettingsButton />
             </nav>
           </div>
