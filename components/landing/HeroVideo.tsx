@@ -1,18 +1,40 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState } from "react";
-import { aiControl } from "@/lib/content/aiControl";
+
+export interface HeroVideoContent {
+  /** null betyr at filmen ikke finnes ennå, og plakatbildet vises alene. */
+  src: string | null;
+  poster: string;
+  label: string;
+  play: string;
+  alt?: string;
+}
 
 /** Nettleserens egne kontroller dekker teksten nederst i plakatbildet, så de
     vises først når filmen er startet. */
-export default function HeroVideo() {
+export default function HeroVideo({ video }: { video: HeroVideoContent }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [started, setStarted] = useState(false);
-  const { video } = aiControl;
 
   function play() {
     setStarted(true);
     ref.current?.play().catch(() => {});
+  }
+
+  if (!video.src) {
+    return (
+      <div className="lp-video lp-video-still">
+        <Image
+          src={video.poster}
+          alt={video.alt ?? ""}
+          fill
+          priority
+          sizes="(max-width: 840px) 100vw, 800px"
+        />
+      </div>
+    );
   }
 
   return (
