@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { PEOPLE, personPath } from "@/lib/people";
+import { PRIVACY_PATHS, privacy } from "@/lib/content/privacy";
 
 const BASE = "https://incrementi.no";
 
@@ -14,7 +15,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${BASE}${route}`,
     lastModified: new Date(),
   }));
-  return [...noOnly, ...localized()];
+  return [...noOnly, ...localized(), ...privacyPages()];
+}
+
+function privacyPages(): MetadataRoute.Sitemap {
+  const languages = {
+    nb: `${BASE}${PRIVACY_PATHS.no}`,
+    en: `${BASE}${PRIVACY_PATHS.en}`,
+  };
+  const lastModified = new Date(privacy.no.updatedIso);
+  return [
+    { url: languages.nb, lastModified, alternates: { languages } },
+    { url: languages.en, lastModified, alternates: { languages } },
+  ];
 }
 
 function localized(): MetadataRoute.Sitemap {

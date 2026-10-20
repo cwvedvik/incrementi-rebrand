@@ -16,6 +16,7 @@ import { PEOPLE, personPath } from "@/lib/people";
 import PersonLinkedIn from "@/components/sections/PersonLinkedIn";
 import { CertSeals, NinetyNineXBadge } from "@/components/trust/TrustBadges";
 import { useLocale } from "@/lib/i18n/locale";
+import { ui } from "@/lib/i18n/ui";
 import { t, tList } from "@/lib/i18n/types";
 import { pushEvent } from "@/lib/analytics";
 
@@ -485,6 +486,7 @@ export default function MarketingHome() {
                   {t(page.label, locale)}
                 </Link>
               ))}
+              <Link href={href("/personvern")}>{t(ui.privacy, locale)}</Link>
               <CookieSettingsButton />
             </nav>
           </div>

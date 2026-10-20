@@ -23,9 +23,22 @@ export function parsePathname(pathname: string): {
   return { locale: "no", path: pathname || "/" };
 }
 
+/** Pages whose slug differs per language, keyed by the Norwegian slug. */
+const LOCALIZED_SLUGS: Record<string, string> = {
+  "/personvern": "/privacy-policy",
+};
+
+function slugFor(path: string, locale: Locale): string {
+  if (locale === "en") return LOCALIZED_SLUGS[path] ?? path;
+  const no = Object.keys(LOCALIZED_SLUGS).find(
+    (key) => LOCALIZED_SLUGS[key] === path,
+  );
+  return no ?? path;
+}
+
 /** Build a locale-aware href. Norwegian = no prefix. */
 export function localePath(path: string, locale: Locale): string {
-  const clean = path.startsWith("/") ? path : `/${path}`;
+  const clean = slugFor(path.startsWith("/") ? path : `/${path}`, locale);
   if (locale === "en") {
     if (clean === "/") return "/en";
     return `/en${clean}`;
