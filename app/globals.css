@@ -5340,6 +5340,14 @@ body[data-mode="marketing"] {
   }
 }
 
+/* Spørsmålet i tittelen er lengre enn tekstkolonnen og skal stå på én linje
+   på desktop, så tittelen bryter ut til samme bredde som figurene. */
+.lp-advisory .lp-hero h1 {
+  --h1-w: min(1040px, calc(100vw - 40px));
+  width: var(--h1-w);
+  margin-left: calc((100% - var(--h1-w)) / 2);
+}
+
 /* Plakatbildet står i filmens ramme til filmen finnes. */
 .lp-video-still img {
   object-fit: cover;
