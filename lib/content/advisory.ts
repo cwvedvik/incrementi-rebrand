@@ -78,7 +78,7 @@ export const advisory = {
 
   contact: {
     title: "Hvilke teknologivalg står dere overfor?",
-    lead: "Book en samtale med oss om hvilke teknologivalg virksomheten står overfor.",
+    lead: "Book et innledende strategimøte for å diskutere muligheter innen teknologi og digitalisering.",
     personIntro: "Du snakker med",
   },
 
@@ -128,18 +128,6 @@ export const advisory = {
         summary: string;
         initiatives: readonly InitiativeId[];
       }[],
-    },
-
-    shift: {
-      label:
-        "Tre eksempler på funksjonalitet som for to år siden krevde spesialutvikling, og som i dag finnes som standard. Det frigjør rom for nye muligheter.",
-      then: "For to år siden",
-      now: "I dag",
-      custom: "Spesialutvikling",
-      standard: "Standard",
-      freed: "Rom for nye muligheter",
-      rows: ["Dokumentanalyse", "Transkribering av møter", "Søk i egne dokumenter"],
-      caption: "Eksempler. Det som krevde et prosjekt, kan i dag være en innstilling.",
     },
 
     horizon: {

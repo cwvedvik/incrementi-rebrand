@@ -14,7 +14,6 @@ import {
 import DirectionPath from "@/components/landing/advisory/DirectionPath";
 import LeadershipTable from "@/components/landing/advisory/LeadershipTable";
 import PriorityMatrix from "@/components/landing/advisory/PriorityMatrix";
-import StandardShift from "@/components/landing/advisory/StandardShift";
 import { advisory } from "@/lib/content/advisory";
 
 export default function AdvisoryLanding() {
@@ -58,7 +57,6 @@ export default function AdvisoryLanding() {
             <section>
               <h2>{choices.title}</h2>
               <p>{choices.pace}</p>
-              <StandardShift />
               <p>{choices.horizon}</p>
               <DirectionPath />
               <p className="lp-emphasis">{choices.emphasis}</p>
