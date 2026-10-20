@@ -7,7 +7,7 @@ import { useLocale } from "@/lib/i18n/locale";
 import { parsePathname } from "@/lib/i18n/config";
 import { ui } from "@/lib/i18n/ui";
 import { t } from "@/lib/i18n/types";
-import { HOME_ANCHORS, PAGE_NAV, homeNav } from "@/lib/nav";
+import { ANCHOR_SUBMENUS, HOME_ANCHORS, PAGE_NAV, homeNav } from "@/lib/nav";
 
 export { PAGE_NAV, HOME_ANCHORS };
 
@@ -95,22 +95,43 @@ export default function SiteNav({
     <>
       {HOME_ANCHORS.map((item) => {
         const target = homeHash(item.id);
-        const isHash = target.startsWith("#");
-        if (isHash) {
-          return (
-            <a key={item.id} href={target} onClick={() => setOpen(false)}>
-              {t(homeNav[item.key], locale)}
-            </a>
-          );
-        }
-        return (
-          <Link
-            key={item.id}
-            href={target}
-            onClick={() => setOpen(false)}
-          >
+        const submenu = ANCHOR_SUBMENUS[item.key];
+        const label = (
+          <>
             {t(homeNav[item.key], locale)}
+            {submenu ? <span className="nav-caret" aria-hidden="true" /> : null}
+          </>
+        );
+        const link = target.startsWith("#") ? (
+          <a key={item.id} href={target} onClick={() => setOpen(false)}>
+            {label}
+          </a>
+        ) : (
+          <Link key={item.id} href={target} onClick={() => setOpen(false)}>
+            {label}
           </Link>
+        );
+        if (!submenu) return link;
+        // Undermenyen åpnes ved hover og når fokus er inne i gruppen, så
+        // den nås med tastatur uten en egen knapp.
+        return (
+          <div key={item.id} className="nav-drop">
+            {link}
+            <div className="nav-drop-menu">
+              <div className="nav-drop-panel">
+                {submenu.map((page) => (
+                  <Link
+                    key={page.href}
+                    href={page.href}
+                    className={path === page.href ? "active" : ""}
+                    onClick={() => setOpen(false)}
+                  >
+                    {t(page.label, locale)}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
         );
       })}
       {PAGE_NAV.map((item) => {

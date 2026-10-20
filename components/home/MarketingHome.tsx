@@ -11,7 +11,7 @@ import SiteNav from "@/components/sections/SiteNav";
 import ValueGlyph from "@/components/home/ValueGlyph";
 import { IconArrowUpRight } from "@/components/icons";
 import { CLIENTS } from "@/lib/clients";
-import { home } from "@/lib/content/home";
+import { home, servicePages } from "@/lib/content/home";
 import { PEOPLE, personPath } from "@/lib/people";
 import PersonLinkedIn from "@/components/sections/PersonLinkedIn";
 import { CertSeals, NinetyNineXBadge } from "@/components/trust/TrustBadges";
@@ -480,12 +480,11 @@ export default function MarketingHome() {
             </div>
             <nav className="mkt-footer-nav" aria-label="Footer">
               <a href="#kontakt">{t(home.hero.cta, locale)}</a>
-              <Link href={home.footer.aiControl.href}>
-                {t(home.footer.aiControl.label, locale)}
-              </Link>
-              <Link href={home.footer.advisory.href}>
-                {t(home.footer.advisory.label, locale)}
-              </Link>
+              {servicePages.map((page) => (
+                <Link key={page.href} href={page.href}>
+                  {t(page.label, locale)}
+                </Link>
+              ))}
               <CookieSettingsButton />
             </nav>
           </div>

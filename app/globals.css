@@ -2781,6 +2781,131 @@ body[data-mode="marketing"] {
   }
 }
 
+/* Undermeny under et ankerpunkt («Hva vi leverer»). Panelet henger litt under
+   lenken, og padding-top bygger bro over mellomrommet så hoveren ikke slipper
+   på veien ned. */
+.nav-drop {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-caret {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-3px) rotate(45deg);
+  transition: transform 0.35s var(--ease-haptic);
+}
+
+.nav-drop:hover .nav-caret,
+.nav-drop:focus-within .nav-caret {
+  transform: translateY(1px) rotate(225deg);
+}
+
+.nav-drop-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 1;
+  padding-top: 14px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 6px);
+  transition:
+    opacity 0.25s var(--ease-out),
+    transform 0.35s var(--ease-haptic),
+    visibility 0s linear 0.25s;
+}
+
+.nav-drop:hover .nav-drop-menu,
+.nav-drop:focus-within .nav-drop-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+  transition:
+    opacity 0.25s var(--ease-out),
+    transform 0.35s var(--ease-haptic),
+    visibility 0s;
+}
+
+.nav-drop-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 270px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(241, 238, 234, 0.98);
+  box-shadow: 0 24px 48px -28px rgba(28, 41, 30, 0.45);
+}
+
+.nav .nav-drop-panel a {
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+  color: var(--ink);
+  transition:
+    background-color 0.25s var(--ease-out),
+    color 0.25s var(--ease-out);
+}
+
+.nav .nav-drop-panel a:hover,
+.nav .nav-drop-panel a.active {
+  background: rgba(80, 118, 86, 0.09);
+  color: var(--accent);
+}
+
+.nav .nav-drop-panel a.active::after {
+  display: none;
+}
+
+/* I mobilskuffen står undermenyen alltid åpen, innrykket under forelderen. */
+.mobile-drawer-nav .nav-drop {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.mobile-drawer-nav .nav-caret {
+  display: none;
+}
+
+.mobile-drawer-nav .nav-drop-menu {
+  position: static;
+  padding: 0;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+}
+
+.mobile-drawer-nav .nav-drop-panel {
+  gap: 14px;
+  min-width: 0;
+  padding: 0 0 0 16px;
+  border: 0;
+  border-left: 1px solid var(--line);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.mobile-drawer-nav .nav-drop-panel a {
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
 .mkt-eyebrow {
   font-size: 11px;
   letter-spacing: 0.28em;

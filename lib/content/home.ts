@@ -14,6 +14,21 @@ export const homeNav = {
   results: { no: "Resultater", en: "Results" },
 } as const;
 
+/**
+ * Tjenestesidene under «Hva vi leverer» i menyen og i footeren. Sidene finnes
+ * bare på norsk, så lenkene peker alltid dit og får aldri /en-prefiks.
+ */
+export const servicePages = [
+  {
+    href: "/radgivning",
+    label: { no: "Teknologirådgivning", en: "Technology advisory" },
+  },
+  {
+    href: "/ai-kontroll",
+    label: { no: "AI Operations & Control Layer", en: "AI Operations & Control Layer" },
+  },
+] as const;
+
 export const home = {
   hero: {
     // Tittelen er delt på fargeskiftet, ikke på et størrelsesskift: hele
@@ -301,15 +316,6 @@ export const home = {
     },
   },
   footer: {
-    // Kampanjesiden finnes bare på norsk, så lenken peker alltid dit.
-    aiControl: {
-      href: "/ai-kontroll",
-      label: { no: "AI Operations & Control Layer", en: "AI Operations & Control Layer" },
-    },
-    advisory: {
-      href: "/radgivning",
-      label: { no: "Rådgivning", en: "Advisory" },
-    },
     line: {"no":"Rådgivning · Data · Programvare · Modernisering · AI der det gir verdi","en":"Advisory · Data · Software · Modernisation · AI where it adds value"},
     legalName: { no: "Incrementi AS", en: "Incrementi AS" },
     orgNr: { no: "Org. nr. 930 168 408", en: "Org. no. 930 168 408" },

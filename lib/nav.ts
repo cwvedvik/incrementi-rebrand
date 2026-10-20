@@ -1,4 +1,4 @@
-import { homeNav } from "@/lib/content/home";
+import { homeNav, servicePages } from "@/lib/content/home";
 
 /** Homepage section anchors (primary IA). */
 export const HOME_ANCHORS = [
@@ -16,5 +16,12 @@ type PageNavItem = {
 
 /** Secondary page links (platform + results temporarily hidden). */
 export const PAGE_NAV: readonly PageNavItem[] = [];
+
+/** Undermenyen under hvert ankerpunkt i hovedmenyen. */
+export const ANCHOR_SUBMENUS: Partial<
+  Record<(typeof HOME_ANCHORS)[number]["key"], typeof servicePages>
+> = {
+  deliver: servicePages,
+};
 
 export { homeNav };
