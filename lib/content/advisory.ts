@@ -14,7 +14,8 @@ export type InitiativeId =
 
 export type RoleId = "ceo" | "cio" | "cfo" | "staff";
 
-export type Quadrant = "prioritize" | "direction" | "quick" | "reassess";
+/** Rutene i Eisenhower-matrisen: viktig/haster, viktig, haster, ingen av delene. */
+export type Quadrant = "now" | "plan" | "delegate" | "reassess";
 
 export const advisory = {
   meta: {
@@ -143,30 +144,29 @@ export const advisory = {
 
     priority: {
       label:
-        "Forretningsforståelse og teknologierfaring vurderer initiativene fra ledermøtet sammen og sorterer dem etter effekt på kort sikt og verdi over tid.",
+        "Forretningsforståelse og teknologierfaring sorterer initiativene fra ledermøtet i en Eisenhower-matrise etter hvor viktige de er og hvor mye de haster. Det som er både viktig og haster, er grunnpilarene kontekstlag, dataplattform og AI Governance.",
       lenses: ["Forretningsforståelse", "Teknologi og gjennomføring"],
       intake: "Initiativene fra ledermøtet",
-      xAxis: "Effekt på kort sikt",
-      yAxis: "Verdi over tid",
+      urgent: "Haster",
+      notUrgent: "Haster ikke",
+      important: "Viktig",
+      notImportant: "Ikke viktig",
       quadrants: {
-        prioritize: "Prioriter",
-        direction: "Bygg retning",
-        quick: "Raske gevinster",
+        now: "Gjør nå",
+        plan: "Planlegg",
+        delegate: "Deleger",
         reassess: "Vurder på nytt",
       } satisfies Record<Quadrant, string>,
+      pillars: ["Kontekstlag", "Dataplattform", "AI Governance"],
+      pillarsNote: "Grunnpilarene alt annet bygger på.",
       placement: {
-        ai: "prioritize",
-        "ai-tools": "prioritize",
-        "new-solutions": "direction",
-        processes: "quick",
-        costs: "quick",
+        ai: "plan",
+        "new-solutions": "plan",
+        costs: "plan",
+        processes: "delegate",
+        "ai-tools": "delegate",
         maintenance: "reassess",
-      } satisfies Record<InitiativeId, Quadrant>,
-      steps: [
-        { verb: "Vurdere mulighetene", note: "Helheten på tvers av ledergruppen" },
-        { verb: "Prioritere investeringene", note: "Kort sikt og lang retning i samme plan" },
-        { verb: "Finne tiltakene", note: "Resultater nå, verdi over tid" },
-      ],
+      } satisfies Record<InitiativeId, Exclude<Quadrant, "now">>,
       caption: "Illustrasjon. Plasseringen avgjøres sammen med dere.",
     },
   },

@@ -8,18 +8,57 @@ import FigureFrame, { EASE, FIG, useReducedMotion } from "./FigureFrame";
 const { priority, initiatives } = advisory.figures;
 
 const ORDER = Object.keys(initiatives) as InitiativeId[];
-/** Rutenettet leses som et koordinatsystem: øverst til høyre er best på begge akser. */
-const CELLS: Quadrant[] = ["direction", "prioritize", "reassess", "quick"];
 
-function Chip({ id, hot }: { id: InitiativeId; hot: boolean }) {
+function Chip({ id }: { id: InitiativeId }) {
   return (
     <motion.span
       layoutId={`lp-prio-${id}`}
-      className={`lp-chip${hot ? " is-hot" : ""}`}
+      className="lp-chip"
       transition={{ type: "spring", stiffness: 140, damping: 22 }}
     >
       {initiatives[id]}
     </motion.span>
+  );
+}
+
+/** Initiativene som sorteres inn i en rute. «Gjør nå» får ingen: der står grunnpilarene. */
+function Chips({ quadrant, sorted }: { quadrant: Quadrant; sorted: boolean }) {
+  return (
+    <div className="lp-eis-chips">
+      {sorted
+        ? ORDER.filter((id) => priority.placement[id] === quadrant).map((id) => (
+            <Chip key={id} id={id} />
+          ))
+        : null}
+    </div>
+  );
+}
+
+function Pillars({ shown, reduce }: { shown: boolean; reduce: boolean }) {
+  return (
+    <div className="lp-pillars">
+      <div className="lp-pillars-row">
+        {priority.pillars.map((name, i) => (
+          <motion.span
+            key={name}
+            className="lp-pillar"
+            initial={reduce ? false : { opacity: 0, y: 28 }}
+            animate={shown ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, delay: 0.5 + i * 0.12, ease: EASE }}
+          >
+            {name}
+          </motion.span>
+        ))}
+      </div>
+      <motion.span
+        className="lp-pillars-base"
+        aria-hidden="true"
+        initial={reduce ? false : { scaleX: 0 }}
+        animate={shown ? { scaleX: 1 } : {}}
+        transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
+      />
+      <span className="lp-pillars-note">{priority.pillarsNote}</span>
+    </div>
   );
 }
 
@@ -65,7 +104,8 @@ export default function PriorityMatrix() {
   const ref = useRef<HTMLDivElement>(null);
   const matrixRef = useRef<HTMLDivElement>(null);
   const shown = useInView(ref, { once: true, amount: 0.25 }) || reduce;
-  const matrixInView = useInView(matrixRef, { once: true, amount: 0.6 });
+  const matrixInView = useInView(matrixRef, { once: true, amount: 0.5 });
+  const matrixShown = matrixInView || reduce;
   const [sorted, setSorted] = useState(false);
 
   useEffect(() => {
@@ -74,11 +114,9 @@ export default function PriorityMatrix() {
       return;
     }
     if (!matrixInView) return;
-    const id = window.setTimeout(() => setSorted(true), 600);
+    const id = window.setTimeout(() => setSorted(true), 1300);
     return () => window.clearTimeout(id);
   }, [matrixInView, reduce]);
-
-  const inCell = (q: Quadrant) => ORDER.filter((id) => priority.placement[id] === q);
 
   return (
     <FigureFrame className="lp-fig-prio" caption={priority.caption}>
@@ -107,45 +145,36 @@ export default function PriorityMatrix() {
                       {initiatives[id]}
                     </span>
                   ))
-                : ORDER.map((id) => <Chip key={id} id={id} hot={false} />)}
+                : ORDER.map((id) => <Chip key={id} id={id} />)}
             </div>
           </div>
 
-          <div ref={matrixRef} className="lp-prio-matrix">
-            <span className="lp-prio-axis lp-prio-axis-y">{priority.yAxis}</span>
-            <div className="lp-prio-grid">
-              {CELLS.map((q) => (
-                <div
-                  key={q}
-                  className={`lp-prio-cell lp-prio-${q}${sorted && q === "prioritize" ? " is-lit" : ""}`}
-                >
-                  <span className="lp-prio-cell-name">{priority.quadrants[q]}</span>
-                  <div className="lp-prio-cell-chips">
-                    {sorted
-                      ? inCell(q).map((id) => <Chip key={id} id={id} hot={q === "prioritize"} />)
-                      : null}
-                  </div>
-                </div>
-              ))}
+          <div ref={matrixRef} className="lp-eis">
+            <span aria-hidden="true" />
+            <span className="lp-eis-col">{priority.urgent}</span>
+            <span className="lp-eis-col">{priority.notUrgent}</span>
+
+            <span className="lp-eis-row">{priority.important}</span>
+            <div className={`lp-eis-cell lp-eis-now${matrixShown ? " is-lit" : ""}`}>
+              <span className="lp-eis-name">{priority.quadrants.now}</span>
+              <Pillars shown={matrixShown} reduce={reduce} />
             </div>
-            <span className="lp-prio-axis lp-prio-axis-x">{priority.xAxis}</span>
+            <div className="lp-eis-cell lp-eis-plan">
+              <span className="lp-eis-name">{priority.quadrants.plan}</span>
+              <Chips quadrant="plan" sorted={sorted} />
+            </div>
+
+            <span className="lp-eis-row">{priority.notImportant}</span>
+            <div className="lp-eis-cell lp-eis-delegate">
+              <span className="lp-eis-name">{priority.quadrants.delegate}</span>
+              <Chips quadrant="delegate" sorted={sorted} />
+            </div>
+            <div className="lp-eis-cell lp-eis-reassess">
+              <span className="lp-eis-name">{priority.quadrants.reassess}</span>
+              <Chips quadrant="reassess" sorted={sorted} />
+            </div>
           </div>
         </LayoutGroup>
-
-        <ol className="lp-prio-steps">
-          {priority.steps.map((s, i) => (
-            <motion.li
-              key={s.verb}
-              initial={reduce ? false : { opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.8 }}
-              transition={{ duration: 0.7, delay: i * 0.12, ease: EASE }}
-            >
-              <strong>{s.verb}</strong>
-              <span>{s.note}</span>
-            </motion.li>
-          ))}
-        </ol>
       </div>
     </FigureFrame>
   );
