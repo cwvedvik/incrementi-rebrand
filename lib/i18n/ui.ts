@@ -17,6 +17,12 @@ export const ui = {
   menu: { no: "Meny", en: "Menu" },
   close: { no: "Lukk", en: "Close" },
   cookieSettings: { no: "Informasjonskapsler", en: "Cookie settings" },
+  privacy: { no: "Personvern", en: "Privacy policy" },
+  formPrivacyNote: {
+    no: "Vi bruker opplysningene du sender til å svare deg. Les mer i",
+    en: "We use the details you send to reply to you. Read more in our",
+  },
+  formPrivacyLink: { no: "personvernerklæringen", en: "privacy policy" },
   companyLine: { no: "A 99x Company", en: "A 99x Company" },
   openExperience: {
     no: "Åpne den levende opplevelsen",

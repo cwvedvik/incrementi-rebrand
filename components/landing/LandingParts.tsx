@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+import CookieSettingsButton from "@/components/analytics/CookieSettingsButton";
 import HubSpotForm from "@/components/sections/HubSpotForm";
 import { TrustBar } from "@/components/trust/TrustBadges";
 import { CLIENTS } from "@/lib/clients";
@@ -103,6 +104,10 @@ export function LandingFooter() {
   return (
     <footer className="lp-footer">
       {home.footer.legalName.no} · {home.footer.orgNr.no} · {home.footer.address.no}
+      {" · "}
+      <Link href="/personvern">Personvern</Link>
+      {" · "}
+      <CookieSettingsButton className="lp-footer-cookies" />
     </footer>
   );
 }

@@ -1,8 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { pushEvent } from "@/lib/analytics";
 import { useLocale } from "@/lib/i18n/locale";
+import { ui } from "@/lib/i18n/ui";
+import { t } from "@/lib/i18n/types";
 
 const PORTAL_ID = "26258430";
 const FORM_ID = "99ae255d-2016-45ce-ae96-898987bdb82a";
@@ -23,7 +26,7 @@ declare global {
  */
 export default function HubSpotForm({ className }: { className?: string }) {
   const frameRef = useRef<HTMLDivElement>(null);
-  const { locale } = useLocale();
+  const { locale, href } = useLocale();
   const localeRef = useRef(locale);
 
   useEffect(() => {
@@ -68,12 +71,18 @@ export default function HubSpotForm({ className }: { className?: string }) {
   }, []);
 
   return (
-    <div
-      ref={frameRef}
-      className={`hs-form-frame${className ? ` ${className}` : ""}`}
-      data-region={REGION}
-      data-form-id={FORM_ID}
-      data-portal-id={PORTAL_ID}
-    />
+    <>
+      <div
+        ref={frameRef}
+        className={`hs-form-frame${className ? ` ${className}` : ""}`}
+        data-region={REGION}
+        data-form-id={FORM_ID}
+        data-portal-id={PORTAL_ID}
+      />
+      <p className="form-privacy-note">
+        {t(ui.formPrivacyNote, locale)}{" "}
+        <Link href={href("/personvern")}>{t(ui.formPrivacyLink, locale)}</Link>.
+      </p>
+    </>
   );
 }
