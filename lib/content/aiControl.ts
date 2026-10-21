@@ -19,10 +19,10 @@ export const aiControl = {
     lead: "Se hvordan dere gir AI riktig kontekst, definerte fullmakter og sporbarhet, på systemene dere allerede har.",
   },
   video: {
-    src: "https://26258430.fs1.hubspotusercontent-eu1.net/hubfs/26258430/incrementi_ai_kontroll_voice_1920x1080.mp4",
+    src: "https://26258430.fs1.hubspotusercontent-eu1.net/hubfs/26258430/AI%20kontroll.mp4",
     poster: "/media/video/ai-kontroll-poster.jpg",
     label: "Film: AI Operations & Control Layer",
-    play: "Spill av filmen (33 sekunder, med lyd)",
+    play: "Spill av filmen (1 minutt, med lyd)",
   },
   logosLabel: "Utvalgte kunder",
   sections: [
