@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 import CookieSettingsButton from "@/components/analytics/CookieSettingsButton";
+import { IconArrowUpRight } from "@/components/icons";
 import HubSpotForm from "@/components/sections/HubSpotForm";
 import { TrustBar } from "@/components/trust/TrustBadges";
 import { CLIENTS } from "@/lib/clients";
@@ -25,7 +26,7 @@ export function LandingTop({ ctaShort }: { ctaShort: string }) {
     <header className="lp-top">
       <Link href="/" className="lp-logo">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/incrementi-logo-ink.png" alt="Incrementi" />
+        <img src="/brand/logo-dark.svg" alt="Incrementi" />
       </Link>
       <a className="lp-top-cta" href="#kontakt">
         {ctaShort}
@@ -37,8 +38,11 @@ export function LandingTop({ ctaShort }: { ctaShort: string }) {
 export function LandingCta({ label, note }: { label: string; note: string }) {
   return (
     <div className="lp-cta">
-      <a className="lp-btn" href="#kontakt">
+      <a className="mkt-btn mkt-btn-primary" href="#kontakt">
         {label}
+        <span className="mkt-btn-icon" aria-hidden="true">
+          <IconArrowUpRight width={14} height={14} />
+        </span>
       </a>
       <p className="lp-cta-note">{note}</p>
     </div>
@@ -103,6 +107,12 @@ export function LandingContact({
 export function LandingFooter() {
   return (
     <footer className="lp-footer">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/brand/lockup-99x-light.svg"
+        alt="Incrementi, a 99x company"
+        className="lp-footer-lockup"
+      />
       {home.footer.legalName.no} · {home.footer.orgNr.no} · {home.footer.address.no}
       {" · "}
       <Link href="/personvern">Personvern</Link>

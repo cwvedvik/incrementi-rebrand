@@ -17,17 +17,15 @@ export function useReducedMotion(): boolean {
 }
 
 /**
- * Samme fargemening som ValueGlyph på forsiden: grønt er det som allerede
- * finnes og initiativene som ligger på bordet, magenta er helheten og valget.
+ * Grønt er retning, valg og gevinst. Magenta brukes bare der figuren
+ * viser et feilsteg eller en risiko.
  */
 export const FIG = {
-  green: "rgba(80, 118, 86, 0.78)",
-  greenSoft: "rgba(80, 118, 86, 0.45)",
-  greenFill: "rgba(80, 118, 86, 0.1)",
-  magenta: "rgba(118, 80, 112, 0.92)",
-  magentaSoft: "rgba(118, 80, 112, 0.5)",
-  magentaFill: "rgba(118, 80, 112, 0.12)",
-  muted: "rgba(64, 94, 69, 0.42)",
+  green: "#507656",
+  greenSoft: "rgba(80, 118, 86, 0.55)",
+  greenFill: "rgba(80, 118, 86, 0.12)",
+  risk: "#765070",
+  muted: "#5E5759",
 } as const;
 
 export const EASE = [0.32, 0.72, 0, 1] as const;

@@ -87,8 +87,8 @@ function Lenses({ shown, reduce }: { shown: boolean; reduce: boolean }) {
       />
       <motion.path
         d="M100 18.05 A46 46 0 0 1 100 93.95 A46 46 0 0 1 100 18.05 Z"
-        fill={FIG.magentaFill}
-        stroke={FIG.magenta}
+        fill={FIG.greenFill}
+        stroke={FIG.green}
         strokeWidth="1.6"
         initial={reduce ? false : { opacity: 0, scale: 0.6 }}
         animate={shown ? { opacity: 1, scale: 1 } : {}}

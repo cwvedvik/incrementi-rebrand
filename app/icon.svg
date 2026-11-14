@@ -1,22 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84 84" width="84" height="84">
-  <!--
-    Merket fra logoen, tegnet som vektor og ikke skalert opp fra PNG-en, som
-    bare er 56x77 px og ville blitt uskarp på 32 px netthinneskjerm.
-
-    Geometrien er målt i den leverte fila: tre stolper på felles midtakse,
-    like brede med like mellomrom, med høydene 31, 52 og 74 av et blekkfelt
-    på 54x74. Fargene er merkevarens egne, #765070 og #507656.
-
-    Den svarte stolpen bytter til Off White i mørk modus. Uten det forsvinner
-    en tredjedel av merket i fanelinjen på en mørk skrivebordsflate.
-  -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Official Incrementi mark (two bars). Plate switches so the mark
+       stays visible in a light or dark browser chrome. -->
   <style>
-    .blekk { fill: #000000; }
+    .plate { fill: #E8E3DE; }
     @media (prefers-color-scheme: dark) {
-      .blekk { fill: #f1eeea; }
+      .plate { fill: #1E1B1C; }
     }
   </style>
-  <rect x="15" y="26.5" width="10.5" height="31" fill="#765070"/>
-  <rect x="36.75" y="16" width="10.5" height="52" fill="#507656"/>
-  <rect class="blekk" x="58.5" y="5" width="10.5" height="74"/>
+  <rect class="plate" width="64" height="64"/>
+  <g transform="translate(16 5.3) scale(1)">
+    <rect x="0" y="10.71" width="10.57" height="31.98" fill="#765070"/>
+    <rect x="21.41" y="0" width="10.57" height="53.40" fill="#507656"/>
+  </g>
 </svg>

@@ -1,16 +1,11 @@
 /**
- * Fargene bærer mening i stedet for å være dekor, og det er den samme
- * meningen overalt på siden: grønt er data og fundament, det som allerede
- * finnes og ligger fast. Magenta er valget, AI-en og kontrollpunktet, altså
- * det vi legger til. Derfor er alle bærende linjer og valgte tilstander
- * magenta, mens kilder, grunnlinjer og åpne alternativer er grønne.
- *
- * Verdiene er mørke fordi figurene står på Off White.
+ * Grønt er kontroll, løsning og gevinst. Valgt vei, AI og kontrollpunkt
+ * tegnes i Dark Green. Fundament og åpne alternativer er samme grønn, bare
+ * svakere, så hierarkiet leses uten en annen farge.
  */
-const MAGENTA = "rgba(118, 80, 112, 0.92)";
-const MAGENTA_SOFT = "rgba(118, 80, 112, 0.5)";
-const GREEN = "rgba(80, 118, 86, 0.78)";
-const GREEN_SOFT = "rgba(80, 118, 86, 0.45)";
+const GREEN = "#507656";
+const GREEN_SOFT = "rgba(80, 118, 86, 0.55)";
+const GREEN_MID = "rgba(80, 118, 86, 0.78)";
 
 export type ValueGlyphKind = "strategic" | "operational" | "financial";
 
@@ -21,21 +16,19 @@ export type ValueGlyphKind = "strategic" | "operational" | "financial";
 function Strategic() {
   return (
     <>
-      {/* Fundamentet er grønt, som alle steder ellers. Det er bare veivalget
-          og den valgte ruten som er magenta. */}
-      <path d="M8 54 H80" stroke={GREEN} strokeWidth="1.6" />
-      <path d="M8 54 V47 M80 54 V47" stroke={GREEN} strokeWidth="1.6" />
+      <path d="M8 54 H80" stroke={GREEN_MID} strokeWidth="1.6" />
+      <path d="M8 54 V47 M80 54 V47" stroke={GREEN_MID} strokeWidth="1.6" />
 
       <path
         d="M44 52 C44 40, 16 38, 16 27"
-        stroke={GREEN}
+        stroke={GREEN_MID}
         strokeWidth="1.3"
         strokeDasharray="4 4"
       />
-      <path d="M44 52 V27" stroke={MAGENTA} strokeWidth="1.4" />
+      <path d="M44 52 V27" stroke={GREEN} strokeWidth="1.4" />
       <path
         d="M44 52 C44 40, 72 38, 72 27"
-        stroke={GREEN}
+        stroke={GREEN_MID}
         strokeWidth="1.3"
         strokeDasharray="4 4"
       />
@@ -54,8 +47,8 @@ function Strategic() {
         y="13"
         width="18"
         height="14"
-        fill="rgba(118, 80, 112, 0.14)"
-        stroke={MAGENTA}
+        fill="rgba(80, 118, 86, 0.14)"
+        stroke={GREEN}
         strokeWidth="1.4"
       />
       <rect
@@ -75,9 +68,9 @@ function Strategic() {
 function Operational() {
   return (
     <>
-      <rect x="6" y="10" width="13" height="10" stroke={GREEN} strokeWidth="1.2" />
-      <rect x="6" y="27" width="13" height="10" stroke={GREEN} strokeWidth="1.2" />
-      <rect x="6" y="44" width="13" height="10" stroke={GREEN} strokeWidth="1.2" />
+      <rect x="6" y="10" width="13" height="10" stroke={GREEN_MID} strokeWidth="1.2" />
+      <rect x="6" y="27" width="13" height="10" stroke={GREEN_MID} strokeWidth="1.2" />
+      <rect x="6" y="44" width="13" height="10" stroke={GREEN_MID} strokeWidth="1.2" />
 
       <path
         d="M19 15 C31 15, 32 30, 41 32"
@@ -98,12 +91,12 @@ function Operational() {
         strokeDasharray="4 4"
       />
 
-      <path d="M44 8 V56" stroke={MAGENTA} strokeWidth="1.6" />
-      <path d="M44 8 H51 M44 56 H51" stroke={MAGENTA} strokeWidth="1.4" />
+      <path d="M44 8 V56" stroke={GREEN} strokeWidth="1.6" />
+      <path d="M44 8 H51 M44 56 H51" stroke={GREEN} strokeWidth="1.4" />
 
-      <path d="M52 20 H81" stroke={MAGENTA_SOFT} strokeWidth="1.3" />
-      <path d="M52 32 H81" stroke={MAGENTA} strokeWidth="1.4" />
-      <path d="M52 44 H81" stroke={MAGENTA_SOFT} strokeWidth="1.3" />
+      <path d="M52 20 H81" stroke={GREEN_MID} strokeWidth="1.3" />
+      <path d="M52 32 H81" stroke={GREEN} strokeWidth="1.4" />
+      <path d="M52 44 H81" stroke={GREEN_MID} strokeWidth="1.3" />
     </>
   );
 }
@@ -122,14 +115,14 @@ function Financial() {
         y="14"
         width="13"
         height="40"
-        stroke={MAGENTA_SOFT}
+        stroke={GREEN_MID}
         strokeWidth="1.25"
         strokeDasharray="3 3"
       />
 
       <path
         d="M18.5 41 L36.5 32 L54.5 23 L72.5 14"
-        stroke={MAGENTA}
+        stroke={GREEN}
         strokeWidth="1.5"
         strokeDasharray="5 4"
       />

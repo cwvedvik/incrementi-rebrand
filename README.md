@@ -69,7 +69,10 @@ driven by the conversation. Each answer fires a radial energy wave. Deep links:
 
 ## Visual system
 
-- Canvas: near-black `#08090B` / deep navy `#0C1420`
-- Text: warm off-white `#F4F2EE`
-- Accent: metallic copper `#C98A5E`, secondary steel `#8FA3B8`
-- Type: Fraunces (display serif) + DM Sans (body/UI), self-hosted via `next/font`
+From the Incrementi brand book (2025):
+
+- Canvas: Off White `#E8E3DE`. Dark bands are Near Black `#1E1B1C`.
+- Text: Near Black `#1E1B1C`. Secondary text `#5E5759`. On dark bands, Off White and `#C2BBB5`.
+- Accent: Dark Green `#507656` for control, solutions and actions. Light Green `#85A289` on Near Black.
+- Risk only: Dark Magenta `#765070` (Light Magenta `#B296AE` on dark).
+- Type: DM Sans only. Medium for the hero, Bold for headings, Regular for body.

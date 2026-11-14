@@ -53,12 +53,12 @@ export const ui = {
   dock: {
     placeholder: { no: "Spør Incrementi…", en: "Ask Incrementi…" },
     hint: {
-      no: "Foreslåtte spørsmål over — eller skriv ditt eget. Spør om det som betyr noe. Hopp over resten.",
-      en: "Suggested questions above — or type your own. Ask what matters to you. Skip what doesn't.",
+      no: "Foreslåtte spørsmål over, eller skriv ditt eget. Spør om det som betyr noe. Hopp over resten.",
+      en: "Suggested questions above, or type your own. Ask what matters to you. Skip what doesn't.",
     },
     hintAfter: {
-      no: "Fortsett å spørre — eller trykk «Tilbake til starten» for å nullstille.",
-      en: "Keep asking — or press “Back to the beginning” to reset.",
+      no: "Fortsett å spørre, eller trykk «Tilbake til starten» for å nullstille.",
+      en: "Keep asking, or press “Back to the beginning” to reset.",
     },
     send: { no: "Send", en: "Send" },
   },
@@ -96,8 +96,8 @@ export const ui = {
     submit: { no: "Send melding", en: "Send message" },
     sending: { no: "Sender…", en: "Sending…" },
     success: {
-      no: "Takk — vi svarer innen én arbeidsdag.",
-      en: "Thank you — we will reply within one working day.",
+      no: "Takk. Vi svarer innen én arbeidsdag.",
+      en: "Thank you. We will reply within one working day.",
     },
     error: {
       no: "Noe gikk galt. Prøv igjen, eller skriv til oss direkte.",
@@ -128,8 +128,8 @@ export const ui = {
     },
     titleTo: { no: "til", en: "to" },
     subBefore: {
-      no: "Vi samler fragmenterte systemer i en felles dataplattform og et robust kontekstlag. Da blir AI trygt og verdiskapende — og gevinstene realiserer seg i",
-      en: "We bring fragmented systems into a shared data platform and a robust context layer. Then AI becomes safe and value-creating — and the gains materialize in",
+      no: "Vi samler fragmenterte systemer i en felles dataplattform og et robust kontekstlag. Da blir AI trygt og verdiskapende, og gevinstene realiserer seg i",
+      en: "We bring fragmented systems into a shared data platform and a robust context layer. Then AI becomes safe and value-creating, and the gains materialize in",
     },
     subBold: {
       no: "økt produktivitet, inntjening per ansatt og EBITDA.",
@@ -137,8 +137,8 @@ export const ui = {
     },
     readCase: { no: "Les casen →", en: "Read the case →" },
     caseTeaser: {
-      no: "NRC Groups HR-integrasjon vs. opprinnelig estimat — fordel som forsterker seg.",
-      en: "NRC Group's HR integration vs. the original estimate — advantage that compounds.",
+      no: "NRC Groups HR-integrasjon vs. opprinnelig estimat: fordel som forsterker seg.",
+      en: "NRC Group's HR integration vs. the original estimate: advantage that compounds.",
     },
   },
   pages: {
@@ -148,8 +148,8 @@ export const ui = {
       en: "Foundation first. Then AI that pays off.",
     },
     journeyIntro: {
-      no: "Én reise, seks byggeklosser — fra ryddig datagrunnlag til styrt kontekstlag og agenter ansatte kan bruke. Dere styrer prioritet og tempo; hver kloss står alene og forsterker den neste.",
-      en: "One journey, six building blocks — from a clean data foundation to a governed context layer and agents your people can use. You control priority and pace; every block stands on its own and compounds into the next.",
+      no: "Én reise, seks byggeklosser, fra ryddig datagrunnlag til styrt kontekstlag og agenter ansatte kan bruke. Dere styrer prioritet og tempo; hver kloss står alene og forsterker den neste.",
+      en: "One journey, six building blocks, from a clean data foundation to a governed context layer and agents your people can use. You control priority and pace; every block stands on its own and compounds into the next.",
     },
     buildEyebrow: { no: "Hva vi bygger", en: "What we build" },
     buildTitle: {
@@ -181,8 +181,8 @@ export const ui = {
       en: "We build the foundation AI needs.",
     },
     aboutIntro: {
-      no: "Uten felles datagrunnlag eskalerer AI kaoset. Vi rydder data-kaoset, bygger plattform og kontekstlag — så produktivitet, inntjening per ansatt og EBITDA kan følge. Dere beholder nøklene. A 99x company.",
-      en: "Without a shared data foundation, AI escalates the chaos. We clear data chaos, build platform and context layer — so productivity, earnings per employee and EBITDA can follow. You keep the keys. A 99x company.",
+      no: "Uten felles datagrunnlag eskalerer AI kaoset. Vi rydder data-kaoset, bygger plattform og kontekstlag, så produktivitet, inntjening per ansatt og EBITDA kan følge. Dere beholder nøklene. A 99x company.",
+      en: "Without a shared data foundation, AI escalates the chaos. We clear data chaos, build platform and context layer, so productivity, earnings per employee and EBITDA can follow. You keep the keys. A 99x company.",
     },
     startEyebrow: { no: "Kom i gang", en: "Get started" },
     startTitle: {
@@ -197,18 +197,18 @@ export const ui = {
       no: [
         "En delt forståelse av hvor data-kaoset hemmer produktivitet og verdi",
         "En målarkitektur for felles dataplattform, kontekstlag og byggesekvens",
-        "En retning hele reisen kan styres etter — uten stor forpliktelse",
+        "En retning hele reisen kan styres etter, uten stor forpliktelse",
       ],
       en: [
         "A shared view of where data chaos holds back productivity and value",
         "A target architecture for shared data platform, context layer and build sequence",
-        "A direction the whole journey can steer by — without a big commitment",
+        "A direction the whole journey can steer by, without a big commitment",
       ],
     } as Record<"no" | "en", string[]>,
   },
   blocksNote: {
-    no: "Vi bygger på åpen, etablert teknologi — og tilpasser oss stacken dere allerede eier. Fundament først, så AI som forsterker i stedet for å spre kaos.",
-    en: "We build on open, established technology — and adapt to the stack you already own. Foundation first, then AI that compounds instead of spreading chaos.",
+    no: "Vi bygger på åpen, etablert teknologi, og tilpasser oss stacken dere allerede eier. Fundament først, så AI som forsterker i stedet for å spre kaos.",
+    en: "We build on open, established technology, and adapt to the stack you already own. Foundation first, then AI that compounds instead of spreading chaos.",
   },
   consulting: {
     k: { no: "Ved siden av reisen", en: "Alongside the journey" },
@@ -217,8 +217,8 @@ export const ui = {
       en: "Product management & development consulting",
     },
     p: {
-      no: "Senior produktledere og ingeniører inne i teamene deres — styrer veikart, leverer produkter og løfter leveransekapasitet, med 99X’ 650+ spesialister i ryggen.",
-      en: "Senior product owners and engineers embedded in your teams — steering roadmaps, shipping products and raising delivery capability, with 99X's 650+ specialists behind them.",
+      no: "Senior produktledere og ingeniører inne i teamene deres, styrer veikart, leverer produkter og løfter leveransekapasitet, med 99X’ 650+ spesialister i ryggen.",
+      en: "Senior product owners and engineers embedded in your teams, steering roadmaps, shipping products and raising delivery capability, with 99X's 650+ specialists behind them.",
     },
   },
 } as const satisfies Record<string, unknown>;

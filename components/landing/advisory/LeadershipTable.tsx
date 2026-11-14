@@ -117,7 +117,7 @@ export default function LeadershipTable() {
                   d={w.d}
                   fill="none"
                   mask={`url(#${uid}-${w.id})`}
-                  stroke={on ? FIG.magenta : FIG.green}
+                  stroke={on ? FIG.green : FIG.greenSoft}
                   strokeWidth={on ? 1.8 : 1.4}
                   strokeDasharray={on ? undefined : "5 5"}
                   initial={false}
@@ -127,7 +127,7 @@ export default function LeadershipTable() {
                 {reduce ? null : (
                   <motion.circle
                     r={3.5}
-                    fill={FIG.magenta}
+                    fill={FIG.green}
                     style={{ offsetPath: `path('${w.d}')`, offsetRotate: "0deg" }}
                     initial={{ offsetDistance: "0%", opacity: 0 }}
                     animate={

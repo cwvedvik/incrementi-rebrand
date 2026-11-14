@@ -53,9 +53,6 @@ export default function MarketingHome() {
 
   return (
     <div className="mkt">
-      {/* Papirfølelsen på Off White. Statisk variant: den animerte i chat-visningen
-          ligger på fire ganger viewportarealet og flytter seg i evig loop. */}
-      <div className="grain grain-static" aria-hidden="true" />
       <SiteNav marketing />
 
       {/* ——— HERO ——— */}
@@ -463,8 +460,8 @@ export default function MarketingHome() {
           <div className="mkt-footer-col">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/incrementi-logo.png"
-              alt="Incrementi"
+              src="/brand/lockup-99x-light.svg"
+              alt="Incrementi, a 99x company"
               className="mkt-footer-logo"
             />
             <p className="mkt-footer-line">{t(home.footer.line, locale)}</p>

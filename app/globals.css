@@ -4,43 +4,45 @@
    ============================================================ */
 :root {
   /* Merkevarepaletten slik den står i Incrementi Branding 2025 V2.
-     Disse fem er kanoniske og skal ikke justeres. */
+     Grønt er kontroll, løsning og gevinst. Magenta er bare risiko. */
   --brand-off-white: #e8e3de;
   --brand-light-green: #85a289;
   --brand-dark-green: #507656;
   --brand-light-magenta: #b296ae;
   --brand-dark-magenta: #765070;
+  --near-black: #1e1b1c;
+  --paper: #ffffff;
+  --card: #f5f2ef;
+  --green-tint: #ebf2ec;
+  --magenta-tint: #efe8ee;
 
-  /* Flater. Off White er bunnen, og kapittelrytmen går i tre trinn:
-     surface → surface-wash → surface-deep. */
+  /* Flater. Off White er bunnen. Lyse bånd er #F5F2EF, mørke bånd Near Black. */
   --surface: var(--brand-off-white);
-  --surface-raised: #f1eeea;
-  --surface-wash: #dcdbd4; /* Light Green 12 % over Off White */
-  --surface-deep: #1c291e; /* Dark Green mørknet 65 % */
+  --surface-raised: var(--card);
+  --surface-wash: var(--card);
+  --surface-deep: var(--near-black);
 
-  /* Tekst. Kontrasttallene er målt mot --surface.
-     Merk at Dark Green selv bare gir 4,05 og derfor ikke brukes som tekst. */
-  --ink: #283b2b; /* 9,41 — overskrifter */
-  --ink-body: #344d38; /* 7,27 — brødtekst */
-  --ink-muted: #405e45; /* 5,67 — dempet tekst */
-  /* Svakeste tillatte tekst. Tallet må holde mot den mørkeste flaten den
-     kan havne på, ikke bare mot --surface: på --surface-wash lå forrige
-     verdi på 4,39 og røk under AA. Denne gir 5,13 og 4,71. */
-  --ink-faint: #45654a;
-  --ink-invert: #f1eeea; /* 13,11 mot --surface-deep */
+  /* Tekst er Near Black. Sekundærtekst er #5E5759 (5,5:1 mot Off White).
+     Dark Green selv er 4,05:1 og brukes til fyll, ikon og stor tekst.
+     Liten grønn tekst bruker --accent-text, den eneste avledede nyansen. */
+  --ink: var(--near-black);
+  --ink-body: var(--near-black);
+  --ink-muted: #5e5759;
+  --ink-faint: #5e5759;
+  --ink-invert: #ffffff;
 
-  /* Aksenter. Dark Magenta er den eneste merkevarefargen som holder
-     som tekst på Off White, så den bærer etiketter og lenker. */
-  --accent: var(--brand-dark-magenta); /* 5,23 */
-  --accent-strong: #64445f; /* 6,50 — hover og trykk */
-  --accent-2: #446449; /* 5,21 — dempet grønn etikett */
+  --accent: var(--brand-dark-green);
+  --accent-strong: #446449; /* mørkere trykk, 6,6:1 for hvit tekst */
+  --accent-text: #446449; /* 5,2:1 mot Off White. Eneste avvik fra paletten. */
+  --accent-2: var(--accent-text);
+  --risk: var(--brand-dark-magenta);
+  --risk-soft: var(--brand-light-magenta);
 
-  /* Fyll og grafikk. Aldri tekst: 2,19 og 2,09 mot flaten. */
   --fill-green: var(--brand-light-green);
   --fill-magenta: var(--brand-light-magenta);
 
-  --line: rgba(80, 118, 86, 0.22);
-  --line-2: rgba(80, 118, 86, 0.12);
+  --line: #d9d9d6;
+  --line-2: #e4e2de;
 
   /* Merkevarens typeskala: 22 Paragraph, 26 Subheader, 32 H4, 37 H3,
      43 H2, 52 H1. Taket er merkevarens tall, gulvet er mobilvarianten.
@@ -59,6 +61,10 @@
   --sans: var(--font-dm), system-ui, sans-serif;
 
   --r-pill: 999px;
+  --r-card: 16px;
+  --r-sm: 8px;
+  --section-y: clamp(72px, 9vw, 128px);
+  --shadow-soft: 0 12px 32px rgba(30, 27, 28, 0.08);
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   /* Tregere start og lang utrulling. Brukes der noe skal kjennes som at det
@@ -93,7 +99,7 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: var(--ink-invert);
+  color: #fff;
 }
 
 a {
@@ -200,7 +206,7 @@ body[data-phase="answering"] .glow {
 
 .logo img {
   display: block;
-  height: 34px;
+  height: 28px;
   width: auto;
 }
 
@@ -218,9 +224,10 @@ body[data-phase="answering"] .glow {
   display: flex;
   gap: 28px;
   align-items: center;
-  font-size: 12.5px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: var(--t-small);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  font-weight: 500;
   color: var(--ink-muted);
 }
 
@@ -257,17 +264,31 @@ body[data-phase="answering"] .glow {
 
 .nav button.start,
 .nav a.start {
-  border: 1px solid rgba(118, 80, 112, 0.5);
-  color: var(--accent);
-  border-radius: 999px;
-  padding: 9px 18px;
-  letter-spacing: 0.1em;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  border-radius: var(--r-pill);
+  padding: 8px 16px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: var(--t-small);
+  font-weight: 500;
+  transition:
+    color 0.35s var(--ease-haptic),
+    border-color 0.35s var(--ease-haptic),
+    background 0.35s var(--ease-haptic),
+    transform 0.35s var(--ease-haptic);
 }
 
 .nav button.start:hover,
 .nav a.start:hover {
-  background: rgba(118, 80, 112, 0.12);
-  color: var(--accent-strong);
+  background: transparent;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.nav button.start:active,
+.nav a.start:active {
+  transform: scale(0.98);
 }
 
 @media (max-width: 880px) {
@@ -964,25 +985,27 @@ body[data-phase="answering"] .glow {
 
 /* ---------- contact form ---------- */
 .contact-card {
-  background: rgba(255, 255, 255, 0.82);
+  background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: var(--r-card);
   padding: 26px 24px;
   margin-top: 18px;
 }
 
 .contact-card .k {
-  font-size: 10.5px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--accent);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-muted);
   margin-bottom: 10px;
 }
 
 .contact-card h4 {
   font-family: var(--display);
-  font-weight: 300;
+  font-weight: 700;
   font-size: 22px;
+  letter-spacing: -0.02em;
   margin-bottom: 16px;
 }
 
@@ -1005,9 +1028,9 @@ body[data-phase="answering"] .glow {
 .field input,
 .field textarea {
   width: 100%;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   padding: 13px 15px;
   color: var(--ink);
   font-family: var(--sans);
@@ -1019,7 +1042,7 @@ body[data-phase="answering"] .glow {
 
 .field input:focus,
 .field textarea:focus {
-  border-color: rgba(118, 80, 112, 0.55);
+  border-color: var(--accent);
 }
 
 /* --muted-2 målte 4,17:1 mot feltbakgrunnen, under WCAG-kravet på 4,5:1. */
@@ -1037,21 +1060,24 @@ body[data-phase="answering"] .glow {
 }
 
 .btn-copper {
-  background: linear-gradient(160deg, var(--accent-strong), var(--accent));
-  color: var(--ink-invert);
+  background: var(--accent);
+  color: #fff;
   border: none;
-  border-radius: 11px;
+  border-radius: var(--r-pill);
   padding: 13px 26px;
-  font-size: 14.5px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: 0;
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.3s;
+  transition: background 0.35s var(--ease-haptic), transform 0.35s var(--ease-haptic);
 }
 
 .btn-copper:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 30px rgba(118, 80, 112, 0.3);
+  background: var(--accent-strong);
+}
+
+.btn-copper:active {
+  transform: scale(0.98);
 }
 
 .btn-copper:disabled {
@@ -1067,8 +1093,8 @@ body[data-phase="answering"] .glow {
 }
 
 .contact-error {
-  font-size: 13px;
-  color: #9c3b33;
+  font-size: var(--t-small);
+  color: var(--risk);
 }
 
 .contact-done {
@@ -1083,7 +1109,6 @@ body[data-phase="answering"] .glow {
   height: 10px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 14px var(--accent);
 }
 
 .contact-done p {
@@ -1412,10 +1437,6 @@ body[data-phase="answering"] .glow {
 }
 
 .eyebrow-sm {
-  font-size: 11.5px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--accent);
   margin-bottom: 14px;
 }
 
@@ -1576,11 +1597,12 @@ body[data-phase="answering"] .glow {
   background: none;
   border: 1px solid var(--line);
   color: var(--ink-muted);
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   padding: 8px 14px;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
   cursor: pointer;
 }
 
@@ -1879,7 +1901,8 @@ body[data-phase="answering"] .glow {
 .page-cta-line {
   font-family: var(--display);
   font-size: clamp(22px, 3vw, 30px);
-  font-weight: 300;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   margin: 8px 0 22px;
   max-width: 18ch;
   line-height: 1.2;
@@ -1895,20 +1918,24 @@ body[data-phase="answering"] .glow {
 .btn-primary {
   display: inline-flex;
   align-items: center;
-  border: 1px solid rgba(118, 80, 112, 0.65);
-  background: rgba(118, 80, 112, 0.14);
-  color: var(--accent-strong);
-  border-radius: 999px;
+  border: 1px solid transparent;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--r-pill);
   padding: 12px 22px;
-  font-size: 12.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: background 0.2s, border-color 0.2s;
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  transition: background 0.35s var(--ease-haptic), transform 0.35s var(--ease-haptic);
 }
 
 .btn-primary:hover {
-  background: rgba(118, 80, 112, 0.24);
-  border-color: var(--accent-strong);
+  background: var(--accent-strong);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
 }
 
 .btn-quiet {
@@ -1923,13 +1950,21 @@ body[data-phase="answering"] .glow {
 
 .btn-outline {
   display: inline-flex;
-  border: 1px solid rgba(118, 80, 112, 0.5);
-  color: var(--accent);
-  border-radius: 999px;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  background: transparent;
+  border-radius: var(--r-pill);
   padding: 8px 16px;
-  font-size: 11.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  transition: color 0.35s var(--ease-haptic), border-color 0.35s var(--ease-haptic);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .sticky-session {
@@ -2702,19 +2737,19 @@ body[data-mode="marketing"] {
   z-index: 40;
   background: transparent;
   border-bottom: 1px solid transparent;
-  transition: background 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease;
+  transition: background 0.35s var(--ease-haptic), border-color 0.35s var(--ease-haptic);
   /* Logoen skal stå på samme venstrekant som hero-tittelen, som den ses
      sammen med. Hero-wrappen er min(1360px, 100% − 64px), så gutteren er
      32 px under 1424 px bredde og (100% − 1360px)/2 over. Med fast 34 px sto
      logoen 42 px til venstre for tittelen på en 1512 px skjerm og 246 px til
      venstre på 1920 px — avviket vokste med bredden. */
   padding-inline: max(32px, (100% - 1360px) / 2);
+  padding-block: 14px;
 }
 
 .mkt-topbar-scrolled {
-  background: rgba(232, 227, 222, 0.9);
+  background: var(--surface);
   border-bottom-color: var(--line);
-  backdrop-filter: blur(14px);
 }
 
 /* Menyen ligger over hero-fotoet. Der er sløret lyst, så navigasjonen
@@ -2722,8 +2757,10 @@ body[data-mode="marketing"] {
    mot den lyse flaten den skroller ned på. */
 .mkt-topbar .desktop-nav a,
 .mkt-topbar .mobile-drawer-nav a {
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: var(--t-small);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  font-weight: 500;
   color: var(--ink);
 }
 
@@ -2736,15 +2773,15 @@ body[data-mode="marketing"] {
 .mkt-topbar .desktop-nav a.start,
 .mkt-topbar .mobile-drawer-nav a.start,
 .mkt-topbar .mobile-start {
-  color: var(--accent);
-  border-color: rgba(118, 80, 112, 0.5);
+  color: var(--ink);
+  border-color: var(--ink);
 }
 
 .mkt-topbar .desktop-nav a.start:hover,
 .mkt-topbar .mobile-drawer-nav a.start:hover,
 .mkt-topbar .mobile-start:hover {
-  color: var(--ink-invert);
-  background: var(--accent);
+  color: var(--accent);
+  background: transparent;
   border-color: var(--accent);
 }
 
@@ -2841,14 +2878,14 @@ body[data-mode="marketing"] {
   min-width: 270px;
   padding: 8px;
   border: 1px solid var(--line);
-  border-radius: 12px;
-  background: rgba(241, 238, 234, 0.98);
-  box-shadow: 0 24px 48px -28px rgba(28, 41, 30, 0.45);
+  border-radius: var(--r-card);
+  background: var(--paper);
+  box-shadow: var(--shadow-soft);
 }
 
 .nav .nav-drop-panel a {
   padding: 10px 12px;
-  border-radius: 8px;
+  border-radius: var(--r-sm);
   font-size: 14px;
   letter-spacing: 0;
   text-transform: none;
@@ -2906,11 +2943,19 @@ body[data-mode="marketing"] {
   text-transform: none;
 }
 
-.mkt-eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.28em;
+.kicker,
+.mkt-eyebrow,
+.lp-eyebrow,
+.eyebrow-sm,
+.mkt-logos-eyebrow {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-text);
+}
+
+.mkt-eyebrow {
   margin-bottom: 14px;
 }
 
@@ -2931,10 +2976,10 @@ body[data-mode="marketing"] {
 .mkt-section-head h2,
 .mkt-subhead h2,
 .mkt-cta h2 {
-  font-weight: 500;
+  font-weight: 700;
   font-size: var(--t-h2);
   line-height: 1.12;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   color: var(--ink);
   margin-bottom: 16px;
   max-width: 18ch;
@@ -2946,7 +2991,7 @@ body[data-mode="marketing"] {
 
 .mkt-section {
   position: relative;
-  padding: 110px 0;
+  padding: var(--section-y) 0;
   scroll-margin-top: 88px;
 }
 
@@ -2969,7 +3014,7 @@ body[data-mode="marketing"] {
   min-height: 100dvh;
   display: flex;
   align-items: center;
-  padding: 132px 0 80px;
+  padding: 96px 0 72px;
   background: var(--surface);
   /* Utblødningen regnes ut fra 100vw, som teller med rullefeltet, mens
      wrappen regnes ut fra 100 %, som ikke gjør det. Over 1424 px gir det
@@ -3076,10 +3121,10 @@ body[data-mode="marketing"] {
 }
 
 .mkt-hero-lead {
-  font-size: var(--t-body);
-  line-height: 1.62;
-  color: var(--ink-body);
-  max-width: 46ch;
+  font-size: var(--t-para);
+  line-height: 1.55;
+  color: var(--ink-muted);
+  max-width: 56ch;
   margin-bottom: 28px;
 }
 
@@ -3095,11 +3140,12 @@ body[data-mode="marketing"] {
   justify-content: center;
   gap: 14px;
   min-height: 46px;
-  padding: 0 24px;
+  padding: 0 22px;
   border-radius: var(--r-pill);
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
   border: 1px solid transparent;
   transition: background 0.35s var(--ease-haptic), color 0.35s var(--ease-haptic),
     border-color 0.35s var(--ease-haptic), transform 0.35s var(--ease-haptic);
@@ -3107,7 +3153,7 @@ body[data-mode="marketing"] {
 
 /* Trykket skal kjennes i fingeren, ikke bare skifte farge. */
 .mkt-btn:active {
-  transform: scale(0.985);
+  transform: scale(0.98);
 }
 
 /* Pilen står aldri naken ved siden av teksten. Den bor i sin egen sirkel,
@@ -3124,14 +3170,14 @@ body[data-mode="marketing"] {
   width: 30px;
   height: 30px;
   border-radius: var(--r-pill);
-  background: rgba(241, 238, 234, 0.18);
+  background: rgba(255, 255, 255, 0.18);
   transition: transform 0.5s var(--ease-haptic), background 0.35s var(--ease-haptic);
 }
 
 /* Spøkelsesknappen har mørk tekst på lys flate, så en lys sirkel ville
    forsvunnet. Den får en grønntonet i stedet. */
 .mkt-btn-ghost .mkt-btn-icon {
-  background: rgba(80, 118, 86, 0.12);
+  background: rgba(30, 27, 28, 0.06);
 }
 
 .mkt-btn:hover .mkt-btn-icon {
@@ -3139,16 +3185,16 @@ body[data-mode="marketing"] {
 }
 
 .mkt-btn-primary:hover .mkt-btn-icon {
-  background: rgba(241, 238, 234, 0.26);
+  background: rgba(255, 255, 255, 0.26);
 }
 
 .mkt-btn-ghost:hover .mkt-btn-icon {
-  background: rgba(118, 80, 112, 0.14);
+  background: rgba(80, 118, 86, 0.14);
 }
 
 .mkt-btn-primary {
   background: var(--accent);
-  color: var(--ink-invert);
+  color: #fff;
 }
 
 .mkt-btn-primary:hover {
@@ -3156,14 +3202,14 @@ body[data-mode="marketing"] {
 }
 
 .mkt-btn-ghost {
-  border-color: rgba(80, 118, 86, 0.45);
+  border-color: var(--ink);
   color: var(--ink);
   background: transparent;
 }
 
 .mkt-btn-ghost:hover {
   border-color: var(--accent);
-  color: var(--accent-strong);
+  color: var(--accent);
 }
 
 /* ——— Post-hero band (body + maskindata note + stats) ——— */
@@ -3192,7 +3238,7 @@ body[data-mode="marketing"] {
   margin: 0 0 28px;
   max-width: 58ch;
   padding-left: 14px;
-  border-left: 2px solid rgba(118, 80, 112, 0.55);
+  border-left: 2px solid var(--line);
 }
 
 .mkt-post-hero-stats {
@@ -3231,17 +3277,17 @@ body[data-mode="marketing"] {
 
 .mkt-post-hero-stats strong {
   font-family: var(--display);
-  font-weight: 400;
+  font-weight: 700;
   font-size: var(--t-sub);
-  color: var(--accent-strong);
+  color: var(--accent-text);
   line-height: 1;
 }
 
 .mkt-post-hero-stats span {
-  font-size: 12px;
+  font-size: var(--t-small);
   line-height: 1.4;
   color: var(--ink-muted);
-  max-width: 18ch;
+  max-width: 22ch;
 }
 
 /* ——— Logostripe ——— */
@@ -3260,10 +3306,6 @@ body[data-mode="marketing"] {
 }
 
 .mkt-logos-eyebrow {
-  font-size: var(--t-label);
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--accent-2);
   margin: 0 0 28px;
 }
 
@@ -3353,18 +3395,19 @@ body[data-mode="marketing"] {
 
 .mkt-journey-n {
   font-family: var(--display);
-  font-size: 13px;
-  color: var(--accent);
-  letter-spacing: 0.16em;
+  font-size: var(--t-small);
+  font-weight: 500;
+  color: var(--accent-text);
+  letter-spacing: 0.04em;
 }
 
 .mkt-journey-tab strong {
   font-size: var(--t-small);
-  font-weight: 550;
+  font-weight: 700;
 }
 
 .mkt-journey-short {
-  font-size: 13px;
+  font-size: var(--t-small);
   line-height: 1.45;
   color: var(--ink-muted);
 }
@@ -3392,8 +3435,9 @@ body[data-mode="marketing"] {
 }
 
 .mkt-journey-copy h3 {
-  font-weight: 500;
+  font-weight: 700;
   font-size: var(--t-h3);
+  letter-spacing: -0.02em;
   line-height: 1.15;
   margin-bottom: 14px;
 }
@@ -3447,15 +3491,15 @@ body[data-mode="marketing"] {
   gap: clamp(24px, 4vw, 64px);
   align-items: start;
   padding-top: clamp(26px, 2.8vw, 38px);
-  border-top: 1px solid rgba(80, 118, 86, 0.16);
+  border-top: 1px solid var(--line);
 }
 
 .mkt-deliver-label {
-  font-weight: 500;
+  font-weight: 700;
   font-size: var(--t-h4);
   line-height: 1.15;
-  letter-spacing: -0.01em;
-  color: var(--accent-strong);
+  letter-spacing: -0.02em;
+  color: var(--ink);
   margin: 0;
 }
 
@@ -3466,8 +3510,9 @@ body[data-mode="marketing"] {
 }
 
 .mkt-deliver-items h4 {
-  font-weight: 400;
+  font-weight: 700;
   font-size: var(--t-para);
+  letter-spacing: -0.02em;
   line-height: 1.3;
   margin: 0 0 10px;
   color: var(--ink);
@@ -3483,7 +3528,7 @@ body[data-mode="marketing"] {
 .mkt-cap,
 .mkt-panel,
 .mkt-ref {
-  border-top: 1px solid rgba(118, 80, 112, 0.45);
+  border-top: 1px solid var(--line);
   background: transparent;
   padding: 22px 4px 10px;
 }
@@ -3554,14 +3599,15 @@ body[data-mode="marketing"] {
 .mkt-why-problem {
   margin: 0;
   padding: 0 0 0 22px;
-  border-left: 2px solid rgba(118, 80, 112, 0.55);
+  border-left: 2px solid var(--risk);
 }
 
 .mkt-why-problem-label {
-  font-size: var(--t-label);
-  letter-spacing: 0.24em;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--risk);
   margin: 0 0 18px;
 }
 
@@ -3580,8 +3626,9 @@ body[data-mode="marketing"] {
 }
 
 .mkt-why-answers h3 {
-  font-weight: 400;
+  font-weight: 700;
   font-size: var(--t-h4);
+  letter-spacing: -0.02em;
   line-height: 1.2;
   margin: 0 0 12px;
   color: var(--ink);
@@ -3606,8 +3653,9 @@ body[data-mode="marketing"] {
 /* Samme nivå som svarene til venstre, så seksjonen holder seg til to
    overskriftsnivåer i stedet for fire. */
 .mkt-why-band-title {
-  font-weight: 400;
+  font-weight: 700;
   font-size: var(--t-h4);
+  letter-spacing: -0.02em;
   line-height: 1.2;
   max-width: 24ch;
   margin: 0 0 clamp(48px, 5vw, 72px);
@@ -3629,18 +3677,18 @@ body[data-mode="marketing"] {
 }
 
 .mkt-why-metric {
-  font-weight: 500;
+  font-weight: 700;
   font-size: var(--t-h3);
   line-height: 1.1;
   letter-spacing: -0.02em;
-  color: var(--accent-strong);
+  color: var(--accent);
   margin: 0 0 16px;
   padding-bottom: 16px;
-  border-bottom: 1px solid rgba(118, 80, 112, 0.32);
+  border-bottom: 1px solid var(--line);
 }
 
 .mkt-why-value h4 {
-  font-weight: 400;
+  font-weight: 700;
   font-size: var(--t-para);
   line-height: 1.3;
   margin: 0 0 10px;
@@ -3659,7 +3707,8 @@ body[data-mode="marketing"] {
 }
 
 .mkt-sovereignty h3 {
-  font-weight: 400;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   font-size: var(--t-h4);
   line-height: 1.2;
   margin-bottom: 14px;
@@ -3675,15 +3724,15 @@ body[data-mode="marketing"] {
 }
 
 .mkt-partner-line {
-  color: var(--accent-2);
-  font-size: var(--t-label);
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .mkt-section-quiet {
-  background: var(--surface-raised);
-  border-block: 1px solid var(--line-2);
+  background: var(--surface);
 }
 
 .mkt-triple {
@@ -3703,7 +3752,7 @@ body[data-mode="marketing"] {
   display: flex;
   flex-direction: column;
   padding: 0 0 clamp(72px, 8vw, 100px);
-  background: var(--surface-wash);
+  background: var(--surface);
   border-bottom: 1px solid var(--line);
 }
 
@@ -3753,7 +3802,8 @@ body[data-mode="marketing"] {
 }
 
 .mkt-industry h3 {
-  font-weight: 400;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   font-size: var(--t-para);
   line-height: 1.25;
   margin: 0 0 10px;
@@ -3801,7 +3851,7 @@ body[data-mode="marketing"] {
 .mkt-pillar {
   flex: 1 1 240px;
   padding: 0 clamp(18px, 2vw, 30px);
-  border-left: 1px solid rgba(80, 118, 86, 0.16);
+  border-left: 1px solid var(--line);
 }
 
 .mkt-pillar:first-child {
@@ -3811,17 +3861,17 @@ body[data-mode="marketing"] {
 
 .mkt-pillar strong {
   display: block;
-  font-weight: 500;
+  font-weight: 700;
   font-size: var(--t-small);
   line-height: 1.35;
-  color: var(--accent-strong);
+  color: var(--ink);
   margin-bottom: 5px;
 }
 
 .mkt-pillar span {
   display: block;
   color: var(--ink-muted);
-  font-size: 13px;
+  font-size: var(--t-small);
   line-height: 1.55;
 }
 
@@ -3861,13 +3911,14 @@ body[data-mode="marketing"] {
 
 .mkt-person-info h3 {
   font-size: var(--t-body);
-  font-weight: 550;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   margin-bottom: 4px;
 }
 
 .mkt-person-info p {
   color: var(--ink-muted);
-  font-size: 13px;
+  font-size: var(--t-small);
 }
 
 /* Navnet er kortets eneste lenke til profilen. ::after strekker treffflaten
@@ -3936,7 +3987,8 @@ body[data-mode="marketing"] {
 }
 
 .mkt-group h3 {
-  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   font-size: var(--t-h3);
   margin-bottom: 14px;
   max-width: 20ch;
@@ -3954,7 +4006,7 @@ body[data-mode="marketing"] {
   flex-wrap: wrap;
   align-items: center;
   gap: 28px 56px;
-  border-top: 1px solid rgba(80, 118, 86, 0.35);
+  border-top: 1px solid var(--line);
   padding-top: 28px;
 }
 
@@ -3967,7 +4019,7 @@ body[data-mode="marketing"] {
   gap: 14px;
   padding: 10px 18px 10px 14px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   color: inherit;
   transition: border-color 0.25s, background-color 0.25s;
 }
@@ -4012,10 +4064,10 @@ body[data-mode="marketing"] {
 }
 
 .trust-99x-copy span {
-  font-size: 12px;
+  font-size: var(--t-small);
   line-height: 1.35;
   color: var(--ink-muted);
-  max-width: 22ch;
+  max-width: 26ch;
 }
 
 .trust-seals ul {
@@ -4111,9 +4163,10 @@ body[data-mode="marketing"] {
 
 .trust-seals-caption {
   margin: 12px 0 0;
-  font-size: var(--t-label);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--ink-muted);
 }
 
@@ -4159,7 +4212,8 @@ body[data-mode="marketing"] {
   cursor: pointer;
   list-style: none;
   font-size: var(--t-para);
-  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   padding-right: 28px;
   position: relative;
 }
@@ -4191,10 +4245,8 @@ body[data-mode="marketing"] {
 
 /* ——— Contact ——— */
 .mkt-cta {
-  background:
-    radial-gradient(70% 80% at 15% 20%, rgba(118, 80, 112, 0.12), transparent 60%),
-    var(--surface-raised);
-  border-top: 1px solid rgba(118, 80, 112, 0.22);
+  background: var(--surface-raised);
+  border-top: 1px solid var(--line);
 }
 
 .mkt-cta-grid {
@@ -4225,9 +4277,9 @@ body[data-mode="marketing"] {
 }
 
 .mkt-cta .contact-card {
-  background: rgba(255, 255, 255, 0.66);
+  background: var(--paper);
   border: 1px solid var(--line);
-  backdrop-filter: blur(8px);
+  border-radius: var(--r-card);
 }
 
 /* Holder plass mens HubSpot-skjemaet lastes, så siden ikke hopper. */
@@ -4235,22 +4287,22 @@ body[data-mode="marketing"] {
   min-height: 320px;
 }
 
-/* Det dypgrønne båndet snur tekstrollene. I stedet for å overstyre hver
-   enkelt regel setter flaten tokenene på nytt, så alt som ligger inni
-   følger etter av seg selv. Her er det merkevarens lyse halvdel som
-   endelig holder som tekst: Light Magenta gir 5,68 og Light Green 5,43. */
+/* Near Black snur tekstrollene. Lys grønn er aksent (6:1), lys magenta er risiko. */
 .mkt-on-deep {
   background: var(--surface-deep);
-  --ink: #f1eeea; /* 13,11 */
-  --ink-body: #dcd8d2; /* 10,68 */
-  --ink-muted: #b9c3b8; /* 8,35 */
-  --ink-faint: #9dab9d; /* 6,31 */
-  --ink-invert: var(--surface-deep);
-  --accent: var(--brand-light-magenta);
-  --accent-strong: #c9b3c5; /* 7,75 */
+  --ink: var(--brand-off-white);
+  --ink-body: var(--brand-off-white);
+  --ink-muted: #c2bbb5;
+  --ink-faint: #c2bbb5;
+  --ink-invert: var(--near-black);
+  --accent: var(--brand-light-green);
+  --accent-strong: var(--brand-off-white);
+  --accent-text: var(--brand-light-green);
   --accent-2: var(--brand-light-green);
-  --line: rgba(232, 227, 222, 0.17);
-  --line-2: rgba(232, 227, 222, 0.09);
+  --risk: var(--brand-light-magenta);
+  --risk-soft: var(--brand-light-magenta);
+  --line: #3a3436;
+  --line-2: #4a4446;
 }
 
 /* ——— Footer ——— */
@@ -4271,13 +4323,13 @@ body[data-mode="marketing"] {
 }
 
 .mkt-footer-logo {
-  height: 30px;
+  height: 40px;
   width: auto;
 }
 
 .mkt-footer-line {
   color: var(--ink-muted);
-  font-size: 13px;
+  font-size: var(--t-small);
   max-width: 42ch;
 }
 
@@ -4291,7 +4343,7 @@ body[data-mode="marketing"] {
 
 .mkt-footer-legal strong {
   color: var(--ink);
-  font-weight: 550;
+  font-weight: 700;
 }
 
 .mkt-footer-legal a {
@@ -4311,10 +4363,11 @@ body[data-mode="marketing"] {
 }
 
 .mkt-footer-nav a {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent-2);
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-muted);
 }
 
 .mkt-footer-nav a:hover {
@@ -4326,9 +4379,11 @@ body[data-mode="marketing"] {
   border: 0;
   background: none;
   cursor: pointer;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font: inherit;
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--ink-muted);
   transition: color 0.2s ease;
 }
@@ -4353,12 +4408,11 @@ body[data-mode="marketing"] {
 }
 
 .mkt-place-pin {
-  width: 10px;
-  height: 10px;
-  margin-top: 6px;
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 4px rgba(118, 80, 112, 0.18);
 }
 
 .mkt-place-copy {
@@ -4367,10 +4421,10 @@ body[data-mode="marketing"] {
 }
 
 .mkt-place-copy strong {
-  font-size: var(--t-label);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent);
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-muted);
   font-weight: 500;
 }
 
@@ -4384,10 +4438,11 @@ body[data-mode="marketing"] {
 }
 
 .mkt-place-cta {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent-2);
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--accent-text);
   margin-top: 4px;
 }
 
@@ -4418,9 +4473,10 @@ body[data-mode="marketing"] {
 }
 
 .mkt-99x-badge span {
-  font-size: var(--t-label);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--ink-muted);
 }
 
@@ -4551,8 +4607,8 @@ body[data-mode="marketing"] {
   }
 
   .mkt-topbar .menu-toggle {
-    padding: 7px 11px;
-    font-size: 10px;
+    padding: 7px 12px;
+    font-size: 12.5px;
   }
 
   .mkt-section {
@@ -4758,6 +4814,7 @@ body[data-mode="marketing"] {
 
 .mkt-sub-title {
   font-weight: 500;
+  letter-spacing: -0.02em;
   font-size: var(--t-h1);
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -4916,7 +4973,7 @@ body[data-mode="marketing"] {
 }
 
 .mkt-subpage .case-card:hover {
-  border-top-color: rgba(118, 80, 112, 0.55);
+  border-top-color: var(--accent);
   background: transparent;
   transform: none;
 }
@@ -4942,14 +4999,17 @@ body[data-mode="marketing"] {
 }
 
 .mkt-subpage .page-back a {
-  color: var(--accent);
+  color: var(--ink);
   font-size: var(--t-small);
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   text-transform: none;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
 }
 
 .mkt-subpage .page-back a:hover {
-  color: var(--accent-strong);
+  color: var(--accent-text);
 }
 
 .mkt-subpage .topbar .nav a.active,
@@ -5029,10 +5089,11 @@ body[data-mode="marketing"] {
 }
 
 .person-profile-contact dt {
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-muted);
 }
 
 .person-profile-contact dd {
@@ -5043,13 +5104,14 @@ body[data-mode="marketing"] {
 
 .person-profile-contact a {
   color: var(--ink);
-  border-bottom: 1px solid transparent;
-  transition: color 0.2s, border-color 0.2s;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+  transition: color 0.2s var(--ease-haptic);
 }
 
 .person-profile-contact a:hover {
-  color: var(--accent-strong);
-  border-color: currentColor;
+  color: var(--accent-text);
 }
 
 .person-profile-linkedin {
@@ -5141,7 +5203,6 @@ body[data-mode="marketing"] {
 .lp h1,
 .lp h2 {
   font-family: var(--display);
-  font-weight: 500;
   letter-spacing: -0.02em;
   color: var(--ink);
   text-wrap: balance;
@@ -5149,8 +5210,13 @@ body[data-mode="marketing"] {
 
 .lp h1 {
   font-size: clamp(32px, 5vw, 50px);
+  font-weight: 500;
   line-height: 1.1;
   margin-bottom: 16px;
+}
+
+.lp h2 {
+  font-weight: 700;
 }
 
 .lp h1 span {
@@ -5181,9 +5247,8 @@ body[data-mode="marketing"] {
   justify-content: space-between;
   gap: 16px;
   padding: 14px max(20px, (100% - 960px) / 2);
-  background: rgba(232, 227, 222, 0.94);
+  background: var(--surface);
   border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(10px);
 }
 
 .lp-logo img {
@@ -5193,25 +5258,25 @@ body[data-mode="marketing"] {
 }
 
 .lp-top-cta {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--accent);
+  font-size: var(--t-small);
+  font-weight: 500;
+  color: var(--ink);
   text-decoration: underline;
+  text-decoration-color: var(--accent);
   text-underline-offset: 4px;
+}
+
+.lp-top-cta:hover {
+  color: var(--accent-text);
 }
 
 .lp-hero {
   padding: 40px 0 56px;
-  text-align: center;
+  text-align: left;
 }
 
 .lp-eyebrow {
   margin-bottom: 14px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
 }
 
 .lp-lead {
@@ -5223,8 +5288,7 @@ body[data-mode="marketing"] {
   position: relative;
   aspect-ratio: 16 / 9;
   margin: 28px 0 24px;
-  background: #1c1c1c;
-  box-shadow: 0 24px 60px -30px rgba(28, 41, 30, 0.5);
+  background: var(--near-black);
 }
 
 .lp-video video {
@@ -5246,10 +5310,9 @@ body[data-mode="marketing"] {
   border-radius: 50%;
   background: var(--accent);
   color: #fff;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   transform: translate(-50%, -50%);
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: transform 0.35s var(--ease-haptic), background 0.35s var(--ease-haptic);
 }
 
 .lp-play:hover {
@@ -5264,7 +5327,7 @@ body[data-mode="marketing"] {
 
 .lp-cta {
   margin-top: 32px;
-  text-align: center;
+  text-align: left;
 }
 
 .lp-hero .lp-cta {
@@ -5275,23 +5338,23 @@ body[data-mode="marketing"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 60px;
-  padding: 0 36px;
-  border-radius: 8px;
+  min-height: 46px;
+  padding: 0 22px;
+  border-radius: var(--r-pill);
   background: var(--accent);
   color: #fff;
-  font-size: 18px;
-  font-weight: 600;
-  transition: background 0.2s ease;
-}
-
-.lp-btn::after {
-  content: "→";
-  margin-left: 12px;
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: 0;
+  transition: background 0.35s var(--ease-haptic), transform 0.35s var(--ease-haptic);
 }
 
 .lp-btn:hover {
   background: var(--accent-strong);
+}
+
+.lp-btn:active {
+  transform: scale(0.98);
 }
 
 .lp-cta-note {
@@ -5370,9 +5433,9 @@ body[data-mode="marketing"] {
 .lp-form {
   margin-top: 28px;
   padding: 24px;
-  background: #fff;
+  background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--r-card);
 }
 
 .lp-form .hs-form-frame {
@@ -5398,7 +5461,14 @@ body[data-mode="marketing"] {
 }
 
 .lp-person a {
-  color: var(--accent);
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+.lp-person a:hover {
+  color: var(--accent-text);
 }
 
 .lp-trust {
@@ -5408,10 +5478,18 @@ body[data-mode="marketing"] {
 }
 
 .lp-footer {
-  padding: 28px 20px;
-  font-size: 13px;
+  padding: 48px 20px 40px;
+  background: var(--surface-deep);
+  color: #c2bbb5;
+  font-size: var(--t-small);
   text-align: center;
-  color: var(--ink-muted);
+}
+
+.lp-footer-lockup {
+  display: block;
+  height: 40px;
+  width: auto;
+  margin: 0 auto 20px;
 }
 
 @media (max-width: 720px) {
@@ -5465,12 +5543,9 @@ body[data-mode="marketing"] {
   }
 }
 
-/* Spørsmålet i tittelen er lengre enn tekstkolonnen og skal stå på én linje
-   på desktop, så tittelen bryter ut til samme bredde som figurene. */
+/* Tittelen er venstrejustert i kolonnen, som resten av brevet. */
 .lp-advisory .lp-hero h1 {
-  --h1-w: min(1040px, calc(100vw - 40px));
-  width: var(--h1-w);
-  margin-left: calc((100% - var(--h1-w)) / 2);
+  max-width: 22ch;
 }
 
 /* Plakatbildet står i filmens ramme til filmen finnes. */
@@ -5494,19 +5569,16 @@ body[data-mode="marketing"] {
 }
 
 .lp-fig-shell {
-  padding: 6px;
-  border-radius: 16px;
-  background: rgba(80, 118, 86, 0.06);
-  box-shadow:
-    0 0 0 1px rgba(80, 118, 86, 0.12),
-    0 40px 80px -56px rgba(28, 41, 30, 0.45);
+  padding: 0;
+  border-radius: var(--r-card);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
 }
 
 .lp-fig-core {
   padding: clamp(20px, 4.4vw, 48px);
-  border-radius: 10px;
-  background: var(--surface-raised);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  border-radius: inherit;
+  background: transparent;
 }
 
 .lp-fig figcaption {
@@ -5541,9 +5613,9 @@ body[data-mode="marketing"] {
 
 .lp-chip-ghost {
   border-style: dashed;
-  border-color: rgba(80, 118, 86, 0.28);
+  border-color: var(--line);
   background: transparent;
-  color: rgba(64, 94, 69, 0.4);
+  color: var(--ink-muted);
 }
 
 /* ---------- Figur 1: ledermøtet ---------- */
@@ -5574,9 +5646,8 @@ body[data-mode="marketing"] {
   gap: 12px;
   padding: 18px 20px;
   border: 1px solid var(--line);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.55);
-  box-shadow: 0 18px 36px -32px rgba(28, 41, 30, 0.4);
+  border-radius: var(--r-sm);
+  background: var(--paper);
   font: inherit;
   color: inherit;
   text-align: left;
@@ -5617,14 +5688,13 @@ body[data-mode="marketing"] {
 }
 
 .lp-meet-role.is-active {
-  border-color: rgba(118, 80, 112, 0.55);
-  box-shadow: 0 22px 44px -30px rgba(118, 80, 112, 0.7);
+  border-color: var(--accent);
 }
 
 .lp-meet-role.is-active .lp-chip {
-  border-color: rgba(118, 80, 112, 0.55);
-  background: rgba(118, 80, 112, 0.12);
-  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--green-tint);
+  color: var(--accent-text);
 }
 
 .lp-meet[data-active] .lp-meet-role:not(.is-active) {
@@ -5661,21 +5731,18 @@ body[data-mode="marketing"] {
   place-items: center;
   width: 100%;
   height: 100%;
-  border: 1.5px solid rgba(118, 80, 112, 0.92);
+  border: 1.5px solid var(--accent);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(118, 80, 112, 0.14), rgba(118, 80, 112, 0.03) 72%);
-  box-shadow:
-    inset 0 0 0 10px rgba(241, 238, 234, 0.7),
-    inset 0 0 0 11px rgba(118, 80, 112, 0.25);
+  background: var(--green-tint);
   font-size: clamp(18px, 2vw, 22px);
-  font-weight: 600;
-  color: var(--accent);
+  font-weight: 700;
+  color: var(--accent-text);
 }
 
 .lp-meet-pulse {
   position: absolute;
   inset: 0;
-  border: 1.5px solid rgba(118, 80, 112, 0.7);
+  border: 1.5px solid var(--accent);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -5733,7 +5800,7 @@ body[data-mode="marketing"] {
 }
 
 .lp-key-direction {
-  border-top: 2.5px solid rgba(118, 80, 112, 0.92);
+  border-top: 2.5px solid var(--accent);
 }
 
 .lp-key-block {
@@ -5749,7 +5816,7 @@ body[data-mode="marketing"] {
 }
 
 .lp-key-misstep {
-  border-top: 2px dotted rgba(64, 94, 69, 0.55);
+  border-top: 2px dotted var(--risk);
 }
 
 .lp-key-base {
@@ -5783,7 +5850,7 @@ body[data-mode="marketing"] {
   width: 1.5px;
   height: 34px;
   margin: 6px auto 0;
-  background: rgba(118, 80, 112, 0.92);
+  background: var(--accent);
   transform-origin: top;
 }
 
@@ -5794,8 +5861,8 @@ body[data-mode="marketing"] {
   left: 50%;
   width: 8px;
   height: 8px;
-  border-right: 1.5px solid rgba(118, 80, 112, 0.92);
-  border-bottom: 1.5px solid rgba(118, 80, 112, 0.92);
+  border-right: 1.5px solid var(--accent);
+  border-bottom: 1.5px solid var(--accent);
   transform: translate(-50%, 0) rotate(45deg);
 }
 
@@ -5894,11 +5961,11 @@ body[data-mode="marketing"] {
 }
 
 .lp-eis-now.is-lit {
-  background: rgba(118, 80, 112, 0.08);
+  background: var(--green-tint);
 }
 
 .lp-eis-now.is-lit .lp-eis-name {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* Grunnpilarene står på en felles sokkel: de er ikke initiativer som
@@ -5922,23 +5989,23 @@ body[data-mode="marketing"] {
   justify-content: center;
   min-height: 118px;
   padding: 12px 4px;
-  border: 1.5px solid rgba(118, 80, 112, 0.92);
+  border: 1.5px solid var(--accent);
   border-bottom: 0;
   border-radius: 6px 6px 0 0;
-  background: linear-gradient(180deg, rgba(118, 80, 112, 0.2), rgba(118, 80, 112, 0.08));
-  font-size: 13.5px;
+  background: var(--green-tint);
+  font-size: var(--t-small);
   font-weight: 600;
   line-height: 1.25;
   text-align: center;
   text-wrap: balance;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .lp-pillars-base {
   display: block;
   height: 8px;
   border-radius: 2px;
-  background: rgba(118, 80, 112, 0.92);
+  background: var(--accent);
   transform-origin: center;
 }
 
@@ -6079,7 +6146,7 @@ body[data-mode="marketing"] {
   .lp-pillar {
     min-height: 0;
     padding: 8px 6px;
-    border-bottom: 1.5px solid rgba(118, 80, 112, 0.92);
+    border-bottom: 1.5px solid var(--accent);
     border-radius: 6px;
     font-size: 13px;
   }
@@ -6249,14 +6316,15 @@ body[data-mode="marketing"] {
 }
 
 .pv-body a {
-  color: var(--accent);
+  color: var(--ink);
   text-decoration: underline;
+  text-decoration-color: var(--accent);
   text-underline-offset: 3px;
   overflow-wrap: anywhere;
 }
 
 .pv-body a:hover {
-  color: var(--accent-strong);
+  color: var(--accent-text);
 }
 
 .pv-body ul {
@@ -6278,13 +6346,13 @@ body[data-mode="marketing"] {
   background: var(--surface-raised);
   border: 1px solid var(--line);
   border-left: 3px solid var(--fill-green);
-  border-radius: 14px;
+  border-radius: var(--r-card);
 }
 
 .pv-summary h2 {
   margin: 0 0 14px;
   font-size: var(--t-sub);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--ink);
 }
@@ -6307,7 +6375,7 @@ body[data-mode="marketing"] {
   align-items: baseline;
   margin: 0 0 20px;
   font-size: clamp(24px, 2.6vw, 30px);
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.015em;
   color: var(--ink);
@@ -6316,11 +6384,11 @@ body[data-mode="marketing"] {
 .pv-section h2::before {
   content: counter(pvs, decimal-leading-zero);
   flex: none;
-  font-size: 13px;
+  font-size: var(--t-small);
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   font-variant-numeric: tabular-nums;
-  color: var(--accent);
+  color: var(--ink-muted);
 }
 
 .pv-section h3 {
@@ -6342,7 +6410,7 @@ body[data-mode="marketing"] {
   margin: 8px 0 24px;
   overflow-x: auto;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--r-card);
   background: var(--surface-raised);
 }
 
@@ -6482,4 +6550,39 @@ body[data-mode="marketing"] {
   html:has(.pv-layout) {
     scroll-behavior: smooth;
   }
+}
+
+/* HubSpot-banneren styres fra portalen. Dette trekker den inn i paletten
+   når den rendres. Portalens egne farger bør settes likt. */
+#hs-eu-cookie-confirmation,
+#hs-eu-cookie-confirmation-inner {
+  background: var(--surface) !important;
+  color: var(--ink) !important;
+  font-family: var(--sans) !important;
+  border-radius: var(--r-card) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+#hs-eu-cookie-confirmation-inner p,
+#hs-eu-cookie-confirmation-inner a {
+  color: var(--ink) !important;
+  font-family: var(--sans) !important;
+}
+
+#hs-eu-confirmation-button {
+  background: var(--accent) !important;
+  color: #fff !important;
+  border: 1px solid var(--accent) !important;
+  border-radius: var(--r-pill) !important;
+  font-family: var(--sans) !important;
+  font-weight: 500 !important;
+}
+
+#hs-eu-decline-button {
+  background: transparent !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--ink) !important;
+  border-radius: var(--r-pill) !important;
+  font-family: var(--sans) !important;
+  font-weight: 500 !important;
 }

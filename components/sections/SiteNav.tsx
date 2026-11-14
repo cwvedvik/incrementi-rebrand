@@ -57,13 +57,10 @@ export default function SiteNav({
     return href(`/#${id}`);
   }
 
-  // Den leverte logoen er nesten hvit og forsvinner på Off White. Den mørke
-  // varianten er generert fra samme alfakanal av
-  // scripts/prepare-client-logos.mjs.
   const logoInner = (
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/incrementi-logo-ink.png" alt="Incrementi" />
+      <img src="/brand/logo-dark.svg" alt="Incrementi" />
     </>
   );
 

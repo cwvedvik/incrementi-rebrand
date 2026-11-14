@@ -119,13 +119,13 @@ export default function DirectionPath() {
 
           <path
             d={MISSTEP}
-            stroke={FIG.muted}
+            stroke={FIG.risk}
             strokeWidth="1.4"
             strokeDasharray="3 5"
             mask="url(#lp-horizon-misstep)"
           />
           <motion.g style={{ opacity: misstep }}>
-            <path d="M197 165 L211 179 M211 165 L197 179" stroke={FIG.muted} strokeWidth="1.8" />
+            <path d="M197 165 L211 179 M211 165 L197 179" stroke={FIG.risk} strokeWidth="1.8" />
             <text className="lp-svg-text lp-svg-muted" x="204" y="148" textAnchor="middle">
               {horizon.misstep}
             </text>
@@ -142,8 +142,8 @@ export default function DirectionPath() {
             />
           ))}
           <motion.g style={{ opacity: forks }}>
-            <circle cx="410" cy="112" r="5.5" stroke={FIG.green} strokeWidth="1.3" fill="#f1eeea" />
-            <circle cx="585" cy="74" r="5.5" stroke={FIG.green} strokeWidth="1.3" fill="#f1eeea" />
+            <circle cx="410" cy="112" r="5.5" stroke={FIG.green} strokeWidth="1.3" fill="#F5F2EF" />
+            <circle cx="585" cy="74" r="5.5" stroke={FIG.green} strokeWidth="1.3" fill="#F5F2EF" />
             <text className="lp-svg-text" x="498" y="58" textAnchor="middle">
               {horizon.flexibility}
             </text>
@@ -151,14 +151,14 @@ export default function DirectionPath() {
 
           <motion.path
             d={DIRECTION}
-            stroke={FIG.magenta}
+            stroke={FIG.green}
             strokeWidth="2.4"
             strokeLinecap="round"
             style={{ pathLength: draw }}
           />
           <motion.g style={{ opacity: arrive }}>
-            <circle cx="890" cy="62" r="11" stroke={FIG.magenta} strokeWidth="1.6" fill="#f1eeea" />
-            <circle cx="890" cy="62" r="4" fill={FIG.magenta} />
+            <circle cx="890" cy="62" r="11" stroke={FIG.green} strokeWidth="1.6" fill="#F5F2EF" />
+            <circle cx="890" cy="62" r="4" fill={FIG.green} />
             <text className="lp-svg-text lp-svg-accent" x="870" y="34" textAnchor="end">
               {horizon.direction}
             </text>
